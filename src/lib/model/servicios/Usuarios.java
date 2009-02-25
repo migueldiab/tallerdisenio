@@ -16,31 +16,29 @@ import lib.model.persistencia.pUsuario;
 public class Usuarios implements Servicios {
 
   public static boolean borrar(Usuario unUsuario) {
-    pUsuario unPUsuario = new pUsuario();
-    if (unPUsuario.borrar(unUsuario)) {
+    if (pUsuario.borrar(unUsuario)) {
       return true;
     }
     return false;
   }
 
   public static boolean guardar(Usuario unUsuario) {
-    pUsuario unPUsuario = new pUsuario();
-    if (unPUsuario.guardar(unUsuario)) {
+    if (pUsuario.guardar(unUsuario)) {
       return true;
     }
     return false;
   }
 
   public ArrayList listar() {
-    return null;
+    return pUsuario.listar();
   }
 
   public Object buscarPorId(Integer id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pUsuario.buscarPorId(id);
   }
 
   public ArrayList buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pUsuario.buscarPorNombre(nombre);
   }
 
   public static boolean login(String usuario, char[] password) {

@@ -13,7 +13,7 @@ import lib.model.miCRM.*;
  *
  * @author Miguel A. Diab
  */
-public class pGrupo {
+public class pPrioridad {
   /**
    * Nombre de campo en la base de datos para el ID
    */
@@ -24,17 +24,17 @@ public class pGrupo {
   public static final String NOMBRE = "nombre";
 
   /**
-   * Convierte un ResultSet específico en un objeto de tipo Grupo
+   * Convierte un ResultSet específico en un objeto de tipo Prioridad
    * en base a los campos definidos
    *
    * @parm rs ResultSet definido
    */
-  private static Grupo toGrupo(ResultSet rs) {
-    try {      
-      Grupo unGrupo = new Grupo();
-      unGrupo.setId(rs.getInt(pGrupo.ID));
-      unGrupo.setNombre(rs.getString(pGrupo.NOMBRE));
-      return unGrupo;
+  private static Prioridad toPrioridad(ResultSet rs) {
+    try {
+      Prioridad unPrioridad = new Prioridad();
+      unPrioridad.setId(rs.getInt(pPrioridad.ID));
+      unPrioridad.setNombre(rs.getString(pPrioridad.NOMBRE));
+      return unPrioridad;
     } catch (Exception e) {
       System.out.println(e.toString());
       return null;
@@ -42,17 +42,17 @@ public class pGrupo {
   }
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
-    ArrayList listaGrupos = new ArrayList();
+    ArrayList listaPrioridads = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad");
         while (rs.next()) {
-          Grupo unGrupo = pGrupo.toGrupo(rs);
-          listaGrupos.add(unGrupo);
+          Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
+          listaPrioridads.add(unPrioridad);
         }
-        return listaGrupos;
+        return listaPrioridads;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
@@ -68,13 +68,13 @@ public class pGrupo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE id = "+id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad WHERE id = "+id);
         rs.next();
-        Grupo unGrupo = pGrupo.toGrupo(rs);
+        Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
         if (rs.next()) {
           return null;
         }
-        return unGrupo;
+        return unPrioridad;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
@@ -87,17 +87,17 @@ public class pGrupo {
 
     @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaGrupos = new ArrayList();
+    ArrayList listaPrioridads = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad WHERE nombre LIKE '%"+nombre+"%'");
         while (rs.next()) {
-          Grupo unGrupo = pGrupo.toGrupo(rs);
-          listaGrupos.add(unGrupo);
+          Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
+          listaPrioridads.add(unPrioridad);
         }
-        return listaGrupos;
+        return listaPrioridads;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
@@ -110,18 +110,18 @@ public class pGrupo {
 
   public static boolean guardar(Object o) {
     try {
-      Grupo unGrupo = (Grupo) o;
+      Prioridad unPrioridad = (Prioridad) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pGrupo.buscarPorId(unGrupo.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO grupo (nombre, id) VALUES (?, ?)");
+        if (pPrioridad.buscarPorId(unPrioridad.getId())==null) {
+          stmt = con.prepareStatement("INSERT INTO prioridad (nombre, id) VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE grupo SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE prioridad SET nombre = ? WHERE id = ?");
         }
-        stmt.setString(1, unGrupo.getNombre());
-        stmt.setInt(2, unGrupo.getId());
+        stmt.setString(1, unPrioridad.getNombre());
+        stmt.setInt(2, unPrioridad.getId());
         stmt.executeUpdate();
         return true;
       }
@@ -136,13 +136,13 @@ public class pGrupo {
 
   public static boolean borrar(Object o) {
     try {
-      Grupo unGrupo = (Grupo) o;
+      Prioridad unPrioridad = (Prioridad) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pGrupo.buscarPorId(unGrupo.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM grupo WHERE id = ?");
-          stmt.setInt(1, unGrupo.getId());
+        if (pPrioridad.buscarPorId(unPrioridad.getId())!=null) {
+          stmt = con.prepareStatement("DELETE FROM prioridad WHERE id = ?");
+          stmt.setInt(1, unPrioridad.getId());
           stmt.executeUpdate();
         }
         return true;

@@ -13,42 +13,50 @@ import lib.model.miCRM.*;
  *
  * @author Miguel A. Diab
  */
-public class pUsuario {
+public class pArticulo {
+  /**
+   * Nombre de campo en la base de datos para el ID
+   */
   public static final String ID = "id";
+  /**
+   * Nombre de campo en la base de datos para el Nombre
+   */
   public static final String NOMBRE = "nombre";
-  public static final String GRUPO = "id_grupo";
 
-  private static Usuario toUsuario(ResultSet rs) {
-
+  /**
+   * Convierte un ResultSet específico en un objeto de tipo Articulo
+   * en base a los campos definidos
+   *
+   * @parm rs ResultSet definido
+   */
+  private static Articulo toArticulo(ResultSet rs) {
     try {
-      Usuario unUsuario = new Usuario();
-      Integer test = null;      
-      unUsuario.setId(rs.getInt(pUsuario.ID));
-      unUsuario.setNombre(rs.getString(pUsuario.NOMBRE));
-      pGrupo unPGrupo = new pGrupo();
-      unUsuario.setGrupo((Grupo) pGrupo.buscarPorId(rs.getInt(pUsuario.GRUPO)));
-      return unUsuario;
+      Articulo unArticulo = new Articulo();
+      unArticulo.setId(rs.getInt(pArticulo.ID));
+      unArticulo.setNombre(rs.getString(pArticulo.NOMBRE));
+      return unArticulo;
     } catch (Exception e) {
+      System.out.println(e.toString());
       return null;
     }
   }
-
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
-    ArrayList listaUsuarios = new ArrayList();
+    ArrayList listaArticulos = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo");
         while (rs.next()) {
-          Usuario unUsuario = pUsuario.toUsuario(rs);
-          listaUsuarios.add(unUsuario);
+          Articulo unArticulo = pArticulo.toArticulo(rs);
+          listaArticulos.add(unArticulo);
         }
-        return listaUsuarios;
+        return listaArticulos;
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
-      }      
+      }
     }
     else {
       return null;
@@ -60,14 +68,15 @@ public class pUsuario {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE id = "+id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo WHERE id = "+id);
         rs.next();
-        Usuario unUsuario = pUsuario.toUsuario(rs);
+        Articulo unArticulo = pArticulo.toArticulo(rs);
         if (rs.next()) {
           return null;
         }
-        return unUsuario;        
+        return unArticulo;
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
       }
     }
@@ -76,20 +85,21 @@ public class pUsuario {
     }
   }
 
-  @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaUsuarios = new ArrayList();
+    ArrayList listaArticulos = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo WHERE nombre LIKE '%"+nombre+"%'");
         while (rs.next()) {
-          Usuario unUsuario = pUsuario.toUsuario(rs);
-          listaUsuarios.add(unUsuario);
+          Articulo unArticulo = pArticulo.toArticulo(rs);
+          listaArticulos.add(unArticulo);
         }
-        return listaUsuarios;
+        return listaArticulos;
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
       }
     }
@@ -100,19 +110,18 @@ public class pUsuario {
 
   public static boolean guardar(Object o) {
     try {
-      Usuario unUsuario = (Usuario) o;
+      Articulo unArticulo = (Articulo) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pUsuario.buscarPorId(unUsuario.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO usuario (nombre, id_grupo, id) VALUES (?, ?, ?)");
+        if (pArticulo.buscarPorId(unArticulo.getId())==null) {
+          stmt = con.prepareStatement("INSERT INTO articulo (nombre, id) VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE usuario SET nombre = ?, id_grupo = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE articulo SET nombre = ? WHERE id = ?");
         }
-        stmt.setString(1, unUsuario.getNombre());
-        stmt.setInt(2, unUsuario.getGrupo().getId());
-        stmt.setInt(3, unUsuario.getId());
+        stmt.setString(1, unArticulo.getNombre());
+        stmt.setInt(2, unArticulo.getId());
         stmt.executeUpdate();
         return true;
       }
@@ -120,19 +129,20 @@ public class pUsuario {
         return false;
       }
     } catch (Exception e) {
+      System.out.println(e.toString());
       return false;
     }
   }
 
   public static boolean borrar(Object o) {
     try {
-      Usuario unUsuario = (Usuario) o;
+      Articulo unArticulo = (Articulo) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pUsuario.buscarPorId(unUsuario.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM usuario WHERE id = ?");
-          stmt.setInt(1, unUsuario.getId());
+        if (pArticulo.buscarPorId(unArticulo.getId())!=null) {
+          stmt = con.prepareStatement("DELETE FROM articulo WHERE id = ?");
+          stmt.setInt(1, unArticulo.getId());
           stmt.executeUpdate();
         }
         return true;
