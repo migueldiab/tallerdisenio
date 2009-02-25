@@ -86,7 +86,9 @@ is divided into following sections:
             <or/>
         </condition>
         <condition property="have.sources">
-            <or/>
+            <or>
+                <available file="${src.src.dir}"/>
+            </or>
         </condition>
         <condition property="netbeans.home+have.tests">
             <and>
@@ -139,6 +141,7 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="-pre-init,-init-private,-init-libraries,-init-user,-init-project,-do-init" name="-init-check">
+        <fail unless="src.src.dir">Must set src.src.dir</fail>
         <fail unless="build.dir">Must set build.dir</fail>
         <fail unless="dist.dir">Must set dist.dir</fail>
         <fail unless="build.classes.dir">Must set build.classes.dir</fail>
@@ -159,7 +162,7 @@ is divided into following sections:
     </target>
     <target name="-init-macrodef-javac">
         <macrodef name="javac" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="" name="srcdir"/>
+            <attribute default="${src.src.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <attribute default="${includes}" name="includes"/>
@@ -178,7 +181,7 @@ is divided into following sections:
             </sequential>
         </macrodef>
         <macrodef name="depend" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="" name="srcdir"/>
+            <attribute default="${src.src.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <sequential>
@@ -326,7 +329,9 @@ is divided into following sections:
                 COMPILATION SECTION
                 ===================
             -->
-    <target depends="init" name="deps-jar" unless="no.deps"/>
+    <target depends="init" name="deps-jar" unless="no.deps">
+        <ant antfile="${project.BG}/build.xml" inheritall="false" target="jar"/>
+    </target>
     <target depends="init,-check-automatic-build,-clean-after-automatic-build" name="-verify-automatic-build"/>
     <target depends="init" name="-check-automatic-build">
         <available file="${build.classes.dir}/.netbeans_automatic_build" property="netbeans.automatic.build"/>
@@ -346,7 +351,9 @@ is divided into following sections:
     </target>
     <target depends="init,deps-jar,-pre-pre-compile,-pre-compile,-compile-depend" if="have.sources" name="-do-compile">
         <j2seproject3:javac/>
-        <copy todir="${build.classes.dir}"/>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+        </copy>
     </target>
     <target name="-post-compile">
         <!-- Empty placeholder for easier customization. -->
@@ -360,7 +367,7 @@ is divided into following sections:
     <target depends="init,deps-jar,-pre-pre-compile" name="-do-compile-single">
         <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
         <j2seproject3:force-recompile/>
-        <j2seproject3:javac excludes="" includes="${javac.includes}" sourcepath=""/>
+        <j2seproject3:javac excludes="" includes="${javac.includes}" sourcepath="${src.src.dir}"/>
     </target>
     <target name="-post-compile-single">
         <!-- Empty placeholder for easier customization. -->
@@ -506,6 +513,9 @@ is divided into following sections:
             <classpath>
                 <path path="${javac.classpath}"/>
             </classpath>
+            <fileset dir="${src.src.dir}" excludes="${excludes}" includes="${includes}">
+                <filename name="**/*.java"/>
+            </fileset>
         </javadoc>
     </target>
     <target depends="init,-javadoc-build" if="netbeans.home" name="-javadoc-browse" unless="no.javadoc.preview">
@@ -642,7 +652,9 @@ is divided into following sections:
                 CLEANUP SECTION
                 ===============
             -->
-    <target depends="init" name="deps-clean" unless="no.deps"/>
+    <target depends="init" name="deps-clean" unless="no.deps">
+        <ant antfile="${project.BG}/build.xml" inheritall="false" target="clean"/>
+    </target>
     <target depends="init" name="-do-clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
