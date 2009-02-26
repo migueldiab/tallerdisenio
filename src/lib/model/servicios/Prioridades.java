@@ -6,23 +6,36 @@
 package lib.model.servicios;
 
 import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pPrioridad;
 
 /**
  *
  * @author Administrator
  */
 public class Prioridades implements Servicios {
-
+  
   public ArrayList listar() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    ArrayList<Prioridades> listaPrioridadess = new ArrayList<Prioridades>();
+    return listaPrioridadess;
   }
-
   public Object buscarPorId(Integer id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pPrioridad.buscarPorId(id);
   }
-
   public ArrayList buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pPrioridad.buscarPorNombre(nombre);
+  }
+   public static boolean borrar(Prioridad unPrioridad) {
+    if (pPrioridad.borrar(unPrioridad)) {
+      return true;
+    }
+    return false;
+  }
+  public static boolean guardar(Prioridad unPrioridad) {
+    if (pPrioridad.guardar(unPrioridad)) {
+      return true;
+    }
+    return false;
   }
 
 }

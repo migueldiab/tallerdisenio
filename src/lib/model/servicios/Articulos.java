@@ -6,7 +6,8 @@
 package lib.model.servicios;
 
 import java.util.ArrayList;
-import lib.model.miCRM.Usuario;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pArticulo;
 
 /**
  *
@@ -15,18 +16,26 @@ import lib.model.miCRM.Usuario;
 public class Articulos implements Servicios {
   
   public ArrayList listar() {
-    ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-    
-    return listaUsuarios;
-
+    ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
+    return listaArticulos;
   }
-
   public Object buscarPorId(Integer id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pArticulo.buscarPorId(id);
   }
-
   public ArrayList buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pArticulo.buscarPorNombre(nombre);
+  }
+   public static boolean borrar(Articulo unArticulo) {
+    if (pArticulo.borrar(unArticulo)) {
+      return true;
+    }
+    return false;
+  }
+  public static boolean guardar(Articulo unArticulo) {
+    if (pArticulo.guardar(unArticulo)) {
+      return true;
+    }
+    return false;
   }
 
 }

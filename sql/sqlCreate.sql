@@ -156,17 +156,9 @@ DROP TABLE IF EXISTS `articulo` ;
 CREATE  TABLE IF NOT EXISTS `articulo` (
   `id` INT NOT NULL ,
   `nombre` VARCHAR(45) NULL ,
-  `id_padre` INT NULL ,
   `costo` DOUBLE NULL ,
-  PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_articulo_articulo`
-    FOREIGN KEY (`id_padre` )
-    REFERENCES `mydb`.`articulo` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
-
-CREATE INDEX `fk_articulo_articulo` ON `articulo` (`id_padre` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -193,6 +185,32 @@ CREATE  TABLE IF NOT EXISTS `articulo_contacto` (
 CREATE INDEX `fk_articulo_has_contacto_articulo` ON `articulo_contacto` (`articulo_id` ASC) ;
 
 CREATE INDEX `fk_articulo_has_contacto_contacto` ON `articulo_contacto` (`contacto_id` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `compuestos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `compuestos` ;
+
+CREATE  TABLE IF NOT EXISTS `compuestos` (
+  `id_articulo` INT NOT NULL ,
+  `id_componente` INT NOT NULL ,
+  `cantidad` INT NULL ,
+  PRIMARY KEY (`id_articulo`, `id_componente`) ,
+  CONSTRAINT `fk_articulo_has_articulo_articulo`
+    FOREIGN KEY (`id_articulo` )
+    REFERENCES `mydb`.`articulo` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_articulo_has_articulo_articulo1`
+    FOREIGN KEY (`id_componente` )
+    REFERENCES `mydb`.`articulo` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE INDEX `fk_articulo_has_articulo_articulo` ON `compuestos` (`id_articulo` ASC) ;
+
+CREATE INDEX `fk_articulo_has_articulo_articulo1` ON `compuestos` (`id_componente` ASC) ;
 
 
 

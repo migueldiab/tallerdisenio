@@ -6,6 +6,8 @@
 package lib.model.servicios;
 
 import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pGrupo;
 
 /**
  *
@@ -14,15 +16,26 @@ import java.util.ArrayList;
 public class Grupos implements Servicios {
 
   public ArrayList listar() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
+    return listaGrupos;
   }
-
   public Object buscarPorId(Integer id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pGrupo.buscarPorId(id);
   }
-
   public ArrayList buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pGrupo.buscarPorNombre(nombre);
+  }
+   public static boolean borrar(Grupo unGrupo) {
+    if (pGrupo.borrar(unGrupo)) {
+      return true;
+    }
+    return false;
+  }
+  public static boolean guardar(Grupo unGrupo) {
+    if (pGrupo.guardar(unGrupo)) {
+      return true;
+    }
+    return false;
   }
 
 }

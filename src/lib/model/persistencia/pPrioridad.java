@@ -14,6 +14,7 @@ import lib.model.miCRM.*;
  * @author Miguel A. Diab
  */
 public class pPrioridad {
+  public static final String TABLA = "prioridad";
   /**
    * Nombre de campo en la base de datos para el ID
    */

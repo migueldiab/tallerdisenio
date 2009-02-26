@@ -14,6 +14,7 @@ import lib.model.miCRM.*;
  * @author Miguel A. Diab
  */
 public class pUsuario {
+  public static final String TABLA = "usuario";
   public static final String ID = "id";
   public static final String NOMBRE = "nombre";
   public static final String GRUPO = "id_grupo";

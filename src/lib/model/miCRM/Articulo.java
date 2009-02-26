@@ -5,6 +5,8 @@
 
 package lib.model.miCRM;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Administrator
@@ -12,8 +14,9 @@ package lib.model.miCRM;
 public class Articulo {
   private Integer id;
   private String nombre;
-  private Articulo padre;
   private Double costo;
+  private ArrayList<Componente> componentes;
+
 
   /**
    * @return the id
@@ -44,20 +47,6 @@ public class Articulo {
   }
 
   /**
-   * @return the padre
-   */
-  public Articulo getPadre() {
-    return padre;
-  }
-
-  /**
-   * @param padre the padre to set
-   */
-  public void setPadre(Articulo padre) {
-    this.padre = padre;
-  }
-
-  /**
    * @return the costo
    */
   public Double getCosto() {
@@ -69,6 +58,22 @@ public class Articulo {
    */
   public void setCosto(Double costo) {
     this.costo = costo;
+  }
+
+  /**
+   * @return the componentes
+   */
+  public ArrayList<Componente> getComponentes() {
+    return componentes;
+  }
+
+  public boolean agregarComponente(Componente componente) {
+    if (this.componentes.add(componente)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   
 }
