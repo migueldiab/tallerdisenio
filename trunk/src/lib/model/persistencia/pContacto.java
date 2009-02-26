@@ -13,29 +13,24 @@ import lib.model.miCRM.*;
  *
  * @author Miguel A. Diab
  */
-public class pGrupo {
-  public static final String TABLA = "grupo";
+public class pContacto {
+  public static final String TABLA = "contacto";
   /**
    * Nombre de campo en la base de datos para el ID
    */
   public static final String ID = "id";
-  /**
-   * Nombre de campo en la base de datos para el Nombre
-   */
-  public static final String NOMBRE = "nombre";
 
   /**
-   * Convierte un ResultSet específico en un objeto de tipo Grupo
+   * Convierte un ResultSet específico en un objeto de tipo Contacto
    * en base a los campos definidos
    *
    * @parm rs ResultSet definido
    */
-  private static Grupo toGrupo(ResultSet rs) {
-    try {      
-      Grupo unGrupo = new Grupo();
-      unGrupo.setId(rs.getInt(pGrupo.ID));
-      unGrupo.setNombre(rs.getString(pGrupo.NOMBRE));
-      return unGrupo;
+  private static Contacto toContacto(ResultSet rs) {
+    try {
+      Contacto unContacto = new Contacto();
+      unContacto.setId(rs.getInt(pContacto.ID));
+      return unContacto;
     } catch (Exception e) {
       System.out.println(e.toString());
       return null;
@@ -43,17 +38,17 @@ public class pGrupo {
   }
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
-    ArrayList listaGrupos = new ArrayList();
+    ArrayList listaContactos = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA);
         while (rs.next()) {
-          Grupo unGrupo = pGrupo.toGrupo(rs);
-          listaGrupos.add(unGrupo);
+          Contacto unContacto = pContacto.toContacto(rs);
+          listaContactos.add(unContacto);
         }
-        return listaGrupos;
+        return listaContactos;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
@@ -69,36 +64,13 @@ public class pGrupo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE id = "+id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE id = "+id);
         rs.next();
-        Grupo unGrupo = pGrupo.toGrupo(rs);
+        Contacto unContacto = pContacto.toContacto(rs);
         if (rs.next()) {
           return null;
         }
-        return unGrupo;
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        return null;
-      }
-    }
-    else {
-      return null;
-    }
-  }
-
-    @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaGrupos = new ArrayList();
-    Connection con=ConnectDB.conectar();
-    if (con!=null) {
-      try {
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE nombre LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          Grupo unGrupo = pGrupo.toGrupo(rs);
-          listaGrupos.add(unGrupo);
-        }
-        return listaGrupos;
+        return unContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
@@ -111,18 +83,17 @@ public class pGrupo {
 
   public static boolean guardar(Object o) {
     try {
-      Grupo unGrupo = (Grupo) o;
+      Contacto unContacto = (Contacto) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pGrupo.buscarPorId(unGrupo.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO grupo (nombre, id) VALUES (?, ?)");
+        if (pContacto.buscarPorId(unContacto.getId())==null) {
+          stmt = con.prepareStatement("INSERT INTO "+pContacto.TABLA+" (nombre, id) VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE grupo SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pContacto.TABLA+" SET nombre = ? WHERE id = ?");
         }
-        stmt.setString(1, unGrupo.getNombre());
-        stmt.setInt(2, unGrupo.getId());
+        stmt.setInt(2, unContacto.getId());
         stmt.executeUpdate();
         return true;
       }
@@ -137,13 +108,13 @@ public class pGrupo {
 
   public static boolean borrar(Object o) {
     try {
-      Grupo unGrupo = (Grupo) o;
+      Contacto unContacto = (Contacto) o;
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        if (pGrupo.buscarPorId(unGrupo.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM grupo WHERE id = ?");
-          stmt.setInt(1, unGrupo.getId());
+        if (pContacto.buscarPorId(unContacto.getId())!=null) {
+          stmt = con.prepareStatement("DELETE FROM "+pContacto.TABLA+" WHERE "+pContacto.TABLA+" = ?");
+          stmt.setInt(1, unContacto.getId());
           stmt.executeUpdate();
         }
         return true;

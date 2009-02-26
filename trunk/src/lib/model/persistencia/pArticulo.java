@@ -14,14 +14,10 @@ import lib.model.miCRM.*;
  * @author Miguel A. Diab
  */
 public class pArticulo {
-  /**
-   * Nombre de campo en la base de datos para el ID
-   */
+  public static final String TABLA = "articulo";
   public static final String ID = "id";
-  /**
-   * Nombre de campo en la base de datos para el Nombre
-   */
   public static final String NOMBRE = "nombre";
+  public static final String COSTO = "costo";
 
   /**
    * Convierte un ResultSet específico en un objeto de tipo Articulo
@@ -29,11 +25,22 @@ public class pArticulo {
    *
    * @parm rs ResultSet definido
    */
+  @SuppressWarnings("unchecked")
   private static Articulo toArticulo(ResultSet rs) {
     try {
       Articulo unArticulo = new Articulo();
       unArticulo.setId(rs.getInt(pArticulo.ID));
       unArticulo.setNombre(rs.getString(pArticulo.NOMBRE));
+      unArticulo.setCosto(rs.getDouble(pArticulo.COSTO));
+      ArrayList<Componente> listaComponentes = pComponente.buscarPorArticulo(unArticulo);
+      for (Componente unComponente : listaComponentes) {
+        if (unArticulo.agregarComponente(unComponente)) {
+          
+        }
+        else {
+          throw new Exception("Componente Ilegal");
+        }
+      }
       return unArticulo;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -47,9 +54,9 @@ public class pArticulo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pArticulo.TABLA);
         while (rs.next()) {
-          Articulo unArticulo = pArticulo.toArticulo(rs);
+          Articulo unArticulo = pArticulo.toArticulo(rs);          
           listaArticulos.add(unArticulo);
         }
         return listaArticulos;
@@ -68,7 +75,7 @@ public class pArticulo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo WHERE id = "+id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = "+id);
         rs.next();
         Articulo unArticulo = pArticulo.toArticulo(rs);
         if (rs.next()) {
@@ -92,7 +99,7 @@ public class pArticulo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM articulo WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pArticulo.TABLA+" WHERE "+pArticulo.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           Articulo unArticulo = pArticulo.toArticulo(rs);
           listaArticulos.add(unArticulo);
@@ -115,14 +122,28 @@ public class pArticulo {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pArticulo.buscarPorId(unArticulo.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO articulo (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pArticulo.TABLA+" " +
+                  "("+pArticulo.NOMBRE+", "+pArticulo.COSTO+", "+pArticulo.ID+")" +
+                  " VALUES (?, ?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE articulo SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pArticulo.TABLA+" SET " +
+                  pArticulo.NOMBRE+" = ?, "+
+                  pArticulo.COSTO+" = ? " +
+                  "WHERE "+pArticulo.ID+" = ?");
         }
         stmt.setString(1, unArticulo.getNombre());
-        stmt.setInt(2, unArticulo.getId());
+        stmt.setDouble(2, unArticulo.getCosto());
+        stmt.setInt(3, unArticulo.getId());
         stmt.executeUpdate();
+
+        stmt = con.prepareStatement("DELETE FROM componente WHERE "+pComponente.PADRE+" = ?");
+        stmt.setInt(1, unArticulo.getId());
+        stmt.executeUpdate();
+        
+        for (Componente unComponente : unArticulo.getComponentes()) {
+          pComponente.guardar(unComponente, unArticulo);
+        }
         return true;
       }
       else {
@@ -141,16 +162,24 @@ public class pArticulo {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pArticulo.buscarPorId(unArticulo.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM articulo WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = ?");
           stmt.setInt(1, unArticulo.getId());
           stmt.executeUpdate();
+          for (Componente unComponente : unArticulo.getComponentes()) {
+            if (pComponente.borrar(unComponente, unArticulo)) {
+
+            }
+            else {
+              throw new Exception("Error al borrar componente");
+            }
+          }
         }
         return true;
       }
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

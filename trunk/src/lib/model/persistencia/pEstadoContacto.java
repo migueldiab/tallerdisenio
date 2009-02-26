@@ -14,6 +14,7 @@ import lib.model.miCRM.*;
  * @author Miguel A. Diab
  */
 public class pEstadoContacto {
+  public static final String TABLA = "estado_contacto";
   /**
    * Nombre de campo en la base de datos para el ID
    */

@@ -21,14 +21,12 @@ public class Usuarios implements Servicios {
     }
     return false;
   }
-
   public static boolean guardar(Usuario unUsuario) {
     if (pUsuario.guardar(unUsuario)) {
       return true;
     }
     return false;
   }
-
   public ArrayList listar() {
     return pUsuario.listar();
   }

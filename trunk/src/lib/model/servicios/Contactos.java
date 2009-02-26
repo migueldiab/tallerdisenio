@@ -6,6 +6,8 @@
 package lib.model.servicios;
 
 import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pContacto;
 
 /**
  *
@@ -14,15 +16,27 @@ import java.util.ArrayList;
 public class Contactos implements Servicios {
 
   public ArrayList listar() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    ArrayList<Contacto> listaContactos = new ArrayList<Contacto>();
+    return listaContactos;
   }
-
   public Object buscarPorId(Integer id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return pContacto.buscarPorId(id);
   }
-
   public ArrayList buscarPorNombre(String nombre) {
     throw new UnsupportedOperationException("Not supported yet.");
   }
+  public static boolean borrar(Contacto unContacto) {
+    if (pContacto.borrar(unContacto)) {
+      return true;
+    }
+    return false;
+  }
+  public static boolean guardar(Contacto unContacto) {
+    if (pContacto.guardar(unContacto)) {
+      return true;
+    }
+    return false;
+  }
+
 
 }
