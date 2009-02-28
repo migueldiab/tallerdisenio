@@ -11,8 +11,9 @@
 
 package miCrm.vista;
 
-import java.util.ArrayList;
-import miCrm.*;
+import javax.swing.DefaultListModel;
+import lib.model.miCRM.*;
+import miCrm.Fachada;
 
 /**
  *
@@ -23,7 +24,29 @@ public class Usuarios extends javax.swing.JFrame {
     /** Creates new form Usuarios */
     public Usuarios() {
         initComponents();
+        cargarListas();
     }
+
+  private void cargarDatos(Usuario u) {
+    tId.setText(u.getId().toString());
+    tNombre.setText(u.getNombre());
+    tPassword.setText(u.getPassword().toString());
+    tRepetir.setText(u.getPassword().toString());
+    cGrupo.setSelectedItem(u.getGrupo());
+  }
+
+  private void cargarListas() {
+    listaUsuarios.clear();
+    for (Usuario u : Fachada.listarUsuarios()) {
+      listaUsuarios.addElement(u);
+    }
+    cGrupo.removeAllItems();
+    for (Grupo g : Fachada.listarGrupos()) {
+      cGrupo.addItem(g);
+    }
+
+
+  }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -50,7 +73,8 @@ public class Usuarios extends javax.swing.JFrame {
     bCancelar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     panelUsuarios = new javax.swing.JScrollPane();
-    listausuarios = new javax.swing.JList();
+    listaUsuarios = new DefaultListModel();
+    jlUsuarios = new javax.swing.JList(listaUsuarios);
 
     setTitle("Usuarios");
 
@@ -65,8 +89,6 @@ public class Usuarios extends javax.swing.JFrame {
     lRepetir.setText("Repetir");
 
     lGrupo.setText("Grupo");
-
-    cGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +129,7 @@ public class Usuarios extends javax.swing.JFrame {
             .addComponent(bGuardar)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(bCancelar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
             .addComponent(bCerrar)))
         .addContainerGap())
     );
@@ -147,14 +169,14 @@ public class Usuarios extends javax.swing.JFrame {
     panelUsuarios.setMinimumSize(new java.awt.Dimension(80, 80));
     panelUsuarios.setPreferredSize(new java.awt.Dimension(80, 160));
 
-    listausuarios.setModel(new javax.swing.AbstractListModel() {
-      ArrayList lUsuarios = Fachada.listarUsuarios();
-
-      public int getSize() { return lUsuarios.size(); }
-      public Object getElementAt(int i) { return lUsuarios.get(i); }
+    jlUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jlUsuarios.setMinimumSize(new java.awt.Dimension(80, 160));
+    jlUsuarios.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jlUsuariosValueChanged(evt);
+      }
     });
-    listausuarios.setMinimumSize(new java.awt.Dimension(80, 160));
-    panelUsuarios.setViewportView(listausuarios);
+    panelUsuarios.setViewportView(jlUsuarios);
 
     panelABMUsuarios.setLeftComponent(panelUsuarios);
 
@@ -162,7 +184,7 @@ public class Usuarios extends javax.swing.JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(panelABMUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+      .addComponent(panelABMUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,6 +197,12 @@ public class Usuarios extends javax.swing.JFrame {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
       // TODO add your handling code here:
 }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void jlUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlUsuariosValueChanged
+
+      cargarDatos((Usuario) jlUsuarios.getSelectedValue());
+      
+}//GEN-LAST:event_jlUsuariosValueChanged
 
     /**
     * @param args the command line arguments
@@ -192,12 +220,12 @@ public class Usuarios extends javax.swing.JFrame {
   private javax.swing.JButton bCerrar;
   private javax.swing.JButton bGuardar;
   private javax.swing.JComboBox cGrupo;
+  private javax.swing.JList jlUsuarios;
   private javax.swing.JLabel lClave;
   private javax.swing.JLabel lGrupo;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
   private javax.swing.JLabel lRepetir;
-  private javax.swing.JList listausuarios;
   private javax.swing.JSplitPane panelABMUsuarios;
   private javax.swing.JPanel panelUsuario;
   private javax.swing.JScrollPane panelUsuarios;
@@ -206,5 +234,6 @@ public class Usuarios extends javax.swing.JFrame {
   private javax.swing.JPasswordField tPassword;
   private javax.swing.JPasswordField tRepetir;
   // End of variables declaration//GEN-END:variables
+  private javax.swing.DefaultListModel listaUsuarios;
 
 }

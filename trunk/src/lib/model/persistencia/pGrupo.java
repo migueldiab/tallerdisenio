@@ -42,7 +42,7 @@ public class pGrupo {
     }
   }
   @SuppressWarnings("unchecked")
-  public static ArrayList listar() {
+  public static ArrayList<Grupo> listar() {
     ArrayList listaGrupos = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
@@ -89,7 +89,7 @@ public class pGrupo {
   }
 
     @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList<Grupo> buscarPorNombre(String nombre) {
     ArrayList listaGrupos = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
@@ -158,5 +158,7 @@ public class pGrupo {
       return false;
     }
   }
+
+
 
 }

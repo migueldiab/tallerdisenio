@@ -28,7 +28,7 @@ public class Usuarios {
     }
     return false;
   }
-  public static ArrayList listar() {
+  public static ArrayList<Usuario> listar() {
     return pUsuario.listar();
   }
 

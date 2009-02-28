@@ -27,7 +27,11 @@ public class Fachada {
     return Usuarios.guardar(unUsuario);
   }
 
-  public static ArrayList listarUsuarios() {
+  public static ArrayList<Grupo> listarGrupos() {
+    return Grupos.listar();
+  }
+
+  public static ArrayList<Usuario> listarUsuarios() {
     return Usuarios.listar();
   }
   public static boolean loginUsuario(Integer usuario, char[] password) {
