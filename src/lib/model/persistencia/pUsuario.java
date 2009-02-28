@@ -37,7 +37,7 @@ public class pUsuario {
   }
 
   @SuppressWarnings("unchecked")
-  public static ArrayList listar() {
+  public static ArrayList<Usuario> listar() {
     ArrayList listaUsuarios = new ArrayList();
     Connection con=ConnectDB.conectar();
     if (con!=null) {

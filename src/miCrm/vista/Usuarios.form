@@ -22,7 +22,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABMUsuarios" alignment="0" pref="388" max="32767" attributes="0"/>
+          <Component id="panelABMUsuarios" min="-2" pref="475" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -80,7 +80,7 @@
                               <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="bCancelar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="99" max="32767" attributes="0"/>
+                              <EmptySpace pref="143" max="32767" attributes="0"/>
                               <Component id="bCerrar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -158,16 +158,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cGrupo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="tRepetir">
             </Component>
@@ -213,15 +203,20 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="listausuarios">
+            <Component class="javax.swing.JList" name="jlUsuarios">
               <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel() {&#xa;    ArrayList lUsuarios = Fachada.listarUsuarios();&#xa;    &#xa;    public int getSize() { return lUsuarios.size(); }    &#xa;    public Object getElementAt(int i) { return lUsuarios.get(i); }&#xa;}" type="code"/>
-                </Property>
+                <Property name="selectionMode" type="int" value="0"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 160]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jlUsuariosValueChanged"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(listaUsuarios)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="listaUsuarios = new DefaultListModel();"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

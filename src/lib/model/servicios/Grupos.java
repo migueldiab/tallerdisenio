@@ -15,14 +15,13 @@ import lib.model.persistencia.pGrupo;
  */
 public class Grupos {
 
-  public ArrayList listar() {
-    ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
-    return listaGrupos;
+  public static ArrayList listar() {
+    return pGrupo.listar();
   }
-  public Grupo buscarPorId(Integer id) {
+  public static Grupo buscarPorId(Integer id) {
     return pGrupo.buscarPorId(id);
   }
-  public ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList<Grupo> buscarPorNombre(String nombre) {
     return pGrupo.buscarPorNombre(nombre);
   }
    public static boolean borrar(Grupo unGrupo) {
