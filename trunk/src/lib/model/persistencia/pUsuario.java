@@ -16,6 +16,7 @@ import lib.model.miCRM.*;
 public class pUsuario {
   public static final String TABLA = "usuario";
   public static final String ID = "id";
+  public static final String PASSWORD = "password";
   public static final String NOMBRE = "nombre";
   public static final String GRUPO = "id_grupo";
 
@@ -23,13 +24,14 @@ public class pUsuario {
 
     try {
       Usuario unUsuario = new Usuario();
-      Integer test = null;      
       unUsuario.setId(rs.getInt(pUsuario.ID));
       unUsuario.setNombre(rs.getString(pUsuario.NOMBRE));
+      unUsuario.setPassword(rs.getString(pUsuario.PASSWORD).toCharArray());
       pGrupo unPGrupo = new pGrupo();
       unUsuario.setGrupo((Grupo) pGrupo.buscarPorId(rs.getInt(pUsuario.GRUPO)));
       return unUsuario;
     } catch (Exception e) {
+      System.out.println(e.toString());
       return null;
     }
   }
@@ -41,13 +43,14 @@ public class pUsuario {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA);
         while (rs.next()) {
           Usuario unUsuario = pUsuario.toUsuario(rs);
           listaUsuarios.add(unUsuario);
         }
         return listaUsuarios;
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
       }      
     }
@@ -56,19 +59,22 @@ public class pUsuario {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Usuario buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }
         Usuario unUsuario = pUsuario.toUsuario(rs);
         if (rs.next()) {
           return null;
         }
         return unUsuario;        
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
       }
     }
@@ -84,13 +90,14 @@ public class pUsuario {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           Usuario unUsuario = pUsuario.toUsuario(rs);
           listaUsuarios.add(unUsuario);
         }
         return listaUsuarios;
       } catch (Exception e) {
+        System.out.println(e.toString());
         return null;
       }
     }
@@ -99,28 +106,33 @@ public class pUsuario {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static boolean guardar(Usuario unUsuario) {
     try {
-      Usuario unUsuario = (Usuario) o;
+      // No permite agregar un usuario si el grupo no existe
+      if (pGrupo.buscarPorId(unUsuario.getGrupo().getId())==null) {
+        throw new Exception("El grupo no existe");
+      }
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pUsuario.buscarPorId(unUsuario.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO usuario (nombre, id_grupo, id) VALUES (?, ?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pUsuario.TABLA+" ("+pUsuario.NOMBRE+", "+pUsuario.PASSWORD+", "+pUsuario.GRUPO+", "+pUsuario.ID+") VALUES (?, ?, ?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE usuario SET nombre = ?, id_grupo = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pUsuario.TABLA+" SET "+pUsuario.NOMBRE+" = ?, "+pUsuario.PASSWORD+" = ?, "+pUsuario.GRUPO+" = ? WHERE "+pUsuario.ID+" = ?");
         }
         stmt.setString(1, unUsuario.getNombre());
-        stmt.setInt(2, unUsuario.getGrupo().getId());
-        stmt.setInt(3, unUsuario.getId());
+        stmt.setString(2, String.valueOf(unUsuario.getPassword()));
+        stmt.setInt(3, unUsuario.getGrupo().getId());
+        stmt.setInt(4, unUsuario.getId());
         stmt.executeUpdate();
         return true;
       }
       else {
-        return false;
+        throw new Exception("No se pudo conectar a la base de datos");
       }
     } catch (Exception e) {
+      System.out.println(e.toString());
       return false;
     }
   }
@@ -132,7 +144,7 @@ public class pUsuario {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pUsuario.buscarPorId(unUsuario.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM usuario WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pUsuario.TABLA+" WHERE "+pUsuario.ID+" = ?");
           stmt.setInt(1, unUsuario.getId());
           stmt.executeUpdate();
         }
@@ -141,7 +153,7 @@ public class pUsuario {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

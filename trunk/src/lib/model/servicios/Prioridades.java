@@ -13,13 +13,13 @@ import lib.model.persistencia.pPrioridad;
  *
  * @author Administrator
  */
-public class Prioridades implements Servicios {
+public class Prioridades {
   
   public ArrayList listar() {
     ArrayList<Prioridades> listaPrioridadess = new ArrayList<Prioridades>();
     return listaPrioridadess;
   }
-  public Object buscarPorId(Integer id) {
+  public Prioridad buscarPorId(Integer id) {
     return pPrioridad.buscarPorId(id);
   }
   public ArrayList buscarPorNombre(String nombre) {

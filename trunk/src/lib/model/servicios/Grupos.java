@@ -13,13 +13,13 @@ import lib.model.persistencia.pGrupo;
  *
  * @author Administrator
  */
-public class Grupos implements Servicios {
+public class Grupos {
 
   public ArrayList listar() {
     ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
     return listaGrupos;
   }
-  public Object buscarPorId(Integer id) {
+  public Grupo buscarPorId(Integer id) {
     return pGrupo.buscarPorId(id);
   }
   public ArrayList buscarPorNombre(String nombre) {

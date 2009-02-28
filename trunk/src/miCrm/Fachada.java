@@ -5,6 +5,7 @@
 
 package miCrm;
 
+import java.util.ArrayList;
 import lib.model.miCRM.*;
 import lib.model.servicios.*;
 
@@ -14,13 +15,25 @@ import lib.model.servicios.*;
  */
 public class Fachada {
 
-  static boolean borrarUsuario(Usuario unUsuario) {
+  public static boolean borrarUsuario(Usuario unUsuario) {
     return Usuarios.borrar(unUsuario);
   }
 
-  static boolean guardarUsuario(Usuario unUsuario) {
+  public static boolean guardarGrupo(Grupo unGrupo) {
+    return Grupos.guardar(unGrupo);
+  }
+
+  public static boolean guardarUsuario(Usuario unUsuario) {
     return Usuarios.guardar(unUsuario);
   }
+
+  public static ArrayList listarUsuarios() {
+    return Usuarios.listar();
+  }
+  public static boolean loginUsuario(Integer usuario, char[] password) {
+    return Usuarios.login(usuario, password);
+  }
+  
   Fachada fachada = null;
   private Fachada() { }
   public Fachada getInstance() {
@@ -28,9 +41,6 @@ public class Fachada {
       this.fachada = new Fachada();
     }
     return fachada;
-  }
-  public static boolean loginUsuario(String usuario, char[] password) {
-    return Usuarios.login(usuario, password);
   }
 
 }

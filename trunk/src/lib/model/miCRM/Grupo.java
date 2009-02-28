@@ -10,6 +10,7 @@ package lib.model.miCRM;
  * @author Administrator
  */
 public class Grupo {
+
   private Integer id;
   private String nombre;
 

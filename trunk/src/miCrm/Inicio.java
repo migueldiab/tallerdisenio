@@ -15,14 +15,23 @@ import miCrm.vista.*;
 public class Inicio {
     public static void main(String[] args) {
       Usuario unUsuario = new Usuario();
-      unUsuario.setId(1);
-      unUsuario.setNombre("Miguel");
+      unUsuario.setId(2);
+      unUsuario.setNombre("Natalia");
+      char[] pass = {'t', 'e', 's', 't'};
+      unUsuario.setPassword(pass);
       Grupo unGrupo = new Grupo();
-      unGrupo.setId(1);
-      unGrupo.setNombre("Admin");
+      unGrupo.setId(2);
+      unGrupo.setNombre("Telefonista");
       unUsuario.setGrupo(unGrupo);
-      //Fachada.guardarUsuario(unUsuario);
-      Fachada.borrarUsuario(unUsuario);
+      if (!Fachada.guardarGrupo(unGrupo)) {
+        System.out.println("No se pudo guardar grupo");
+        return;
+      }
+      if (!Fachada.guardarUsuario(unUsuario)) {
+        System.out.println("No se pudo guardar usuario");
+        return;
+      }
+      //Fachada.borrarUsuario(unUsuario);
       Login vLogin = new Login();
       vLogin.setVisible(true);
     }

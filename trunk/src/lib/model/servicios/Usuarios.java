@@ -6,6 +6,7 @@
 package lib.model.servicios;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import lib.model.miCRM.Usuario;
 import lib.model.persistencia.pUsuario;
 
@@ -13,7 +14,7 @@ import lib.model.persistencia.pUsuario;
  *
  * @author Administrator
  */
-public class Usuarios implements Servicios {
+public class Usuarios {
 
   public static boolean borrar(Usuario unUsuario) {
     if (pUsuario.borrar(unUsuario)) {
@@ -27,20 +28,28 @@ public class Usuarios implements Servicios {
     }
     return false;
   }
-  public ArrayList listar() {
+  public static ArrayList listar() {
     return pUsuario.listar();
   }
 
-  public Object buscarPorId(Integer id) {
+  public static Usuario buscarPorId(Integer id) {
     return pUsuario.buscarPorId(id);
   }
 
-  public ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList buscarPorNombre(String nombre) {
     return pUsuario.buscarPorNombre(nombre);
   }
 
-  public static boolean login(String usuario, char[] password) {
-    return true;
+  public static boolean login(Integer usuario, char[] password) {
+    Usuario unUsuario = Usuarios.buscarPorId(usuario);
+    if (unUsuario!=null) {
+      if (password.length == unUsuario.getPassword().length) {
+        if (Arrays.equals(unUsuario.getPassword() , password)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 

@@ -48,7 +48,7 @@ public class pTipoContacto {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM tipo_contacto");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA);
         while (rs.next()) {
           TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
           listaTipoContactos.add(unTipoContacto);
@@ -64,13 +64,15 @@ public class pTipoContacto {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static TipoContacto buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM tipo_contacto WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }
         TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
         if (rs.next()) {
           return null;
@@ -93,7 +95,7 @@ public class pTipoContacto {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM tipo_contacto WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
           listaTipoContactos.add(unTipoContacto);
@@ -116,10 +118,10 @@ public class pTipoContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pTipoContacto.buscarPorId(unTipoContacto.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO tipo_contacto (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pTipoContacto.TABLA+" ("+pTipoContacto.NOMBRE+", "+pTipoContacto.ID+") VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE tipo_contacto SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pTipoContacto.TABLA+" SET "+pTipoContacto.NOMBRE+" = ? WHERE "+pTipoContacto.ID+" = ?");
         }
         stmt.setString(1, unTipoContacto.getNombre());
         stmt.setInt(2, unTipoContacto.getId());
@@ -142,7 +144,7 @@ public class pTipoContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pTipoContacto.buscarPorId(unTipoContacto.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM tipo_contacto WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.ID+" = ?");
           stmt.setInt(1, unTipoContacto.getId());
           stmt.executeUpdate();
         }
@@ -151,7 +153,7 @@ public class pTipoContacto {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

@@ -6,7 +6,7 @@
 package lib.model.miCRM;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import lib.model.miCRM.Usuario;
 
 /**
@@ -19,6 +19,7 @@ public class Contacto {
   private Date asignadoEl;
   private String numeroEntrante;
   private String desc;
+  private String resolucion;
   private EstadoContacto estadoContacto;
   private TipoContacto tipoContacto;
   private Cliente cliente;
@@ -193,5 +194,19 @@ public class Contacto {
    */
   public void setArticulos(ArrayList<Articulo> articulos) {
     this.setArticulos(articulos);
+  }
+
+  /**
+   * @return the resolucion
+   */
+  public String getResolucion() {
+    return resolucion;
+  }
+
+  /**
+   * @param resolucion the resolucion to set
+   */
+  public void setResolucion(String resolucion) {
+    this.resolucion = resolucion;
   }
 }

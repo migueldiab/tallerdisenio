@@ -71,13 +71,15 @@ public class pCliente {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Cliente buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.ID+" = "+id);
-        rs.next();
+        if (!rs.next()) {
+          return null;
+        }
         Cliente unCliente = pCliente.toCliente(rs);
         if (rs.next()) {
           return null;
@@ -172,7 +174,7 @@ public class pCliente {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

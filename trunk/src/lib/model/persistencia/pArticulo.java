@@ -76,8 +76,12 @@ public class pArticulo {
       try {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = "+id);
-        rs.next();
+        // Si no hay resultados
+        if (!rs.next()) {
+          return null;
+        }
         Articulo unArticulo = pArticulo.toArticulo(rs);
+        // Si hay mas de un resultado
         if (rs.next()) {
           return null;
         }

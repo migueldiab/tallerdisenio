@@ -48,7 +48,7 @@ public class pEstadoContacto {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM estado_contacto");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA);
         while (rs.next()) {
           EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
           listaEstadoContactos.add(unEstadoContacto);
@@ -64,13 +64,15 @@ public class pEstadoContacto {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static EstadoContacto buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM estado_contacto WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }
         EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
         if (rs.next()) {
           return null;
@@ -93,7 +95,7 @@ public class pEstadoContacto {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM estado_contacto WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
           listaEstadoContactos.add(unEstadoContacto);
@@ -116,10 +118,10 @@ public class pEstadoContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pEstadoContacto.buscarPorId(unEstadoContacto.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO estado_contacto (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pEstadoContacto.TABLA+" ("+pEstadoContacto.NOMBRE+", "+pEstadoContacto.ID+") VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE estado_contacto SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pEstadoContacto.TABLA+" SET "+pEstadoContacto.NOMBRE+" = ? WHERE "+pEstadoContacto.ID+" = ?");
         }
         stmt.setString(1, unEstadoContacto.getNombre());
         stmt.setInt(2, unEstadoContacto.getId());
@@ -142,7 +144,7 @@ public class pEstadoContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pEstadoContacto.buscarPorId(unEstadoContacto.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM estado_contacto WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.ID+" = ?");
           stmt.setInt(1, unEstadoContacto.getId());
           stmt.executeUpdate();
         }
@@ -151,7 +153,7 @@ public class pEstadoContacto {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }
