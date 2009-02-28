@@ -13,7 +13,7 @@ import lib.model.persistencia.pCliente;
  *
  * @author Administrator
  */
-public class Clientes implements Servicios {
+public class Clientes {
 
   public ArrayList listar() {
     ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();

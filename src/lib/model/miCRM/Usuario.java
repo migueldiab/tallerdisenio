@@ -12,6 +12,7 @@ package lib.model.miCRM;
 public class Usuario {
 
     private Integer id;
+    private char[] password;
     private String nombre;
     private Grupo grupo;
 
@@ -55,6 +56,41 @@ public class Usuario {
    */
   public void setGrupo(Grupo grupo) {
     this.grupo = grupo;
+  }
+
+  /**
+   * @return the password
+   */
+  public char[] getPassword() {
+    return password;
+  }
+
+  /**
+   * @param password the password to set
+   */
+  public void setPassword(char[] password) {
+    this.password = password;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      Usuario unUsuario = (Usuario) obj;
+      if (this.getId().equals(unUsuario.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre()+" ("+this.getId()+")";
   }
 
 }

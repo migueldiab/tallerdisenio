@@ -13,7 +13,7 @@ import lib.model.persistencia.pContacto;
  *
  * @author Administrator
  */
-public class Contactos implements Servicios {
+public class Contactos {
 
   public ArrayList listar() {
     ArrayList<Contacto> listaContactos = new ArrayList<Contacto>();

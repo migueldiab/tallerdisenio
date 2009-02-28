@@ -48,7 +48,7 @@ public class pPrioridad {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA);
         while (rs.next()) {
           Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
           listaPrioridads.add(unPrioridad);
@@ -64,13 +64,15 @@ public class pPrioridad {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Prioridad buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }
         Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
         if (rs.next()) {
           return null;
@@ -93,7 +95,7 @@ public class pPrioridad {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM prioridad WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
           listaPrioridads.add(unPrioridad);
@@ -116,10 +118,10 @@ public class pPrioridad {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pPrioridad.buscarPorId(unPrioridad.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO prioridad (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pPrioridad.TABLA+" ("+pPrioridad.NOMBRE+", "+pPrioridad.ID+") VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE prioridad SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pPrioridad.TABLA+" SET "+pPrioridad.NOMBRE+" = ? WHERE "+pPrioridad.ID+" = ?");
         }
         stmt.setString(1, unPrioridad.getNombre());
         stmt.setInt(2, unPrioridad.getId());
@@ -142,7 +144,7 @@ public class pPrioridad {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pPrioridad.buscarPorId(unPrioridad.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM prioridad WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.ID+" = ?");
           stmt.setInt(1, unPrioridad.getId());
           stmt.executeUpdate();
         }
@@ -151,7 +153,7 @@ public class pPrioridad {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

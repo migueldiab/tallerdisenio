@@ -13,7 +13,7 @@ import lib.model.persistencia.pArticulo;
  *
  * @author Administrator
  */
-public class Articulos implements Servicios {
+public class Articulos {
   
   public ArrayList listar() {
     ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();

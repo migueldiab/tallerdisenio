@@ -48,7 +48,7 @@ public class pGrupo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA);
         while (rs.next()) {
           Grupo unGrupo = pGrupo.toGrupo(rs);
           listaGrupos.add(unGrupo);
@@ -64,13 +64,15 @@ public class pGrupo {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Grupo buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA+" WHERE "+pGrupo.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }        
         Grupo unGrupo = pGrupo.toGrupo(rs);
         if (rs.next()) {
           return null;
@@ -93,7 +95,7 @@ public class pGrupo {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM grupo WHERE nombre LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA+" WHERE "+pGrupo.NOMBRE+" LIKE '%"+nombre+"%'");
         while (rs.next()) {
           Grupo unGrupo = pGrupo.toGrupo(rs);
           listaGrupos.add(unGrupo);
@@ -116,10 +118,10 @@ public class pGrupo {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pGrupo.buscarPorId(unGrupo.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO grupo (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pGrupo.TABLA+" ("+pGrupo.NOMBRE+", "+pGrupo.ID+") VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE grupo SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pGrupo.TABLA+" SET "+pGrupo.NOMBRE+" = ? WHERE "+pGrupo.ID+" = ?");
         }
         stmt.setString(1, unGrupo.getNombre());
         stmt.setInt(2, unGrupo.getId());
@@ -142,7 +144,7 @@ public class pGrupo {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pGrupo.buscarPorId(unGrupo.getId())!=null) {
-          stmt = con.prepareStatement("DELETE FROM grupo WHERE id = ?");
+          stmt = con.prepareStatement("DELETE FROM "+pGrupo.TABLA+" WHERE "+pGrupo.ID+" = ?");
           stmt.setInt(1, unGrupo.getId());
           stmt.executeUpdate();
         }
@@ -151,7 +153,7 @@ public class pGrupo {
       else {
         return false;
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.toString());
       return false;
     }

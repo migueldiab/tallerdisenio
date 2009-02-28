@@ -15,6 +15,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import miCrm.Fachada;
+import miCrm.resources.widget.StatusBar.MSG;
 
 /**
  *
@@ -44,6 +45,7 @@ public class Login extends javax.swing.JFrame {
     tPassword = new javax.swing.JPasswordField();
     pImagen = new javax.swing.JPanel();
     lBgImage = new javax.swing.JLabel();
+    StatusBar = new miCrm.resources.widget.StatusBar();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Ingresar a miCRM");
@@ -60,6 +62,15 @@ public class Login extends javax.swing.JFrame {
     lPassword.setText("Contraseña");
 
     lUsuario.setText("Usuario");
+
+    tUsuario.setText("1");
+    tUsuario.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tUsuarioActionPerformed(evt);
+      }
+    });
+
+    tPassword.setText("abc123");
 
     lBgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/login.png"))); // NOI18N
 
@@ -96,39 +107,55 @@ public class Login extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addComponent(bCerrar)))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .addComponent(StatusBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(tUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lUsuario))
-        .addGap(18, 18, 18)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lPassword))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(bEntrar)
-          .addComponent(bCerrar)))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(pImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lUsuario))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lPassword))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(bEntrar)
+              .addComponent(bCerrar))))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(StatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
-      if (Fachada.loginUsuario(tUsuario.getText(), tPassword.getPassword())) {
-        Principal vPrincipal = new Principal();
-        vPrincipal.setVisible(true);
-      }
-      else {
-
+      try {
+        Integer id_usuario = Integer.parseInt(tUsuario.getText());
+        if (Fachada.loginUsuario(id_usuario, tPassword.getPassword())) {
+          Principal vPrincipal = new Principal();
+          vPrincipal.setVisible(true);
+          this.setVisible(false);
+        }
+        else {
+         StatusBar.setMessage("Login Error", MSG.ERROR);
+        }
+      } catch (Exception e) {
+        System.out.println(e.toString());
       }
     }//GEN-LAST:event_bEntrarActionPerformed
 
+    private void tUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tUsuarioActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_tUsuarioActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private miCrm.resources.widget.StatusBar StatusBar;
   private javax.swing.JButton bCerrar;
   private javax.swing.JButton bEntrar;
   private javax.swing.JLabel lBgImage;

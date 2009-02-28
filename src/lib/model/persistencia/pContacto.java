@@ -19,6 +19,17 @@ public class pContacto {
    * Nombre de campo en la base de datos para el ID
    */
   public static final String ID = "id";
+  public static final String RECIBIDO = "recibido_el";
+  public static final String ASIGNADO = "asignado_el";
+  public static final String NUMERO_ENTRANTE = "numero_entrante";
+  public static final String DESC = "desc";
+  public static final String RESOLUCION = "resolucion";
+  public static final String ESTADO = "id_estado_contacto";
+  public static final String TIPO = "id_tipo_contacto";
+  public static final String CLIENTE = "id_cliente";
+  public static final String PRIORIDAD = "id_prioridad";
+  public static final String TECNICO = "id_tecnico";
+  public static final String TELEFONISTA = "id_telefonista";
 
   /**
    * Convierte un ResultSet específico en un objeto de tipo Contacto
@@ -30,6 +41,17 @@ public class pContacto {
     try {
       Contacto unContacto = new Contacto();
       unContacto.setId(rs.getInt(pContacto.ID));
+      unContacto.setAsignadoEl(rs.getDate(pContacto.ASIGNADO));
+      unContacto.setCliente(pCliente.buscarPorId(rs.getInt(pContacto.CLIENTE)));
+      unContacto.setDesc(rs.getString(pContacto.DESC));
+      unContacto.setEstadoContacto(pEstadoContacto.buscarPorId(rs.getInt(pContacto.ESTADO)));
+      unContacto.setNumeroEntrante(rs.getString(pContacto.NUMERO_ENTRANTE));
+      unContacto.setPrioridad(pPrioridad.buscarPorId(rs.getInt(pContacto.PRIORIDAD)));
+      unContacto.setRecibidoEl(rs.getDate(pContacto.RECIBIDO));
+      unContacto.setResolucion(rs.getString(pContacto.RESOLUCION));
+      unContacto.setTecnico(pUsuario.buscarPorId(rs.getInt(pContacto.TECNICO)));
+      unContacto.setTelefonista(pUsuario.buscarPorId(rs.getInt(pContacto.TELEFONISTA)));
+      unContacto.setTipoContacto(pTipoContacto.buscarPorId(rs.getInt(pContacto.TIPO)));
       return unContacto;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -64,8 +86,10 @@ public class pContacto {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE id = "+id);
-        rs.next();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE "+pContacto.ID+" = "+id);
+        if (!rs.next()) {
+          return null;
+        }
         Contacto unContacto = pContacto.toContacto(rs);
         if (rs.next()) {
           return null;
@@ -88,12 +112,48 @@ public class pContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pContacto.buscarPorId(unContacto.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pContacto.TABLA+" (nombre, id) VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pContacto.TABLA+" ("
+                  +pContacto.ASIGNADO+", "
+                  +pContacto.CLIENTE+", "
+                  +pContacto.DESC+", "
+                  +pContacto.ESTADO+", "
+                  +pContacto.NUMERO_ENTRANTE+", "
+                  +pContacto.PRIORIDAD+", "
+                  +pContacto.RECIBIDO+", "
+                  +pContacto.RESOLUCION+", "
+                  +pContacto.TECNICO+", "
+                  +pContacto.TELEFONISTA+", "
+                  +pContacto.TIPO+", "
+                  +pContacto.ID
+                  + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE "+pContacto.TABLA+" SET nombre = ? WHERE id = ?");
+          stmt = con.prepareStatement("UPDATE "+pContacto.TABLA+" SET "
+                  +pContacto.ASIGNADO+"= ?,"
+                  +pContacto.CLIENTE+"= ?,"
+                  +pContacto.DESC+"= ?,"
+                  +pContacto.ESTADO+"= ?,"
+                  +pContacto.NUMERO_ENTRANTE+"= ?,"
+                  +pContacto.PRIORIDAD+"= ?,"
+                  +pContacto.RECIBIDO+"= ?,"
+                  +pContacto.RESOLUCION+"= ?,"
+                  +pContacto.TECNICO+"= ?,"
+                  +pContacto.TELEFONISTA+"= ?,"
+                  +pContacto.TIPO+"= ?"
+                  +"WHERE "+pContacto.ID+"= ?");
         }
-        stmt.setInt(2, unContacto.getId());
+        stmt.setDate(1, unContacto.getAsignadoEl());
+        stmt.setInt(2, unContacto.getCliente().getId());
+        stmt.setString(3, unContacto.getDesc());
+        stmt.setInt(4, unContacto.getEstadoContacto().getId());
+        stmt.setString(5, unContacto.getNumeroEntrante());
+        stmt.setInt(6, unContacto.getPrioridad().getId());
+        stmt.setDate(7, unContacto.getRecibidoEl());
+        stmt.setString(8, unContacto.getResolucion());
+        stmt.setInt(9, unContacto.getTecnico().getId());
+        stmt.setInt(10, unContacto.getTelefonista().getId());
+        stmt.setInt(11, unContacto.getTipoContacto().getId());
+        stmt.setInt(12, unContacto.getId());
         stmt.executeUpdate();
         return true;
       }

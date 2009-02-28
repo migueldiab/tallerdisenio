@@ -11,6 +11,9 @@
 
 package miCrm.vista;
 
+import java.util.ArrayList;
+import miCrm.*;
+
 /**
  *
  * @author Administrator
@@ -31,21 +34,147 @@ public class Usuarios extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    panelABMUsuarios = new javax.swing.JSplitPane();
+    panelUsuario = new javax.swing.JPanel();
+    lId = new javax.swing.JLabel();
+    tId = new javax.swing.JTextField();
+    tNombre = new javax.swing.JTextField();
+    lNombre = new javax.swing.JLabel();
+    lClave = new javax.swing.JLabel();
+    lRepetir = new javax.swing.JLabel();
+    lGrupo = new javax.swing.JLabel();
+    cGrupo = new javax.swing.JComboBox();
+    tRepetir = new javax.swing.JPasswordField();
+    tPassword = new javax.swing.JPasswordField();
+    bGuardar = new javax.swing.JButton();
+    bCancelar = new javax.swing.JButton();
+    bCerrar = new javax.swing.JButton();
+    panelUsuarios = new javax.swing.JScrollPane();
+    listausuarios = new javax.swing.JList();
+
     setTitle("Usuarios");
+
+    panelUsuario.setMinimumSize(new java.awt.Dimension(160, 160));
+
+    lId.setText("Id");
+
+    lNombre.setText("Nombre");
+
+    lClave.setText("Clave");
+
+    lRepetir.setText("Repetir");
+
+    lGrupo.setText("Grupo");
+
+    cGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+    bGuardar.setText("Guardar");
+    bGuardar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bGuardarActionPerformed(evt);
+      }
+    });
+
+    bCancelar.setText("Cancelar");
+
+    bCerrar.setText("Cerrar");
+
+    javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
+    panelUsuario.setLayout(panelUsuarioLayout);
+    panelUsuarioLayout.setHorizontalGroup(
+      panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelUsuarioLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+              .addComponent(lId)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+              .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(lNombre)
+                .addComponent(lGrupo)
+                .addComponent(lRepetir)
+                .addComponent(lClave))
+              .addGap(30, 30, 30)
+              .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(tPassword)
+                .addComponent(tRepetir)
+                .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
+          .addGroup(panelUsuarioLayout.createSequentialGroup()
+            .addComponent(bGuardar)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(bCancelar)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+            .addComponent(bCerrar)))
+        .addContainerGap())
+    );
+    panelUsuarioLayout.setVerticalGroup(
+      panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelUsuarioLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lId)
+          .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lNombre)
+          .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lClave)
+          .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lRepetir)
+          .addComponent(tRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lGrupo)
+          .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bGuardar)
+          .addComponent(bCancelar)
+          .addComponent(bCerrar))
+        .addContainerGap())
+    );
+
+    panelABMUsuarios.setRightComponent(panelUsuario);
+
+    panelUsuarios.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelUsuarios.setPreferredSize(new java.awt.Dimension(80, 160));
+
+    listausuarios.setModel(new javax.swing.AbstractListModel() {
+      ArrayList lUsuarios = Fachada.listarUsuarios();
+
+      public int getSize() { return lUsuarios.size(); }
+      public Object getElementAt(int i) { return lUsuarios.get(i); }
+    });
+    listausuarios.setMinimumSize(new java.awt.Dimension(80, 160));
+    panelUsuarios.setViewportView(listausuarios);
+
+    panelABMUsuarios.setLeftComponent(panelUsuarios);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addComponent(panelABMUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
+      .addComponent(panelABMUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+      // TODO add your handling code here:
+}//GEN-LAST:event_bGuardarActionPerformed
 
     /**
     * @param args the command line arguments
@@ -59,6 +188,23 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton bCancelar;
+  private javax.swing.JButton bCerrar;
+  private javax.swing.JButton bGuardar;
+  private javax.swing.JComboBox cGrupo;
+  private javax.swing.JLabel lClave;
+  private javax.swing.JLabel lGrupo;
+  private javax.swing.JLabel lId;
+  private javax.swing.JLabel lNombre;
+  private javax.swing.JLabel lRepetir;
+  private javax.swing.JList listausuarios;
+  private javax.swing.JSplitPane panelABMUsuarios;
+  private javax.swing.JPanel panelUsuario;
+  private javax.swing.JScrollPane panelUsuarios;
+  private javax.swing.JTextField tId;
+  private javax.swing.JTextField tNombre;
+  private javax.swing.JPasswordField tPassword;
+  private javax.swing.JPasswordField tRepetir;
   // End of variables declaration//GEN-END:variables
 
 }
