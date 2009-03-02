@@ -19,6 +19,10 @@ public class Fachada {
     return Usuarios.borrar(unUsuario);
   }
 
+  public static Usuario buscarUsuarioPorId(int id) {
+    return Usuarios.buscarPorId(id);
+  }
+
   public static boolean guardarGrupo(Grupo unGrupo) {
     return Grupos.guardar(unGrupo);
   }

@@ -12,6 +12,7 @@
 package miCrm.vista;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
 
@@ -29,12 +30,20 @@ public class Usuarios extends javax.swing.JFrame {
 
   private void cargarDatos(Usuario u) {
     tId.setText(u.getId().toString());
+    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
     tPassword.setText(u.getPassword().toString());
     tRepetir.setText(u.getPassword().toString());
     cGrupo.setSelectedItem(u.getGrupo());
   }
-
+  private void limpiarCampos() {
+    tId.setText("");
+    tId.setEnabled(true);
+    tNombre.setText("");
+    tPassword.setText("");
+    tRepetir.setText("");
+    cGrupo.setSelectedItem(null);
+  }
   private void cargarListas() {
     listaUsuarios.clear();
     for (Usuario u : Fachada.listarUsuarios()) {
@@ -44,10 +53,15 @@ public class Usuarios extends javax.swing.JFrame {
     for (Grupo g : Fachada.listarGrupos()) {
       cGrupo.addItem(g);
     }
-
-
   }
-
+  private void guardarDatos() {
+//    tId.setText(u.getId().toString());
+//    tId.setEnabled(false);
+//    tNombre.setText(u.getNombre());
+//    tPassword.setText(u.getPassword().toString());
+//    tRepetir.setText(u.getPassword().toString());
+//    cGrupo.setSelectedItem(u.getGrupo());
+  }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -72,6 +86,7 @@ public class Usuarios extends javax.swing.JFrame {
     bGuardar = new javax.swing.JButton();
     bCancelar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
+    bNuevo = new javax.swing.JButton();
     panelUsuarios = new javax.swing.JScrollPane();
     listaUsuarios = new DefaultListModel();
     jlUsuarios = new javax.swing.JList(listaUsuarios);
@@ -101,6 +116,13 @@ public class Usuarios extends javax.swing.JFrame {
 
     bCerrar.setText("Cerrar");
 
+    bNuevo.setText("Nuevo");
+    bNuevo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bNuevoActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
     panelUsuario.setLayout(panelUsuarioLayout);
     panelUsuarioLayout.setHorizontalGroup(
@@ -126,10 +148,12 @@ public class Usuarios extends javax.swing.JFrame {
                 .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
           .addGroup(panelUsuarioLayout.createSequentialGroup()
+            .addComponent(bNuevo)
+            .addGap(18, 18, 18)
             .addComponent(bGuardar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(18, 18, 18)
             .addComponent(bCancelar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
             .addComponent(bCerrar)))
         .addContainerGap())
     );
@@ -158,9 +182,10 @@ public class Usuarios extends javax.swing.JFrame {
           .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
         .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bCerrar)
+          .addComponent(bNuevo)
           .addComponent(bGuardar)
-          .addComponent(bCancelar)
-          .addComponent(bCerrar))
+          .addComponent(bCancelar))
         .addContainerGap())
     );
 
@@ -195,7 +220,29 @@ public class Usuarios extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-      // TODO add your handling code here:
+      try {
+        if(tId.isEnabled()) {
+          Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
+          if (unUsuario!=null) {
+            if (JOptionPane.showConfirmDialog(
+              null,"El usuario con ID "+tId.getText()+" ya existe ("+unUsuario.toString()+"). Deseea reemplazarlo?",
+              "Confirma reemplazar?",
+              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
+                return;
+            }
+          }
+        }
+        guardarDatos();
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              null,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+      }
+
 }//GEN-LAST:event_bGuardarActionPerformed
 
     private void jlUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlUsuariosValueChanged
@@ -203,6 +250,11 @@ public class Usuarios extends javax.swing.JFrame {
       cargarDatos((Usuario) jlUsuarios.getSelectedValue());
       
 }//GEN-LAST:event_jlUsuariosValueChanged
+
+    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+      limpiarCampos();
+
+    }//GEN-LAST:event_bNuevoActionPerformed
 
     /**
     * @param args the command line arguments
@@ -219,6 +271,7 @@ public class Usuarios extends javax.swing.JFrame {
   private javax.swing.JButton bCancelar;
   private javax.swing.JButton bCerrar;
   private javax.swing.JButton bGuardar;
+  private javax.swing.JButton bNuevo;
   private javax.swing.JComboBox cGrupo;
   private javax.swing.JList jlUsuarios;
   private javax.swing.JLabel lClave;
