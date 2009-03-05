@@ -15,14 +15,13 @@ import lib.model.persistencia.pArticulo;
  */
 public class Articulos {
   
-  public ArrayList listar() {
-    ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
-    return listaArticulos;
+  public static ArrayList<Articulo> listar() {
+    return pArticulo.listar();
   }
-  public Object buscarPorId(Integer id) {
+  public static Articulo buscarPorId(Integer id) {
     return pArticulo.buscarPorId(id);
   }
-  public ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList buscarPorNombre(String nombre) {
     return pArticulo.buscarPorNombre(nombre);
   }
    public static boolean borrar(Articulo unArticulo) {

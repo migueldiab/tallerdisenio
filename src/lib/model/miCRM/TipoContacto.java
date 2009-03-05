@@ -55,4 +55,26 @@ public class TipoContacto {
   public void setCosto(Double costo) {
     this.costo = costo;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      TipoContacto unTipoContacto = (TipoContacto) obj;
+      if (this.getId().equals(unTipoContacto.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre()+" ("+this.getId()+")";
+  }
+
 }

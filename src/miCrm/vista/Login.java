@@ -70,7 +70,7 @@ public class Login extends javax.swing.JFrame {
       }
     });
 
-    tPassword.setText("abc123");
+    tPassword.setText("test");
 
     lBgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/login.png"))); // NOI18N
 

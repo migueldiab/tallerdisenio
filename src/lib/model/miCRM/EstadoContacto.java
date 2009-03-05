@@ -40,4 +40,25 @@ public class EstadoContacto {
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      EstadoContacto unEstadoContacto = (EstadoContacto) obj;
+      if (this.getId().equals(unEstadoContacto.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre()+" ("+this.getId()+")";
+  }
 }

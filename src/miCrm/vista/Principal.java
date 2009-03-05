@@ -107,12 +107,27 @@ public class Principal extends javax.swing.JFrame {
     mAdministracion.setText("Administracion");
 
     mArticulos.setText("Articulos");
+    mArticulos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mArticulosActionPerformed(evt);
+      }
+    });
     mAdministracion.add(mArticulos);
 
     mClientes.setText("Clientes");
+    mClientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mClientesActionPerformed(evt);
+      }
+    });
     mAdministracion.add(mClientes);
 
     mGrupos.setText("Grupos");
+    mGrupos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mGruposActionPerformed(evt);
+      }
+    });
     mAdministracion.add(mGrupos);
 
     mUsuarios.setText("Usuarios");
@@ -173,7 +188,7 @@ public class Principal extends javax.swing.JFrame {
       .addGroup(layout.createSequentialGroup()
         .addGap(107, 107, 107)
         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(418, Short.MAX_VALUE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
@@ -192,6 +207,21 @@ public class Principal extends javax.swing.JFrame {
       RegistroContactos vRegistroContactos = new RegistroContactos();
       vRegistroContactos.setVisible(true);
     }//GEN-LAST:event_mNuevoContactoActionPerformed
+
+    private void mGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGruposActionPerformed
+      Grupos vGrupos = new Grupos();
+      vGrupos.setVisible(true);
+    }//GEN-LAST:event_mGruposActionPerformed
+
+    private void mClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClientesActionPerformed
+      Clientes vClientes = new Clientes();
+      vClientes.setVisible(true);
+    }//GEN-LAST:event_mClientesActionPerformed
+
+    private void mArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mArticulosActionPerformed
+      Articulos vArticulos = new Articulos();
+      vArticulos.setVisible(true);
+    }//GEN-LAST:event_mArticulosActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JInternalFrame jInternalFrame1;

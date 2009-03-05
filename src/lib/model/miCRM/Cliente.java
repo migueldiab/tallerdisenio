@@ -86,4 +86,25 @@ public class Cliente {
     this.direccion = direccion;
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      Cliente unCliente = (Cliente) obj;
+      if (this.getId().equals(unCliente.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre()+" ("+this.getId()+")";
+  }
+
 }

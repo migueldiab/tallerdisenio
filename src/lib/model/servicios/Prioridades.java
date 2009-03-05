@@ -15,14 +15,13 @@ import lib.model.persistencia.pPrioridad;
  */
 public class Prioridades {
   
-  public ArrayList listar() {
-    ArrayList<Prioridades> listaPrioridadess = new ArrayList<Prioridades>();
-    return listaPrioridadess;
+  public static ArrayList<Prioridad> listar() {
+    return pPrioridad.listar();
   }
-  public Prioridad buscarPorId(Integer id) {
+  public static Prioridad buscarPorId(Integer id) {
     return pPrioridad.buscarPorId(id);
   }
-  public ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList buscarPorNombre(String nombre) {
     return pPrioridad.buscarPorNombre(nombre);
   }
    public static boolean borrar(Prioridad unPrioridad) {

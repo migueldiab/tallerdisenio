@@ -70,7 +70,7 @@ public class pArticulo {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Articulo buscarPorId(Integer id) {
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {

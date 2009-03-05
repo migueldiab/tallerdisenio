@@ -17,7 +17,7 @@ public class pComponente {
   /**
    * Nombre de campo en la base de datos para el ID
    */
-  public static final String TABLA = "componente";
+  public static final String TABLA = "compuestos";
   public static final String PADRE = "id_articulo";
   public static final String COMPONENTE = "id_componente";
   public static final String CANTIDAD = "cantidad";
