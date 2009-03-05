@@ -15,11 +15,10 @@ import lib.model.persistencia.pCliente;
  */
 public class Clientes {
 
-  public ArrayList listar() {
-    ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-    return listaClientes;
+  public static ArrayList<Cliente> listar() {
+    return pCliente.listar();
   }
-  public Object buscarPorId(Integer id) {
+  public static Cliente buscarPorId(Integer id) {
     return pCliente.buscarPorId(id);
   }
   public ArrayList buscarPorNombre(String nombre) {

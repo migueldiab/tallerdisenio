@@ -16,8 +16,7 @@ import lib.model.persistencia.pContacto;
 public class Contactos {
 
   public ArrayList listar() {
-    ArrayList<Contacto> listaContactos = new ArrayList<Contacto>();
-    return listaContactos;
+    return pContacto.listar();
   }
   public Object buscarPorId(Integer id) {
     return pContacto.buscarPorId(id);

@@ -28,4 +28,24 @@ public class Componente extends Articulo {
   }
 
 
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      Componente unComponente = (Componente) obj;
+      if (this.getNombre().equals(unComponente.getNombre())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre();
+  }
 }

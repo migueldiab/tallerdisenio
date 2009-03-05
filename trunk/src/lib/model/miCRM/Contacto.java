@@ -209,4 +209,25 @@ public class Contacto {
   public void setResolucion(String resolucion) {
     this.resolucion = resolucion;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      Contacto unContacto = (Contacto) obj;
+      if (this.getId().equals(unContacto.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getDesc();
+  }
 }

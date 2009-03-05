@@ -4,7 +4,7 @@
  */
 
 /*
- * Usuarios.java
+ * Grupos.java
  *
  * Created on 21/02/2009, 04:00:29 PM
  */
@@ -21,93 +21,42 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Usuarios extends javax.swing.JFrame {
+public class Grupos extends javax.swing.JFrame {
 
-    /** Creates new form Usuarios */
-    public Usuarios() {
+    /** Creates new form Grupos */
+    public Grupos() {
         initComponents();
         cargarListas();
     }
 
-  private void cargarDatos(Usuario u) {
+  private void cargarDatos(Grupo u) {
     tId.setText(u.getId().toString());
     tId.setEnabled(false);
     tNombre.setText(u.getNombre());
-    tPassword.setText("");
-    tRepetir.setText("");
-    cGrupo.setSelectedItem(u.getGrupo());
   }
   private void limpiarCampos() {
     tId.setText("");
     tId.setEnabled(true);
     tNombre.setText("");
-    tPassword.setText("");
-    tRepetir.setText("");
-    cGrupo.setSelectedItem(null);
     cargarListas();
   }
   private boolean validarCampos() {
-    if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
-      JOptionPane.showMessageDialog(
-        null,"La constraseña no coincide con la verificación",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    for (int i = 0; i < tPassword.getPassword().length; i++) {
-      if (tPassword.getPassword()[i]!=tRepetir.getPassword()[i]) {
-        JOptionPane.showMessageDialog(
-          null,"La constraseña no coincide con la verificación",
-          "Error al guardar",
-          JOptionPane.ERROR_MESSAGE);
-        return false;
-      }
-    }
-    if ((tPassword.getPassword().toString().length()<4) && (tPassword.getPassword().toString().length()>0)) {
-      JOptionPane.showMessageDialog(
-        null,"La constraseña debe teneral menos 4 caracteres",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    if ((tPassword.getPassword().toString().length()==0) && (tId.isEnabled())) {
-      JOptionPane.showMessageDialog(
-        null,"La constraseña no puede estar vacía para un nuevo usuario",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    if (cGrupo.getSelectedIndex()==-1) {
-      JOptionPane.showMessageDialog(
-        null,"Debe elegir un grupo para el usuario",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
     return true;
   }
   private void cargarListas() {
-    listaUsuarios.clear();
-    for (Usuario u : Fachada.listarUsuarios()) {
-      listaUsuarios.addElement(u);
-    }
-    cGrupo.removeAllItems();
-    for (Grupo g : Fachada.listarGrupos()) {
-      cGrupo.addItem(g);
+    lista.clear();
+    for (Grupo u : Fachada.listarGrupos()) {
+      lista.addElement(u);
     }
   }
-  private boolean guardarDatos(Usuario u) {
+  private boolean guardarDatos(Grupo u) {
     try {
       if (u==null) {
-        u = new Usuario();
+        u = new Grupo();
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
-      if (tPassword.getPassword().length>=4) {
-        u.setPassword(tPassword.getPassword());
-      }
-      u.setGrupo((Grupo) cGrupo.getSelectedItem());
-      if (Fachada.guardarUsuario(u)) {
+      if (Fachada.guardarGrupo(u)) {
         return true;
       }
       else {
@@ -132,19 +81,13 @@ public class Usuarios extends javax.swing.JFrame {
     tId = new javax.swing.JTextField();
     tNombre = new javax.swing.JTextField();
     lNombre = new javax.swing.JLabel();
-    lClave = new javax.swing.JLabel();
-    lRepetir = new javax.swing.JLabel();
-    lGrupo = new javax.swing.JLabel();
-    cGrupo = new javax.swing.JComboBox();
-    tRepetir = new javax.swing.JPasswordField();
-    tPassword = new javax.swing.JPasswordField();
     bGuardar = new javax.swing.JButton();
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     bNuevo = new javax.swing.JButton();
     panelListado = new javax.swing.JScrollPane();
-    listaUsuarios = new DefaultListModel();
-    jListado = new javax.swing.JList(listaUsuarios);
+    lista = new DefaultListModel();
+    jListado = new javax.swing.JList(lista);
 
     setTitle("Usuarios");
 
@@ -153,12 +96,6 @@ public class Usuarios extends javax.swing.JFrame {
     lId.setText("Id");
 
     lNombre.setText("Nombre");
-
-    lClave.setText("Clave");
-
-    lRepetir.setText("Repetir");
-
-    lGrupo.setText("Grupo");
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,17 +138,9 @@ public class Usuarios extends javax.swing.JFrame {
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelEditarLayout.createSequentialGroup()
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lNombre)
-                .addComponent(lGrupo)
-                .addComponent(lRepetir)
-                .addComponent(lClave))
+              .addComponent(lNombre)
               .addGap(30, 30, 30)
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(tPassword)
-                .addComponent(tRepetir)
-                .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
           .addGroup(panelEditarLayout.createSequentialGroup()
             .addComponent(bNuevo)
             .addGap(18, 18, 18)
@@ -233,19 +162,7 @@ public class Usuarios extends javax.swing.JFrame {
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(lNombre)
           .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lClave)
-          .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lRepetir)
-          .addComponent(tRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lGrupo)
-          .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bCerrar)
           .addComponent(bNuevo)
@@ -289,31 +206,31 @@ public class Usuarios extends javax.swing.JFrame {
         if (!validarCampos()) {
           return;
         }
-        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
+        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
         if(tId.isEnabled()) {
-          if (unUsuario!=null) {
+          if (unGrupo!=null) {
             if (JOptionPane.showConfirmDialog(
-              null,"El usuario con ID "+tId.getText()+" ya existe ("+unUsuario.toString()+"). Deseea reemplazarlo?",
+              null,"El Grupo con ID "+tId.getText()+" ya existe ("+unGrupo.toString()+"). Deseea reemplazarlo?",
               "Confirma reemplazar?",
               JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
                 return;
             }
           }
         }
-        if (!guardarDatos(unUsuario)) {
-          throw new Exception("falló guardarDatos(unUsuario)");
+        if (!guardarDatos(unGrupo)) {
+          throw new Exception("falló guardarDatos(unGrupo)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"Usuario guardado",
-              "Usuario guardado",
+              null,"Grupo guardado",
+              "Grupo guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
         limpiarCampos();
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              null,"Error al guardar el Grupo. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -328,24 +245,24 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
       try {
-        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
-        if (unUsuario==null) {
-          throw new Exception("No existe usuario con ID = "+tId.getText());
+        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
+        if (unGrupo==null) {
+          throw new Exception("No existe Grupo con ID = "+tId.getText());
         }
-        if (!Fachada.borrarUsuario(unUsuario)) {
-          throw new Exception("Falló borrarUsuario(unUsuario)");
+        if (!Fachada.borrarGrupo(unGrupo)) {
+          throw new Exception("Falló borrarGrupo(unGrupo)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"El usuario "+unUsuario.toString()+" fue eliminado",
-              "Usuario Eliminado",
+              null,"El Grupo "+unGrupo.toString()+" fue eliminado",
+              "Grupo Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
         }
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al eliminar el usuario. Verifique los datos.\r\n"+
+              null,"Error al eliminar el Grupo. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -355,7 +272,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
-        cargarDatos((Usuario) jListado.getSelectedValue());
+        cargarDatos((Grupo) jListado.getSelectedValue());
       }
 }//GEN-LAST:event_jListadoValueChanged
 
@@ -369,7 +286,7 @@ public class Usuarios extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Usuarios().setVisible(true);
+                new Grupos().setVisible(true);
             }
         });
     }
@@ -379,22 +296,16 @@ public class Usuarios extends javax.swing.JFrame {
   private javax.swing.JButton bEliminar;
   private javax.swing.JButton bGuardar;
   private javax.swing.JButton bNuevo;
-  private javax.swing.JComboBox cGrupo;
   private javax.swing.JList jListado;
-  private javax.swing.JLabel lClave;
-  private javax.swing.JLabel lGrupo;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
-  private javax.swing.JLabel lRepetir;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
   private javax.swing.JScrollPane panelListado;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
-  private javax.swing.JPasswordField tPassword;
-  private javax.swing.JPasswordField tRepetir;
   // End of variables declaration//GEN-END:variables
-  private javax.swing.DefaultListModel listaUsuarios;
+  private javax.swing.DefaultListModel lista;
 
 
 }

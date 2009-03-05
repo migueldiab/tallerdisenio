@@ -76,4 +76,24 @@ public class Articulo {
     }
   }
   
-}
+
+  @Override
+  public boolean equals(Object obj) {
+    try {
+      Articulo unArticulo = (Articulo) obj;
+      if (this.getNombre().equals(unArticulo.getNombre())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return this.getNombre();
+  }}
