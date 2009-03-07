@@ -15,14 +15,65 @@ public class Articulo {
   private Integer id;
   private String nombre;
   private Double costo;
-  private ArrayList<Componente> componentes;
+  private ArrayList<Articulo> componentes = null;
 
+  public boolean agregarComponente(Articulo unComponente) {
+    if (componentes==null) {
+      componentes = new ArrayList<Articulo>();
+    }
+    if (componentes.add(unComponente)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public int contarComponentes() {
+    if (componentes==null) {
+      return 0;
+    }
+    else {
+      return componentes.size();
+    }
+  }
+
+  public boolean esHoja() {
+    if (componentes==null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public ArrayList<Articulo> getComponentes() {
+    return componentes;
+  }
+
+  public Object getHijo(int posicion) {
+    if (componentes==null) {
+      return null;
+    }
+    else {
+      return componentes.get(posicion);
+    }
+  }
 
   /**
    * @return the id
    */
   public Integer getId() {
     return id;
+  }
+
+  public int getPosComponente(Articulo articulo) {
+    if (componentes==null) {
+      return -1;
+    }
+    else {
+      return componentes.indexOf(articulo);
+    }
   }
 
   /**
@@ -60,23 +111,6 @@ public class Articulo {
     this.costo = costo;
   }
 
-  /**
-   * @return the componentes
-   */
-  public ArrayList<Componente> getComponentes() {
-    return componentes;
-  }
-
-  public boolean agregarComponente(Componente componente) {
-    if (this.componentes.add(componente)) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-  
-
   @Override
   public boolean equals(Object obj) {
     try {
@@ -96,4 +130,8 @@ public class Articulo {
   @Override
   public String toString() {
     return this.getNombre();
-  }}
+  }
+  
+}
+
+

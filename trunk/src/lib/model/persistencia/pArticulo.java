@@ -19,6 +19,10 @@ public class pArticulo {
   public static final String NOMBRE = "nombre";
   public static final String COSTO = "costo";
 
+  public static int cantidadComponentes() {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
   /**
    * Convierte un ResultSet específico en un objeto de tipo Articulo
    * en base a los campos definidos
@@ -32,24 +36,25 @@ public class pArticulo {
       unArticulo.setId(rs.getInt(pArticulo.ID));
       unArticulo.setNombre(rs.getString(pArticulo.NOMBRE));
       unArticulo.setCosto(rs.getDouble(pArticulo.COSTO));
-      ArrayList<Componente> listaComponentes = pComponente.buscarPorArticulo(unArticulo);
-      for (Componente unComponente : listaComponentes) {
+      ArrayList<Articulo> listaComponentes = pComponente.buscarPorArticulo(unArticulo);
+      for (Articulo unComponente : listaComponentes) {
         if (unArticulo.agregarComponente(unComponente)) {
-          
+          // Todo bien...
         }
         else {
           throw new Exception("Componente Ilegal");
         }
       }
       return unArticulo;
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       System.out.println(e.toString());
       return null;
     }
   }
-  @SuppressWarnings("unchecked")
-  public static ArrayList listar() {
-    ArrayList listaArticulos = new ArrayList();
+  
+  public static ArrayList<Articulo> listar() {
+    ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
@@ -145,7 +150,7 @@ public class pArticulo {
         stmt.setInt(1, unArticulo.getId());
         stmt.executeUpdate();
         
-        for (Componente unComponente : unArticulo.getComponentes()) {
+        for (Articulo unComponente : unArticulo.getComponentes()) {
           pComponente.guardar(unComponente, unArticulo);
         }
         return true;
@@ -169,7 +174,7 @@ public class pArticulo {
           stmt = con.prepareStatement("DELETE FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = ?");
           stmt.setInt(1, unArticulo.getId());
           stmt.executeUpdate();
-          for (Componente unComponente : unArticulo.getComponentes()) {
+          for (Articulo unComponente : unArticulo.getComponentes()) {
             if (pComponente.borrar(unComponente, unArticulo)) {
 
             }
