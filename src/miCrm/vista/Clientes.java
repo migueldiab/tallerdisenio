@@ -91,6 +91,8 @@ public class Clientes extends javax.swing.JFrame {
 
     setTitle("Usuarios");
 
+    panelABM.setDividerLocation(150);
+
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
     lId.setText("Id");
@@ -147,7 +149,7 @@ public class Clientes extends javax.swing.JFrame {
             .addComponent(bGuardar)
             .addGap(18, 18, 18)
             .addComponent(bEliminar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
             .addComponent(bCerrar)))
         .addContainerGap())
     );
@@ -191,7 +193,7 @@ public class Clientes extends javax.swing.JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

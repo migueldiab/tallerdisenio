@@ -22,7 +22,7 @@ public class pComponente {
   public static final String COMPONENTE = "id_componente";
   public static final String CANTIDAD = "cantidad";
 
-  public static boolean borrar(Componente unComponente, Articulo unArticulo) {
+  public static boolean borrar(Articulo unComponente, Articulo padre) {
     try {
       Connection con=ConnectDB.conectar();
       if (con!=null) {
@@ -30,7 +30,7 @@ public class pComponente {
         stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "
                 + pComponente.PADRE+" = ?, "
                 + pComponente.COMPONENTE+" = ?");
-        stmt.setInt(1, unArticulo.getId());
+        stmt.setInt(1, padre.getId());
         stmt.setInt(2, unComponente.getId());        
         stmt.executeUpdate();
         return true;
@@ -44,15 +44,15 @@ public class pComponente {
     }
   }
 
-  public static boolean guardar(Componente unComponente, Articulo unArticulo) {
+  public static boolean guardar(Articulo unComponente, Articulo padre) {
     try {      
       Connection con=ConnectDB.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         stmt = con.prepareStatement("INSERT INTO "+pComponente.TABLA+" SET "+pComponente.PADRE+" = ?, "+pComponente.COMPONENTE+" = ?, "+pComponente.CANTIDAD+" = ?, ");
-        stmt.setInt(1, unArticulo.getId());
+        stmt.setInt(1, padre.getId());
         stmt.setInt(2, unComponente.getId());
-        stmt.setInt(3, unComponente.getCantidad());
+        //stmt.setInt(3, unComponente.getCantidad());
         stmt.executeUpdate();        
         return true;
       }
@@ -71,10 +71,10 @@ public class pComponente {
    *
    * @parm rs ResultSet definido
    */
-  private static Componente toComponente(ResultSet rs) {
+  private static Articulo toComponente(ResultSet rs) {
     try {
-      Componente unComponente = (Componente) pArticulo.buscarPorId(rs.getInt(pComponente.COMPONENTE));
-      unComponente.setCantidad(rs.getInt(pComponente.CANTIDAD));       
+      Articulo unComponente = pArticulo.buscarPorId(rs.getInt(pComponente.COMPONENTE));
+      //unComponente.setCantidad(rs.getInt(pComponente.CANTIDAD));
       return unComponente;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -83,14 +83,15 @@ public class pComponente {
   }
   
   public static ArrayList buscarPorArticulo(Articulo unArticulo) {
-    ArrayList<Componente> listaComponentes = new ArrayList<Componente>();
+    ArrayList<Articulo> listaComponentes = new ArrayList<Articulo>();
     Connection con=ConnectDB.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pComponente.TABLA+" WHERE id_articulo = "+unArticulo.getId());
         while (rs.next()) {
-          listaComponentes.add(pComponente.toComponente(rs));
+          Articulo unComponente = pComponente.toComponente(rs);
+          listaComponentes.add(unComponente);
         }        
         return listaComponentes;
       } catch (Exception e) {

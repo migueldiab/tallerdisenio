@@ -22,7 +22,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" min="-2" pref="475" max="-2" attributes="0"/>
+          <Component id="panelABM" min="-2" pref="550" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -33,6 +33,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="panelABM">
+      <Properties>
+        <Property name="dividerLocation" type="int" value="150"/>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
@@ -72,7 +75,7 @@
                               <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bEliminar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="58" max="32767" attributes="0"/>
+                              <EmptySpace pref="64" max="32767" attributes="0"/>
                               <Component id="bCerrar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>

@@ -14,7 +14,14 @@ import lib.model.persistencia.pArticulo;
  * @author Administrator
  */
 public class Articulos {
-  
+
+  public static ArrayList<Articulo> listadoCompuestos() {
+    return null;
+  }
+  public static int cantidadComponentes()
+  {
+    return pArticulo.cantidadComponentes();
+  }
   public static ArrayList<Articulo> listar() {
     return pArticulo.listar();
   }
