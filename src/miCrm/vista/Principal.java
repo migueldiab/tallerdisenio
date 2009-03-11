@@ -179,7 +179,7 @@ public class Principal extends javax.swing.JFrame {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(642, Short.MAX_VALUE)
+        .addContainerGap(794, Short.MAX_VALUE)
         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(173, 173, 173))
     );
@@ -188,7 +188,7 @@ public class Principal extends javax.swing.JFrame {
       .addGroup(layout.createSequentialGroup()
         .addGap(107, 107, 107)
         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(380, Short.MAX_VALUE))
     );
 
     pack();
@@ -199,27 +199,27 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mSalirMouseClicked
 
     private void mUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mUsuariosActionPerformed
-      Usuarios vUsuarios = new Usuarios();
+      Usuarios vUsuarios = new Usuarios(this);
       vUsuarios.setVisible(true);
     }//GEN-LAST:event_mUsuariosActionPerformed
 
     private void mNuevoContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNuevoContactoActionPerformed
-      RegistroContactos vRegistroContactos = new RegistroContactos();
+      RegistroContactos vRegistroContactos = new RegistroContactos(this);
       vRegistroContactos.setVisible(true);
     }//GEN-LAST:event_mNuevoContactoActionPerformed
 
     private void mGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGruposActionPerformed
-      Grupos vGrupos = new Grupos();
+      Grupos vGrupos = new Grupos(this);
       vGrupos.setVisible(true);
     }//GEN-LAST:event_mGruposActionPerformed
 
     private void mClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClientesActionPerformed
-      Clientes vClientes = new Clientes();
+      Clientes vClientes = new Clientes(this);
       vClientes.setVisible(true);
     }//GEN-LAST:event_mClientesActionPerformed
 
     private void mArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mArticulosActionPerformed
-      Articulos vArticulos = new Articulos();
+      Articulos vArticulos = new Articulos(this);
       vArticulos.setVisible(true);
     }//GEN-LAST:event_mArticulosActionPerformed
 

@@ -44,7 +44,7 @@ public class pPrioridad {
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
     ArrayList listaPrioridads = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -65,7 +65,7 @@ public class pPrioridad {
   }
 
   public static Prioridad buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -91,7 +91,7 @@ public class pPrioridad {
     @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
     ArrayList listaPrioridads = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -111,36 +111,34 @@ public class pPrioridad {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static Integer guardar(Prioridad unPrioridad) {
     try {
-      Prioridad unPrioridad = (Prioridad) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pPrioridad.buscarPorId(unPrioridad.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pPrioridad.TABLA+" ("+pPrioridad.NOMBRE+", "+pPrioridad.ID+") VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pPrioridad.TABLA+" ("+pPrioridad.NOMBRE+") VALUES (?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pPrioridad.TABLA+" SET "+pPrioridad.NOMBRE+" = ? WHERE "+pPrioridad.ID+" = ?");
+          stmt.setInt(2, unPrioridad.getId());
         }
         stmt.setString(1, unPrioridad.getNombre());
-        stmt.setInt(2, unPrioridad.getId());
         stmt.executeUpdate();
-        return true;
+        return Access.ultimoId(con);
       }
       else {
-        return false;
+        return -1;
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Prioridad unPrioridad) {
     try {
-      Prioridad unPrioridad = (Prioridad) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pPrioridad.buscarPorId(unPrioridad.getId())!=null) {

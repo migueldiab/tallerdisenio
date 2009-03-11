@@ -12,6 +12,7 @@
 package miCrm.vista;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
@@ -20,10 +21,11 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Prioridades extends javax.swing.JFrame {
+public class Prioridades extends javax.swing.JDialog {
 
     /** Creates new form Prioridads */
-    public Prioridades() {
+    public Prioridades(JFrame parent) {
+      super(parent);
         initComponents();
         cargarListas();
     }
@@ -55,7 +57,7 @@ public class Prioridades extends javax.swing.JFrame {
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
-      if (Fachada.guardarPrioridad(u)) {
+      if (u.guardar()) {
         return true;
       }
       else {
@@ -211,7 +213,7 @@ public class Prioridades extends javax.swing.JFrame {
         if(tId.isEnabled()) {
           if (unPrioridad!=null) {
             if (JOptionPane.showConfirmDialog(
-              null,"El Prioridad con ID "+tId.getText()+" ya existe ("+unPrioridad.toString()+"). Deseea reemplazarlo?",
+              this,"El Prioridad con ID "+tId.getText()+" ya existe ("+unPrioridad.toString()+"). Deseea reemplazarlo?",
               "Confirma reemplazar?",
               JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
                 return;
@@ -223,7 +225,7 @@ public class Prioridades extends javax.swing.JFrame {
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"Prioridad guardado",
+              this,"Prioridad guardado",
               "Prioridad guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
@@ -231,7 +233,7 @@ public class Prioridades extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al guardar el Prioridad. Verifique los datos.\r\n"+
+              this,"Error al guardar el Prioridad. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -250,12 +252,12 @@ public class Prioridades extends javax.swing.JFrame {
         if (unPrioridad==null) {
           throw new Exception("No existe Prioridad con ID = "+tId.getText());
         }
-        if (!Fachada.borrarPrioridad(unPrioridad)) {
+        if (!unPrioridad.borrar()) {
           throw new Exception("Falló borrarPrioridad(unPrioridad)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"El Prioridad "+unPrioridad.toString()+" fue eliminado",
+              this,"El Prioridad "+unPrioridad.toString()+" fue eliminado",
               "Prioridad Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
@@ -263,7 +265,7 @@ public class Prioridades extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al eliminar el Prioridad. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Prioridad. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -280,17 +282,6 @@ public class Prioridades extends javax.swing.JFrame {
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
       this.dispose();
     }//GEN-LAST:event_bCerrarActionPerformed
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Prioridades().setVisible(true);
-            }
-        });
-    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCerrar;

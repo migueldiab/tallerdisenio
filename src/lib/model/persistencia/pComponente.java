@@ -24,7 +24,7 @@ public class pComponente {
 
   public static boolean borrar(Articulo unComponente, Articulo padre) {
     try {
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "
@@ -46,10 +46,13 @@ public class pComponente {
 
   public static boolean guardar(Articulo unComponente, Articulo padre) {
     try {      
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
-        stmt = con.prepareStatement("INSERT INTO "+pComponente.TABLA+" SET "+pComponente.PADRE+" = ?, "+pComponente.COMPONENTE+" = ?, "+pComponente.CANTIDAD+" = ?, ");
+        stmt = con.prepareStatement("INSERT INTO "+pComponente.TABLA+" (" +
+                pComponente.PADRE+", "+
+                pComponente.COMPONENTE+" )" +
+                " VALUES (?, ?)");
         stmt.setInt(1, padre.getId());
         stmt.setInt(2, unComponente.getId());
         //stmt.setInt(3, unComponente.getCantidad());
@@ -84,7 +87,7 @@ public class pComponente {
   
   public static ArrayList buscarPorArticulo(Articulo unArticulo) {
     ArrayList<Articulo> listaComponentes = new ArrayList<Articulo>();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();

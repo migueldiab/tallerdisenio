@@ -32,21 +32,19 @@ public class StatusBar extends JLabel {
     public void setMessage(String message, StatusBar.MSG tipo_msg) {
       this.setHorizontalAlignment(CENTER);
       
-      switch(tipo_msg) {
-        case ERROR:
+      if (tipo_msg==MSG.ERROR) {
           this.setForeground(Color.RED);
           message = "Error : " + message;
-          break;
-        case HELP:
+      }
+      else if (tipo_msg==MSG.HELP) {
           this.setForeground(Color.BLUE);
           message = "Tip : " + message;
-          break;
-        case INFO:
+      }
+      else if (tipo_msg==MSG.INFO) {
           this.setForeground(Color.GREEN);
-          break;
-        default:
+      }
+      else {
           this.setForeground(Color.BLACK);
-          break;
       }
       setText(message);
     }

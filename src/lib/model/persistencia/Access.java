@@ -11,7 +11,7 @@ import java.sql.*;
  *
  * @author Miguel A. Diab
  */
-public class ConnectDB {
+public class Access {
 
   public static Connection conectar() {
     try {      
@@ -24,5 +24,19 @@ public class ConnectDB {
       return null;
     }
 
+  }
+  public static Integer ultimoId(Connection con) {
+    try {
+      Integer id = 0;
+      Statement stmtId = con.createStatement();
+      ResultSet rs = stmtId.executeQuery("SELECT @@Identity");
+      while (rs.next()) {
+        id = rs.getInt(1);
+      }
+      return id;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return -1;
+    }
   }
 }

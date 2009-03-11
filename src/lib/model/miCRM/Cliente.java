@@ -5,6 +5,8 @@
 
 package lib.model.miCRM;
 
+import lib.model.persistencia.pCliente;
+
 /**
  *
  * @author Administrator
@@ -16,11 +18,26 @@ public class Cliente {
   private String telefono;
   private String direccion;
 
+  public boolean borrar() {
+    if (pCliente.borrar(this)) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * @return the id
    */
   public Integer getId() {
     return id;
+  }
+
+  public boolean guardar() {    
+    Integer id = pCliente.guardar(this);
+    if (id!=-1) {
+      return true;
+    }
+    return false;
   }
 
   /**

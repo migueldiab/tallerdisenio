@@ -44,7 +44,7 @@ public class pGrupo {
   @SuppressWarnings("unchecked")
   public static ArrayList<Grupo> listar() {
     ArrayList listaGrupos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -65,7 +65,7 @@ public class pGrupo {
   }
 
   public static Grupo buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -91,7 +91,7 @@ public class pGrupo {
     @SuppressWarnings("unchecked")
   public static ArrayList<Grupo> buscarPorNombre(String nombre) {
     ArrayList listaGrupos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -111,36 +111,35 @@ public class pGrupo {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static Integer guardar(Grupo unGrupo) {
     try {
-      Grupo unGrupo = (Grupo) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pGrupo.buscarPorId(unGrupo.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pGrupo.TABLA+" ("+pGrupo.NOMBRE+", "+pGrupo.ID+") VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pGrupo.TABLA+" ("+pGrupo.NOMBRE+") VALUES (?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pGrupo.TABLA+" SET "+pGrupo.NOMBRE+" = ? WHERE "+pGrupo.ID+" = ?");
+          stmt.setInt(2, unGrupo.getId());
         }
         stmt.setString(1, unGrupo.getNombre());
-        stmt.setInt(2, unGrupo.getId());
         stmt.executeUpdate();
-        return true;
+                
+        return Access.ultimoId(con);
       }
       else {
-        return false;
+        return -1;
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Grupo unGrupo) {
     try {
-      Grupo unGrupo = (Grupo) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pGrupo.buscarPorId(unGrupo.getId())!=null) {

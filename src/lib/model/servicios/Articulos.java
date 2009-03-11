@@ -16,11 +16,14 @@ import lib.model.persistencia.pArticulo;
 public class Articulos {
 
   public static ArrayList<Articulo> listadoCompuestos() {
-    return null;
-  }
-  public static int cantidadComponentes()
-  {
-    return pArticulo.cantidadComponentes();
+    ArrayList<Articulo> articulos = listar();
+    ArrayList<Articulo> articulosCompuestos = new ArrayList<Articulo>();
+    for (Articulo u : articulos) {
+        if (u.getComponentes()!=null && u.getComponentes().size()>0) {
+            articulosCompuestos.add(u);
+        }
+    }
+    return articulosCompuestos;
   }
   public static ArrayList<Articulo> listar() {
     return pArticulo.listar();
@@ -31,17 +34,29 @@ public class Articulos {
   public static ArrayList buscarPorNombre(String nombre) {
     return pArticulo.buscarPorNombre(nombre);
   }
-   public static boolean borrar(Articulo unArticulo) {
-    if (pArticulo.borrar(unArticulo)) {
-      return true;
+  public static boolean validarComponente(Articulo unArticulo, Articulo unComponente) {
+    if (unComponente.equals(unArticulo)) {
+      return false;
     }
-    return false;
-  }
-  public static boolean guardar(Articulo unArticulo) {
-    if (pArticulo.guardar(unArticulo)) {
-      return true;
+    for (Articulo u : unArticulo.getComponentes()) {
+      if (u.equals(unComponente)) {
+        return false;
+      }
     }
-    return false;
+    if (unComponente.contarComponentes()>0) {
+      ArrayList<Articulo> componentes = unComponente.getComponentes();
+      for (Articulo u : componentes) {
+        if (u.equals(unArticulo)) {
+          return false;
+        }
+        if (u.contarComponentes()>0) {
+          if (!validarComponente(unArticulo, u)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
   }
 
 }

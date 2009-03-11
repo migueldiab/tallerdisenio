@@ -44,7 +44,7 @@ public class pEstadoContacto {
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
     ArrayList listaEstadoContactos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -65,7 +65,7 @@ public class pEstadoContacto {
   }
 
   public static EstadoContacto buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -91,7 +91,7 @@ public class pEstadoContacto {
     @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
     ArrayList listaEstadoContactos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -111,20 +111,19 @@ public class pEstadoContacto {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static boolean guardar(EstadoContacto unEstadoContacto) {
     try {
-      EstadoContacto unEstadoContacto = (EstadoContacto) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pEstadoContacto.buscarPorId(unEstadoContacto.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pEstadoContacto.TABLA+" ("+pEstadoContacto.NOMBRE+", "+pEstadoContacto.ID+") VALUES (?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pEstadoContacto.TABLA+" ("+pEstadoContacto.NOMBRE+") VALUES (?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pEstadoContacto.TABLA+" SET "+pEstadoContacto.NOMBRE+" = ? WHERE "+pEstadoContacto.ID+" = ?");
+          stmt.setInt(2, unEstadoContacto.getId());
         }
         stmt.setString(1, unEstadoContacto.getNombre());
-        stmt.setInt(2, unEstadoContacto.getId());
         stmt.executeUpdate();
         return true;
       }
@@ -137,10 +136,9 @@ public class pEstadoContacto {
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(EstadoContacto unEstadoContacto) {
     try {
-      EstadoContacto unEstadoContacto = (EstadoContacto) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pEstadoContacto.buscarPorId(unEstadoContacto.getId())!=null) {

@@ -24,17 +24,4 @@ public class Clientes {
   public ArrayList buscarPorNombre(String nombre) {
     return pCliente.buscarPorNombre(nombre);
   }
-   public static boolean borrar(Cliente unCliente) {
-    if (pCliente.borrar(unCliente)) {
-      return true;
-    }
-    return false;
-  }
-  public static boolean guardar(Cliente unCliente) {
-    if (pCliente.guardar(unCliente)) {
-      return true;
-    }
-    return false;
-  }
-
 }

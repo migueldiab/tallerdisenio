@@ -5,6 +5,8 @@
 
 package lib.model.miCRM;
 
+import lib.model.persistencia.pGrupo;
+
 /**
  *
  * @author Administrator
@@ -14,11 +16,26 @@ public class Grupo {
   private Integer id;
   private String nombre;
 
+  public boolean borrar() {
+    if (pGrupo.borrar(this)) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * @return the id
    */
   public Integer getId() {
     return id;
+  }
+
+  public boolean guardar() {
+    Integer id = pGrupo.guardar(this);
+    if (id!=-1) {
+      return true;
+    }
+    return false;
   }
 
   /**

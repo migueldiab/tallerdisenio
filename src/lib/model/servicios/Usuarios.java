@@ -16,18 +16,6 @@ import lib.model.persistencia.pUsuario;
  */
 public class Usuarios {
 
-  public static boolean borrar(Usuario unUsuario) {
-    if (pUsuario.borrar(unUsuario)) {
-      return true;
-    }
-    return false;
-  }
-  public static boolean guardar(Usuario unUsuario) {
-    if (pUsuario.guardar(unUsuario)) {
-      return true;
-    }
-    return false;
-  }
   public static ArrayList<Usuario> listar() {
     return pUsuario.listar();
   }
