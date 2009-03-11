@@ -11,8 +11,8 @@
 
 package miCrm.vista;
 
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
@@ -21,10 +21,11 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Grupos extends javax.swing.JFrame {
+public class Grupos extends javax.swing.JDialog {
 
     /** Creates new form Grupos */
-    public Grupos() {
+    public Grupos(JFrame parent) {
+      super(parent);
         initComponents();
         cargarListas();
     }
@@ -56,7 +57,7 @@ public class Grupos extends javax.swing.JFrame {
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
-      if (Fachada.guardarGrupo(u)) {
+      if (u.guardar()) {
         return true;
       }
       else {
@@ -212,7 +213,7 @@ public class Grupos extends javax.swing.JFrame {
         if(tId.isEnabled()) {
           if (unGrupo!=null) {
             if (JOptionPane.showConfirmDialog(
-              null,"El Grupo con ID "+tId.getText()+" ya existe ("+unGrupo.toString()+"). Deseea reemplazarlo?",
+              this,"El Grupo con ID "+tId.getText()+" ya existe ("+unGrupo.toString()+"). Deseea reemplazarlo?",
               "Confirma reemplazar?",
               JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
                 return;
@@ -224,7 +225,7 @@ public class Grupos extends javax.swing.JFrame {
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"Grupo guardado",
+              this,"Grupo guardado",
               "Grupo guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
@@ -251,12 +252,12 @@ public class Grupos extends javax.swing.JFrame {
         if (unGrupo==null) {
           throw new Exception("No existe Grupo con ID = "+tId.getText());
         }
-        if (!Fachada.borrarGrupo(unGrupo)) {
+        if (!unGrupo.borrar()) {
           throw new Exception("Falló borrarGrupo(unGrupo)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"El Grupo "+unGrupo.toString()+" fue eliminado",
+              this,"El Grupo "+unGrupo.toString()+" fue eliminado",
               "Grupo Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
@@ -264,7 +265,7 @@ public class Grupos extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al eliminar el Grupo. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Grupo. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -281,17 +282,6 @@ public class Grupos extends javax.swing.JFrame {
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
       this.dispose();
     }//GEN-LAST:event_bCerrarActionPerformed
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Grupos().setVisible(true);
-            }
-        });
-    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCerrar;

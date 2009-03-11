@@ -39,7 +39,7 @@ public class pUsuario {
   @SuppressWarnings("unchecked")
   public static ArrayList<Usuario> listar() {
     ArrayList listaUsuarios = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -60,7 +60,7 @@ public class pUsuario {
   }
 
   public static Usuario buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -86,7 +86,7 @@ public class pUsuario {
   @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
     ArrayList listaUsuarios = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -106,41 +106,48 @@ public class pUsuario {
     }
   }
 
-  public static boolean guardar(Usuario unUsuario) {
+  public static Integer guardar(Usuario unUsuario) {
     try {
       // No permite agregar un usuario si el grupo no existe
       if (pGrupo.buscarPorId(unUsuario.getGrupo().getId())==null) {
         throw new Exception("El grupo no existe");
       }
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pUsuario.buscarPorId(unUsuario.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pUsuario.TABLA+" ("+pUsuario.NOMBRE+", "+pUsuario.PASSWORD+", "+pUsuario.GRUPO+", "+pUsuario.ID+") VALUES (?, ?, ?, ?)");
+          stmt = con.prepareStatement("INSERT INTO "+pUsuario.TABLA+" ("+
+                  pUsuario.NOMBRE+", "+
+                  pUsuario.PASSWORD+", "+
+                  pUsuario.GRUPO+
+                  ") VALUES (?, ?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE "+pUsuario.TABLA+" SET "+pUsuario.NOMBRE+" = ?, "+pUsuario.PASSWORD+" = ?, "+pUsuario.GRUPO+" = ? WHERE "+pUsuario.ID+" = ?");
+          stmt = con.prepareStatement("UPDATE "+pUsuario.TABLA+" SET "+
+                  pUsuario.NOMBRE+" = ?, "+
+                  pUsuario.PASSWORD+" = ?, "+
+                  pUsuario.GRUPO+" = ? " +
+                  "WHERE "+pUsuario.ID+" = ?");
+          stmt.setInt(4, unUsuario.getId());
         }
         stmt.setString(1, unUsuario.getNombre());
         stmt.setString(2, String.valueOf(unUsuario.getPassword()));
         stmt.setInt(3, unUsuario.getGrupo().getId());
-        stmt.setInt(4, unUsuario.getId());
         stmt.executeUpdate();
-        return true;
+        return Access.ultimoId(con);
       }
       else {
         throw new Exception("No se pudo conectar a la base de datos");
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Usuario unUsuario) {
     try {
-      Usuario unUsuario = (Usuario) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pUsuario.buscarPorId(unUsuario.getId())!=null) {

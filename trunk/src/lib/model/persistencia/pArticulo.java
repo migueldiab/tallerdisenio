@@ -19,10 +19,7 @@ public class pArticulo {
   public static final String NOMBRE = "nombre";
   public static final String COSTO = "costo";
 
-  public static int cantidadComponentes() {
-    throw new UnsupportedOperationException("Not yet implemented");
-  }
-
+  
   /**
    * Convierte un ResultSet específico en un objeto de tipo Articulo
    * en base a los campos definidos
@@ -55,7 +52,7 @@ public class pArticulo {
   
   public static ArrayList<Articulo> listar() {
     ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -76,7 +73,7 @@ public class pArticulo {
   }
 
   public static Articulo buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -104,7 +101,7 @@ public class pArticulo {
     @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
     ArrayList listaArticulos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -124,62 +121,63 @@ public class pArticulo {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static Integer guardar(Articulo unArticulo) {
     try {
-      Articulo unArticulo = (Articulo) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pArticulo.buscarPorId(unArticulo.getId())==null) {
           stmt = con.prepareStatement("INSERT INTO "+pArticulo.TABLA+" " +
-                  "("+pArticulo.NOMBRE+", "+pArticulo.COSTO+", "+pArticulo.ID+")" +
-                  " VALUES (?, ?, ?)");
+                  "("+pArticulo.NOMBRE+", "+pArticulo.COSTO+")" +
+                  " VALUES (?, ?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pArticulo.TABLA+" SET " +
                   pArticulo.NOMBRE+" = ?, "+
                   pArticulo.COSTO+" = ? " +
                   "WHERE "+pArticulo.ID+" = ?");
+          stmt.setInt(3, unArticulo.getId());
         }
         stmt.setString(1, unArticulo.getNombre());
         stmt.setDouble(2, unArticulo.getCosto());
-        stmt.setInt(3, unArticulo.getId());
         stmt.executeUpdate();
 
-        stmt = con.prepareStatement("DELETE FROM componente WHERE "+pComponente.PADRE+" = ?");
+        Integer id = Access.ultimoId(con);
+
+        stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "+pComponente.PADRE+" = ?");
         stmt.setInt(1, unArticulo.getId());
         stmt.executeUpdate();
-        
-        for (Articulo unComponente : unArticulo.getComponentes()) {
-          pComponente.guardar(unComponente, unArticulo);
+
+        if (unArticulo.getComponentes()!=null) {
+          for (Articulo unComponente : unArticulo.getComponentes()) {
+            pComponente.guardar(unComponente, unArticulo);
+          }
         }
-        return true;
+        return id;
       }
       else {
-        return false;
+        return -1;
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Articulo unArticulo) {
     try {
-      Articulo unArticulo = (Articulo) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pArticulo.buscarPorId(unArticulo.getId())!=null) {
           stmt = con.prepareStatement("DELETE FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = ?");
           stmt.setInt(1, unArticulo.getId());
           stmt.executeUpdate();
-          for (Articulo unComponente : unArticulo.getComponentes()) {
-            if (pComponente.borrar(unComponente, unArticulo)) {
-
-            }
-            else {
-              throw new Exception("Error al borrar componente");
+          if (unArticulo.getComponentes()!=null) {
+            for (Articulo unComponente : unArticulo.getComponentes()) {
+              if (!pComponente.borrar(unComponente, unArticulo)) {
+                throw new Exception("Error al borrar componente");
+              }
             }
           }
         }

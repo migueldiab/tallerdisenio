@@ -11,7 +11,9 @@
 
 package miCrm.vista;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
@@ -20,13 +22,159 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Articulos extends javax.swing.JFrame {
+public class Articulos extends javax.swing.JDialog {
 
     /** Creates new form Articulos */
-    public Articulos() {
-        initComponents();
-        cargarListas();
+    public Articulos(JFrame parent) {
+      super(parent);
+      initComponents();
+      limpiarCampos();
+      cargarListas();
     }
+
+  private void agregarComponente() {
+    if (lArticulos.getSelectedIndex()==-1) {
+      JOptionPane.showMessageDialog(
+        this,"Debe seleccionar un artículo a agregar",
+        "Error al agregar",
+        JOptionPane.ERROR_MESSAGE);
+    }
+    else {
+      try {
+        Articulo elArticulo = (Articulo) arbolComponentes.getRoot();
+        Articulo elComponente = (Articulo) lArticulos.getSelectedValue();
+        if (elArticulo.equals(elComponente)) {
+          JOptionPane.showMessageDialog(
+            null,"No puede agregar a un articulo el mismo como componente",
+            "Error al agregar",
+            JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+          if (elArticulo.agregarComponente(elComponente)) {
+            tComponentes.updateUI();
+          }
+          else {
+            JOptionPane.showMessageDialog(
+              this,"No puede agregar el componente seleccionado.\r\nVerifique dependencia circular.",
+              "Error al agregar",
+              JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al agregar componente. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al agregar componente",
+              JOptionPane.ERROR_MESSAGE);
+      }
+
+    }
+  }
+
+  private void eliminarArticulo() {
+    try {
+      Articulo unArticulo = Fachada.buscarArticuloPorId(Integer.parseInt(tId.getText()));
+      if (unArticulo==null) {
+        throw new Exception("No existe Articulo con ID = "+tId.getText());
+      }
+      if (!unArticulo.borrar()) {
+        throw new Exception("Falló borrarArticulo(unArticulo)");
+      }
+      else {
+        JOptionPane.showMessageDialog(
+            this,"El Articulo "+unArticulo.toString()+" fue eliminado",
+            "Articulo Eliminado",
+            JOptionPane.INFORMATION_MESSAGE);
+        limpiarCampos();
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      JOptionPane.showMessageDialog(
+            this,"Error al eliminar el Articulo. Verifique los datos.\r\n"+
+            "Si el error persiste, por favor consulte con el administrador.\r\n"
+            +e.toString(),
+            "Error al eliminar",
+            JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+
+
+  private void guardarArticulo() {
+    try {
+        if (!validarCampos()) {
+          return;
+        }
+        Articulo unArticulo = Fachada.buscarArticuloPorId(Integer.parseInt(tId.getText()));
+        if(tId.isEnabled()) {
+          if (unArticulo!=null) {
+            if (JOptionPane.showConfirmDialog(
+              this,"El Articulo con ID "+tId.getText()+" ya existe ("+unArticulo.toString()+"). Deseea reemplazarlo?",
+              "Confirma reemplazar?",
+              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
+                return;
+            }
+          }
+        }
+        if (!guardarDatos(unArticulo)) {
+          throw new Exception("falló guardarDatos(unArticulo)");
+        }
+        else {
+          JOptionPane.showMessageDialog(
+              this,"Articulo guardado",
+              "Articulo guardado",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        limpiarCampos();
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al guardar el Articulo. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+      }
+  }
+  private void quitarComponete() {
+    try {
+      Articulo elArticulo = (Articulo) arbolComponentes.getRoot();
+      Articulo elComponente = (Articulo) tComponentes.getLastSelectedPathComponent();
+      if (elComponente==null) {
+        JOptionPane.showMessageDialog(
+          this,"Debe seleccionar un artículo a eliminar",
+          "Error al eliminar",
+          JOptionPane.ERROR_MESSAGE);
+      }
+      if (elArticulo.equals(elComponente)) {
+        JOptionPane.showMessageDialog(
+          this,"No puede eliminar la base el articulo",
+          "Error al eliminar",
+          JOptionPane.ERROR_MESSAGE);
+      }
+      else {
+        if (elArticulo.eliminarComponente(elComponente)) {
+          tComponentes.updateUI();
+        }
+        else {
+          JOptionPane.showMessageDialog(
+            this,"No puede eliminar el componente seleccionado.",
+            "Error al eliminar",
+            JOptionPane.ERROR_MESSAGE);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      JOptionPane.showMessageDialog(
+            this,"Error al eliminar componente. Verifique los datos.\r\n"+
+            "Si el error persiste, por favor consulte con el administrador.\r\n"
+            +e.toString(),
+            "Error al eliminar componente",
+            JOptionPane.ERROR_MESSAGE);
+    }
+  }
 
   private void cargarDatos(Articulo u) {
     tId.setText(u.getId().toString());
@@ -42,8 +190,12 @@ public class Articulos extends javax.swing.JFrame {
     tId.setEnabled(true);
     tNombre.setText("");
     tCosto.setText("0.00");
+    arbolComponentes=new ModeloArbol(new Articulo());
+    tComponentes.setModel(arbolComponentes);
+    tComponentes.updateUI();
     cargarListas();
   }
+
   private boolean validarCampos() {
     return true;
   }
@@ -67,7 +219,11 @@ public class Articulos extends javax.swing.JFrame {
       }
       u.setNombre(tNombre.getText());
       u.setCosto(Double.parseDouble(tCosto.getText()));
-      if (Fachada.guardarArticulo(u)) {
+      ArrayList<Articulo> componentes = ((Articulo) arbolComponentes.getRoot()).getComponentes();
+      if (componentes!=null) {
+        u.remplazarComponentes(componentes);
+      }      
+      if (u.guardar()) {
         return true;
       }
       else {
@@ -111,11 +267,9 @@ public class Articulos extends javax.swing.JFrame {
     jListado = new javax.swing.JList(lista);
 
     setTitle("Articulos");
-    setAlwaysOnTop(true);
     setResizable(false);
 
     panelABM.setDividerLocation(150);
-    panelABM.setPreferredSize(null);
 
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
@@ -165,6 +319,11 @@ public class Articulos extends javax.swing.JFrame {
     });
 
     bQuitar.setText(">>");
+    bQuitar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bQuitarActionPerformed(evt);
+      }
+    });
 
     sArticulos.setViewportView(lArticulos);
 
@@ -203,8 +362,8 @@ public class Articulos extends javax.swing.JFrame {
                     .addComponent(bQuitar)
                     .addComponent(bAgregar))
                   .addGap(6, 6, 6)
-                  .addComponent(sArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGap(100, 100, 100))))
+                  .addComponent(sArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+        .addGap(100, 100, 100))
     );
     panelEditarLayout.setVerticalGroup(
       panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,41 +429,7 @@ public class Articulos extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-      try {
-        if (!validarCampos()) {
-          return;
-        }
-        Articulo unArticulo = Fachada.buscarArticuloPorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unArticulo!=null) {
-            if (JOptionPane.showConfirmDialog(
-              null,"El Articulo con ID "+tId.getText()+" ya existe ("+unArticulo.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
-        }
-        if (!guardarDatos(unArticulo)) {
-          throw new Exception("falló guardarDatos(unArticulo)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              null,"Articulo guardado",
-              "Articulo guardado",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
-        limpiarCampos();
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              null,"Error al guardar el Articulo. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al guardar",
-              JOptionPane.ERROR_MESSAGE);
-      }
-
+      guardarArticulo();
 }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
@@ -312,30 +437,7 @@ public class Articulos extends javax.swing.JFrame {
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-      try {
-        Articulo unArticulo = Fachada.buscarArticuloPorId(Integer.parseInt(tId.getText()));
-        if (unArticulo==null) {
-          throw new Exception("No existe Articulo con ID = "+tId.getText());
-        }
-        if (!Fachada.borrarArticulo(unArticulo)) {
-          throw new Exception("Falló borrarArticulo(unArticulo)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              null,"El Articulo "+unArticulo.toString()+" fue eliminado",
-              "Articulo Eliminado",
-              JOptionPane.INFORMATION_MESSAGE);
-          limpiarCampos();
-        }
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              null,"Error al eliminar el Articulo. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al eliminar",
-              JOptionPane.ERROR_MESSAGE);
-      }
+      eliminarArticulo();
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
@@ -349,19 +451,12 @@ public class Articulos extends javax.swing.JFrame {
     }//GEN-LAST:event_bCerrarActionPerformed
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-      // TODO add your handling code here:
+      agregarComponente();
 }//GEN-LAST:event_bAgregarActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Articulos().setVisible(true);
-            }
-        });
-    }
+    private void bQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bQuitarActionPerformed
+      quitarComponete();
+    }//GEN-LAST:event_bQuitarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bAgregar;

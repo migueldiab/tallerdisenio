@@ -15,26 +15,6 @@ import lib.model.servicios.*;
  */
 public class Fachada {
 
-  public static boolean borrarArticulo(Articulo unArticulo) {
-    return Articulos.borrar(unArticulo);
-  }
-
-  public static boolean borrarCliente(Cliente unCliente) {
-    return Clientes.borrar(unCliente);
-  }
-
-  public static boolean borrarGrupo(Grupo unGrupo) {
-    return Grupos.borrar(unGrupo);
-  }
-
-  public static boolean borrarPrioridad(Prioridad unPrioridad) {
-    return Prioridades.borrar(unPrioridad);
-  }
-
-  public static boolean borrarUsuario(Usuario unUsuario) {
-    return Usuarios.borrar(unUsuario);
-  }
-
   public static Articulo buscarArticuloPorId(int id) {
     return Articulos.buscarPorId(id);
   }
@@ -53,26 +33,6 @@ public class Fachada {
 
   public static Usuario buscarUsuarioPorId(int id) {
     return Usuarios.buscarPorId(id);
-  }
-
-  public static boolean guardarArticulo(Articulo u) {
-    return Articulos.guardar(u);
-  }
-
-  public static boolean guardarCliente(Cliente u) {
-    return Clientes.guardar(u);
-  }
-
-  public static boolean guardarGrupo(Grupo unGrupo) {
-    return Grupos.guardar(unGrupo);
-  }
-
-  public static boolean guardarPrioridad(Prioridad u) {
-    return Prioridades.guardar(u);
-  }
-
-  public static boolean guardarUsuario(Usuario unUsuario) {
-    return Usuarios.guardar(unUsuario);
   }
 
   public static ArrayList<Articulo> listarArticulos() {
@@ -96,6 +56,10 @@ public class Fachada {
   }
   public static boolean loginUsuario(Integer usuario, char[] password) {
     return Usuarios.login(usuario, password);
+  }
+
+  public static boolean validarComponente(Articulo unArticulo, Articulo unComponente) {
+    return Articulos.validarComponente(unArticulo, unComponente);
   }
   
   Fachada fachada = null;

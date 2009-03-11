@@ -61,7 +61,7 @@ public class pContacto {
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
     ArrayList listaContactos = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -82,7 +82,7 @@ public class pContacto {
   }
 
   public static Object buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -105,10 +105,9 @@ public class pContacto {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static boolean guardar(Contacto unContacto) {
     try {
-      Contacto unContacto = (Contacto) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pContacto.buscarPorId(unContacto.getId())==null) {
@@ -123,9 +122,8 @@ public class pContacto {
                   +pContacto.RESOLUCION+", "
                   +pContacto.TECNICO+", "
                   +pContacto.TELEFONISTA+", "
-                  +pContacto.TIPO+", "
-                  +pContacto.ID
-                  + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                  +pContacto.TIPO
+                  + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pContacto.TABLA+" SET "
@@ -141,6 +139,7 @@ public class pContacto {
                   +pContacto.TELEFONISTA+"= ?,"
                   +pContacto.TIPO+"= ?"
                   +"WHERE "+pContacto.ID+"= ?");
+          stmt.setInt(12, unContacto.getId());
         }
         stmt.setDate(1, unContacto.getAsignadoEl());
         stmt.setInt(2, unContacto.getCliente().getId());
@@ -153,7 +152,6 @@ public class pContacto {
         stmt.setInt(9, unContacto.getTecnico().getId());
         stmt.setInt(10, unContacto.getTelefonista().getId());
         stmt.setInt(11, unContacto.getTipoContacto().getId());
-        stmt.setInt(12, unContacto.getId());
         stmt.executeUpdate();
         return true;
       }
@@ -166,10 +164,9 @@ public class pContacto {
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Contacto unContacto) {
     try {
-      Contacto unContacto = (Contacto) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pContacto.buscarPorId(unContacto.getId())!=null) {

@@ -11,8 +11,8 @@
 
 package miCrm.vista;
 
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
@@ -21,10 +21,11 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Usuarios extends javax.swing.JFrame {
+public class Usuarios extends javax.swing.JDialog {
 
     /** Creates new form Usuarios */
-    public Usuarios() {
+    public Usuarios(JFrame parent) {
+      super(parent);
         initComponents();
         cargarListas();
     }
@@ -49,7 +50,7 @@ public class Usuarios extends javax.swing.JFrame {
   private boolean validarCampos() {
     if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
       JOptionPane.showMessageDialog(
-        null,"La constraseña no coincide con la verificación",
+        this,"La constraseña no coincide con la verificación",
         "Error al guardar",
         JOptionPane.ERROR_MESSAGE);
       return false;
@@ -57,7 +58,7 @@ public class Usuarios extends javax.swing.JFrame {
     for (int i = 0; i < tPassword.getPassword().length; i++) {
       if (tPassword.getPassword()[i]!=tRepetir.getPassword()[i]) {
         JOptionPane.showMessageDialog(
-          null,"La constraseña no coincide con la verificación",
+          this,"La constraseña no coincide con la verificación",
           "Error al guardar",
           JOptionPane.ERROR_MESSAGE);
         return false;
@@ -72,14 +73,14 @@ public class Usuarios extends javax.swing.JFrame {
     }
     if ((tPassword.getPassword().toString().length()==0) && (tId.isEnabled())) {
       JOptionPane.showMessageDialog(
-        null,"La constraseña no puede estar vacía para un nuevo usuario",
+        this,"La constraseña no puede estar vacía para un nuevo usuario",
         "Error al guardar",
         JOptionPane.ERROR_MESSAGE);
       return false;
     }
     if (cGrupo.getSelectedIndex()==-1) {
       JOptionPane.showMessageDialog(
-        null,"Debe elegir un grupo para el usuario",
+        this,"Debe elegir un grupo para el usuario",
         "Error al guardar",
         JOptionPane.ERROR_MESSAGE);
       return false;
@@ -107,7 +108,7 @@ public class Usuarios extends javax.swing.JFrame {
         u.setPassword(tPassword.getPassword());
       }
       u.setGrupo((Grupo) cGrupo.getSelectedItem());
-      if (Fachada.guardarUsuario(u)) {
+      if (u.guardar()) {
         return true;
       }
       else {
@@ -295,7 +296,7 @@ public class Usuarios extends javax.swing.JFrame {
         if(tId.isEnabled()) {
           if (unUsuario!=null) {
             if (JOptionPane.showConfirmDialog(
-              null,"El usuario con ID "+tId.getText()+" ya existe ("+unUsuario.toString()+"). Deseea reemplazarlo?",
+              this,"El usuario con ID "+tId.getText()+" ya existe ("+unUsuario.toString()+"). Deseea reemplazarlo?",
               "Confirma reemplazar?",
               JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
                 return;
@@ -307,7 +308,7 @@ public class Usuarios extends javax.swing.JFrame {
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"Usuario guardado",
+              this,"Usuario guardado",
               "Usuario guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
@@ -315,7 +316,7 @@ public class Usuarios extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              this,"Error al guardar el usuario. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -334,12 +335,12 @@ public class Usuarios extends javax.swing.JFrame {
         if (unUsuario==null) {
           throw new Exception("No existe usuario con ID = "+tId.getText());
         }
-        if (!Fachada.borrarUsuario(unUsuario)) {
+        if (!unUsuario.borrar()) {
           throw new Exception("Falló borrarUsuario(unUsuario)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"El usuario "+unUsuario.toString()+" fue eliminado",
+              this,"El usuario "+unUsuario.toString()+" fue eliminado",
               "Usuario Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
@@ -347,7 +348,7 @@ public class Usuarios extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al eliminar el usuario. Verifique los datos.\r\n"+
+              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -364,17 +365,6 @@ public class Usuarios extends javax.swing.JFrame {
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
       this.dispose();
     }//GEN-LAST:event_bCerrarActionPerformed
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Usuarios().setVisible(true);
-            }
-        });
-    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCerrar;

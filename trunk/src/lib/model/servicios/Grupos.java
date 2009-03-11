@@ -24,17 +24,4 @@ public class Grupos {
   public static ArrayList<Grupo> buscarPorNombre(String nombre) {
     return pGrupo.buscarPorNombre(nombre);
   }
-   public static boolean borrar(Grupo unGrupo) {
-    if (pGrupo.borrar(unGrupo)) {
-      return true;
-    }
-    return false;
-  }
-  public static boolean guardar(Grupo unGrupo) {
-    if (pGrupo.guardar(unGrupo)) {
-      return true;
-    }
-    return false;
-  }
-
 }

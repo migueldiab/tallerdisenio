@@ -6,6 +6,9 @@
 package lib.model.miCRM;
 
 import java.util.ArrayList;
+import lib.model.persistencia.pArticulo;
+import lib.model.persistencia.pComponente;
+import miCrm.Fachada;
 
 /**
  *
@@ -19,14 +22,26 @@ public class Articulo {
 
   public boolean agregarComponente(Articulo unComponente) {
     if (componentes==null) {
-      componentes = new ArrayList<Articulo>();
+      componentes = new ArrayList<Articulo>();      
     }
-    if (componentes.add(unComponente)) {
-      return true;
+    if (Fachada.validarComponente(this, unComponente)) {
+      if (componentes.add(unComponente)) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
     else {
       return false;
     }
+  }
+
+  public boolean borrar() {
+    if (pArticulo.borrar(this)) {
+      return true;
+    }
+    return false;
   }
 
   public int contarComponentes() {
@@ -36,6 +51,21 @@ public class Articulo {
     else {
       return componentes.size();
     }
+  }
+
+  public boolean eliminarComponente(Articulo elComponente) {
+    if (componentes.indexOf(elComponente)!=-1) {
+      if (!componentes.remove(elComponente)) {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+    if (componentes.size()==0) {
+      componentes = null;
+    }
+    return true;
   }
 
   public boolean esHoja() {
@@ -73,6 +103,27 @@ public class Articulo {
     }
     else {
       return componentes.indexOf(articulo);
+    }
+  }
+
+    public boolean guardar() {
+      Integer autoId = pArticulo.guardar(this);
+      if (autoId!=-1) {
+        this.setId(autoId);
+        return true;
+      }
+      return false;
+    }
+
+  public void remplazarComponentes(ArrayList<Articulo> nuevosComponentes) {
+    if (componentes == null) {
+      componentes = new ArrayList<Articulo>();
+    }
+    else {
+      componentes.clear();
+    }
+    for (Articulo u : nuevosComponentes) {
+      componentes.add(u);
     }
   }
 

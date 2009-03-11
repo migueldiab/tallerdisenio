@@ -24,17 +24,4 @@ public class Prioridades {
   public static ArrayList buscarPorNombre(String nombre) {
     return pPrioridad.buscarPorNombre(nombre);
   }
-   public static boolean borrar(Prioridad unPrioridad) {
-    if (pPrioridad.borrar(unPrioridad)) {
-      return true;
-    }
-    return false;
-  }
-  public static boolean guardar(Prioridad unPrioridad) {
-    if (pPrioridad.guardar(unPrioridad)) {
-      return true;
-    }
-    return false;
-  }
-
 }

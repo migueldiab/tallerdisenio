@@ -11,8 +11,8 @@
 
 package miCrm.vista;
 
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
@@ -21,10 +21,11 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Clientes extends javax.swing.JFrame {
+public class Clientes extends javax.swing.JDialog {
 
     /** Creates new form Clientes */
-    public Clientes() {
+    public Clientes(JFrame parent) {
+      super(parent);
         initComponents();
         cargarListas();
     }
@@ -56,7 +57,7 @@ public class Clientes extends javax.swing.JFrame {
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
-      if (Fachada.guardarCliente(u)) {
+      if (u.guardar()) {
         return true;
       }
       else {
@@ -212,7 +213,7 @@ public class Clientes extends javax.swing.JFrame {
         if(tId.isEnabled()) {
           if (unCliente!=null) {
             if (JOptionPane.showConfirmDialog(
-              null,"El Cliente con ID "+tId.getText()+" ya existe ("+unCliente.toString()+"). Deseea reemplazarlo?",
+              this,"El Cliente con ID "+tId.getText()+" ya existe ("+unCliente.toString()+"). Deseea reemplazarlo?",
               "Confirma reemplazar?",
               JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
                 return;
@@ -224,7 +225,7 @@ public class Clientes extends javax.swing.JFrame {
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"Cliente guardado",
+              this,"Cliente guardado",
               "Cliente guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
@@ -232,7 +233,7 @@ public class Clientes extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al guardar el Cliente. Verifique los datos.\r\n"+
+              this,"Error al guardar el Cliente. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -251,12 +252,12 @@ public class Clientes extends javax.swing.JFrame {
         if (unCliente==null) {
           throw new Exception("No existe Cliente con ID = "+tId.getText());
         }
-        if (!Fachada.borrarCliente(unCliente)) {
+        if (!unCliente.borrar()) {
           throw new Exception("Falló borrarCliente(unCliente)");
         }
         else {
           JOptionPane.showMessageDialog(
-              null,"El Cliente "+unCliente.toString()+" fue eliminado",
+              this,"El Cliente "+unCliente.toString()+" fue eliminado",
               "Cliente Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
@@ -264,7 +265,7 @@ public class Clientes extends javax.swing.JFrame {
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -281,17 +282,6 @@ public class Clientes extends javax.swing.JFrame {
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
       this.dispose();
     }//GEN-LAST:event_bCerrarActionPerformed
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Clientes().setVisible(true);
-            }
-        });
-    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCerrar;

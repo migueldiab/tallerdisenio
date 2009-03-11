@@ -11,16 +11,44 @@
 
 package miCrm.vista;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import lib.model.miCRM.Cliente;
+import miCrm.Fachada;
+
 /**
  *
  * @author Administrator
  */
-public class RegistroContactos extends javax.swing.JFrame {
+public class RegistroContactos extends javax.swing.JDialog {
 
     /** Creates new form RegistroContactos */
-    public RegistroContactos() {
-        initComponents();
+    public RegistroContactos(JFrame parent) {
+      super(parent);
+      initComponents();
+      cargarCamposAutomaticos();
+      cargarListas();
     }
+
+  private void cargarCamposAutomaticos() {        
+    SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat hora = new SimpleDateFormat("H:mm");
+    tFecha.setText(fecha.format(new Date()));
+    tHora.setText(hora.format(new Date()));
+
+  }
+
+  private void cargarListas() {
+    ArrayList<Cliente> lista = Fachada.listarClientes();
+    listaClientes.clear();
+    for (Cliente c : lista) {
+      listaClientes.addElement(c);
+    }
+
+  }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -31,6 +59,10 @@ public class RegistroContactos extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    dClientes = new javax.swing.JDialog();
+    sCleintes = new javax.swing.JScrollPane();
+    lClientes = new javax.swing.JList();
+    bSeleccionar = new javax.swing.JButton();
     tFecha = new javax.swing.JTextField();
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
@@ -53,6 +85,22 @@ public class RegistroContactos extends javax.swing.JFrame {
     jLabel9 = new javax.swing.JLabel();
     cPrioridad = new javax.swing.JComboBox();
     bCancelar = new javax.swing.JButton();
+
+    dClientes.setAlwaysOnTop(true);
+    dClientes.setBounds(new java.awt.Rectangle(0, 0, 150, 300));
+
+    lClientes.setModel(listaClientes);
+    sCleintes.setViewportView(lClientes);
+
+    dClientes.getContentPane().add(sCleintes, java.awt.BorderLayout.CENTER);
+
+    bSeleccionar.setText("Seleccionar");
+    bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bSeleccionarActionPerformed(evt);
+      }
+    });
+    dClientes.getContentPane().add(bSeleccionar, java.awt.BorderLayout.PAGE_END);
 
     setTitle("Registro de Contactos");
 
@@ -79,6 +127,14 @@ public class RegistroContactos extends javax.swing.JFrame {
     tCliente.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         tClienteActionPerformed(evt);
+      }
+    });
+    tCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusGained(java.awt.event.FocusEvent evt) {
+        tClienteFocusGained(evt);
+      }
+      public void focusLost(java.awt.event.FocusEvent evt) {
+        tClienteFocusLost(evt);
       }
     });
 
@@ -234,6 +290,7 @@ public class RegistroContactos extends javax.swing.JFrame {
 
     private void tClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tClienteActionPerformed
       // TODO add your handling code here:
+      
 }//GEN-LAST:event_tClienteActionPerformed
 
     private void tTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tTelefonoActionPerformed
@@ -245,31 +302,34 @@ public class RegistroContactos extends javax.swing.JFrame {
 }//GEN-LAST:event_bGuardarActionPerformed
 
     private void tBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBuscarClienteActionPerformed
-      // TODO add your handling code here:
+      dClientes.setVisible(true);
 }//GEN-LAST:event_tBuscarClienteActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
       // TODO add your handling code here:
 }//GEN-LAST:event_bCancelarActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroContactos().setVisible(true);
-            }
-        });
-    }
+    private void tClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tClienteFocusGained
+
+    }//GEN-LAST:event_tClienteFocusGained
+
+    private void tClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tClienteFocusLost
+
+    }//GEN-LAST:event_tClienteFocusLost
+
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
+      // TODO add your handling code here:
+}//GEN-LAST:event_bSeleccionarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCancelar;
   private javax.swing.JButton bGuardar;
+  private javax.swing.JButton bSeleccionar;
   private javax.swing.JComboBox cEstado;
   private javax.swing.JComboBox cPrioridad;
   private javax.swing.JComboBox cTecnico;
   private javax.swing.JComboBox cTipoContacto;
+  private javax.swing.JDialog dClientes;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
@@ -280,6 +340,8 @@ public class RegistroContactos extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel8;
   private javax.swing.JLabel jLabel9;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JList lClientes;
+  private javax.swing.JScrollPane sCleintes;
   private javax.swing.JButton tBuscarCliente;
   private javax.swing.JTextField tCliente;
   private javax.swing.JTextArea tDescripcion;
@@ -287,5 +349,5 @@ public class RegistroContactos extends javax.swing.JFrame {
   private javax.swing.JTextField tHora;
   private javax.swing.JTextField tTelefono;
   // End of variables declaration//GEN-END:variables
-
+  DefaultListModel listaClientes = new DefaultListModel();
 }

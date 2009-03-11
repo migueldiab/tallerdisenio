@@ -51,7 +51,7 @@ public class pCliente {
   @SuppressWarnings("unchecked")
   public static ArrayList listar() {
     ArrayList listaClientes = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -72,7 +72,7 @@ public class pCliente {
   }
 
   public static Cliente buscarPorId(Integer id) {
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -98,7 +98,7 @@ public class pCliente {
     @SuppressWarnings("unchecked")
   public static ArrayList buscarPorNombre(String nombre) {
     ArrayList listaClientes = new ArrayList();
-    Connection con=ConnectDB.conectar();
+    Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
@@ -118,10 +118,9 @@ public class pCliente {
     }
   }
 
-  public static boolean guardar(Object o) {
+  public static Integer guardar(Cliente unCliente) {
     try {
-      Cliente unCliente = (Cliente) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pCliente.buscarPorId(unCliente.getId())==null) {
@@ -129,9 +128,8 @@ public class pCliente {
                   + pCliente.NOMBRE+", "
                   + pCliente.APELLIDO+", "
                   + pCliente.DIRECCION+", "
-                  + pCliente.TELEFONO+", "                  
-                  + pCliente.ID
-                  +") VALUES (?, ?, ?, ?, ?)");
+                  + pCliente.TELEFONO
+                  +") VALUES (?, ?, ?, ?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pCliente.TABLA+" SET "
@@ -140,28 +138,28 @@ public class pCliente {
                   + pCliente.DIRECCION+" = ? ,"
                   + pCliente.TELEFONO+" = ? "
                   + "WHERE "+pCliente.ID+" = ?");
+          stmt.setInt(5, unCliente.getId());
         }
         stmt.setString(1, unCliente.getNombre());
         stmt.setString(2, unCliente.getApellido());
         stmt.setString(3, unCliente.getDireccion());
         stmt.setString(4, unCliente.getTelefono());
-        stmt.setInt(5, unCliente.getId());
         stmt.executeUpdate();
-        return true;
+
+        return Access.ultimoId(con);
       }
       else {
-        return false;
+        return -1;
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 
-  public static boolean borrar(Object o) {
+  public static boolean borrar(Cliente unCliente) {
     try {
-      Cliente unCliente = (Cliente) o;
-      Connection con=ConnectDB.conectar();
+      Connection con=Access.conectar();
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pCliente.buscarPorId(unCliente.getId())!=null) {
