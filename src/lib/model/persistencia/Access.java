@@ -16,7 +16,9 @@ public class Access {
   public static Connection conectar() {
     try {      
       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");      
-      Connection con = DriverManager.getConnection("jdbc:odbc:miCRM","Admin","test123");
+      String baseAccess = "miCRM.mdb";
+      String strcon= "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=" + baseAccess;
+      Connection con = DriverManager.getConnection(strcon);
       return con;
     }
     catch (Exception e) {
