@@ -93,7 +93,9 @@ public class Usuario {
   public boolean equals(Object obj) {
     try {
       Usuario unUsuario = (Usuario) obj;
-      if (this.getId().equals(unUsuario.getId())) {
+      if (this.getNombre().equals(unUsuario.getNombre()) ||
+          this.getId().equals(unUsuario.getId()))
+      {
         return true;
       }
       else {

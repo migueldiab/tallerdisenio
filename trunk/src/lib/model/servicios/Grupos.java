@@ -21,7 +21,7 @@ public class Grupos {
   public static Grupo buscarPorId(Integer id) {
     return pGrupo.buscarPorId(id);
   }
-  public static ArrayList<Grupo> buscarPorNombre(String nombre) {
+  public static Grupo buscarPorNombre(String nombre) {
     return pGrupo.buscarPorNombre(nombre);
   }
 }

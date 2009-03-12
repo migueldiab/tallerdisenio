@@ -4,12 +4,12 @@
  */
 
 /*
- * Clientes.java
+ * Grupos.java
  *
  * Created on 21/02/2009, 04:00:29 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.admin;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -21,23 +21,21 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Clientes extends javax.swing.JDialog {
+public class Grupos extends javax.swing.JDialog {
 
-    /** Creates new form Clientes */
-    public Clientes(JFrame parent) {
+    /** Creates new form Grupos */
+    public Grupos(JFrame parent) {
       super(parent);
         initComponents();
         cargarListas();
     }
 
-  private void cargarDatos(Cliente u) {
+  private void cargarDatos(Grupo u) {
     tId.setText(u.getId().toString());
-    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
   }
   private void limpiarCampos() {
     tId.setText("");
-    tId.setEnabled(true);
     tNombre.setText("");
     cargarListas();
   }
@@ -46,14 +44,14 @@ public class Clientes extends javax.swing.JDialog {
   }
   private void cargarListas() {
     lista.clear();
-    for (Cliente u : Fachada.listarClientes()) {
+    for (Grupo u : Fachada.listarGrupos()) {
       lista.addElement(u);
     }
   }
-  private boolean guardarDatos(Cliente u) {
+  private boolean guardarDatos(Grupo u) {
     try {
       if (u==null) {
-        u = new Cliente();
+        u = new Grupo();
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
@@ -86,7 +84,7 @@ public class Clientes extends javax.swing.JDialog {
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     bNuevo = new javax.swing.JButton();
-    panelLista = new javax.swing.JScrollPane();
+    panelListado = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
 
@@ -97,6 +95,8 @@ public class Clientes extends javax.swing.JDialog {
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
     lId.setText("Id");
+
+    tId.setEnabled(false);
 
     lNombre.setText("Nombre");
 
@@ -176,8 +176,8 @@ public class Clientes extends javax.swing.JDialog {
 
     panelABM.setRightComponent(panelEditar);
 
-    panelLista.setMinimumSize(new java.awt.Dimension(80, 80));
-    panelLista.setPreferredSize(new java.awt.Dimension(80, 160));
+    panelListado.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelListado.setPreferredSize(new java.awt.Dimension(80, 160));
 
     jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     jListado.setMinimumSize(new java.awt.Dimension(80, 160));
@@ -186,9 +186,9 @@ public class Clientes extends javax.swing.JDialog {
         jListadoValueChanged(evt);
       }
     });
-    panelLista.setViewportView(jListado);
+    panelListado.setViewportView(jListado);
 
-    panelABM.setLeftComponent(panelLista);
+    panelABM.setLeftComponent(panelListado);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -209,31 +209,21 @@ public class Clientes extends javax.swing.JDialog {
         if (!validarCampos()) {
           return;
         }
-        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unCliente!=null) {
-            if (JOptionPane.showConfirmDialog(
-              this,"El Cliente con ID "+tId.getText()+" ya existe ("+unCliente.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
-        }
-        if (!guardarDatos(unCliente)) {
-          throw new Exception("falló guardarDatos(unCliente)");
+        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
+        if (!guardarDatos(unGrupo)) {
+          throw new Exception("falló guardarDatos(unGrupo)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"Cliente guardado",
-              "Cliente guardado",
+              this,"Grupo guardado",
+              "Grupo guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
         limpiarCampos();
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al guardar el Cliente. Verifique los datos.\r\n"+
+              null,"Error al guardar el Grupo. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -248,24 +238,24 @@ public class Clientes extends javax.swing.JDialog {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
       try {
-        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
-        if (unCliente==null) {
-          throw new Exception("No existe Cliente con ID = "+tId.getText());
+        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
+        if (unGrupo==null) {
+          throw new Exception("No existe Grupo con ID = "+tId.getText());
         }
-        if (!unCliente.borrar()) {
-          throw new Exception("Falló borrarCliente(unCliente)");
+        if (!unGrupo.borrar()) {
+          throw new Exception("Falló borrarGrupo(unGrupo)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"El Cliente "+unCliente.toString()+" fue eliminado",
-              "Cliente Eliminado",
+              this,"El Grupo "+unGrupo.toString()+" fue eliminado",
+              "Grupo Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
         }
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Grupo. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -275,7 +265,7 @@ public class Clientes extends javax.swing.JDialog {
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
-        cargarDatos((Cliente) jListado.getSelectedValue());
+        cargarDatos((Grupo) jListado.getSelectedValue());
       }
 }//GEN-LAST:event_jListadoValueChanged
 
@@ -293,7 +283,7 @@ public class Clientes extends javax.swing.JDialog {
   private javax.swing.JLabel lNombre;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
-  private javax.swing.JScrollPane panelLista;
+  private javax.swing.JScrollPane panelListado;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
   // End of variables declaration//GEN-END:variables

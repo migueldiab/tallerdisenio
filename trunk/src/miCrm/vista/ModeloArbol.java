@@ -14,7 +14,7 @@ import lib.model.miCRM.Articulo;
  *
  * @author Miguel A. Diab
  */
-class ModeloArbol implements TreeModel {
+public class ModeloArbol implements TreeModel {
   private Articulo raiz;
 
   public ModeloArbol(Articulo r){

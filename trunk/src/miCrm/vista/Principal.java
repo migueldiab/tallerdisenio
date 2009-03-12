@@ -11,6 +11,12 @@
 
 package miCrm.vista;
 
+import miCrm.vista.sistema.RegistroContactos;
+import miCrm.vista.admin.Usuarios;
+import miCrm.vista.admin.Clientes;
+import miCrm.vista.admin.Grupos;
+import miCrm.vista.admin.Articulos;
+
 /**
  *
  * @author Administrator

@@ -7,6 +7,7 @@ package miCrm;
 
 import java.util.ArrayList;
 import lib.model.miCRM.*;
+import lib.model.persistencia.pGrupo;
 import lib.model.servicios.*;
 
 /**
@@ -27,6 +28,10 @@ public class Fachada {
     return Grupos.buscarPorId(id);
   }
 
+  public static Grupo buscarGrupoPorNombre(String nombre) {
+    return Grupos.buscarPorNombre(nombre);
+  }
+
   public static Prioridad buscarPrioridadPorId(int id) {
     return Prioridades.buscarPorId(id);
   }
@@ -43,6 +48,10 @@ public class Fachada {
     return Clientes.listar();
   }
 
+  public static ArrayList<EstadoContacto> listarEstados() {
+    return Estados.listar();
+  }
+
   public static ArrayList<Grupo> listarGrupos() {
     return Grupos.listar();
   }
@@ -51,10 +60,19 @@ public class Fachada {
     return Prioridades.listar();
   }
 
+  public static Iterable<Usuario> listarTecnicos() {
+    return Usuarios.listarTecnicos();
+  }
+
+  public static ArrayList<TipoContacto> listarTipoContactos() {
+    return TiposContactos.listar();
+  }
+
   public static ArrayList<Usuario> listarUsuarios() {
     return Usuarios.listar();
   }
-  public static boolean loginUsuario(Integer usuario, char[] password) {
+
+  public static boolean loginUsuario(String usuario, char[] password) {
     return Usuarios.login(usuario, password);
   }
 

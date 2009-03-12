@@ -4,12 +4,12 @@
  */
 
 /*
- * Usuarios.java
+ * Clientes.java
  *
  * Created on 21/02/2009, 04:00:29 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.admin;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -21,93 +21,40 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Usuarios extends javax.swing.JDialog {
+public class Clientes extends javax.swing.JDialog {
 
-    /** Creates new form Usuarios */
-    public Usuarios(JFrame parent) {
+    /** Creates new form Clientes */
+    public Clientes(JFrame parent) {
       super(parent);
         initComponents();
         cargarListas();
     }
 
-  private void cargarDatos(Usuario u) {
+  private void cargarDatos(Cliente u) {
     tId.setText(u.getId().toString());
-    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
-    tPassword.setText("");
-    tRepetir.setText("");
-    cGrupo.setSelectedItem(u.getGrupo());
   }
   private void limpiarCampos() {
     tId.setText("");
-    tId.setEnabled(true);
     tNombre.setText("");
-    tPassword.setText("");
-    tRepetir.setText("");
-    cGrupo.setSelectedItem(null);
     cargarListas();
   }
   private boolean validarCampos() {
-    if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
-      JOptionPane.showMessageDialog(
-        this,"La constraseña no coincide con la verificación",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    for (int i = 0; i < tPassword.getPassword().length; i++) {
-      if (tPassword.getPassword()[i]!=tRepetir.getPassword()[i]) {
-        JOptionPane.showMessageDialog(
-          this,"La constraseña no coincide con la verificación",
-          "Error al guardar",
-          JOptionPane.ERROR_MESSAGE);
-        return false;
-      }
-    }
-    if ((tPassword.getPassword().toString().length()<4) && (tPassword.getPassword().toString().length()>0)) {
-      JOptionPane.showMessageDialog(
-        null,"La constraseña debe teneral menos 4 caracteres",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    if ((tPassword.getPassword().toString().length()==0) && (tId.isEnabled())) {
-      JOptionPane.showMessageDialog(
-        this,"La constraseña no puede estar vacía para un nuevo usuario",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
-    if (cGrupo.getSelectedIndex()==-1) {
-      JOptionPane.showMessageDialog(
-        this,"Debe elegir un grupo para el usuario",
-        "Error al guardar",
-        JOptionPane.ERROR_MESSAGE);
-      return false;
-    }
     return true;
   }
   private void cargarListas() {
-    listaUsuarios.clear();
-    for (Usuario u : Fachada.listarUsuarios()) {
-      listaUsuarios.addElement(u);
-    }
-    cGrupo.removeAllItems();
-    for (Grupo g : Fachada.listarGrupos()) {
-      cGrupo.addItem(g);
+    lista.clear();
+    for (Cliente u : Fachada.listarClientes()) {
+      lista.addElement(u);
     }
   }
-  private boolean guardarDatos(Usuario u) {
+  private boolean guardarDatos(Cliente u) {
     try {
       if (u==null) {
-        u = new Usuario();
+        u = new Cliente();
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
-      if (tPassword.getPassword().length>=4) {
-        u.setPassword(tPassword.getPassword());
-      }
-      u.setGrupo((Grupo) cGrupo.getSelectedItem());
       if (u.guardar()) {
         return true;
       }
@@ -133,19 +80,13 @@ public class Usuarios extends javax.swing.JDialog {
     tId = new javax.swing.JTextField();
     tNombre = new javax.swing.JTextField();
     lNombre = new javax.swing.JLabel();
-    lClave = new javax.swing.JLabel();
-    lRepetir = new javax.swing.JLabel();
-    lGrupo = new javax.swing.JLabel();
-    cGrupo = new javax.swing.JComboBox();
-    tRepetir = new javax.swing.JPasswordField();
-    tPassword = new javax.swing.JPasswordField();
     bGuardar = new javax.swing.JButton();
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     bNuevo = new javax.swing.JButton();
-    panelListado = new javax.swing.JScrollPane();
-    listaUsuarios = new DefaultListModel();
-    jListado = new javax.swing.JList(listaUsuarios);
+    panelLista = new javax.swing.JScrollPane();
+    lista = new DefaultListModel();
+    jListado = new javax.swing.JList(lista);
 
     setTitle("Usuarios");
 
@@ -155,13 +96,9 @@ public class Usuarios extends javax.swing.JDialog {
 
     lId.setText("Id");
 
+    tId.setEnabled(false);
+
     lNombre.setText("Nombre");
-
-    lClave.setText("Clave");
-
-    lRepetir.setText("Repetir");
-
-    lGrupo.setText("Grupo");
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -204,17 +141,9 @@ public class Usuarios extends javax.swing.JDialog {
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelEditarLayout.createSequentialGroup()
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lNombre)
-                .addComponent(lGrupo)
-                .addComponent(lRepetir)
-                .addComponent(lClave))
+              .addComponent(lNombre)
               .addGap(30, 30, 30)
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(tPassword)
-                .addComponent(tRepetir)
-                .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
           .addGroup(panelEditarLayout.createSequentialGroup()
             .addComponent(bNuevo)
             .addGap(18, 18, 18)
@@ -236,19 +165,7 @@ public class Usuarios extends javax.swing.JDialog {
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(lNombre)
           .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lClave)
-          .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lRepetir)
-          .addComponent(tRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lGrupo)
-          .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bCerrar)
           .addComponent(bNuevo)
@@ -259,8 +176,8 @@ public class Usuarios extends javax.swing.JDialog {
 
     panelABM.setRightComponent(panelEditar);
 
-    panelListado.setMinimumSize(new java.awt.Dimension(80, 80));
-    panelListado.setPreferredSize(new java.awt.Dimension(80, 160));
+    panelLista.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelLista.setPreferredSize(new java.awt.Dimension(80, 160));
 
     jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     jListado.setMinimumSize(new java.awt.Dimension(80, 160));
@@ -269,9 +186,9 @@ public class Usuarios extends javax.swing.JDialog {
         jListadoValueChanged(evt);
       }
     });
-    panelListado.setViewportView(jListado);
+    panelLista.setViewportView(jListado);
 
-    panelABM.setLeftComponent(panelListado);
+    panelABM.setLeftComponent(panelLista);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -292,31 +209,21 @@ public class Usuarios extends javax.swing.JDialog {
         if (!validarCampos()) {
           return;
         }
-        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unUsuario!=null) {
-            if (JOptionPane.showConfirmDialog(
-              this,"El usuario con ID "+tId.getText()+" ya existe ("+unUsuario.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
-        }
-        if (!guardarDatos(unUsuario)) {
-          throw new Exception("falló guardarDatos(unUsuario)");
+        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));        
+        if (!guardarDatos(unCliente)) {
+          throw new Exception("falló guardarDatos(unCliente)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"Usuario guardado",
-              "Usuario guardado",
+              this,"Cliente guardado",
+              "Cliente guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
         limpiarCampos();
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              this,"Error al guardar el Cliente. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -331,24 +238,24 @@ public class Usuarios extends javax.swing.JDialog {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
       try {
-        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
-        if (unUsuario==null) {
-          throw new Exception("No existe usuario con ID = "+tId.getText());
+        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
+        if (unCliente==null) {
+          throw new Exception("No existe Cliente con ID = "+tId.getText());
         }
-        if (!unUsuario.borrar()) {
-          throw new Exception("Falló borrarUsuario(unUsuario)");
+        if (!unCliente.borrar()) {
+          throw new Exception("Falló borrarCliente(unCliente)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"El usuario "+unUsuario.toString()+" fue eliminado",
-              "Usuario Eliminado",
+              this,"El Cliente "+unCliente.toString()+" fue eliminado",
+              "Cliente Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
         }
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -358,7 +265,7 @@ public class Usuarios extends javax.swing.JDialog {
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
-        cargarDatos((Usuario) jListado.getSelectedValue());
+        cargarDatos((Cliente) jListado.getSelectedValue());
       }
 }//GEN-LAST:event_jListadoValueChanged
 
@@ -371,22 +278,16 @@ public class Usuarios extends javax.swing.JDialog {
   private javax.swing.JButton bEliminar;
   private javax.swing.JButton bGuardar;
   private javax.swing.JButton bNuevo;
-  private javax.swing.JComboBox cGrupo;
   private javax.swing.JList jListado;
-  private javax.swing.JLabel lClave;
-  private javax.swing.JLabel lGrupo;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
-  private javax.swing.JLabel lRepetir;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
-  private javax.swing.JScrollPane panelListado;
+  private javax.swing.JScrollPane panelLista;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
-  private javax.swing.JPasswordField tPassword;
-  private javax.swing.JPasswordField tRepetir;
   // End of variables declaration//GEN-END:variables
-  private javax.swing.DefaultListModel listaUsuarios;
+  private javax.swing.DefaultListModel lista;
 
 
 }

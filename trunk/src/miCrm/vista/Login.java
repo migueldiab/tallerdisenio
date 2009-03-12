@@ -63,7 +63,7 @@ public class Login extends javax.swing.JFrame {
 
     lUsuario.setText("Usuario");
 
-    tUsuario.setText("1");
+    tUsuario.setText("admin");
     tUsuario.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         tUsuarioActionPerformed(evt);
@@ -135,9 +135,8 @@ public class Login extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
-      try {
-        Integer id_usuario = Integer.parseInt(tUsuario.getText());
-        if (Fachada.loginUsuario(id_usuario, tPassword.getPassword())) {
+      try {        
+        if (Fachada.loginUsuario(tUsuario.getText(), tPassword.getPassword())) {
           Principal vPrincipal = new Principal();
           vPrincipal.setVisible(true);
           this.setVisible(false);

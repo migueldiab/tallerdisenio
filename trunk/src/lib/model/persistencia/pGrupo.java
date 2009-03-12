@@ -89,18 +89,20 @@ public class pGrupo {
   }
 
     @SuppressWarnings("unchecked")
-  public static ArrayList<Grupo> buscarPorNombre(String nombre) {
-    ArrayList listaGrupos = new ArrayList();
+  public static Grupo buscarPorNombre(String nombre) {
+    Grupo unGrupo = null;
     Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA+" WHERE "+pGrupo.NOMBRE+" LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          Grupo unGrupo = pGrupo.toGrupo(rs);
-          listaGrupos.add(unGrupo);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA+" WHERE "+pGrupo.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unGrupo = pGrupo.toGrupo(rs);
         }
-        return listaGrupos;
+        if (rs.next()) {
+          return null;
+        }
+        return unGrupo;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;
