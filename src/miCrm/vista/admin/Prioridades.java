@@ -4,12 +4,12 @@
  */
 
 /*
- * Grupos.java
+ * Prioridads.java
  *
  * Created on 21/02/2009, 04:00:29 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.admin;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -21,23 +21,21 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Grupos extends javax.swing.JDialog {
+public class Prioridades extends javax.swing.JDialog {
 
-    /** Creates new form Grupos */
-    public Grupos(JFrame parent) {
+    /** Creates new form Prioridads */
+    public Prioridades(JFrame parent) {
       super(parent);
         initComponents();
         cargarListas();
     }
 
-  private void cargarDatos(Grupo u) {
+  private void cargarDatos(Prioridad u) {
     tId.setText(u.getId().toString());
-    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
   }
   private void limpiarCampos() {
     tId.setText("");
-    tId.setEnabled(true);
     tNombre.setText("");
     cargarListas();
   }
@@ -46,14 +44,14 @@ public class Grupos extends javax.swing.JDialog {
   }
   private void cargarListas() {
     lista.clear();
-    for (Grupo u : Fachada.listarGrupos()) {
+    for (Prioridad u : Fachada.listarPrioridades()) {
       lista.addElement(u);
     }
   }
-  private boolean guardarDatos(Grupo u) {
+  private boolean guardarDatos(Prioridad u) {
     try {
       if (u==null) {
-        u = new Grupo();
+        u = new Prioridad();
         u.setId(Integer.parseInt(tId.getText()));
       }
       u.setNombre(tNombre.getText());
@@ -86,7 +84,7 @@ public class Grupos extends javax.swing.JDialog {
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     bNuevo = new javax.swing.JButton();
-    panelListado = new javax.swing.JScrollPane();
+    panelLista = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
 
@@ -97,6 +95,8 @@ public class Grupos extends javax.swing.JDialog {
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
     lId.setText("Id");
+
+    tId.setEnabled(false);
 
     lNombre.setText("Nombre");
 
@@ -176,8 +176,8 @@ public class Grupos extends javax.swing.JDialog {
 
     panelABM.setRightComponent(panelEditar);
 
-    panelListado.setMinimumSize(new java.awt.Dimension(80, 80));
-    panelListado.setPreferredSize(new java.awt.Dimension(80, 160));
+    panelLista.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelLista.setPreferredSize(new java.awt.Dimension(80, 160));
 
     jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     jListado.setMinimumSize(new java.awt.Dimension(80, 160));
@@ -186,9 +186,9 @@ public class Grupos extends javax.swing.JDialog {
         jListadoValueChanged(evt);
       }
     });
-    panelListado.setViewportView(jListado);
+    panelLista.setViewportView(jListado);
 
-    panelABM.setLeftComponent(panelListado);
+    panelABM.setLeftComponent(panelLista);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -209,31 +209,21 @@ public class Grupos extends javax.swing.JDialog {
         if (!validarCampos()) {
           return;
         }
-        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unGrupo!=null) {
-            if (JOptionPane.showConfirmDialog(
-              this,"El Grupo con ID "+tId.getText()+" ya existe ("+unGrupo.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
-        }
-        if (!guardarDatos(unGrupo)) {
-          throw new Exception("falló guardarDatos(unGrupo)");
+        Prioridad unPrioridad = Fachada.buscarPrioridadPorId(Integer.parseInt(tId.getText()));
+        if (!guardarDatos(unPrioridad)) {
+          throw new Exception("falló guardarDatos(unPrioridad)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"Grupo guardado",
-              "Grupo guardado",
+              this,"Prioridad guardado",
+              "Prioridad guardado",
               JOptionPane.INFORMATION_MESSAGE);
         }
         limpiarCampos();
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              null,"Error al guardar el Grupo. Verifique los datos.\r\n"+
+              this,"Error al guardar el Prioridad. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al guardar",
@@ -248,24 +238,24 @@ public class Grupos extends javax.swing.JDialog {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
       try {
-        Grupo unGrupo = Fachada.buscarGrupoPorId(Integer.parseInt(tId.getText()));
-        if (unGrupo==null) {
-          throw new Exception("No existe Grupo con ID = "+tId.getText());
+        Prioridad unPrioridad = Fachada.buscarPrioridadPorId(Integer.parseInt(tId.getText()));
+        if (unPrioridad==null) {
+          throw new Exception("No existe Prioridad con ID = "+tId.getText());
         }
-        if (!unGrupo.borrar()) {
-          throw new Exception("Falló borrarGrupo(unGrupo)");
+        if (!unPrioridad.borrar()) {
+          throw new Exception("Falló borrarPrioridad(unPrioridad)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"El Grupo "+unGrupo.toString()+" fue eliminado",
-              "Grupo Eliminado",
+              this,"El Prioridad "+unPrioridad.toString()+" fue eliminado",
+              "Prioridad Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
         }
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al eliminar el Grupo. Verifique los datos.\r\n"+
+              this,"Error al eliminar el Prioridad. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -275,7 +265,7 @@ public class Grupos extends javax.swing.JDialog {
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
-        cargarDatos((Grupo) jListado.getSelectedValue());
+        cargarDatos((Prioridad) jListado.getSelectedValue());
       }
 }//GEN-LAST:event_jListadoValueChanged
 
@@ -293,7 +283,7 @@ public class Grupos extends javax.swing.JDialog {
   private javax.swing.JLabel lNombre;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
-  private javax.swing.JScrollPane panelListado;
+  private javax.swing.JScrollPane panelLista;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
   // End of variables declaration//GEN-END:variables

@@ -84,18 +84,20 @@ public class pUsuario {
   }
 
   @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaUsuarios = new ArrayList();
+  public static Usuario buscarPorNombre(String nombre) {
+    Usuario unUsuario = null;
     Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.NOMBRE+" LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          Usuario unUsuario = pUsuario.toUsuario(rs);
-          listaUsuarios.add(unUsuario);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unUsuario = pUsuario.toUsuario(rs);          
         }
-        return listaUsuarios;
+        if (rs.next()) {
+          return null;
+        }
+        return unUsuario;
       } catch (Exception e) {
         System.out.println(e.toString());
         return null;

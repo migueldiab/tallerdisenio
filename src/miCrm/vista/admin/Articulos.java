@@ -9,7 +9,7 @@
  * Created on 21/02/2009, 04:00:29 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.admin;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
+import miCrm.vista.ModeloArbol;
 
 /**
  *

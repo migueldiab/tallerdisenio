@@ -9,7 +9,7 @@
  * Created on 21/02/2009, 04:16:20 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.sistema;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +17,10 @@ import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import lib.model.miCRM.Cliente;
+import lib.model.miCRM.EstadoContacto;
+import lib.model.miCRM.Prioridad;
+import lib.model.miCRM.TipoContacto;
+import lib.model.miCRM.Usuario;
 import miCrm.Fachada;
 
 /**
@@ -47,7 +51,22 @@ public class RegistroContactos extends javax.swing.JDialog {
     for (Cliente c : lista) {
       listaClientes.addElement(c);
     }
-
+    cEstado.removeAllItems();
+    for (EstadoContacto e : Fachada.listarEstados()) {
+      cEstado.addItem(e);
+    }
+    cPrioridad.removeAllItems();
+    for (Prioridad e : Fachada.listarPrioridades()) {
+      cPrioridad.addItem(e);
+    }
+    cTecnico.removeAllItems();
+    for (Usuario e : Fachada.listarTecnicos()) {
+      cTecnico.addItem(e);
+    }
+    cTipoContacto.removeAllItems();
+    for (TipoContacto e : Fachada.listarTipoContactos()) {
+      cTipoContacto.addItem(e);
+    }
   }
 
     /** This method is called from within the constructor to
@@ -280,6 +299,15 @@ public class RegistroContactos extends javax.swing.JDialog {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  private void seleccionarCliente(Object selectedValue) {
+    try {
+      Cliente unCliente = (Cliente) selectedValue;
+      tCliente.setText(unCliente.toString());
+      dClientes.setVisible(false);
+    } catch (Exception e) {
+    }
+  }
+
     private void tFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFechaActionPerformed
       // TODO add your handling code here:
 }//GEN-LAST:event_tFechaActionPerformed
@@ -318,7 +346,7 @@ public class RegistroContactos extends javax.swing.JDialog {
     }//GEN-LAST:event_tClienteFocusLost
 
     private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
-      // TODO add your handling code here:
+    seleccionarCliente(lClientes.getSelectedValue());
 }//GEN-LAST:event_bSeleccionarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

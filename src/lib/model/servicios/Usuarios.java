@@ -7,8 +7,10 @@ package lib.model.servicios;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import lib.model.miCRM.Grupo;
 import lib.model.miCRM.Usuario;
 import lib.model.persistencia.pUsuario;
+import miCrm.Fachada;
 
 /**
  *
@@ -24,12 +26,25 @@ public class Usuarios {
     return pUsuario.buscarPorId(id);
   }
 
-  public static ArrayList buscarPorNombre(String nombre) {
+  public static Usuario buscarPorNombre(String nombre) {
     return pUsuario.buscarPorNombre(nombre);
   }
 
-  public static boolean login(Integer usuario, char[] password) {
-    Usuario unUsuario = Usuarios.buscarPorId(usuario);
+  public static Iterable<Usuario> listarTecnicos() {
+    ArrayList<Usuario> losUsuarios = pUsuario.listar();
+    ArrayList<Usuario> losTecnicos = new ArrayList<Usuario>();
+    Grupo tecnico = Fachada.buscarGrupoPorNombre("Técnico");
+    for (Usuario u : losUsuarios) {
+      if (u.getGrupo().equals(tecnico)) {
+        losTecnicos.add(u);
+      }
+    }
+    return losTecnicos;
+    
+  }
+
+  public static boolean login(String usuario, char[] password) {
+    Usuario unUsuario = Usuarios.buscarPorNombre(usuario);
     if (unUsuario!=null) {
       if (password.length == unUsuario.getPassword().length) {
         if (Arrays.equals(unUsuario.getPassword() , password)) {
@@ -39,6 +54,7 @@ public class Usuarios {
     }
     return false;
   }
+
 
 
 }

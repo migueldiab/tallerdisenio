@@ -4,12 +4,12 @@
  */
 
 /*
- * Prioridads.java
+ * Usuarios.java
  *
  * Created on 21/02/2009, 04:00:29 PM
  */
 
-package miCrm.vista;
+package miCrm.vista.admin;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -21,52 +21,104 @@ import miCrm.Fachada;
  *
  * @author Administrator
  */
-public class Prioridades extends javax.swing.JDialog {
+public class Usuarios extends javax.swing.JDialog {
 
-    /** Creates new form Prioridads */
-    public Prioridades(JFrame parent) {
+    /** Creates new form Usuarios */
+    public Usuarios(JFrame parent) {
       super(parent);
         initComponents();
         cargarListas();
     }
 
-  private void cargarDatos(Prioridad u) {
+  private void cargarDatos(Usuario u) {
     tId.setText(u.getId().toString());
-    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
+    tPassword.setText("");
+    tRepetir.setText("");
+    cGrupo.setSelectedItem(u.getGrupo());
+  }
+
+  private void guardarUsuario() {
+    try {
+        if (!validarCampos()) {
+          return;
+        }
+        Usuario u = new Usuario();
+        u.setNombre(tNombre.getText());
+        u.setPassword(tPassword.getPassword());
+        u.setGrupo((Grupo) cGrupo.getSelectedItem());
+        if (u.guardar()) {
+          JOptionPane.showMessageDialog(
+              this,"Usuario guardado",
+              "Usuario guardado",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+          throw new Exception("Error en Usuario.guardar()");
+        }
+        limpiarCampos();
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+      }
   }
   private void limpiarCampos() {
     tId.setText("");
-    tId.setEnabled(true);
     tNombre.setText("");
+    tPassword.setText("");
+    tRepetir.setText("");
+    cGrupo.setSelectedItem(null);
     cargarListas();
   }
   private boolean validarCampos() {
+    if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
+      JOptionPane.showMessageDialog(
+        this,"La constraseña no coincide con la verificación",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    for (int i = 0; i < tPassword.getPassword().length; i++) {
+      if (tPassword.getPassword()[i]!=tRepetir.getPassword()[i]) {
+        JOptionPane.showMessageDialog(
+          this,"La constraseña no coincide con la verificación",
+          "Error al guardar",
+          JOptionPane.ERROR_MESSAGE);
+        return false;
+      }
+    }
+    if (tPassword.getPassword().toString().length()<4) {
+      JOptionPane.showMessageDialog(
+        null,"La constraseña debe tener al menos 4 caracteres",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    if (cGrupo.getSelectedIndex()==-1) {
+      JOptionPane.showMessageDialog(
+        this,"Debe elegir un grupo para el usuario",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
     return true;
   }
   private void cargarListas() {
-    lista.clear();
-    for (Prioridad u : Fachada.listarPrioridades()) {
-      lista.addElement(u);
+    listaUsuarios.clear();
+    for (Usuario u : Fachada.listarUsuarios()) {
+      listaUsuarios.addElement(u);
+    }
+    cGrupo.removeAllItems();
+    for (Grupo g : Fachada.listarGrupos()) {
+      cGrupo.addItem(g);
     }
   }
-  private boolean guardarDatos(Prioridad u) {
-    try {
-      if (u==null) {
-        u = new Prioridad();
-        u.setId(Integer.parseInt(tId.getText()));
-      }
-      u.setNombre(tNombre.getText());
-      if (u.guardar()) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    } catch (Exception e) {
-      return false;
-    }
-  }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -82,13 +134,19 @@ public class Prioridades extends javax.swing.JDialog {
     tId = new javax.swing.JTextField();
     tNombre = new javax.swing.JTextField();
     lNombre = new javax.swing.JLabel();
+    lClave = new javax.swing.JLabel();
+    lRepetir = new javax.swing.JLabel();
+    lGrupo = new javax.swing.JLabel();
+    cGrupo = new javax.swing.JComboBox();
+    tRepetir = new javax.swing.JPasswordField();
+    tPassword = new javax.swing.JPasswordField();
     bGuardar = new javax.swing.JButton();
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
     bNuevo = new javax.swing.JButton();
-    panelLista = new javax.swing.JScrollPane();
-    lista = new DefaultListModel();
-    jListado = new javax.swing.JList(lista);
+    panelListado = new javax.swing.JScrollPane();
+    listaUsuarios = new DefaultListModel();
+    jListado = new javax.swing.JList(listaUsuarios);
 
     setTitle("Usuarios");
 
@@ -98,7 +156,15 @@ public class Prioridades extends javax.swing.JDialog {
 
     lId.setText("Id");
 
+    tId.setEnabled(false);
+
     lNombre.setText("Nombre");
+
+    lClave.setText("Clave");
+
+    lRepetir.setText("Repetir");
+
+    lGrupo.setText("Grupo");
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +207,17 @@ public class Prioridades extends javax.swing.JDialog {
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelEditarLayout.createSequentialGroup()
-              .addComponent(lNombre)
+              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(lNombre)
+                .addComponent(lGrupo)
+                .addComponent(lRepetir)
+                .addComponent(lClave))
               .addGap(30, 30, 30)
-              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(tPassword)
+                .addComponent(tRepetir)
+                .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
           .addGroup(panelEditarLayout.createSequentialGroup()
             .addComponent(bNuevo)
             .addGap(18, 18, 18)
@@ -165,7 +239,19 @@ public class Prioridades extends javax.swing.JDialog {
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(lNombre)
           .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lClave)
+          .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lRepetir)
+          .addComponent(tRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lGrupo)
+          .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bCerrar)
           .addComponent(bNuevo)
@@ -176,8 +262,8 @@ public class Prioridades extends javax.swing.JDialog {
 
     panelABM.setRightComponent(panelEditar);
 
-    panelLista.setMinimumSize(new java.awt.Dimension(80, 80));
-    panelLista.setPreferredSize(new java.awt.Dimension(80, 160));
+    panelListado.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelListado.setPreferredSize(new java.awt.Dimension(80, 160));
 
     jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     jListado.setMinimumSize(new java.awt.Dimension(80, 160));
@@ -186,9 +272,9 @@ public class Prioridades extends javax.swing.JDialog {
         jListadoValueChanged(evt);
       }
     });
-    panelLista.setViewportView(jListado);
+    panelListado.setViewportView(jListado);
 
-    panelABM.setLeftComponent(panelLista);
+    panelABM.setLeftComponent(panelListado);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -205,41 +291,7 @@ public class Prioridades extends javax.swing.JDialog {
   }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-      try {
-        if (!validarCampos()) {
-          return;
-        }
-        Prioridad unPrioridad = Fachada.buscarPrioridadPorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unPrioridad!=null) {
-            if (JOptionPane.showConfirmDialog(
-              this,"El Prioridad con ID "+tId.getText()+" ya existe ("+unPrioridad.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
-        }
-        if (!guardarDatos(unPrioridad)) {
-          throw new Exception("falló guardarDatos(unPrioridad)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              this,"Prioridad guardado",
-              "Prioridad guardado",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
-        limpiarCampos();
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              this,"Error al guardar el Prioridad. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al guardar",
-              JOptionPane.ERROR_MESSAGE);
-      }
-
+      guardarUsuario();
 }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
@@ -248,24 +300,24 @@ public class Prioridades extends javax.swing.JDialog {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
       try {
-        Prioridad unPrioridad = Fachada.buscarPrioridadPorId(Integer.parseInt(tId.getText()));
-        if (unPrioridad==null) {
-          throw new Exception("No existe Prioridad con ID = "+tId.getText());
+        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
+        if (unUsuario==null) {
+          throw new Exception("No existe usuario con ID = "+tId.getText());
         }
-        if (!unPrioridad.borrar()) {
-          throw new Exception("Falló borrarPrioridad(unPrioridad)");
+        if (!unUsuario.borrar()) {
+          throw new Exception("Falló borrarUsuario(unUsuario)");
         }
         else {
           JOptionPane.showMessageDialog(
-              this,"El Prioridad "+unPrioridad.toString()+" fue eliminado",
-              "Prioridad Eliminado",
+              this,"El usuario "+unUsuario.toString()+" fue eliminado",
+              "Usuario Eliminado",
               JOptionPane.INFORMATION_MESSAGE);
           limpiarCampos();
         }
       } catch (Exception e) {
         System.out.println(e.toString());
         JOptionPane.showMessageDialog(
-              this,"Error al eliminar el Prioridad. Verifique los datos.\r\n"+
+              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
               "Si el error persiste, por favor consulte con el administrador.\r\n"
               +e.toString(),
               "Error al eliminar",
@@ -275,7 +327,7 @@ public class Prioridades extends javax.swing.JDialog {
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
-        cargarDatos((Prioridad) jListado.getSelectedValue());
+        cargarDatos((Usuario) jListado.getSelectedValue());
       }
 }//GEN-LAST:event_jListadoValueChanged
 
@@ -288,16 +340,22 @@ public class Prioridades extends javax.swing.JDialog {
   private javax.swing.JButton bEliminar;
   private javax.swing.JButton bGuardar;
   private javax.swing.JButton bNuevo;
+  private javax.swing.JComboBox cGrupo;
   private javax.swing.JList jListado;
+  private javax.swing.JLabel lClave;
+  private javax.swing.JLabel lGrupo;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
+  private javax.swing.JLabel lRepetir;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
-  private javax.swing.JScrollPane panelLista;
+  private javax.swing.JScrollPane panelListado;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
+  private javax.swing.JPasswordField tPassword;
+  private javax.swing.JPasswordField tRepetir;
   // End of variables declaration//GEN-END:variables
-  private javax.swing.DefaultListModel lista;
+  private javax.swing.DefaultListModel listaUsuarios;
 
 
 }

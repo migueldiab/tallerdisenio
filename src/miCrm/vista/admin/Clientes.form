@@ -64,19 +64,9 @@
                                   <Component id="tId" min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lGrupo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lRepetir" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lClave" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="lNombre" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tPassword" max="32767" attributes="1"/>
-                                      <Component id="tRepetir" max="32767" attributes="1"/>
-                                      <Component id="cGrupo" max="32767" attributes="1"/>
-                                      <Component id="tNombre" alignment="0" pref="116" max="32767" attributes="1"/>
-                                  </Group>
+                                  <Component id="tNombre" min="-2" pref="116" max="-2" attributes="1"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -106,22 +96,7 @@
                           <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lClave" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="149" max="32767" attributes="0"/>
+                      <EmptySpace pref="229" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -140,6 +115,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tId">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tNombre">
             </Component>
@@ -147,27 +125,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lClave">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Clave"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lRepetir">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Repetir"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lGrupo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Grupo"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cGrupo">
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="tRepetir">
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="tPassword">
             </Component>
             <Component class="javax.swing.JButton" name="bGuardar">
               <Properties>
@@ -203,7 +160,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="panelListado">
+        <Container class="javax.swing.JScrollPane" name="panelLista">
           <Properties>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[80, 80]"/>
@@ -234,8 +191,8 @@
                 <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListadoValueChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(listaUsuarios)"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="listaUsuarios = new DefaultListModel();"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(lista)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="lista = new DefaultListModel();"/>
               </AuxValues>
             </Component>
           </SubComponents>
