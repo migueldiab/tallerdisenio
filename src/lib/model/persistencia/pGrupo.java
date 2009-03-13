@@ -53,6 +53,7 @@ public class pGrupo {
           Grupo unGrupo = pGrupo.toGrupo(rs);
           listaGrupos.add(unGrupo);
         }
+        Access.desconectar(con);
         return listaGrupos;
       } catch (Exception e) {
         System.out.println(e.toString());
@@ -71,15 +72,18 @@ public class pGrupo {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pGrupo.TABLA+" WHERE "+pGrupo.ID+" = "+id);
         if (!rs.next()) {
+          Access.desconectar(con);
           return null;
         }        
         Grupo unGrupo = pGrupo.toGrupo(rs);
         if (rs.next()) {
+          Access.desconectar(con);
           return null;
         }
         return unGrupo;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -100,11 +104,14 @@ public class pGrupo {
           unGrupo = pGrupo.toGrupo(rs);
         }
         if (rs.next()) {
+          Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unGrupo;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -127,8 +134,9 @@ public class pGrupo {
         }
         stmt.setString(1, unGrupo.getNombre());
         stmt.executeUpdate();
-                
-        return Access.ultimoId(con);
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);                
+        return id;
       }
       else {
         return -1;
@@ -149,6 +157,7 @@ public class pGrupo {
           stmt.setInt(1, unGrupo.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

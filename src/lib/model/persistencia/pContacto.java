@@ -70,9 +70,11 @@ public class pContacto {
           Contacto unContacto = pContacto.toContacto(rs);
           listaContactos.add(unContacto);
         }
+        Access.desconectar(con);
         return listaContactos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -88,15 +90,19 @@ public class pContacto {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE "+pContacto.ID+" = "+id);
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         Contacto unContacto = pContacto.toContacto(rs);
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -153,6 +159,7 @@ public class pContacto {
         stmt.setInt(10, unContacto.getTelefonista().getId());
         stmt.setInt(11, unContacto.getTipoContacto().getId());
         stmt.executeUpdate();
+        Access.desconectar(con);
         return true;
       }
       else {
@@ -174,6 +181,7 @@ public class pContacto {
           stmt.setInt(1, unContacto.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

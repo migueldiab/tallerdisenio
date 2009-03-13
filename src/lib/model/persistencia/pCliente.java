@@ -60,9 +60,11 @@ public class pCliente {
           Cliente unCliente = pCliente.toCliente(rs);
           listaClientes.add(unCliente);
         }
+        Access.desconectar(con);
         return listaClientes;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -78,15 +80,19 @@ public class pCliente {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.ID+" = "+id);
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         Cliente unCliente = pCliente.toCliente(rs);
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unCliente;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -107,9 +113,11 @@ public class pCliente {
           Cliente unCliente = pCliente.toCliente(rs);
           listaClientes.add(unCliente);
         }
+        Access.desconectar(con);
         return listaClientes;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -146,7 +154,9 @@ public class pCliente {
         stmt.setString(4, unCliente.getTelefono());
         stmt.executeUpdate();
 
-        return Access.ultimoId(con);
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);
+        return id;
       }
       else {
         return -1;
@@ -167,6 +177,7 @@ public class pCliente {
           stmt.setInt(1, unCliente.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

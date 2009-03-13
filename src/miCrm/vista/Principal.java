@@ -11,11 +11,13 @@
 
 package miCrm.vista;
 
+import miCrm.resources.widget.Ventanas;
 import miCrm.vista.sistema.RegistroContactos;
 import miCrm.vista.admin.Usuarios;
 import miCrm.vista.admin.Clientes;
 import miCrm.vista.admin.Grupos;
 import miCrm.vista.admin.Articulos;
+import miCrm.vista.sistema.ConsolaTrabajos;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
     /** Creates new form Principal */
     public Principal() {
         initComponents();
+        Ventanas.centrarVentana(this);
     }
 
     /** This method is called from within the constructor to
@@ -52,6 +55,7 @@ public class Principal extends javax.swing.JFrame {
     mContactos = new javax.swing.JMenu();
     mNuevoContacto = new javax.swing.JMenuItem();
     mControlAsignaciones = new javax.swing.JMenuItem();
+    mConsolaTrabajos = new javax.swing.JMenuItem();
     mListados = new javax.swing.JMenu();
     mLlamadasFecha = new javax.swing.JMenuItem();
     mTrabajosPendientes = new javax.swing.JMenuItem();
@@ -161,6 +165,14 @@ public class Principal extends javax.swing.JFrame {
     mControlAsignaciones.setText("Control de Asignaciones");
     mContactos.add(mControlAsignaciones);
 
+    mConsolaTrabajos.setText("Consola Trabajos");
+    mConsolaTrabajos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mConsolaTrabajosActionPerformed(evt);
+      }
+    });
+    mContactos.add(mConsolaTrabajos);
+
     mOperaciones.add(mContactos);
 
     jMenuBar1.add(mOperaciones);
@@ -229,6 +241,11 @@ public class Principal extends javax.swing.JFrame {
       vArticulos.setVisible(true);
     }//GEN-LAST:event_mArticulosActionPerformed
 
+    private void mConsolaTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsolaTrabajosActionPerformed
+      ConsolaTrabajos vConsolaTrabajos = new ConsolaTrabajos(this);
+      vConsolaTrabajos.setVisible(true);
+}//GEN-LAST:event_mConsolaTrabajosActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JInternalFrame jInternalFrame1;
   private javax.swing.JMenuBar jMenuBar1;
@@ -238,6 +255,7 @@ public class Principal extends javax.swing.JFrame {
   private javax.swing.JMenu mArchivo;
   private javax.swing.JMenuItem mArticulos;
   private javax.swing.JMenuItem mClientes;
+  private javax.swing.JMenuItem mConsolaTrabajos;
   private javax.swing.JMenu mContactos;
   private javax.swing.JMenuItem mControlAsignaciones;
   private javax.swing.JMenuItem mGrupos;

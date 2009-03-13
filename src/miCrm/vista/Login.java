@@ -11,11 +11,9 @@
 
 package miCrm.vista;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import miCrm.Fachada;
 import miCrm.resources.widget.StatusBar.MSG;
+import miCrm.resources.widget.Ventanas;
 
 /**
  *
@@ -26,6 +24,7 @@ public class Login extends javax.swing.JFrame {
     /** Creates new form Login */
     public Login() {
         initComponents();
+        Ventanas.centrarVentana(this);
     }
 
     /** This method is called from within the constructor to
@@ -51,6 +50,11 @@ public class Login extends javax.swing.JFrame {
     setTitle("Ingresar a miCRM");
 
     bCerrar.setText("Cerrar");
+    bCerrar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bCerrarActionPerformed(evt);
+      }
+    });
 
     bEntrar.setText("Entrar");
     bEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +156,10 @@ public class Login extends javax.swing.JFrame {
     private void tUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tUsuarioActionPerformed
       // TODO add your handling code here:
     }//GEN-LAST:event_tUsuarioActionPerformed
+
+    private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_bCerrarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private miCrm.resources.widget.StatusBar StatusBar;

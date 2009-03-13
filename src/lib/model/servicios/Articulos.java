@@ -38,11 +38,6 @@ public class Articulos {
     if (unComponente.equals(unArticulo)) {
       return false;
     }
-    for (Articulo u : unArticulo.getComponentes()) {
-      if (u.equals(unComponente)) {
-        return false;
-      }
-    }
     if (unComponente.contarComponentes()>0) {
       ArrayList<Articulo> componentes = unComponente.getComponentes();
       for (Articulo u : componentes) {

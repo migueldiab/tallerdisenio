@@ -20,8 +20,8 @@ public class Estados {
   public static Object buscarPorId(Integer id) {
     return pEstadoContacto.buscarPorId(id);
   }
-  public static ArrayList<EstadoContacto> buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public static EstadoContacto buscarPorNombre(String nombre) {
+    return pEstadoContacto.buscarPorNombre(nombre);
   }
   public static boolean borrar(EstadoContacto unEstadoContacto) {
     if (pEstadoContacto.borrar(unEstadoContacto)) {

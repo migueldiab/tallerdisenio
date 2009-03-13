@@ -21,7 +21,7 @@ public class Prioridades {
   public static Prioridad buscarPorId(Integer id) {
     return pPrioridad.buscarPorId(id);
   }
-  public static ArrayList buscarPorNombre(String nombre) {
+  public static Prioridad buscarPorNombre(String nombre) {
     return pPrioridad.buscarPorNombre(nombre);
   }
 }

@@ -86,6 +86,14 @@
                     <Property name="text" type="java.lang.String" value="Control de Asignaciones"/>
                   </Properties>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mConsolaTrabajos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Consola Trabajos"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConsolaTrabajosActionPerformed"/>
+                  </Events>
+                </MenuItem>
               </SubComponents>
             </Menu>
           </SubComponents>
