@@ -48,9 +48,11 @@ public class pUsuario {
           Usuario unUsuario = pUsuario.toUsuario(rs);
           listaUsuarios.add(unUsuario);
         }
+        Access.desconectar(con);
         return listaUsuarios;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }      
     }
@@ -66,15 +68,19 @@ public class pUsuario {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.ID+" = "+id);
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         Usuario unUsuario = pUsuario.toUsuario(rs);
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unUsuario;        
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -95,11 +101,14 @@ public class pUsuario {
           unUsuario = pUsuario.toUsuario(rs);          
         }
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unUsuario;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -136,7 +145,9 @@ public class pUsuario {
         stmt.setString(2, String.valueOf(unUsuario.getPassword()));
         stmt.setInt(3, unUsuario.getGrupo().getId());
         stmt.executeUpdate();
-        return Access.ultimoId(con);
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);
+        return id;
       }
       else {
         throw new Exception("No se pudo conectar a la base de datos");
@@ -157,6 +168,7 @@ public class pUsuario {
           stmt.setInt(1, unUsuario.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

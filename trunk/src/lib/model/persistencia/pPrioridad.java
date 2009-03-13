@@ -53,9 +53,11 @@ public class pPrioridad {
           Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
           listaPrioridads.add(unPrioridad);
         }
+        Access.desconectar(con);
         return listaPrioridads;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -71,15 +73,19 @@ public class pPrioridad {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.ID+" = "+id);
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unPrioridad;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -89,20 +95,24 @@ public class pPrioridad {
   }
 
     @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaPrioridads = new ArrayList();
+  public static Prioridad buscarPorNombre(String nombre) {
+    Prioridad unPrioridad = null;
     Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.NOMBRE+" LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
-          listaPrioridads.add(unPrioridad);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unPrioridad = pPrioridad.toPrioridad(rs);
         }
-        return listaPrioridads;
+        if (rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        return unPrioridad;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -125,7 +135,9 @@ public class pPrioridad {
         }
         stmt.setString(1, unPrioridad.getNombre());
         stmt.executeUpdate();
-        return Access.ultimoId(con);
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);
+        return id;
       }
       else {
         return -1;
@@ -146,9 +158,11 @@ public class pPrioridad {
           stmt.setInt(1, unPrioridad.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {
+        Access.desconectar(con);
         return false;
       }
     } catch (Exception e) {

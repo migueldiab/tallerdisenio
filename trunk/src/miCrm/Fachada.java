@@ -36,6 +36,10 @@ public class Fachada {
     return Prioridades.buscarPorId(id);
   }
 
+  public static Prioridad buscarPrioridadPorNombre(String nombre) {
+    return Prioridades.buscarPorNombre(nombre);
+  }
+
   public static Usuario buscarUsuarioPorId(int id) {
     return Usuarios.buscarPorId(id);
   }
@@ -78,6 +82,10 @@ public class Fachada {
 
   public static boolean validarComponente(Articulo unArticulo, Articulo unComponente) {
     return Articulos.validarComponente(unArticulo, unComponente);
+  }
+
+  static EstadoContacto buscarEstadoPorNombre(String nombre) {
+    return Estados.buscarPorNombre(nombre);
   }
   
   Fachada fachada = null;

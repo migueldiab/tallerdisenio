@@ -21,17 +21,16 @@ import lib.model.miCRM.EstadoContacto;
 import lib.model.miCRM.Prioridad;
 import lib.model.miCRM.TipoContacto;
 import lib.model.miCRM.Usuario;
-import miCrm.Conf;
 import miCrm.Fachada;
 
 /**
  *
  * @author Administrator
  */
-public class RegistroContactos extends javax.swing.JDialog {
+public class ConsolaTrabajos extends javax.swing.JDialog {
 
     /** Creates new form RegistroContactos */
-    public RegistroContactos(JFrame parent) {
+    public ConsolaTrabajos(JFrame parent) {
       super(parent);
       initComponents();
       cargarListas();
@@ -43,9 +42,8 @@ public class RegistroContactos extends javax.swing.JDialog {
     SimpleDateFormat hora = new SimpleDateFormat("H:mm");
     tFecha.setText(fecha.format(new Date()));
     tHora.setText(hora.format(new Date()));
-    cEstado.setSelectedItem(Conf.ESTADO_NUEVO_CONTACTO);
-    cTecnico.setSelectedItem(Conf.TECNICO_POR_DEFECTO);
-    cPrioridad.setSelectedItem(Conf.PRIORIDAD_POR_DEFECTO);
+    Prioridad p = Fachada.buscarPrioridadPorNombre("Pendiente");
+    cPrioridad.setSelectedIndex(WIDTH);
   }
 
   private void cargarListas() {
@@ -85,28 +83,33 @@ public class RegistroContactos extends javax.swing.JDialog {
     sCleintes = new javax.swing.JScrollPane();
     lClientes = new javax.swing.JList();
     bSeleccionar = new javax.swing.JButton();
-    tFecha = new javax.swing.JTextField();
-    jLabel1 = new javax.swing.JLabel();
-    jLabel2 = new javax.swing.JLabel();
-    tHora = new javax.swing.JTextField();
+    jSplitPane1 = new javax.swing.JSplitPane();
+    jPanel1 = new javax.swing.JPanel();
     jLabel3 = new javax.swing.JLabel();
     jLabel4 = new javax.swing.JLabel();
-    tCliente = new javax.swing.JTextField();
-    tTelefono = new javax.swing.JTextField();
-    jLabel5 = new javax.swing.JLabel();
+    jLabel1 = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
     jLabel6 = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    jLabel9 = new javax.swing.JLabel();
+    jLabel7 = new javax.swing.JLabel();
+    jLabel8 = new javax.swing.JLabel();
+    cTipoContacto = new javax.swing.JComboBox();
+    tCliente = new javax.swing.JTextField();
+    tBuscarCliente = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     tDescripcion = new javax.swing.JTextArea();
-    jLabel7 = new javax.swing.JLabel();
-    bGuardar = new javax.swing.JButton();
-    tBuscarCliente = new javax.swing.JButton();
-    cTipoContacto = new javax.swing.JComboBox();
+    tTelefono = new javax.swing.JTextField();
     cEstado = new javax.swing.JComboBox();
-    jLabel8 = new javax.swing.JLabel();
     cTecnico = new javax.swing.JComboBox();
-    jLabel9 = new javax.swing.JLabel();
     cPrioridad = new javax.swing.JComboBox();
+    tFecha = new javax.swing.JTextField();
+    tHora = new javax.swing.JTextField();
+    bGuardar = new javax.swing.JButton();
     bCancelar = new javax.swing.JButton();
+    jPanel2 = new javax.swing.JPanel();
+    jScrollPane2 = new javax.swing.JScrollPane();
+    jTable1 = new javax.swing.JTable();
 
     dClientes.setAlwaysOnTop(true);
     dClientes.setBounds(new java.awt.Rectangle(0, 0, 150, 300));
@@ -126,25 +129,32 @@ public class RegistroContactos extends javax.swing.JDialog {
 
     setTitle("Registro de Contactos");
 
-    tFecha.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        tFechaActionPerformed(evt);
-      }
-    });
+    jSplitPane1.setDividerLocation(400);
+    jSplitPane1.setMinimumSize(new java.awt.Dimension(850, 454));
+    jSplitPane1.setPreferredSize(new java.awt.Dimension(900, 454));
+
+    jPanel1.setMinimumSize(new java.awt.Dimension(450, 452));
+    jPanel1.setPreferredSize(new java.awt.Dimension(450, 452));
+
+    jLabel3.setText("Telefono Origen");
+
+    jLabel4.setText("Cliente");
 
     jLabel1.setText("Fecha");
 
     jLabel2.setText("Hora");
 
-    tHora.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        tHoraActionPerformed(evt);
-      }
-    });
+    jLabel6.setText("Descripción");
 
-    jLabel3.setText("Telefono Origen");
+    jLabel5.setText("Tipo Contacto");
 
-    jLabel4.setText("Cliente");
+    jLabel9.setText("Prioridad");
+
+    jLabel7.setText("Estado");
+
+    jLabel8.setText("Tecnico");
+
+    cTipoContacto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
     tCliente.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,21 +170,40 @@ public class RegistroContactos extends javax.swing.JDialog {
       }
     });
 
+    tBuscarCliente.setText("...");
+    tBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tBuscarClienteActionPerformed(evt);
+      }
+    });
+
+    tDescripcion.setColumns(20);
+    tDescripcion.setRows(5);
+    jScrollPane1.setViewportView(tDescripcion);
+
     tTelefono.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         tTelefonoActionPerformed(evt);
       }
     });
 
-    jLabel5.setText("Tipo Contacto");
+    cEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-    jLabel6.setText("Descripción");
+    cTecnico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-    tDescripcion.setColumns(20);
-    tDescripcion.setRows(5);
-    jScrollPane1.setViewportView(tDescripcion);
+    cPrioridad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-    jLabel7.setText("Estado");
+    tFecha.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tFechaActionPerformed(evt);
+      }
+    });
+
+    tHora.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tHoraActionPerformed(evt);
+      }
+    });
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -183,27 +212,6 @@ public class RegistroContactos extends javax.swing.JDialog {
       }
     });
 
-    tBuscarCliente.setText("...");
-    tBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        tBuscarClienteActionPerformed(evt);
-      }
-    });
-
-    cTipoContacto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-    cEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    cEstado.setEnabled(false);
-
-    jLabel8.setText("Tecnico");
-
-    cTecnico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    cTecnico.setEnabled(false);
-
-    jLabel9.setText("Prioridad");
-
-    cPrioridad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
     bCancelar.setText("Cancelar");
     bCancelar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,13 +219,13 @@ public class RegistroContactos extends javax.swing.JDialog {
       }
     });
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
+    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jLabel3)
           .addComponent(jLabel4)
           .addComponent(jLabel1)
@@ -228,9 +236,9 @@ public class RegistroContactos extends javax.swing.JDialog {
           .addComponent(jLabel7)
           .addComponent(jLabel8))
         .addGap(51, 51, 51)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(cTipoContacto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(layout.createSequentialGroup()
+          .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(tCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(tBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,66 +247,111 @@ public class RegistroContactos extends javax.swing.JDialog {
           .addComponent(cEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 166, Short.MAX_VALUE)
           .addComponent(cTecnico, 0, 166, Short.MAX_VALUE)
           .addComponent(cPrioridad, javax.swing.GroupLayout.Alignment.TRAILING, 0, 166, Short.MAX_VALUE)
-          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(tFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
               .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(bCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addComponent(bCancelar))))
+        .addContainerGap(139, Short.MAX_VALUE))
     );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
+    jPanel1Layout.setVerticalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel1)
               .addComponent(tFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jLabel2)))
-          .addGroup(layout.createSequentialGroup()
+          .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(bGuardar)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bCancelar)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel3))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel4)
           .addComponent(tCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(tBuscarCliente))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cTipoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel5))
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(jPanel1Layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(layout.createSequentialGroup()
+          .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(27, 27, 27)
             .addComponent(jLabel6)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel7))
         .addGap(7, 7, 7)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel9))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel8))
-        .addGap(96, 96, 96))
+        .addContainerGap(119, Short.MAX_VALUE))
+    );
+
+    jSplitPane1.setRightComponent(jPanel1);
+
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null}
+      },
+      new String [] {
+        "Title 1", "Title 2", "Title 3", "Title 4"
+      }
+    ));
+    jScrollPane2.setViewportView(jTable1);
+
+    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+    jPanel2.setLayout(jPanel2Layout);
+    jPanel2Layout.setHorizontalGroup(
+      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel2Layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(30, Short.MAX_VALUE))
+    );
+    jPanel2Layout.setVerticalGroup(
+      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel2Layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(37, Short.MAX_VALUE))
+    );
+
+    jSplitPane1.setLeftComponent(jPanel2);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
     pack();
@@ -310,7 +363,6 @@ public class RegistroContactos extends javax.swing.JDialog {
       tCliente.setText(unCliente.toString());
       dClientes.setVisible(false);
     } catch (Exception e) {
-      System.out.println("fallo SeleccionarCliente");
     }
   }
 
@@ -373,7 +425,12 @@ public class RegistroContactos extends javax.swing.JDialog {
   private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel8;
   private javax.swing.JLabel jLabel9;
+  private javax.swing.JPanel jPanel1;
+  private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JScrollPane jScrollPane2;
+  private javax.swing.JSplitPane jSplitPane1;
+  private javax.swing.JTable jTable1;
   private javax.swing.JList lClientes;
   private javax.swing.JScrollPane sCleintes;
   private javax.swing.JButton tBuscarCliente;

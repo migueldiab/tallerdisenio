@@ -116,14 +116,16 @@ public class Articulo {
     }
 
   public void remplazarComponentes(ArrayList<Articulo> nuevosComponentes) {
-    if (componentes == null) {
-      componentes = new ArrayList<Articulo>();
-    }
-    else {
-      componentes.clear();
-    }
-    for (Articulo u : nuevosComponentes) {
-      componentes.add(u);
+    if (nuevosComponentes!=null) {
+      if (componentes == null) {
+        componentes = new ArrayList<Articulo>();
+      }
+      else {
+        componentes.clear();
+      }
+      for (Articulo u : nuevosComponentes) {
+        componentes.add(u);
+      }
     }
   }
 

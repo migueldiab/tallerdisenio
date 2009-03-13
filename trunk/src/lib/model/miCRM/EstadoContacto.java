@@ -45,7 +45,7 @@ public class EstadoContacto {
   public boolean equals(Object obj) {
     try {
       EstadoContacto unEstadoContacto = (EstadoContacto) obj;
-      if (this.getId().equals(unEstadoContacto.getId())) {
+      if (this.getNombre().equals(unEstadoContacto.getNombre())) {
         return true;
       }
       else {

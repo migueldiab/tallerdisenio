@@ -33,6 +33,7 @@ public class pComponente {
         stmt.setInt(1, padre.getId());
         stmt.setInt(2, unComponente.getId());        
         stmt.executeUpdate();
+        Access.desconectar(con);
         return true;
       }
       else {
@@ -57,6 +58,7 @@ public class pComponente {
         stmt.setInt(2, unComponente.getId());
         //stmt.setInt(3, unComponente.getCantidad());
         stmt.executeUpdate();        
+        Access.desconectar(con);
         return true;
       }
       else {
@@ -96,6 +98,7 @@ public class pComponente {
           Articulo unComponente = pComponente.toComponente(rs);
           listaComponentes.add(unComponente);
         }        
+        Access.desconectar(con);
         return listaComponentes;
       } catch (Exception e) {
         System.out.println(e.toString());

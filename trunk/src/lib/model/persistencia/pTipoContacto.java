@@ -53,9 +53,11 @@ public class pTipoContacto {
           TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
           listaTipoContactos.add(unTipoContacto);
         }
+        Access.desconectar(con);
         return listaTipoContactos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -71,15 +73,19 @@ public class pTipoContacto {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.ID+" = "+id);
         if (!rs.next()) {
+          Access.desconectar(con);
           return null;
         }
         TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
         if (rs.next()) {
+          Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unTipoContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -100,9 +106,11 @@ public class pTipoContacto {
           TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
           listaTipoContactos.add(unTipoContacto);
         }
+        Access.desconectar(con);
         return listaTipoContactos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -146,9 +154,11 @@ public class pTipoContacto {
           stmt.setInt(1, unTipoContacto.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {
+        Access.desconectar(con);
         return false;
       }
     } catch (Exception e) {

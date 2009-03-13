@@ -53,9 +53,11 @@ public class pEstadoContacto {
           EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
           listaEstadoContactos.add(unEstadoContacto);
         }
+        Access.desconectar(con);
         return listaEstadoContactos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -71,15 +73,19 @@ public class pEstadoContacto {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.ID+" = "+id);
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unEstadoContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -89,20 +95,24 @@ public class pEstadoContacto {
   }
 
     @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaEstadoContactos = new ArrayList();
+  public static EstadoContacto buscarPorNombre(String nombre) {
+    EstadoContacto unEstadoContacto = null;
     Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.NOMBRE+" LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          EstadoContacto unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
-          listaEstadoContactos.add(unEstadoContacto);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pEstadoContacto.TABLA+" WHERE "+pEstadoContacto.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unEstadoContacto = pEstadoContacto.toEstadoContacto(rs);
         }
-        return listaEstadoContactos;
+        if (rs.next()) {
+          return null;
+        }
+        Access.desconectar(con);
+        return unEstadoContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -125,9 +135,11 @@ public class pEstadoContacto {
         }
         stmt.setString(1, unEstadoContacto.getNombre());
         stmt.executeUpdate();
+        Access.desconectar(con);
         return true;
       }
       else {
+        Access.desconectar(con);
         return false;
       }
     } catch (Exception e) {
@@ -146,6 +158,7 @@ public class pEstadoContacto {
           stmt.setInt(1, unEstadoContacto.getId());
           stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

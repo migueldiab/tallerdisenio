@@ -34,12 +34,14 @@ public class pArticulo {
       unArticulo.setNombre(rs.getString(pArticulo.NOMBRE));
       unArticulo.setCosto(rs.getDouble(pArticulo.COSTO));
       ArrayList<Articulo> listaComponentes = pComponente.buscarPorArticulo(unArticulo);
-      for (Articulo unComponente : listaComponentes) {
-        if (unArticulo.agregarComponente(unComponente)) {
-          // Todo bien...
-        }
-        else {
-          throw new Exception("Componente Ilegal");
+      if (listaComponentes!=null) {
+        for (Articulo unComponente : listaComponentes) {
+          if (unArticulo.agregarComponente(unComponente)) {
+            // Todo bien...
+          }
+          else {
+            throw new Exception("Componente Ilegal");
+          }
         }
       }
       return unArticulo;
@@ -61,9 +63,11 @@ public class pArticulo {
           Articulo unArticulo = pArticulo.toArticulo(rs);          
           listaArticulos.add(unArticulo);
         }
+        Access.desconectar(con);
         return listaArticulos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -80,16 +84,20 @@ public class pArticulo {
         ResultSet rs = stmt.executeQuery("SELECT * FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = "+id);
         // Si no hay resultados
         if (!rs.next()) {
+        Access.desconectar(con);
           return null;
         }
         Articulo unArticulo = pArticulo.toArticulo(rs);
         // Si hay mas de un resultado
         if (rs.next()) {
+        Access.desconectar(con);
           return null;
         }
+        Access.desconectar(con);
         return unArticulo;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -110,9 +118,11 @@ public class pArticulo {
           Articulo unArticulo = pArticulo.toArticulo(rs);
           listaArticulos.add(unArticulo);
         }
+        Access.desconectar(con);
         return listaArticulos;
       } catch (Exception e) {
         System.out.println(e.toString());
+        Access.desconectar(con);
         return null;
       }
     }
@@ -144,6 +154,9 @@ public class pArticulo {
 
         Integer id = Access.ultimoId(con);
 
+        if (unArticulo.getId()==null) {
+          unArticulo.setId(id);
+        }
         stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "+pComponente.PADRE+" = ?");
         stmt.setInt(1, unArticulo.getId());
         stmt.executeUpdate();
@@ -153,6 +166,7 @@ public class pArticulo {
             pComponente.guardar(unComponente, unArticulo);
           }
         }
+        Access.desconectar(con);
         return id;
       }
       else {
@@ -173,14 +187,12 @@ public class pArticulo {
           stmt = con.prepareStatement("DELETE FROM "+pArticulo.TABLA+" WHERE "+pArticulo.ID+" = ?");
           stmt.setInt(1, unArticulo.getId());
           stmt.executeUpdate();
-          if (unArticulo.getComponentes()!=null) {
-            for (Articulo unComponente : unArticulo.getComponentes()) {
-              if (!pComponente.borrar(unComponente, unArticulo)) {
-                throw new Exception("Error al borrar componente");
-              }
-            }
-          }
+          stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "+pComponente.PADRE+" = ? OR "+pComponente.COMPONENTE+" = ? ");
+          stmt.setInt(1, unArticulo.getId());
+          stmt.setInt(2, unArticulo.getId());
+          stmt.executeUpdate();
         }
+        Access.desconectar(con);
         return true;
       }
       else {

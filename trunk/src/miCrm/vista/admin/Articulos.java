@@ -108,25 +108,21 @@ public class Articulos extends javax.swing.JDialog {
         if (!validarCampos()) {
           return;
         }
-        Articulo unArticulo = Fachada.buscarArticuloPorId(Integer.parseInt(tId.getText()));
-        if(tId.isEnabled()) {
-          if (unArticulo!=null) {
-            if (JOptionPane.showConfirmDialog(
-              this,"El Articulo con ID "+tId.getText()+" ya existe ("+unArticulo.toString()+"). Deseea reemplazarlo?",
-              "Confirma reemplazar?",
-              JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION) {
-                return;
-            }
-          }
+        Articulo u = new Articulo();
+        if (!tId.getText().equals("")) {
+          u.setId(Integer.parseInt(tId.getText()));
         }
-        if (!guardarDatos(unArticulo)) {
-          throw new Exception("falló guardarDatos(unArticulo)");
-        }
-        else {
+        u.setNombre(tNombre.getText());
+        u.setCosto(Double.parseDouble(tCosto.getText()));
+        u.remplazarComponentes(((Articulo) arbolComponentes.getRoot()).getComponentes());
+        if (u.guardar()) {
           JOptionPane.showMessageDialog(
               this,"Articulo guardado",
               "Articulo guardado",
               JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+          throw new Exception("falló guardarDatos(unArticulo)");
         }
         limpiarCampos();
       } catch (Exception e) {
@@ -179,7 +175,6 @@ public class Articulos extends javax.swing.JDialog {
 
   private void cargarDatos(Articulo u) {
     tId.setText(u.getId().toString());
-    tId.setEnabled(false);
     tNombre.setText(u.getNombre());
     tCosto.setText(u.getCosto().toString());
     arbolComponentes=new ModeloArbol(u);
@@ -188,7 +183,6 @@ public class Articulos extends javax.swing.JDialog {
   }
   private void limpiarCampos() {
     tId.setText("");
-    tId.setEnabled(true);
     tNombre.setText("");
     tCosto.setText("0.00");
     arbolComponentes=new ModeloArbol(new Articulo());
@@ -211,29 +205,7 @@ public class Articulos extends javax.swing.JDialog {
       articulos.addElement(u);
     }
 
-  }
-  private boolean guardarDatos(Articulo u) {
-    try {
-      if (u==null) {
-        u = new Articulo();
-        u.setId(Integer.parseInt(tId.getText()));
-      }
-      u.setNombre(tNombre.getText());
-      u.setCosto(Double.parseDouble(tCosto.getText()));
-      ArrayList<Articulo> componentes = ((Articulo) arbolComponentes.getRoot()).getComponentes();
-      if (componentes!=null) {
-        u.remplazarComponentes(componentes);
-      }      
-      if (u.guardar()) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    } catch (Exception e) {
-      return false;
-    }
-  }
+  }  
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -275,6 +247,8 @@ public class Articulos extends javax.swing.JDialog {
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
     lId.setText("Id");
+
+    tId.setEnabled(false);
 
     lNombre.setText("Nombre");
 
