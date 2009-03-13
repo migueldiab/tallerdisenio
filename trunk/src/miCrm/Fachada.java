@@ -20,8 +20,16 @@ public class Fachada {
     return Articulos.buscarPorId(id);
   }
 
+  public static ArrayList<Cliente> buscarClientePorApellidoNombre(String nombre, String apellido) {
+    return Clientes.buscarPorApellidoNombre(nombre, apellido);
+  }
+
   public static Cliente buscarClientePorId(int id) {
     return Clientes.buscarPorId(id);
+  }
+
+  public static ArrayList<Cliente> buscarClientePorNombre(String nombre) {
+    return Clientes.buscarPorNombre(nombre);
   }
 
   public static Grupo buscarGrupoPorId(int id) {
