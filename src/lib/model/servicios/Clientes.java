@@ -15,13 +15,17 @@ import lib.model.persistencia.pCliente;
  */
 public class Clientes {
 
+  public static ArrayList<Cliente> buscarPorApellidoNombre(String nombre, String apellido) {
+    return pCliente.buscarPorApellidoNombre(nombre, apellido);
+  }
+
   public static ArrayList<Cliente> listar() {
     return pCliente.listar();
   }
   public static Cliente buscarPorId(Integer id) {
     return pCliente.buscarPorId(id);
   }
-  public ArrayList buscarPorNombre(String nombre) {
+  public static ArrayList buscarPorNombre(String nombre) {
     return pCliente.buscarPorNombre(nombre);
   }
 }

@@ -23,8 +23,8 @@ import miCrm.Fachada;
  */
 public class Clientes extends javax.swing.JDialog {
 
-    /** Creates new form Clientes */
-    public Clientes(JFrame parent) {
+  /** Creates new form Clientes */
+  public Clientes(JFrame parent) {
       super(parent);
         initComponents();
         cargarListas();
@@ -44,18 +44,21 @@ public class Clientes extends javax.swing.JDialog {
   }
   private void cargarListas() {
     lista.clear();
-    for (Cliente u : Fachada.listarClientes()) {
-      lista.addElement(u);
+    for (Cliente unCliente : Fachada.listarClientes()) {
+      lista.addElement(unCliente);
     }
   }
-  private boolean guardarDatos(Cliente u) {
+  private boolean guardarDatos(Cliente unCliente) {
     try {
-      if (u==null) {
-        u = new Cliente();
-        u.setId(Integer.parseInt(tId.getText()));
+      if (unCliente==null) {
+        unCliente = new Cliente();
+        unCliente.setId(Integer.parseInt(tId.getText()));
       }
-      u.setNombre(tNombre.getText());
-      if (u.guardar()) {
+      unCliente.setNombre(tNombre.getText());
+      unCliente.setApellido(tApellido.getText());
+      unCliente.setDireccion(tDireccion.getText());
+      unCliente.setTelefono(tTelefono.getText());
+      if (unCliente.guardar()) {
         return true;
       }
       else {
@@ -76,14 +79,20 @@ public class Clientes extends javax.swing.JDialog {
 
     panelABM = new javax.swing.JSplitPane();
     panelEditar = new javax.swing.JPanel();
-    lId = new javax.swing.JLabel();
-    tId = new javax.swing.JTextField();
-    tNombre = new javax.swing.JTextField();
+    bNuevo = new javax.swing.JButton();
+    lDireccion = new javax.swing.JLabel();
+    lTelefono = new javax.swing.JLabel();
+    lApellido = new javax.swing.JLabel();
     lNombre = new javax.swing.JLabel();
+    lId = new javax.swing.JLabel();
     bGuardar = new javax.swing.JButton();
     bEliminar = new javax.swing.JButton();
     bCerrar = new javax.swing.JButton();
-    bNuevo = new javax.swing.JButton();
+    tId = new javax.swing.JTextField();
+    tApellido = new javax.swing.JTextField();
+    tNombre = new javax.swing.JTextField();
+    tTelefono = new javax.swing.JTextField();
+    tDireccion = new javax.swing.JTextField();
     panelLista = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
@@ -94,11 +103,22 @@ public class Clientes extends javax.swing.JDialog {
 
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
-    lId.setText("Id");
+    bNuevo.setText("Nuevo");
+    bNuevo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bNuevoActionPerformed(evt);
+      }
+    });
 
-    tId.setEnabled(false);
+    lDireccion.setText("Direccion");
+
+    lTelefono.setText("Telefono");
+
+    lApellido.setText("Apellido");
 
     lNombre.setText("Nombre");
+
+    lId.setText("Id");
 
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,12 +141,7 @@ public class Clientes extends javax.swing.JDialog {
       }
     });
 
-    bNuevo.setText("Nuevo");
-    bNuevo.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        bNuevoActionPerformed(evt);
-      }
-    });
+    tId.setEnabled(false);
 
     javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
     panelEditar.setLayout(panelEditarLayout);
@@ -135,42 +150,61 @@ public class Clientes extends javax.swing.JDialog {
       .addGroup(panelEditarLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-            .addGroup(panelEditarLayout.createSequentialGroup()
-              .addComponent(lId)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelEditarLayout.createSequentialGroup()
-              .addComponent(lNombre)
-              .addGap(30, 30, 30)
-              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
           .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(lDireccion)
+              .addComponent(lTelefono)
+              .addComponent(lApellido)
+              .addComponent(lNombre)
+              .addComponent(lId))
+            .addGap(28, 28, 28)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(tApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(tTelefono, javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(110, 110, 110))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
             .addComponent(bNuevo)
-            .addGap(18, 18, 18)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bGuardar)
             .addGap(18, 18, 18)
             .addComponent(bEliminar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-            .addComponent(bCerrar)))
-        .addContainerGap())
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+            .addComponent(bCerrar)
+            .addContainerGap())))
     );
     panelEditarLayout.setVerticalGroup(
       panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(panelEditarLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lId)
-          .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lId))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lNombre)
-          .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+          .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lNombre))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(bCerrar)
+          .addComponent(tApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lApellido))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lTelefono))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(tDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lDireccion))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bNuevo)
           .addComponent(bGuardar)
-          .addComponent(bEliminar))
+          .addComponent(bEliminar)
+          .addComponent(bCerrar))
         .addContainerGap())
     );
 
@@ -194,74 +228,17 @@ public class Clientes extends javax.swing.JDialog {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addGroup(layout.createSequentialGroup()
+        .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(57, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-
-    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-      try {
-        if (!validarCampos()) {
-          return;
-        }
-        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));        
-        if (!guardarDatos(unCliente)) {
-          throw new Exception("falló guardarDatos(unCliente)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              this,"Cliente guardado",
-              "Cliente guardado",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
-        limpiarCampos();
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              this,"Error al guardar el Cliente. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al guardar",
-              JOptionPane.ERROR_MESSAGE);
-      }
-
-}//GEN-LAST:event_bGuardarActionPerformed
-
-    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
-      limpiarCampos();
-    }//GEN-LAST:event_bNuevoActionPerformed
-
-    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-      try {
-        Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
-        if (unCliente==null) {
-          throw new Exception("No existe Cliente con ID = "+tId.getText());
-        }
-        if (!unCliente.borrar()) {
-          throw new Exception("Falló borrarCliente(unCliente)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              this,"El Cliente "+unCliente.toString()+" fue eliminado",
-              "Cliente Eliminado",
-              JOptionPane.INFORMATION_MESSAGE);
-          limpiarCampos();
-        }
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al eliminar",
-              JOptionPane.ERROR_MESSAGE);
-      }
-    }//GEN-LAST:event_bEliminarActionPerformed
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged
       if (jListado.getSelectedIndex()!=-1) {
@@ -269,9 +246,24 @@ public class Clientes extends javax.swing.JDialog {
       }
 }//GEN-LAST:event_jListadoValueChanged
 
+    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+      // TODO add your handling code here:
+}//GEN-LAST:event_bNuevoActionPerformed
+
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
-      this.dispose();
-    }//GEN-LAST:event_bCerrarActionPerformed
+      // TODO add your handling code here:
+}//GEN-LAST:event_bCerrarActionPerformed
+
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+      // TODO add your handling code here:
+}//GEN-LAST:event_bEliminarActionPerformed
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+      if (validarCampos()) {
+        Cliente unCliente = new Cliente();
+        guardarDatos(unCliente);
+      }
+}//GEN-LAST:event_bGuardarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bCerrar;
@@ -279,13 +271,19 @@ public class Clientes extends javax.swing.JDialog {
   private javax.swing.JButton bGuardar;
   private javax.swing.JButton bNuevo;
   private javax.swing.JList jListado;
+  private javax.swing.JLabel lApellido;
+  private javax.swing.JLabel lDireccion;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
+  private javax.swing.JLabel lTelefono;
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
   private javax.swing.JScrollPane panelLista;
+  private javax.swing.JTextField tApellido;
+  private javax.swing.JTextField tDireccion;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
+  private javax.swing.JTextField tTelefono;
   // End of variables declaration//GEN-END:variables
   private javax.swing.DefaultListModel lista;
 

@@ -22,12 +22,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" min="-2" pref="550" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panelABM" min="-2" pref="838" max="-2" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" alignment="0" pref="322" max="32767" attributes="0"/>
+          <Component id="panelABM" alignment="0" pref="518" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -57,29 +60,37 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="1">
-                                  <Component id="lId" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="tId" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lId" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lNombre" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="tNombre" min="-2" pref="116" max="-2" attributes="1"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tId" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <Component id="tApellido" alignment="0" min="-2" pref="116" max="-2" attributes="1"/>
+                                  <Component id="tNombre" alignment="0" min="-2" pref="116" max="-2" attributes="1"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="tTelefono" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="tDireccion" alignment="0" min="-2" pref="266" max="-2" attributes="1"/>
+                                  </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="bNuevo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bEliminar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="64" max="32767" attributes="0"/>
+                              <EmptySpace pref="364" max="32767" attributes="0"/>
                               <Component id="bCerrar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -88,20 +99,35 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tDireccion" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="lDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="308" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -109,21 +135,37 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lId">
+            <Component class="javax.swing.JButton" name="bNuevo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Id"/>
+                <Property name="text" type="java.lang.String" value="Nuevo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bNuevoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lDireccion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Direccion"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tId">
+            <Component class="javax.swing.JLabel" name="lTelefono">
               <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="Telefono"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tNombre">
+            <Component class="javax.swing.JLabel" name="lApellido">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Apellido"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lNombre">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lId">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Id"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bGuardar">
@@ -150,13 +192,18 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCerrarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="bNuevo">
+            <Component class="javax.swing.JTextField" name="tId">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bNuevoActionPerformed"/>
-              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tApellido">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tNombre">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tTelefono">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tDireccion">
             </Component>
           </SubComponents>
         </Container>

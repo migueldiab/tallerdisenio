@@ -28,6 +28,30 @@ public class pCliente {
   public static final String TELEFONO = "telefono";
   public static final String DIRECCION = "direccion";
 
+  public static ArrayList<Cliente> buscarPorApellidoNombre(String nombre, String apellido) {
+    ArrayList listaClientes = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.NOMBRE+" LIKE '%"+nombre+"%' AND "+pCliente.APELLIDO+" LIKE '%"+apellido+"%'");
+        while (rs.next()) {
+          Cliente unCliente = pCliente.toCliente(rs);
+          listaClientes.add(unCliente);
+        }
+        Access.desconectar(con);
+        return listaClientes;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+
   /**
    * Convierte un ResultSet específico en un objeto de tipo Cliente
    * en base a los campos definidos
