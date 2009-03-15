@@ -124,16 +124,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Llamadas por Fecha"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mLlamadasFechaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mTrabajosPendientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trabajos Pendientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mTrabajosPendientesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mRankingTecnicos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ranking T&#xe9;cnicos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mRankingTecnicosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
