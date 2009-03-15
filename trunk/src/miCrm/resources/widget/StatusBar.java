@@ -41,7 +41,7 @@ public class StatusBar extends JLabel {
           message = "Tip : " + message;
       }
       else if (tipo_msg==MSG.INFO) {
-          this.setForeground(Color.GREEN);
+          this.setForeground(new Color(40,180,40));
       }
       else {
           this.setForeground(Color.BLACK);

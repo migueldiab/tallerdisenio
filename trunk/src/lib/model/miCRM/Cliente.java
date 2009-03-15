@@ -121,7 +121,7 @@ public class Cliente {
 
   @Override
   public String toString() {
-    return this.getNombre()+" ("+this.getId()+")";
+    return this.getApellido()+", "+this.getNombre();
   }
 
 }

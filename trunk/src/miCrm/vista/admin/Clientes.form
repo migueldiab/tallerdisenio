@@ -22,15 +22,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panelABM" min="-2" pref="838" max="-2" attributes="0"/>
-              <EmptySpace pref="57" max="32767" attributes="0"/>
-          </Group>
+          <Component id="panelABM" min="-2" pref="630" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" alignment="0" pref="518" max="32767" attributes="0"/>
+          <Component id="panelABM" alignment="0" pref="299" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -38,6 +35,9 @@
     <Container class="javax.swing.JSplitPane" name="panelABM">
       <Properties>
         <Property name="dividerLocation" type="int" value="150"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[630, 162]"/>
+        </Property>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
@@ -73,24 +73,21 @@
                                   <Component id="tId" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
                                   <Component id="tApellido" alignment="0" min="-2" pref="116" max="-2" attributes="1"/>
                                   <Component id="tNombre" alignment="0" min="-2" pref="116" max="-2" attributes="1"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="tTelefono" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="tDireccion" alignment="0" min="-2" pref="266" max="-2" attributes="1"/>
-                                  </Group>
+                                  <Component id="sDireccion" alignment="0" pref="403" max="32767" attributes="0"/>
+                                  <Component id="tTelefono" alignment="0" min="-2" pref="221" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="bNuevo" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="bNuevo" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bEliminar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="364" max="32767" attributes="0"/>
-                              <Component id="bCerrar" min="-2" max="-2" attributes="0"/>
+                              <Component id="bGuardar" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="bEliminar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="170" max="32767" attributes="0"/>
+                              <Component id="bCerrar" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -118,16 +115,16 @@
                           <Component id="lTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tDireccion" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
-                          <Component id="lDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lDireccion" min="-2" max="-2" attributes="0"/>
+                          <Component id="sDireccion" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="308" max="32767" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -203,8 +200,21 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tTelefono">
             </Component>
-            <Component class="javax.swing.JTextField" name="tDireccion">
-            </Component>
+            <Container class="javax.swing.JScrollPane" name="sDireccion">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="tDireccion">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="panelLista">

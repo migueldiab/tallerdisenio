@@ -60,6 +60,14 @@ public class Fachada {
     return Clientes.listar();
   }
 
+  public static ArrayList<Contacto> listarContactos() {
+    return Contactos.listar();
+  }
+
+  public static ArrayList<Contacto> listarContactosPorFechaSinAsignar() {
+    return Contactos.listarPorFechaSinAsignar();
+  }
+
   public static ArrayList<EstadoContacto> listarEstados() {
     return Estados.listar();
   }
@@ -68,12 +76,16 @@ public class Fachada {
     return Grupos.listar();
   }
 
-  public static Iterable<Prioridad> listarPrioridades() {
+  public static ArrayList<Prioridad> listarPrioridades() {
     return Prioridades.listar();
   }
 
-  public static Iterable<Usuario> listarTecnicos() {
-    return Usuarios.listarTecnicos();
+  public static ArrayList<Usuario> listarTecnicos() {
+    return Usuarios.listarPorGrupo("Técnico");
+  }
+
+  public static ArrayList<Usuario> listarTelefonistas() {
+    return Usuarios.listarPorGrupo("Telefonista");
   }
 
   public static ArrayList<TipoContacto> listarTipoContactos() {
@@ -84,7 +96,7 @@ public class Fachada {
     return Usuarios.listar();
   }
 
-  public static boolean loginUsuario(String usuario, char[] password) {
+  public static Usuario loginUsuario(String usuario, char[] password) {
     return Usuarios.login(usuario, password);
   }
 

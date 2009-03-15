@@ -22,7 +22,7 @@ public class pContacto {
   public static final String RECIBIDO = "recibido_el";
   public static final String ASIGNADO = "asignado_el";
   public static final String NUMERO_ENTRANTE = "numero_entrante";
-  public static final String DESC = "desc";
+  public static final String DESC = "descripcion";
   public static final String RESOLUCION = "resolucion";
   public static final String ESTADO = "id_estado_contacto";
   public static final String TIPO = "id_tipo_contacto";
@@ -30,6 +30,30 @@ public class pContacto {
   public static final String PRIORIDAD = "id_prioridad";
   public static final String TECNICO = "id_tecnico";
   public static final String TELEFONISTA = "id_telefonista";
+
+  public static ArrayList<Contacto> listarPorFechaSinAsignar() {
+    ArrayList listaContactos = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" ORDER BY "+pContacto.ASIGNADO+", "+pContacto.RECIBIDO);
+        while (rs.next()) {
+          Contacto unContacto = pContacto.toContacto(rs);
+          listaContactos.add(unContacto);
+        }
+        Access.desconectar(con);
+        return listaContactos;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
 
   /**
    * Convierte un ResultSet específico en un objeto de tipo Contacto
@@ -41,13 +65,13 @@ public class pContacto {
     try {
       Contacto unContacto = new Contacto();
       unContacto.setId(rs.getInt(pContacto.ID));
-      unContacto.setAsignadoEl(rs.getDate(pContacto.ASIGNADO));
+      unContacto.setAsignadoEl(rs.getTimestamp(pContacto.ASIGNADO));
       unContacto.setCliente(pCliente.buscarPorId(rs.getInt(pContacto.CLIENTE)));
       unContacto.setDesc(rs.getString(pContacto.DESC));
       unContacto.setEstadoContacto(pEstadoContacto.buscarPorId(rs.getInt(pContacto.ESTADO)));
       unContacto.setNumeroEntrante(rs.getString(pContacto.NUMERO_ENTRANTE));
       unContacto.setPrioridad(pPrioridad.buscarPorId(rs.getInt(pContacto.PRIORIDAD)));
-      unContacto.setRecibidoEl(rs.getDate(pContacto.RECIBIDO));
+      unContacto.setRecibidoEl(rs.getTimestamp(pContacto.RECIBIDO));
       unContacto.setResolucion(rs.getString(pContacto.RESOLUCION));
       unContacto.setTecnico(pUsuario.buscarPorId(rs.getInt(pContacto.TECNICO)));
       unContacto.setTelefonista(pUsuario.buscarPorId(rs.getInt(pContacto.TELEFONISTA)));
@@ -58,8 +82,7 @@ public class pContacto {
       return null;
     }
   }
-  @SuppressWarnings("unchecked")
-  public static ArrayList listar() {
+  public static ArrayList<Contacto> listar() {
     ArrayList listaContactos = new ArrayList();
     Connection con=Access.conectar();
     if (con!=null) {
@@ -111,7 +134,7 @@ public class pContacto {
     }
   }
 
-  public static boolean guardar(Contacto unContacto) {
+  public static Integer guardar(Contacto unContacto) {
     try {
       Connection con=Access.conectar();
       if (con!=null) {
@@ -144,30 +167,43 @@ public class pContacto {
                   +pContacto.TECNICO+"= ?,"
                   +pContacto.TELEFONISTA+"= ?,"
                   +pContacto.TIPO+"= ?"
-                  +"WHERE "+pContacto.ID+"= ?");
+                  +" WHERE "+pContacto.ID+"= ?");
           stmt.setInt(12, unContacto.getId());
         }
-        stmt.setDate(1, unContacto.getAsignadoEl());
+        stmt.setTimestamp(1, unContacto.getAsignadoEl());
         stmt.setInt(2, unContacto.getCliente().getId());
         stmt.setString(3, unContacto.getDesc());
         stmt.setInt(4, unContacto.getEstadoContacto().getId());
         stmt.setString(5, unContacto.getNumeroEntrante());
-        stmt.setInt(6, unContacto.getPrioridad().getId());
-        stmt.setDate(7, unContacto.getRecibidoEl());
+        if (unContacto.getTecnico()!=null) {
+          stmt.setInt(6, unContacto.getPrioridad().getId());
+        }
+        else {
+          stmt.setInt(6, -1);
+        }
+        stmt.setTimestamp(7, unContacto.getRecibidoEl());
         stmt.setString(8, unContacto.getResolucion());
-        stmt.setInt(9, unContacto.getTecnico().getId());
+        if (unContacto.getTecnico()!=null) {
+          stmt.setInt(9, unContacto.getTecnico().getId());
+        }
+        else {
+          stmt.setInt(9, -1);
+        }
         stmt.setInt(10, unContacto.getTelefonista().getId());
         stmt.setInt(11, unContacto.getTipoContacto().getId());
         stmt.executeUpdate();
+
+        Integer id = Access.ultimoId(con);
+
         Access.desconectar(con);
-        return true;
+        return id;
       }
       else {
-        return false;
+        return -1;
       }
     } catch (Exception e) {
       System.out.println(e.toString());
-      return false;
+      return -1;
     }
   }
 

@@ -34,7 +34,9 @@ public class pCliente {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.NOMBRE+" LIKE '%"+nombre+"%' AND "+pCliente.APELLIDO+" LIKE '%"+apellido+"%'");
+        String query = "SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.NOMBRE+" LIKE '"+nombre+"%' AND "+pCliente.APELLIDO+" LIKE '"+apellido+"%'";
+        ResultSet rs = stmt.executeQuery(query);
+
         while (rs.next()) {
           Cliente unCliente = pCliente.toCliente(rs);
           listaClientes.add(unCliente);
@@ -132,7 +134,7 @@ public class pCliente {
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.NOMBRE+" LIKE '%"+nombre+"%'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pCliente.TABLA+" WHERE "+pCliente.NOMBRE+" LIKE '"+nombre+"%'");
         while (rs.next()) {
           Cliente unCliente = pCliente.toCliente(rs);
           listaClientes.add(unCliente);
