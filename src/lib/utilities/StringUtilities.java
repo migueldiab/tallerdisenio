@@ -8,7 +8,18 @@ package lib.utilities;
  */
 public class StringUtilities {
 
-	public static final String padLeft(int param, int length, char pad) 
+	public static final String pad(String texto, int largo)  {
+    StringBuffer buffer = new StringBuffer();
+    if (texto==null) {
+      texto = "-null-";
+    }
+    buffer.append(texto);
+    for (int i = texto.length(); i < largo; i++) {
+	      buffer.append(' ');
+	   }
+    return buffer.toString();
+  }
+	public static final String padLeft(int param, int length, char pad)
 	{
 	    StringBuffer buffer = new StringBuffer(length);
 	    buffer.append(param);

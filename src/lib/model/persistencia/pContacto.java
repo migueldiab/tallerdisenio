@@ -7,6 +7,7 @@ package lib.model.persistencia;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import lib.model.miCRM.*;
 
 /**
@@ -30,6 +31,60 @@ public class pContacto {
   public static final String PRIORIDAD = "id_prioridad";
   public static final String TECNICO = "id_tecnico";
   public static final String TELEFONISTA = "id_telefonista";
+
+  public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {
+    ArrayList listaContactos = new ArrayList();
+    try {
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        stmt = con.prepareStatement("SELECT * FROM "+pContacto.TABLA+" WHERE "
+                +pContacto.RECIBIDO+" >= ? AND "
+                +pContacto.RECIBIDO+" <= ? " +
+                "ORDER BY "+pContacto.RECIBIDO
+                );
+        stmt.setTimestamp(1, inicio);
+        stmt.setTimestamp(2, fin);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+          Contacto unContacto = pContacto.toContacto(rs);
+          listaContactos.add(unContacto);
+        }
+        Access.desconectar(con);
+        return listaContactos;
+      }
+      else {
+        return null;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }
+  }
+
+  public static ArrayList<Contacto> listarPorFechaPorEstado(Integer estado) {
+    ArrayList listaContactos = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE "+pContacto.ESTADO+" = "+estado+" ORDER BY "+pContacto.RECIBIDO);
+        while (rs.next()) {
+          Contacto unContacto = pContacto.toContacto(rs);
+          listaContactos.add(unContacto);
+        }
+        Access.desconectar(con);
+        return listaContactos;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
 
   public static ArrayList<Contacto> listarPorFechaSinAsignar() {
     ArrayList listaContactos = new ArrayList();
@@ -68,6 +123,41 @@ public class pContacto {
         }
         Access.desconectar(con);
         return listaContactos;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+
+  public static Hashtable<Usuario, Integer> listarRankingTecnicosPorFechaPorEstado(Timestamp inicio, Timestamp fin, EstadoContacto estado) {
+    Hashtable<Usuario, Integer> ranking = new Hashtable<Usuario, Integer>();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        PreparedStatement stmt = null;
+        stmt = con.prepareStatement("SELECT Count(*) AS cantidad, "+pContacto.TECNICO+" FROM "+pContacto.TABLA+
+                " WHERE ("+pContacto.ESTADO+"=?) AND " +
+                "("+pContacto.RECIBIDO+" >= ?) AND "+
+                "("+pContacto.RECIBIDO+" <= ?) "+
+                " GROUP BY ("+pContacto.TECNICO+")");
+        stmt.setInt(1, estado.getId());
+        stmt.setTimestamp(2, inicio);
+        stmt.setTimestamp(3, fin);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+          Usuario unUsuario = pUsuario.buscarPorId(rs.getInt(pContacto.TECNICO));
+          if (unUsuario!=null) {
+            Integer casos = rs.getInt("cantidad");
+            ranking.put(unUsuario, casos);
+          }
+        }
+        Access.desconectar(con);
+        return ranking;
       } catch (Exception e) {
         System.out.println(e.toString());
         Access.desconectar(con);

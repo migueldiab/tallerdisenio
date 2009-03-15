@@ -5,7 +5,9 @@
 
 package miCrm;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import lib.model.miCRM.*;
 import lib.model.miCRM.Usuario;
 import lib.model.servicios.*;
@@ -68,8 +70,16 @@ public class Fachada {
     return Contactos.listarPorFechaSinAsignar();
   }
 
+  public static ArrayList<Contacto> listarContactosPorTecnicoPorEstado(Usuario tecnico, EstadoContacto estado) {
+    return Contactos.listarContactosPorTecnicoPorEstado(tecnico, estado);
+  }
+
   public static ArrayList<Contacto> listarContactosPorTecnicoSinFinalizar(Usuario tecnico) {
     return Contactos.listarContactosPorTecnicoSinFinalizar(tecnico);
+  }
+
+  public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {
+    return Contactos.listarContactosRangoFecha(inicio, fin);
   }
 
   public static ArrayList<EstadoContacto> listarEstados() {
@@ -82,6 +92,10 @@ public class Fachada {
 
   public static ArrayList<Prioridad> listarPrioridades() {
     return Prioridades.listar();
+  }
+
+  public static Hashtable<Usuario, Integer> listarRankingTecnicos(Timestamp inicio, Timestamp fin, EstadoContacto estado) {
+    return Contactos.listarRankingTecnicos(inicio, fin, estado);
   }
 
   public static ArrayList<Usuario> listarTecnicos() {

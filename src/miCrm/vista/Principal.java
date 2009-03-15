@@ -20,6 +20,9 @@ import miCrm.vista.admin.Usuarios;
 import miCrm.vista.admin.Clientes;
 import miCrm.vista.admin.Grupos;
 import miCrm.vista.admin.Articulos;
+import miCrm.vista.listados.LlamadasPorFecha;
+import miCrm.vista.listados.RankingTecnicos;
+import miCrm.vista.listados.TrabajosPendientes;
 import miCrm.vista.sistema.ConsolaTecnico;
 import miCrm.vista.sistema.ControlAsignaciones;
 
@@ -206,7 +209,7 @@ public class Principal extends javax.swing.JFrame {
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel1.setText("Manejo de Incidentes");
 
-    jButton1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jButton1.setFont(new java.awt.Font("Verdana", 0, 12));
     jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/5.png"))); // NOI18N
     jButton1.setText("Atender Llamadas");
     jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -216,7 +219,7 @@ public class Principal extends javax.swing.JFrame {
       }
     });
 
-    jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jButton2.setFont(new java.awt.Font("Verdana", 0, 12));
     jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/12.png"))); // NOI18N
     jButton2.setText("Control de Asignaciones");
     jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -226,7 +229,7 @@ public class Principal extends javax.swing.JFrame {
       }
     });
 
-    jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jButton3.setFont(new java.awt.Font("Verdana", 0, 12));
     jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/29.png"))); // NOI18N
     jButton3.setText("Consola Técnicos");
     jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -240,7 +243,7 @@ public class Principal extends javax.swing.JFrame {
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel2.setText("Reportes");
 
-    jButton4.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/2.png"))); // NOI18N
     jButton4.setText("Llamadas por Fecha");
     jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -250,7 +253,7 @@ public class Principal extends javax.swing.JFrame {
       }
     });
 
-    jButton5.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/84.png"))); // NOI18N
     jButton5.setText("Trabajos Pendientes");
     jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -260,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
       }
     });
 
-    jButton6.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/81.png"))); // NOI18N
     jButton6.setText("Ranking Técnicos");
     jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -383,12 +386,27 @@ public class Principal extends javax.swing.JFrame {
     mListados.setText("Listados");
 
     mLlamadasFecha.setText("Llamadas por Fecha");
+    mLlamadasFecha.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mLlamadasFechaActionPerformed(evt);
+      }
+    });
     mListados.add(mLlamadasFecha);
 
     mTrabajosPendientes.setText("Trabajos Pendientes");
+    mTrabajosPendientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mTrabajosPendientesActionPerformed(evt);
+      }
+    });
     mListados.add(mTrabajosPendientes);
 
     mRankingTecnicos.setText("Ranking Técnicos");
+    mRankingTecnicos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mRankingTecnicosActionPerformed(evt);
+      }
+    });
     mListados.add(mRankingTecnicos);
 
     jMenuBar1.add(mListados);
@@ -474,6 +492,19 @@ public class Principal extends javax.swing.JFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  private void llamadasPorFecha() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      LlamadasPorFecha vLlamadasPorFecha = new LlamadasPorFecha(this);
+      vLlamadasPorFecha.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
     private void mSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mSalirMouseClicked
       
     }//GEN-LAST:event_mSalirMouseClicked
@@ -527,15 +558,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      // TODO add your handling code here:
+      llamadasPorFecha();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      // TODO add your handling code here:
+      trabajosPendientes();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      // TODO add your handling code here:
+      rankingTecnicos();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -545,6 +576,18 @@ public class Principal extends javax.swing.JFrame {
     private void mControlAsignacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControlAsignacionesActionPerformed
       controlDeAsignaciones();
     }//GEN-LAST:event_mControlAsignacionesActionPerformed
+
+    private void mLlamadasFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLlamadasFechaActionPerformed
+      llamadasPorFecha();
+    }//GEN-LAST:event_mLlamadasFechaActionPerformed
+
+    private void mTrabajosPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mTrabajosPendientesActionPerformed
+      trabajosPendientes();
+    }//GEN-LAST:event_mTrabajosPendientesActionPerformed
+
+    private void mRankingTecnicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRankingTecnicosActionPerformed
+      rankingTecnicos();
+    }//GEN-LAST:event_mRankingTecnicosActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButton1;
@@ -581,6 +624,34 @@ public class Principal extends javax.swing.JFrame {
   private javax.swing.JMenuItem mUsuarios;
   private miCrm.resources.widget.StatusBar statusBar1;
   // End of variables declaration//GEN-END:variables
+
+  private void rankingTecnicos() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      RankingTecnicos vRankingTecnicos = new RankingTecnicos(this);
+      vRankingTecnicos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  // End of variables declaration
+
+  private void trabajosPendientes() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      TrabajosPendientes vTrabajosPendientes = new TrabajosPendientes(this);
+      vTrabajosPendientes.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  // End of variables declaration
 
   private void usuarios() {
     if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
