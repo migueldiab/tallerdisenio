@@ -7,7 +7,9 @@ package lib.model.miCRM;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.sql.Timestamp;
 import lib.model.miCRM.Usuario;
+import lib.model.persistencia.pContacto;
 
 /**
  *
@@ -15,8 +17,8 @@ import lib.model.miCRM.Usuario;
  */
 public class Contacto {
   private Integer id;
-  private Date recibidoEl;
-  private Date asignadoEl;
+  private Timestamp recibidoEl;
+  private Timestamp asignadoEl;
   private String numeroEntrante;
   private String desc;
   private String resolucion;
@@ -35,6 +37,15 @@ public class Contacto {
     return id;
   }
 
+  public boolean guardar() {
+    Integer autoId = pContacto.guardar(this);
+    if (autoId!=-1) {
+      this.setId(autoId);
+      return true;
+    }
+    return false;
+  }
+
   /**
    * @param id the id to set
    */
@@ -45,28 +56,28 @@ public class Contacto {
   /**
    * @return the recibidoEl
    */
-  public Date getRecibidoEl() {
+  public Timestamp getRecibidoEl() {
     return recibidoEl;
   }
 
   /**
    * @param recibidoEl the recibidoEl to set
    */
-  public void setRecibidoEl(Date recibidoEl) {
+  public void setRecibidoEl(Timestamp recibidoEl) {
     this.recibidoEl = recibidoEl;
   }
 
   /**
    * @return the asignadoEl
    */
-  public Date getAsignadoEl() {
+  public Timestamp getAsignadoEl() {
     return asignadoEl;
   }
 
   /**
    * @param asignadoEl the asignadoEl to set
    */
-  public void setAsignadoEl(Date asignadoEl) {
+  public void setAsignadoEl(Timestamp asignadoEl) {
     this.asignadoEl = asignadoEl;
   }
 
@@ -228,6 +239,6 @@ public class Contacto {
 
   @Override
   public String toString() {
-    return this.getDesc();
+    return this.getRecibidoEl().toString()+" - "+this.getCliente().toString() + " - "+this.getEstadoContacto();
   }
 }

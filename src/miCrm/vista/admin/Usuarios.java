@@ -11,7 +11,9 @@
 
 package miCrm.vista.admin;
 
+import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
@@ -25,7 +27,7 @@ public class Usuarios extends javax.swing.JDialog {
 
     /** Creates new form Usuarios */
     public Usuarios(JFrame parent) {
-      super(parent);
+        super(parent);
         initComponents();
         cargarListas();
     }
@@ -36,6 +38,33 @@ public class Usuarios extends javax.swing.JDialog {
     tPassword.setText("");
     tRepetir.setText("");
     cGrupo.setSelectedItem(u.getGrupo());
+  }
+
+  private void eliminarUsuario() {
+    try {
+        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
+        if (unUsuario==null) {
+          throw new Exception("No existe usuario con ID = "+tId.getText());
+        }
+        if (!unUsuario.borrar()) {
+          throw new Exception("Falló borrarUsuario(unUsuario)");
+        }
+        else {
+          JOptionPane.showMessageDialog(
+              this,"El usuario "+unUsuario.toString()+" fue eliminado",
+              "Usuario Eliminado",
+              JOptionPane.INFORMATION_MESSAGE);
+          limpiarCampos();
+        }
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al eliminar",
+              JOptionPane.ERROR_MESSAGE);
+      }
   }
 
   private void guardarUsuario() {
@@ -75,6 +104,8 @@ public class Usuarios extends javax.swing.JDialog {
     cGrupo.setSelectedItem(null);
     cargarListas();
   }
+
+
   private boolean validarCampos() {
     if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
       JOptionPane.showMessageDialog(
@@ -299,30 +330,7 @@ public class Usuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-      try {
-        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
-        if (unUsuario==null) {
-          throw new Exception("No existe usuario con ID = "+tId.getText());
-        }
-        if (!unUsuario.borrar()) {
-          throw new Exception("Falló borrarUsuario(unUsuario)");
-        }
-        else {
-          JOptionPane.showMessageDialog(
-              this,"El usuario "+unUsuario.toString()+" fue eliminado",
-              "Usuario Eliminado",
-              JOptionPane.INFORMATION_MESSAGE);
-          limpiarCampos();
-        }
-      } catch (Exception e) {
-        System.out.println(e.toString());
-        JOptionPane.showMessageDialog(
-              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
-              "Si el error persiste, por favor consulte con el administrador.\r\n"
-              +e.toString(),
-              "Error al eliminar",
-              JOptionPane.ERROR_MESSAGE);
-      }
+      eliminarUsuario();
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void jListadoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListadoValueChanged

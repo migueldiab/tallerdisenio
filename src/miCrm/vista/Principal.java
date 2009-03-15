@@ -11,13 +11,16 @@
 
 package miCrm.vista;
 
+import miCrm.Conf;
+import miCrm.resources.widget.StatusBar.MSG;
 import miCrm.resources.widget.Ventanas;
 import miCrm.vista.sistema.RegistroContactos;
 import miCrm.vista.admin.Usuarios;
 import miCrm.vista.admin.Clientes;
 import miCrm.vista.admin.Grupos;
 import miCrm.vista.admin.Articulos;
-import miCrm.vista.sistema.ConsolaTrabajos;
+import miCrm.vista.sistema.ConsolaTecnico;
+import miCrm.vista.sistema.ControlAsignaciones;
 
 /**
  *
@@ -29,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         Ventanas.centrarVentana(this);
+        statusBar1.setMessage("Bienvenido, usted está logueado como "+Conf.getUsuarioLogueado().toString(), MSG.INFO);
     }
 
     /** This method is called from within the constructor to
@@ -43,8 +47,14 @@ public class Principal extends javax.swing.JFrame {
     jTextField1 = new javax.swing.JTextField();
     jInternalFrame1 = new javax.swing.JInternalFrame();
     jPanel1 = new javax.swing.JPanel();
+    statusBar1 = new miCrm.resources.widget.StatusBar();
+    jLabel1 = new javax.swing.JLabel();
+    jButton1 = new javax.swing.JButton();
+    jButton2 = new javax.swing.JButton();
+    jButton3 = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     mArchivo = new javax.swing.JMenu();
+    jMenuItem1 = new javax.swing.JMenuItem();
     mSalir = new javax.swing.JMenuItem();
     mAdministracion = new javax.swing.JMenu();
     mArticulos = new javax.swing.JMenuItem();
@@ -65,6 +75,7 @@ public class Principal extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("miCRM - Líder en manejo de contactos");
+    setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
     jInternalFrame1.setClosable(true);
     jInternalFrame1.setIconifiable(true);
@@ -102,12 +113,57 @@ public class Principal extends javax.swing.JFrame {
           .addContainerGap()))
     );
 
+    statusBar1.setFont(new java.awt.Font("Verdana", 0, 14));
+
+    jLabel1.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel1.setText("Manejo de Incidentes");
+
+    jButton1.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/5.png"))); // NOI18N
+    jButton1.setText("Atender Llamadas");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1ActionPerformed(evt);
+      }
+    });
+
+    jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/12.png"))); // NOI18N
+    jButton2.setText("Control de Asignaciones");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2ActionPerformed(evt);
+      }
+    });
+
+    jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/29.png"))); // NOI18N
+    jButton3.setText("Consola Técnicos");
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3ActionPerformed(evt);
+      }
+    });
+
     mArchivo.setText("Archivo");
+
+    jMenuItem1.setText("Cerrar Sesión");
+    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1ActionPerformed(evt);
+      }
+    });
+    mArchivo.add(jMenuItem1);
 
     mSalir.setText("Salir");
     mSalir.addMouseListener(new java.awt.event.MouseAdapter() {
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         mSalirMouseClicked(evt);
+      }
+    });
+    mSalir.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mSalirActionPerformed(evt);
       }
     });
     mArchivo.add(mSalir);
@@ -196,17 +252,44 @@ public class Principal extends javax.swing.JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(794, Short.MAX_VALUE)
-        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(173, 173, 173))
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(statusBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
+            .addContainerGap())
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel1)
+            .addContainerGap(808, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+              .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+            .addGap(531, 531, 531)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(173, 173, 173))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+            .addGap(704, 704, 704))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGap(107, 107, 107)
-        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(380, Short.MAX_VALUE))
+        .addContainerGap()
+        .addComponent(jLabel1)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(82, 82, 82)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton2)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jButton3)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+        .addComponent(statusBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
@@ -242,13 +325,45 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mArticulosActionPerformed
 
     private void mConsolaTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsolaTrabajosActionPerformed
-      ConsolaTrabajos vConsolaTrabajos = new ConsolaTrabajos(this);
-      vConsolaTrabajos.setVisible(true);
+      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
+      vConsolaTecnico.setVisible(true);
 }//GEN-LAST:event_mConsolaTrabajosActionPerformed
 
+    private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
+
+      this.dispose();
+    }//GEN-LAST:event_mSalirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+      Login vLogin = new Login();
+      vLogin.setVisible(true);
+      Conf.setUsuarioLogueado(null);
+      this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      RegistroContactos vRegistroContactos = new RegistroContactos(this);
+      vRegistroContactos.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      ControlAsignaciones vControlAsignaciones = new ControlAsignaciones(this);
+      vControlAsignaciones.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
+      vConsolaTecnico.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButton1;
+  private javax.swing.JButton jButton2;
+  private javax.swing.JButton jButton3;
   private javax.swing.JInternalFrame jInternalFrame1;
+  private javax.swing.JLabel jLabel1;
   private javax.swing.JMenuBar jMenuBar1;
+  private javax.swing.JMenuItem jMenuItem1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JTextField jTextField1;
   private javax.swing.JMenu mAdministracion;
@@ -267,6 +382,7 @@ public class Principal extends javax.swing.JFrame {
   private javax.swing.JMenuItem mSalir;
   private javax.swing.JMenuItem mTrabajosPendientes;
   private javax.swing.JMenuItem mUsuarios;
+  private miCrm.resources.widget.StatusBar statusBar1;
   // End of variables declaration//GEN-END:variables
 
 }

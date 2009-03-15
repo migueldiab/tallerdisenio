@@ -30,29 +30,29 @@ public class Usuarios {
     return pUsuario.buscarPorNombre(nombre);
   }
 
-  public static Iterable<Usuario> listarTecnicos() {
+  public static ArrayList<Usuario> listarPorGrupo(String grupo) {
     ArrayList<Usuario> losUsuarios = pUsuario.listar();
-    ArrayList<Usuario> losTecnicos = new ArrayList<Usuario>();
-    Grupo tecnico = Fachada.buscarGrupoPorNombre("Técnico");
+    ArrayList<Usuario> subgrupo = new ArrayList<Usuario>();
+    Grupo tecnico = Fachada.buscarGrupoPorNombre(grupo);
     for (Usuario u : losUsuarios) {
       if (u.getGrupo().equals(tecnico)) {
-        losTecnicos.add(u);
+        subgrupo.add(u);
       }
     }
-    return losTecnicos;
+    return subgrupo;
     
   }
 
-  public static boolean login(String usuario, char[] password) {
+  public static Usuario login(String usuario, char[] password) {
     Usuario unUsuario = Usuarios.buscarPorNombre(usuario);
     if (unUsuario!=null) {
       if (password.length == unUsuario.getPassword().length) {
         if (Arrays.equals(unUsuario.getPassword() , password)) {
-          return true;
+          return unUsuario;
         }
       }
     }
-    return false;
+    return null;
   }
 
 

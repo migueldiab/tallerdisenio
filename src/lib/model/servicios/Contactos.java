@@ -15,8 +15,12 @@ import lib.model.persistencia.pContacto;
  */
 public class Contactos {
 
-  public ArrayList listar() {
+  public static ArrayList<Contacto> listar() {
     return pContacto.listar();
+  }
+
+  public static ArrayList<Contacto> listarPorFechaSinAsignar() {
+    return pContacto.listarPorFechaSinAsignar();
   }
   public Object buscarPorId(Integer id) {
     return pContacto.buscarPorId(id);
@@ -30,11 +34,8 @@ public class Contactos {
     }
     return false;
   }
-  public static boolean guardar(Contacto unContacto) {
-    if (pContacto.guardar(unContacto)) {
-      return true;
-    }
-    return false;
+  public static Integer guardar(Contacto unContacto) {
+    return pContacto.guardar(unContacto);
   }
 
 

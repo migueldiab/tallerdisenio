@@ -11,6 +11,8 @@
 
 package miCrm.vista;
 
+import lib.model.miCRM.Usuario;
+import miCrm.Conf;
 import miCrm.Fachada;
 import miCrm.resources.widget.StatusBar.MSG;
 import miCrm.resources.widget.Ventanas;
@@ -76,7 +78,7 @@ public class Login extends javax.swing.JFrame {
 
     tPassword.setText("test");
 
-    lBgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/login.png"))); // NOI18N
+    lBgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/49.png"))); // NOI18N
 
     javax.swing.GroupLayout pImagenLayout = new javax.swing.GroupLayout(pImagen);
     pImagen.setLayout(pImagenLayout);
@@ -110,7 +112,7 @@ public class Login extends javax.swing.JFrame {
             .addComponent(bEntrar)
             .addGap(18, 18, 18)
             .addComponent(bCerrar)))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(26, Short.MAX_VALUE))
       .addComponent(StatusBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
@@ -139,11 +141,13 @@ public class Login extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
-      try {        
-        if (Fachada.loginUsuario(tUsuario.getText(), tPassword.getPassword())) {
+      try {
+        Usuario unUsuario = Fachada.loginUsuario(tUsuario.getText(), tPassword.getPassword());
+        if (unUsuario!=null) {
+          Conf.setUsuarioLogueado(unUsuario);
           Principal vPrincipal = new Principal();
           vPrincipal.setVisible(true);
-          this.setVisible(false);
+          this.dispose();
         }
         else {
          StatusBar.setMessage("Login Error", MSG.ERROR);

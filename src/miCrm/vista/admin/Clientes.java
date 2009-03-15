@@ -11,34 +11,101 @@
 
 package miCrm.vista.admin;
 
+import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.*;
 import miCrm.Fachada;
+import miCrm.vista.sistema.RegistroContactos;
 
 /**
  *
  * @author Administrator
  */
 public class Clientes extends javax.swing.JDialog {
+  private boolean modoSeleccionar = false;
+  public Clientes(JDialog hermana) {
+    super(hermana);
+    initComponents();
+    cargarListas();
+    modoSeleccionar();
+  }
 
   /** Creates new form Clientes */
   public Clientes(JFrame parent) {
       super(parent);
-        initComponents();
-        cargarListas();
+      initComponents();
+      cargarListas();
     }
 
   private void cargarDatos(Cliente u) {
     tId.setText(u.getId().toString());
     tNombre.setText(u.getNombre());
+    tApellido.setText(u.getApellido());
+    tDireccion.setText(u.getDireccion());
+    tTelefono.setText(u.getTelefono());
+  }
+
+  private void eliminarCliente() {
+    try {
+      Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
+      if (unCliente==null) {
+        throw new Exception("No existe Cliente con ID = "+tId.getText());
+      }
+      if (!unCliente.borrar()) {
+        throw new Exception("Falló borrarCliente(unCliente)");
+      }
+      else {
+        JOptionPane.showMessageDialog(
+            this,"El Cliente "+unCliente.toString()+" fue eliminado",
+            "Cliente Eliminado",
+            JOptionPane.INFORMATION_MESSAGE);
+        limpiarCampos();
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      JOptionPane.showMessageDialog(
+            this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
+            "Si el error persiste, por favor consulte con el administrador.\r\n"
+            +e.toString(),
+            "Error al eliminar",
+            JOptionPane.ERROR_MESSAGE);
+    }
   }
   private void limpiarCampos() {
     tId.setText("");
     tNombre.setText("");
+    tApellido.setText("");
+    tDireccion.setText("");
+    tTelefono.setText("");
     cargarListas();
   }
+
+  private void modoSeleccionar() {
+    bEliminar.setText("Seleccionar");
+    this.modoSeleccionar = true;
+  }
+  private void bSeleccionarActionPerformed(ActionEvent evt) {
+    
+  }
+
+  private void seleccionarCliente() {
+    if (jListado.getSelectedIndex()!=-1) {
+      RegistroContactos padre = (RegistroContactos) this.getOwner();
+      padre.seleccionarCliente(jListado.getSelectedValue());
+      this.dispose();
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"Debe seleccionar un cliente",
+        "Error al seleccionar",
+        JOptionPane.ERROR_MESSAGE);
+    }
+    
+  }
+
   private boolean validarCampos() {
     return true;
   }
@@ -92,7 +159,8 @@ public class Clientes extends javax.swing.JDialog {
     tApellido = new javax.swing.JTextField();
     tNombre = new javax.swing.JTextField();
     tTelefono = new javax.swing.JTextField();
-    tDireccion = new javax.swing.JTextField();
+    sDireccion = new javax.swing.JScrollPane();
+    tDireccion = new javax.swing.JTextArea();
     panelLista = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
@@ -100,6 +168,7 @@ public class Clientes extends javax.swing.JDialog {
     setTitle("Usuarios");
 
     panelABM.setDividerLocation(150);
+    panelABM.setMinimumSize(new java.awt.Dimension(630, 162));
 
     panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
 
@@ -143,6 +212,10 @@ public class Clientes extends javax.swing.JDialog {
 
     tId.setEnabled(false);
 
+    tDireccion.setColumns(20);
+    tDireccion.setRows(5);
+    sDireccion.setViewportView(tDireccion);
+
     javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
     panelEditar.setLayout(panelEditarLayout);
     panelEditarLayout.setHorizontalGroup(
@@ -162,20 +235,21 @@ public class Clientes extends javax.swing.JDialog {
               .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(tApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(tTelefono, javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(110, 110, 110))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
+              .addComponent(sDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+              .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(panelEditarLayout.createSequentialGroup()
             .addComponent(bNuevo)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bGuardar)
-            .addGap(18, 18, 18)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bEliminar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
-            .addComponent(bCerrar)
-            .addContainerGap())))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+            .addComponent(bCerrar)))
+        .addContainerGap())
     );
+
+    panelEditarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bCerrar, bEliminar, bGuardar, bNuevo});
+
     panelEditarLayout.setVerticalGroup(
       panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(panelEditarLayout.createSequentialGroup()
@@ -196,15 +270,15 @@ public class Clientes extends javax.swing.JDialog {
           .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(lTelefono))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(tDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lDireccion))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(lDireccion)
+          .addComponent(sDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bNuevo)
+          .addComponent(bCerrar)
           .addComponent(bGuardar)
-          .addComponent(bEliminar)
-          .addComponent(bCerrar))
+          .addComponent(bEliminar))
         .addContainerGap())
     );
 
@@ -228,13 +302,11 @@ public class Clientes extends javax.swing.JDialog {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(57, Short.MAX_VALUE))
+      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
     );
 
     pack();
@@ -247,22 +319,50 @@ public class Clientes extends javax.swing.JDialog {
 }//GEN-LAST:event_jListadoValueChanged
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
-      // TODO add your handling code here:
+      limpiarCampos();
 }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
-      // TODO add your handling code here:
+      this.dispose();
 }//GEN-LAST:event_bCerrarActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-      // TODO add your handling code here:
+      if (this.modoSeleccionar) {
+        seleccionarCliente();
+      }
+      else {
+        eliminarCliente();  
+      }
 }//GEN-LAST:event_bEliminarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-      if (validarCampos()) {
+      try {
         Cliente unCliente = new Cliente();
-        guardarDatos(unCliente);
+        if (validarCampos()) {
+          if (!tId.getText().equals("")) {
+            unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
+          }
+          if (guardarDatos(unCliente)) {
+            JOptionPane.showMessageDialog(
+                this,"El Cliente "+unCliente.toString()+" fue guardado",
+                "Cliente Guardado",
+                JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+          }
+          else {
+            JOptionPane.showMessageDialog(
+              this,"No se pudo guardar el cliente.",
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+          }
+        }        
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(
+          this,"No se pudo guardar el cliente.",
+          "Error al guardar",
+          JOptionPane.ERROR_MESSAGE);
       }
+
 }//GEN-LAST:event_bGuardarActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,8 +379,9 @@ public class Clientes extends javax.swing.JDialog {
   private javax.swing.JSplitPane panelABM;
   private javax.swing.JPanel panelEditar;
   private javax.swing.JScrollPane panelLista;
+  private javax.swing.JScrollPane sDireccion;
   private javax.swing.JTextField tApellido;
-  private javax.swing.JTextField tDireccion;
+  private javax.swing.JTextArea tDireccion;
   private javax.swing.JTextField tId;
   private javax.swing.JTextField tNombre;
   private javax.swing.JTextField tTelefono;
