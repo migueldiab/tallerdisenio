@@ -48,7 +48,19 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     }
 
   private void agregarArticulo() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (lArticulos.getSelectedIndex()==-1) {
+      JOptionPane.showMessageDialog(
+        this,"Debe seleccionar un artículo a agregar",
+        "Error al agregar",
+        JOptionPane.ERROR_MESSAGE);
+    }
+    else {
+        listaArticulosContacto.addElement(lArticulos.getSelectedValue());
+    }
+  }
+
+  private void bloqueante() {
+    System.out.println("Bloqueante");
   }
 
   private void buscarCliente() {
@@ -80,16 +92,18 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     cPrioridad.setSelectedItem(Conf.PRIORIDAD_POR_DEFECTO);
   }
 
-  private void cargarDatos() {
-    try {
-      Contacto c = (Contacto) lContactos.getSelectedValue();
+  private void cargarDatos(Contacto c) {
+    try {      
       tId.setText(c.getId().toString());
       tFecha.setText(DateUtilities.parseTimestamp(c.getRecibidoEl(),DateUtilities.DATE_FORMAT));
       tHora.setText(DateUtilities.parseTimestamp(c.getRecibidoEl(),DateUtilities.TIME_FORMAT));
       tTelefono.setText(c.getNumeroEntrante().toString());
       tCliente.setText(c.getCliente().toString());
       elCliente = c.getCliente();
-      cTipoContacto.setSelectedItem(c.getTipoContacto());
+      cEstado.setSelectedItem(c.getEstadoContacto());
+      cPrioridad.setSelectedItem(c.getPrioridad());
+      cTecnico.setSelectedItem(c.getTecnico());
+      cTelefonista.setSelectedItem(c.getTelefonista());
       tDescripcion.setText(c.getDesc().toString());
       if (c.getEstadoContacto().equals(Conf.ESTADO_NUEVO_CONTACTO)) {
         cEstado.setSelectedItem(Conf.ESTADO_ASIGNADO);
@@ -116,8 +130,12 @@ public class ConsolaTecnico extends javax.swing.JDialog {
 
   private void cargarListas() {
     this.lista.clear();
-    for (Contacto u : Fachada.listarContactosPorFechaSinAsignar()) {
+    for (Contacto u : Fachada.listarContactosPorTecnicoSinFinalizar(Conf.getUsuarioLogueado())) {
       this.lista.addElement(u);
+      if (u.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
+        cargarDatos(u);
+        bloqueante();
+      }
     }
     this.listaArticulos.clear();
     for (Articulo u : Fachada.listarArticulos()) {
@@ -268,10 +286,12 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     sDescripcion.setViewportView(tDescripcion);
 
     cTecnico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cTecnico.setEnabled(false);
     cTecnico.setMinimumSize(new java.awt.Dimension(150, 20));
     cTecnico.setPreferredSize(new java.awt.Dimension(150, 22));
 
     cPrioridad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cPrioridad.setEnabled(false);
     cPrioridad.setMinimumSize(new java.awt.Dimension(150, 20));
     cPrioridad.setPreferredSize(new java.awt.Dimension(150, 22));
 
@@ -539,7 +559,15 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   }
 
   private void quitarArticulo() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (lArticulosContacto.getSelectedIndex()==-1) {
+      JOptionPane.showMessageDialog(
+        this,"Debe seleccionar un artículo a quitar",
+        "Error al quitar",
+        JOptionPane.ERROR_MESSAGE);
+    }
+    else {
+        listaArticulosContacto.remove(lArticulosContacto.getSelectedIndex());
+    }
   }
 
     private void tFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFechaActionPerformed
@@ -589,7 +617,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
 
     private void lContactosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lContactosValueChanged
       if (lContactos.getSelectedIndex()!=-1) {
-        cargarDatos();
+        cargarDatos((Contacto) lContactos.getSelectedValue());
       }
     }//GEN-LAST:event_lContactosValueChanged
 

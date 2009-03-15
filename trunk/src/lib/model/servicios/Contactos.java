@@ -8,6 +8,7 @@ package lib.model.servicios;
 import java.util.ArrayList;
 import lib.model.miCRM.*;
 import lib.model.persistencia.pContacto;
+import miCrm.Conf;
 
 /**
  *
@@ -19,9 +20,21 @@ public class Contactos {
     return pContacto.listar();
   }
 
+  public static ArrayList<Contacto> listarContactosPorTecnicoSinFinalizar(Usuario tecnico) {
+    ArrayList<Contacto> contactosSinFinalizar = pContacto.listarPorFechaEstadoDistintoDe(Conf.ESTADO_FINALIZADO.getId());
+    ArrayList<Contacto> contactosPorTecnico = new ArrayList<Contacto>();
+    for (Contacto c : contactosSinFinalizar) {
+      if (tecnico.equals(c.getTecnico())) {
+        contactosPorTecnico.add(c);
+      }
+    }
+    return contactosPorTecnico;
+  }
+
   public static ArrayList<Contacto> listarPorFechaSinAsignar() {
     return pContacto.listarPorFechaSinAsignar();
   }
+
   public Object buscarPorId(Integer id) {
     return pContacto.buscarPorId(id);
   }
