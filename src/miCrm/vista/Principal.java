@@ -11,6 +11,7 @@
 
 package miCrm.vista;
 
+import javax.swing.JOptionPane;
 import miCrm.Conf;
 import miCrm.resources.widget.StatusBar.MSG;
 import miCrm.resources.widget.Ventanas;
@@ -35,6 +36,85 @@ public class Principal extends javax.swing.JFrame {
         statusBar1.setMessage("Bienvenido, usted está logueado como "+Conf.getUsuarioLogueado().toString(), MSG.INFO);
     }
 
+  private void articulos() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Articulos vArticulos = new Articulos(this);
+      vArticulos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void atenderLlamadas() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TELEFONISTA)) {
+      RegistroContactos vRegistroContactos = new RegistroContactos(this);
+      vRegistroContactos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void clientes() {
+    if ((Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) ||
+        (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TELEFONISTA))) {
+      Clientes vClientes = new Clientes(this);
+      vClientes.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void consolaTecnicos() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TECNICO)) {
+      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
+      vConsolaTecnico.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void controlDeAsignaciones() {
+     if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      ControlAsignaciones vControlAsignaciones = new ControlAsignaciones(this);
+      vControlAsignaciones.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void grupos() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Grupos vGrupos = new Grupos(this);
+      vGrupos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -52,6 +132,12 @@ public class Principal extends javax.swing.JFrame {
     jButton1 = new javax.swing.JButton();
     jButton2 = new javax.swing.JButton();
     jButton3 = new javax.swing.JButton();
+    jLabel2 = new javax.swing.JLabel();
+    jButton4 = new javax.swing.JButton();
+    jButton5 = new javax.swing.JButton();
+    jButton6 = new javax.swing.JButton();
+    jLabel3 = new javax.swing.JLabel();
+    jButton8 = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     mArchivo = new javax.swing.JMenu();
     jMenuItem1 = new javax.swing.JMenuItem();
@@ -66,6 +152,7 @@ public class Principal extends javax.swing.JFrame {
     mNuevoContacto = new javax.swing.JMenuItem();
     mControlAsignaciones = new javax.swing.JMenuItem();
     mConsolaTrabajos = new javax.swing.JMenuItem();
+    jMenuItem2 = new javax.swing.JMenuItem();
     mListados = new javax.swing.JMenu();
     mLlamadasFecha = new javax.swing.JMenuItem();
     mTrabajosPendientes = new javax.swing.JMenuItem();
@@ -116,11 +203,13 @@ public class Principal extends javax.swing.JFrame {
     statusBar1.setFont(new java.awt.Font("Verdana", 0, 14));
 
     jLabel1.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel1.setText("Manejo de Incidentes");
 
-    jButton1.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/5.png"))); // NOI18N
     jButton1.setText("Atender Llamadas");
+    jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton1ActionPerformed(evt);
@@ -130,6 +219,7 @@ public class Principal extends javax.swing.JFrame {
     jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/12.png"))); // NOI18N
     jButton2.setText("Control de Asignaciones");
+    jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton2ActionPerformed(evt);
@@ -139,9 +229,58 @@ public class Principal extends javax.swing.JFrame {
     jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
     jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/29.png"))); // NOI18N
     jButton3.setText("Consola Técnicos");
+    jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     jButton3.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton3ActionPerformed(evt);
+      }
+    });
+
+    jLabel2.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel2.setText("Reportes");
+
+    jButton4.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/2.png"))); // NOI18N
+    jButton4.setText("Llamadas por Fecha");
+    jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton4.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4ActionPerformed(evt);
+      }
+    });
+
+    jButton5.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/84.png"))); // NOI18N
+    jButton5.setText("Trabajos Pendientes");
+    jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton5.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton5ActionPerformed(evt);
+      }
+    });
+
+    jButton6.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/81.png"))); // NOI18N
+    jButton6.setText("Ranking Técnicos");
+    jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton6.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton6ActionPerformed(evt);
+      }
+    });
+
+    jLabel3.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel3.setText("Clientes");
+
+    jButton8.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/86.png"))); // NOI18N
+    jButton8.setText("Estado de Cuenta");
+    jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton8.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton8ActionPerformed(evt);
       }
     });
 
@@ -210,7 +349,7 @@ public class Principal extends javax.swing.JFrame {
 
     mContactos.setText("Contactos");
 
-    mNuevoContacto.setText("Nuevo Contacto");
+    mNuevoContacto.setText("Atender Llamadas");
     mNuevoContacto.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         mNuevoContactoActionPerformed(evt);
@@ -219,6 +358,11 @@ public class Principal extends javax.swing.JFrame {
     mContactos.add(mNuevoContacto);
 
     mControlAsignaciones.setText("Control de Asignaciones");
+    mControlAsignaciones.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mControlAsignacionesActionPerformed(evt);
+      }
+    });
     mContactos.add(mControlAsignaciones);
 
     mConsolaTrabajos.setText("Consola Trabajos");
@@ -230,6 +374,9 @@ public class Principal extends javax.swing.JFrame {
     mContactos.add(mConsolaTrabajos);
 
     mOperaciones.add(mContactos);
+
+    jMenuItem2.setText("Estado de Cuenta");
+    mOperaciones.add(jMenuItem2);
 
     jMenuBar1.add(mOperaciones);
 
@@ -256,41 +403,73 @@ public class Principal extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(statusBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
+            .addComponent(statusBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
             .addContainerGap())
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jLabel1)
-            .addContainerGap(808, Short.MAX_VALUE))
-          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-              .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-            .addGap(531, 531, 531)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+              .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                  .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                .addGap(10, 10, 10)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+            .addGap(9, 9, 9)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel3)
+              .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(173, 173, 173))
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-            .addGap(704, 704, 704))))
+            .addGap(173, 173, 173))))
     );
+
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton8, jLabel1, jLabel2, jLabel3});
+
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jLabel1)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(layout.createSequentialGroup()
-            .addGap(82, 82, 82)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton3))
           .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton1)
+            .addComponent(jButton4)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jButton3)
+            .addComponent(jButton5)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton6))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel3)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton8)
+            .addGap(126, 126, 126)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
         .addComponent(statusBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
+
+    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton8});
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
@@ -300,33 +479,27 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mSalirMouseClicked
 
     private void mUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mUsuariosActionPerformed
-      Usuarios vUsuarios = new Usuarios(this);
-      vUsuarios.setVisible(true);
+      usuarios();
     }//GEN-LAST:event_mUsuariosActionPerformed
 
     private void mNuevoContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNuevoContactoActionPerformed
-      RegistroContactos vRegistroContactos = new RegistroContactos(this);
-      vRegistroContactos.setVisible(true);
+      atenderLlamadas();
     }//GEN-LAST:event_mNuevoContactoActionPerformed
 
     private void mGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGruposActionPerformed
-      Grupos vGrupos = new Grupos(this);
-      vGrupos.setVisible(true);
+      grupos();
     }//GEN-LAST:event_mGruposActionPerformed
 
     private void mClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClientesActionPerformed
-      Clientes vClientes = new Clientes(this);
-      vClientes.setVisible(true);
+      clientes();
     }//GEN-LAST:event_mClientesActionPerformed
 
     private void mArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mArticulosActionPerformed
-      Articulos vArticulos = new Articulos(this);
-      vArticulos.setVisible(true);
+      articulos();
     }//GEN-LAST:event_mArticulosActionPerformed
 
     private void mConsolaTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsolaTrabajosActionPerformed
-      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
-      vConsolaTecnico.setVisible(true);
+      consolaTecnicos();
 }//GEN-LAST:event_mConsolaTrabajosActionPerformed
 
     private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
@@ -342,28 +515,52 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      RegistroContactos vRegistroContactos = new RegistroContactos(this);
-      vRegistroContactos.setVisible(true);
+      atenderLlamadas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      ControlAsignaciones vControlAsignaciones = new ControlAsignaciones(this);
-      vControlAsignaciones.setVisible(true);
+      controlDeAsignaciones();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
-      vConsolaTecnico.setVisible(true);
+      consolaTecnicos();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void mControlAsignacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControlAsignacionesActionPerformed
+      controlDeAsignaciones();
+    }//GEN-LAST:event_mControlAsignacionesActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButton1;
   private javax.swing.JButton jButton2;
   private javax.swing.JButton jButton3;
+  private javax.swing.JButton jButton4;
+  private javax.swing.JButton jButton5;
+  private javax.swing.JButton jButton6;
+  private javax.swing.JButton jButton8;
   private javax.swing.JInternalFrame jInternalFrame1;
   private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
   private javax.swing.JMenuBar jMenuBar1;
   private javax.swing.JMenuItem jMenuItem1;
+  private javax.swing.JMenuItem jMenuItem2;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JTextField jTextField1;
   private javax.swing.JMenu mAdministracion;
@@ -384,5 +581,18 @@ public class Principal extends javax.swing.JFrame {
   private javax.swing.JMenuItem mUsuarios;
   private miCrm.resources.widget.StatusBar statusBar1;
   // End of variables declaration//GEN-END:variables
+
+  private void usuarios() {
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Usuarios vUsuarios = new Usuarios(this);
+      vUsuarios.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+  }
 
 }

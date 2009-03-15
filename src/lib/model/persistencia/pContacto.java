@@ -55,6 +55,30 @@ public class pContacto {
     }
   }
 
+  public static ArrayList<Contacto> listarPorFechaEstadoDistintoDe(Integer estado) {
+    ArrayList listaContactos = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA+" WHERE "+pContacto.ESTADO+" <> "+estado+" ORDER BY "+pContacto.PRIORIDAD);
+        while (rs.next()) {
+          Contacto unContacto = pContacto.toContacto(rs);
+          listaContactos.add(unContacto);
+        }
+        Access.desconectar(con);
+        return listaContactos;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+
   /**
    * Convierte un ResultSet específico en un objeto de tipo Contacto
    * en base a los campos definidos

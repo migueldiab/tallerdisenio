@@ -31,6 +31,7 @@ import miCrm.Conf;
 import miCrm.Fachada;
 import miCrm.vista.admin.Clientes;
 
+
 /**
  *
  * @author Administrator
@@ -365,7 +366,7 @@ public class ControlAsignaciones extends javax.swing.JDialog {
                 .addComponent(sDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)))
-        .addGap(129, 129, 129))
+        .addGap(44, 44, 44))
     );
 
     pAsignacionContactoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bCancelar, bGuardar});
@@ -447,7 +448,7 @@ public class ControlAsignaciones extends javax.swing.JDialog {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pControlAsignaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(pControlAsignaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,7 +498,15 @@ public class ControlAsignaciones extends javax.swing.JDialog {
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
       if (validarDatos()) {
-        guardarContacto();
+        if (validarBloqueante()) {
+          guardarContacto();
+        }
+        else {
+          JOptionPane.showMessageDialog(
+            this,"El técnico ya tiene asignada una tarea bloqueante.",
+            "Error en asignación",
+            JOptionPane.ERROR_MESSAGE);
+        }
       }
       else {
         JOptionPane.showMessageDialog(
@@ -564,6 +573,18 @@ public class ControlAsignaciones extends javax.swing.JDialog {
   DefaultListModel lista = new DefaultListModel();
   DefaultListModel listaClientes = new DefaultListModel();
   Cliente elCliente = null;
+
+  private boolean validarBloqueante() {
+    if (((Prioridad) cPrioridad.getSelectedItem()).equals(Conf.PRIORIDAD_BLOQUENATE)) {
+      ArrayList<Contacto> contactosTecnico = Fachada.listarContactosPorTecnicoSinFinalizar((Usuario) cTecnico.getSelectedItem());
+      for (Contacto c : contactosTecnico) {
+        if (c.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
   
   private boolean validarDatos() {
     try {

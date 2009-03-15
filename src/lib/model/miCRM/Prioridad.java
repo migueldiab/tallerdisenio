@@ -11,7 +11,7 @@ import lib.model.persistencia.pPrioridad;
  *
  * @author Administrator
  */
-public class Prioridad {
+public class Prioridad {  
   private Integer id;
   private String nombre;
 

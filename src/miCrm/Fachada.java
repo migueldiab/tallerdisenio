@@ -7,7 +7,7 @@ package miCrm;
 
 import java.util.ArrayList;
 import lib.model.miCRM.*;
-import lib.model.persistencia.pGrupo;
+import lib.model.miCRM.Usuario;
 import lib.model.servicios.*;
 
 /**
@@ -66,6 +66,10 @@ public class Fachada {
 
   public static ArrayList<Contacto> listarContactosPorFechaSinAsignar() {
     return Contactos.listarPorFechaSinAsignar();
+  }
+
+  public static ArrayList<Contacto> listarContactosPorTecnicoSinFinalizar(Usuario tecnico) {
+    return Contactos.listarContactosPorTecnicoSinFinalizar(tecnico);
   }
 
   public static ArrayList<EstadoContacto> listarEstados() {

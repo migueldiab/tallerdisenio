@@ -233,8 +233,8 @@ public class Articulos extends javax.swing.JDialog {
     bAgregar = new javax.swing.JButton();
     bQuitar = new javax.swing.JButton();
     sArticulos = new javax.swing.JScrollPane();
-    lista = new DefaultListModel();
-    lArticulos = new javax.swing.JList(lista);
+    articulos = new DefaultListModel();
+    lArticulos = new javax.swing.JList(articulos);
     panelLista = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
