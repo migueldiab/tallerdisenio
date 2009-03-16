@@ -5,7 +5,6 @@
 
 package lib.model.persistencia;
 
-import com.sun.xml.internal.ws.message.saaj.SAAJHeader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -17,6 +16,7 @@ import lib.model.miCRM.*;
  */
 public class pContacto {
   public static final String TABLA = "contacto";
+  public static final String TABLA_ARTICULOS = "articulo_contacto";
   /**
    * Nombre de campo en la base de datos para el ID
    */
@@ -33,6 +33,10 @@ public class pContacto {
   public static final String TECNICO = "id_tecnico";
   public static final String TELEFONISTA = "id_telefonista";
   public static final String TIEMPO = "tiempo_resolucion";
+
+  public static final String ARTICULO = "articulo_id";
+  public static final String CONTACTO = "contacto_id";
+  public static final String CANTIDAD = "cantidad";
 
   
   public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {
@@ -172,6 +176,50 @@ public class pContacto {
     }
   }
 
+  private static ArrayList<ArticulosVendidos> listarArticulosPorContacto(Integer id) {
+    ArrayList<ArticulosVendidos> articulosVendidos = new ArrayList<ArticulosVendidos>();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pContacto.TABLA_ARTICULOS+" WHERE "+pContacto.CONTACTO+"="+id);
+        while (rs.next()) {
+          ArticulosVendidos unArtVendido = pContacto.toArticuloVendido(rs);
+          if (unArtVendido!=null) {
+            articulosVendidos.add(unArtVendido);
+          }
+        }
+        Access.desconectar(con);
+        if (articulosVendidos.size()>0)
+          return articulosVendidos;
+        else
+          return null;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+
+  private static ArticulosVendidos toArticuloVendido(ResultSet rs) {
+     try {
+      Articulo unArticulo = pArticulo.buscarPorId(rs.getInt(pContacto.ARTICULO));
+      Integer cantidad = rs.getInt(pContacto.CANTIDAD);
+      ArticulosVendidos unArticulosVendidos = null;
+      if (unArticulo!=null) {
+        unArticulosVendidos = new ArticulosVendidos(unArticulo, cantidad);
+      }
+      return unArticulosVendidos;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }
+  }
+
   /**
    * Convierte un ResultSet específico en un objeto de tipo Contacto
    * en base a los campos definidos
@@ -194,6 +242,7 @@ public class pContacto {
       unContacto.setTelefonista(pUsuario.buscarPorId(rs.getInt(pContacto.TELEFONISTA)));
       unContacto.setTipoContacto(pTipoContacto.buscarPorId(rs.getInt(pContacto.TIPO)));
       unContacto.setTiempoResolucion(rs.getInt(pContacto.TIEMPO));
+      unContacto.setArticulos(pContacto.listarArticulosPorContacto(unContacto.getId()));
       return unContacto;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -311,13 +360,39 @@ public class pContacto {
         }
         stmt.setInt(10, unContacto.getTelefonista().getId());
         stmt.setInt(11, unContacto.getTipoContacto().getId());
-        stmt.setInt(12, unContacto.getTiempoResolucion());
+        if (unContacto.getTiempoResolucion()!=null) {
+          stmt.setInt(12, unContacto.getTiempoResolucion());
+        }
+        else {
+          stmt.setInt(12, 0);
+        }
         stmt.executeUpdate();
 
-        Integer id = Access.ultimoId(con);
+        if (pContacto.buscarPorId(unContacto.getId())==null) {
+          Integer id = Access.ultimoId(con);
+          unContacto.setId(id);
+        }
 
+        stmt = con.prepareStatement("DELETE FROM "+pContacto.TABLA_ARTICULOS+" WHERE "+
+                pContacto.ARTICULO+"= ?");
+        stmt.setInt(1, unContacto.getId());
+        stmt.executeUpdate();
+
+        if (unContacto.getArticulos()!=null) {
+          for (ArticulosVendidos a : unContacto.getArticulos()) {
+            stmt = con.prepareStatement("INSERT INTO "+pContacto.TABLA_ARTICULOS+" ("+
+                    pContacto.ARTICULO+"," +
+                    pContacto.CONTACTO+"," +
+                    pContacto.CANTIDAD+")" +
+                    "VALUES (?, ?, ?)");
+            stmt.setInt(1, a.getArticulo().getId());
+            stmt.setInt(2, unContacto.getId());
+            stmt.setInt(3, a.getCantidad());
+            stmt.executeUpdate();
+          }
+        }
         Access.desconectar(con);
-        return id;
+        return unContacto.getId();
       }
       else {
         return -1;

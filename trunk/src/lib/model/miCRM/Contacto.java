@@ -29,9 +29,9 @@ public class Contacto {
   private Usuario tecnico;
   private Usuario telefonista;
   private Integer tiempoResolucion;
-  private ArrayList<Articulo> articulos;
+  private ArrayList<ArticulosVendidos> articulos;
 
-  public void agregarArticulo(Articulo articulo) {
+  public void agregarArticulo(ArticulosVendidos articulo) {
     articulos.add(articulo);
   }
 
@@ -52,7 +52,7 @@ public class Contacto {
   }
 
   public void limpiarArticulos() {
-    articulos = new ArrayList<Articulo>();
+    articulos = new ArrayList<ArticulosVendidos>();
   }
 
   /**
@@ -205,15 +205,15 @@ public class Contacto {
   /**
    * @return the articulos
    */
-  public ArrayList<Articulo> getArticulos() {
+  public ArrayList<ArticulosVendidos> getArticulos() {
     return articulos;
   }
 
   /**
    * @param articulos the articulos to set
    */
-  public void setArticulos(ArrayList<Articulo> articulos) {
-    this.setArticulos(articulos);
+  public void setArticulos(ArrayList<ArticulosVendidos> losArticulos) {
+    this.articulos = losArticulos;
   }
 
   /**
