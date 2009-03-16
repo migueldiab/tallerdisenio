@@ -42,15 +42,6 @@ public class Contacto {
     return id;
   }
 
-  public boolean guardar() {
-    Integer autoId = pContacto.guardar(this);
-    if (autoId!=-1) {
-      this.setId(autoId);
-      return true;
-    }
-    return false;
-  }
-
   public void limpiarArticulos() {
     articulos = new ArrayList<ArticulosVendidos>();
   }

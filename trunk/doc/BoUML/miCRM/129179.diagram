@@ -1,0 +1,60 @@
+format 66
+
+packagecanvas 128027 
+  package_ref 128155 // lib
+    xyzwh 39 73 2000 411 343
+end
+packagecanvas 128155 
+  package_ref 128283 // model
+    xyzwh 50 122 2005 355 142
+end
+packagecanvas 128283 
+  package_ref 128411 // miCRM
+    xyzwh 64 173 2010 65 71
+end
+packagecanvas 128411 
+  package_ref 128539 // persistencia
+    xyzwh 167 175 2010 67 71
+end
+packagecanvas 128539 
+  package_ref 128667 // servicios
+    xyzwh 279 177 2010 65 71
+end
+packagecanvas 128667 
+  package_ref 128795 // utilities
+    xyzwh 83 303 2005 65 71
+end
+packagecanvas 128795 
+  package_ref 129051 // miCrm
+    xyzwh 475 79 2000 391 333
+end
+packagecanvas 128923 
+  package_ref 129179 // resources
+    xyzwh 496 130 2005 65 71
+end
+packagecanvas 129051 
+  package_ref 129435 // vista
+    xyzwh 511 235 2005 317 167
+end
+packagecanvas 129563 
+  package_ref 129819 // admin
+    xyzwh 525 286 2010 65 71
+end
+packagecanvas 129691 
+  package_ref 129947 // listados
+    xyzwh 623 286 2010 65 71
+end
+packagecanvas 129819 
+  package_ref 130075 // sistema
+    xyzwh 721 288 2010 65 71
+end
+simplerelationcanvas 129179 simplerelation_ref 128283
+  from ref 129051 z 1999 to ref 128795
+end
+simplerelationcanvas 129307 simplerelation_ref 128027
+  from ref 128795 z 1999 to ref 129051
+end
+simplerelationcanvas 129435 simplerelation_ref 128155
+  from ref 128795 z 1999 to ref 129051
+end
+end

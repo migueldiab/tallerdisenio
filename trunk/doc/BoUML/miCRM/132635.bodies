@@ -1,0 +1,23 @@
+class StatusBar
+!!!164123.java!!!	StatusBar()
+        super();
+        super.setPreferredSize(new Dimension(100, 16));
+        setMessage("Bienvenido al sistema...", StatusBar.MSG.HELP);
+!!!164251.java!!!	setMessage(in message : String, inout tipo_msg : MSG) : void
+      this.setHorizontalAlignment(CENTER);
+      
+      if (tipo_msg==MSG.ERROR) {
+          this.setForeground(Color.RED);
+          message = "Error : " + message;
+      }
+      else if (tipo_msg==MSG.HELP) {
+          this.setForeground(Color.BLUE);
+          message = "Tip : " + message;
+      }
+      else if (tipo_msg==MSG.INFO) {
+          this.setForeground(new Color(40,180,40));
+      }
+      else {
+          this.setForeground(Color.BLACK);
+      }
+      setText(message);

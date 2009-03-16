@@ -1,0 +1,5 @@
+class Conf
+!!!159643.java!!!	getUsuarioLogueado() : Usuario
+      return usuarioLogueado;
+!!!159771.java!!!	setUsuarioLogueado(inout aUsuarioLogueado : Usuario) : void
+      usuarioLogueado = aUsuarioLogueado;

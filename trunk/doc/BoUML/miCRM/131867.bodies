@@ -1,0 +1,21 @@
+class StringUtilities
+!!!159387.java!!!	pad(in texto : String, in largo : int) : String
+
+    StringBuffer buffer = new StringBuffer();
+    if (texto==null) {
+      texto = "-null-";
+    }
+    buffer.append(texto);
+    for (int i = texto.length(); i < largo; i++) {
+	      buffer.append(' ');
+	   }
+    return buffer.toString();
+!!!159515.java!!!	padLeft(in param : int, in length : int, in pad : char) : String
+
+	    StringBuffer buffer = new StringBuffer(length);
+	    buffer.append(param);
+	    int padLength = length - buffer.length();
+	    for (int i = padLength; i > 0; i--) {
+	      buffer.insert(0, pad);
+	   }
+	    return buffer.toString();

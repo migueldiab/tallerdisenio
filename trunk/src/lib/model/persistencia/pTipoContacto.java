@@ -23,6 +23,7 @@ public class pTipoContacto {
    * Nombre de campo en la base de datos para el Nombre
    */
   public static final String NOMBRE = "nombre";
+  public static final String COSTO = "costo";
 
   /**
    * Convierte un ResultSet específico en un objeto de tipo TipoContacto
@@ -35,6 +36,7 @@ public class pTipoContacto {
       TipoContacto unTipoContacto = new TipoContacto();
       unTipoContacto.setId(rs.getInt(pTipoContacto.ID));
       unTipoContacto.setNombre(rs.getString(pTipoContacto.NOMBRE));
+      unTipoContacto.setCosto(rs.getDouble(pTipoContacto.COSTO));
       return unTipoContacto;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -95,19 +97,24 @@ public class pTipoContacto {
   }
 
     @SuppressWarnings("unchecked")
-  public static ArrayList buscarPorNombre(String nombre) {
-    ArrayList listaTipoContactos = new ArrayList();
+  public static TipoContacto buscarPorNombre(String nombre) {
+    TipoContacto unTipoContacto = null;
     Connection con=Access.conectar();
     if (con!=null) {
       try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.NOMBRE+" LIKE '%"+nombre+"%'");
-        while (rs.next()) {
-          TipoContacto unTipoContacto = pTipoContacto.toTipoContacto(rs);
-          listaTipoContactos.add(unTipoContacto);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pTipoContacto.TABLA+" WHERE "+pTipoContacto.NOMBRE+" = '"+nombre+"'");
+        if (!rs.next()) {
+          Access.desconectar(con);
+          return null;
+        }
+        unTipoContacto = pTipoContacto.toTipoContacto(rs);
+        if (rs.next()) {
+          Access.desconectar(con);
+          return null;
         }
         Access.desconectar(con);
-        return listaTipoContactos;
+        return unTipoContacto;
       } catch (Exception e) {
         System.out.println(e.toString());
         Access.desconectar(con);
@@ -125,13 +132,20 @@ public class pTipoContacto {
       if (con!=null) {
         PreparedStatement stmt = null;
         if (pTipoContacto.buscarPorId(unTipoContacto.getId())==null) {
-          stmt = con.prepareStatement("INSERT INTO "+pTipoContacto.TABLA+" ("+pTipoContacto.NOMBRE+") VALUES (?)");
+          stmt = con.prepareStatement("INSERT INTO "+pTipoContacto.TABLA+" ("
+                  +pTipoContacto.NOMBRE
+                  +pTipoContacto.COSTO
+                  +") VALUES (?, ?)");
         }
         else {
-          stmt = con.prepareStatement("UPDATE "+pTipoContacto.TABLA+" SET "+pTipoContacto.NOMBRE+" = ? WHERE "+pTipoContacto.ID+" = ?");
-          stmt.setInt(2, unTipoContacto.getId());
+          stmt = con.prepareStatement("UPDATE "+pTipoContacto.TABLA+" SET "+
+                  pTipoContacto.NOMBRE+" = ?, " +
+                  pTipoContacto.COSTO+" = ? " +
+                  "WHERE "+pTipoContacto.ID+" = ?");
+          stmt.setInt(3, unTipoContacto.getId());
         }
         stmt.setString(1, unTipoContacto.getNombre());
+        stmt.setDouble(2, unTipoContacto.getCosto());
         stmt.executeUpdate();
         return true;
       }

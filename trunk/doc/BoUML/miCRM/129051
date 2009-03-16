@@ -1,0 +1,821 @@
+format 66
+"miCrm" // src::miCrm
+  revision 1
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "miCrm"
+  java_package "miCrm"
+  classview 128667 "miCrm"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 131995 "Conf"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      attribute 139035 "DEBUG_MODE"
+	class_attribute const_attribute public explicit_type "Boolean"
+	init_value "=  false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139163 "MAX_LEN_DESC"
+	class_attribute const_attribute public explicit_type "Integer"
+	init_value "=  600"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139291 "MIN_LEN_RESOLUCION"
+	class_attribute const_attribute public explicit_type "Integer"
+	init_value "=  10"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 129435 // ESTADO_NUEVO_CONTACTO (<unidirectional association>)
+	relation 129435 --->
+	  a role_name "ESTADO_NUEVO_CONTACTO" init_value "=  Fachada.buscarEstadoPorNombre(\"Pendiente\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129435 // ESTADO_NUEVO_CONTACTO (<unidirectional association>)
+	  b parent class_ref 128539 // EstadoContacto
+      end
+
+      classrelation 129563 // ESTADO_ASIGNADO (<unidirectional association>)
+	relation 129563 --->
+	  a role_name "ESTADO_ASIGNADO" init_value "=  Fachada.buscarEstadoPorNombre(\"Asignado\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129563 // ESTADO_ASIGNADO (<unidirectional association>)
+	  b parent class_ref 128539 // EstadoContacto
+      end
+
+      classrelation 129691 // ESTADO_FINALIZADO (<unidirectional association>)
+	relation 129691 --->
+	  a role_name "ESTADO_FINALIZADO" init_value "=  Fachada.buscarEstadoPorNombre(\"Finalizado\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129691 // ESTADO_FINALIZADO (<unidirectional association>)
+	  b parent class_ref 128539 // EstadoContacto
+      end
+
+      classrelation 129819 // ESTADO_EN_PROCESO (<unidirectional association>)
+	relation 129819 --->
+	  a role_name "ESTADO_EN_PROCESO" init_value "=  Fachada.buscarEstadoPorNombre(\"En Proceso\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129819 // ESTADO_EN_PROCESO (<unidirectional association>)
+	  b parent class_ref 128539 // EstadoContacto
+      end
+
+      classrelation 129947 // ESTADO_EN_VISITA (<unidirectional association>)
+	relation 129947 --->
+	  a role_name "ESTADO_EN_VISITA" init_value "=  Fachada.buscarEstadoPorNombre(\"En Visita\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129947 // ESTADO_EN_VISITA (<unidirectional association>)
+	  b parent class_ref 128539 // EstadoContacto
+      end
+
+      classrelation 130075 // TECNICO_POR_DEFECTO (<unidirectional association>)
+	relation 130075 --->
+	  a role_name "TECNICO_POR_DEFECTO" init_value "=  null" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130075 // TECNICO_POR_DEFECTO (<unidirectional association>)
+	  b parent class_ref 128923 // Usuario
+      end
+
+      classrelation 130203 // PRIORIDAD_POR_DEFECTO (<unidirectional association>)
+	relation 130203 --->
+	  a role_name "PRIORIDAD_POR_DEFECTO" init_value "=  null" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130203 // PRIORIDAD_POR_DEFECTO (<unidirectional association>)
+	  b parent class_ref 128795 // Prioridad
+      end
+
+      classrelation 130331 // PRIORIDAD_BLOQUENATE (<unidirectional association>)
+	relation 130331 --->
+	  a role_name "PRIORIDAD_BLOQUENATE" init_value "=  Fachada.buscarPrioridadPorNombre(\"Bloqueante\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130331 // PRIORIDAD_BLOQUENATE (<unidirectional association>)
+	  b parent class_ref 128795 // Prioridad
+      end
+
+      classrelation 130459 // GRUPO_TELEFONISTA (<unidirectional association>)
+	relation 130459 --->
+	  a role_name "GRUPO_TELEFONISTA" init_value "=  Fachada.buscarGrupoPorNombre(\"Telefonista\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130459 // GRUPO_TELEFONISTA (<unidirectional association>)
+	  b parent class_ref 129051 // Grupo
+      end
+
+      classrelation 130587 // GRUPO_ADMIN (<unidirectional association>)
+	relation 130587 --->
+	  a role_name "GRUPO_ADMIN" init_value "=  Fachada.buscarGrupoPorNombre(\"Administrador\")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130587 // GRUPO_ADMIN (<unidirectional association>)
+	  b parent class_ref 129051 // Grupo
+      end
+
+      classrelation 130715 // GRUPO_TECNICO (<unidirectional association>)
+	relation 130715 --->
+	  a role_name "GRUPO_TECNICO" init_value "=  Fachada.buscarGrupoPorNombre(\"Técnico \")" class_relation const_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130715 // GRUPO_TECNICO (<unidirectional association>)
+	  b parent class_ref 129051 // Grupo
+      end
+
+      classrelation 130843 // usuarioLogueado (<unidirectional association>)
+	relation 130843 --->
+	  a role_name "usuarioLogueado" init_value "=  null" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130843 // usuarioLogueado (<unidirectional association>)
+	  b parent class_ref 128923 // Usuario
+      end
+
+      operation 159643 "getUsuarioLogueado"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return the usuarioLogueado"
+      end
+
+      operation 159771 "setUsuarioLogueado"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "aUsuarioLogueado" type class_ref 128923 // Usuario
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param aUsuarioLogueado the usuarioLogueado to set"
+      end
+    end
+
+    class 132123 "Fachada"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 159899 "buscarArticuloPorId"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160027 "buscarClientePorApellidoNombre"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 2
+	  param in name "nombre" explicit_type "String"
+	  param in name "apellido" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160155 "buscarClientePorId"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160283 "buscarClientePorNombre"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160411 "buscarContactoPorId"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160539 "buscarGrupoPorId"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160667 "buscarGrupoPorNombre"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160795 "buscarPrioridadPorId"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160923 "buscarPrioridadPorNombre"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161051 "buscarUsuarioPorId"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161179 "listarArticulos"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161307 "listarClientes"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161435 "listarContactos"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161563 "listarContactosPorFechaSinAsignar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161691 "listarContactosPorTecnicoPorEstado"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 2
+	  param inout name "tecnico" type class_ref 128923 // Usuario
+	  param inout name "estado" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161819 "listarContactosPorTecnicoSinFinalizar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "tecnico" type class_ref 128923 // Usuario
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161947 "listarContactosProblemasSimilares"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param in name "text" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162075 "listarContactosRangoFecha"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 2
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162203 "listarEstados"
+	class_operation public return_type class_ref 128539 // EstadoContacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162331 "listarGrupos"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162459 "listarPrioridades"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162587 "listarRankingTecnicos"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 3
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	  param inout name "estado" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Hashtable<${type}, Integer> ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162715 "listarTecnicos"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162843 "listarTelefonistas"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162971 "listarTipoContactos"
+	class_operation public return_type class_ref 128667 // TipoContacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163099 "listarUsuarios"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163227 "loginUsuario"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 2
+	  param in name "usuario" explicit_type "String"
+	  param in name "password" explicit_type "char"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1}[] ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163355 "validarComponente"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "unArticulo" type class_ref 128027 // Articulo
+	  param inout name "unComponente" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163483 "buscarEstadoPorNombre"
+	class_operation package return_type class_ref 128539 // EstadoContacto
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 130971 // fachada (<unidirectional association>)
+	relation 130971 --->
+	  a role_name "fachada" init_value "=  null" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130971 // fachada (<unidirectional association>)
+	  b parent class_ref 132123 // Fachada
+      end
+
+      operation 163611 "Fachada"
+	private explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163739 "getInstance"
+	public explicit_return_type "Fachada"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 138779 // <dependency>
+	relation 138779 -_->
+	  a default
+	    classrelation_ref 138779 // <dependency>
+	  b parent class_ref 130459 // Articulos
+      end
+
+      classrelation 138907 // <dependency>
+	relation 138907 -_->
+	  a default
+	    classrelation_ref 138907 // <dependency>
+	  b parent class_ref 130587 // Clientes
+      end
+
+      classrelation 139035 // <dependency>
+	relation 139035 -_->
+	  a default
+	    classrelation_ref 139035 // <dependency>
+	  b parent class_ref 130715 // Contactos
+      end
+
+      classrelation 139163 // <dependency>
+	relation 139163 -_->
+	  a default
+	    classrelation_ref 139163 // <dependency>
+	  b parent class_ref 130971 // Grupos
+      end
+
+      classrelation 139291 // <dependency>
+	relation 139291 -_->
+	  a default
+	    classrelation_ref 139291 // <dependency>
+	  b parent class_ref 131355 // Usuarios
+      end
+
+      classrelation 139419 // <dependency>
+	relation 139419 -_->
+	  a default
+	    classrelation_ref 139419 // <dependency>
+	  b parent class_ref 130843 // Estados
+      end
+
+      classrelation 139547 // <dependency>
+	relation 139547 -_->
+	  a default
+	    classrelation_ref 139547 // <dependency>
+	  b parent class_ref 131099 // Prioridades
+      end
+
+      classrelation 139675 // <dependency>
+	relation 139675 -_->
+	  a default
+	    classrelation_ref 139675 // <dependency>
+	  b parent class_ref 131227 // TiposContactos
+      end
+    end
+
+    class 132251 "Inicio"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 163867 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "args" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 136603 // <dependency>
+	relation 136603 -_->
+	  a default
+	    classrelation_ref 136603 // <dependency>
+	  b parent class_ref 133147 // Login
+      end
+    end
+  end
+
+  deploymentview 128539 "miCrm"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 131867 "Conf"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import lib.model.miCRM.EstadoContacto;
+import lib.model.miCRM.Grupo;
+import lib.model.miCRM.Prioridad;
+import lib.model.miCRM.Usuario;
+${definition}"
+      associated_classes
+	class_ref 131995 // Conf
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 131995 "Fachada"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import lib.model.miCRM.*;
+import lib.model.miCRM.Usuario;
+import lib.model.servicios.*;
+${definition}"
+      associated_classes
+	class_ref 132123 // Fachada
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 132123 "Inicio"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import lib.model.miCRM.*;
+import miCrm.vista.*;
+${definition}"
+      associated_classes
+	class_ref 132251 // Inicio
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+  end
+
+  package_ref 129179 // resources
+
+  package_ref 129435 // vista
+
+  simplerelation 128027
+    -_->
+      on 
+      package_ref 129435 // vista
+  end
+
+  simplerelation 128155
+    -_->
+      on 
+      package_ref 129435 // vista
+  end
+
+  simplerelation 128411
+    -_->
+      on class_ref 133147 // Login
+  end
+
+  simplerelation 128539
+    -_->
+      on class_ref 133147 // Login
+  end
+end

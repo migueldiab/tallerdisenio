@@ -1,0 +1,1419 @@
+format 66
+"vista" // src::miCrm::vista
+  revision 1
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "miCrm/vista"
+  java_package "miCrm.vista"
+  classview 128923 "vista"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 133147 "Login"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 131355 // <generalisation>
+	relation 131355 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131355 // <generalisation>
+	  b parent class_ref 133275 // JFrame
+      end
+
+      operation 164507 "Login"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form Login "
+      end
+
+      operation 164635 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 164763 "bEntrarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 164891 "tUsuarioActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bEntrarActionPerformed"
+      end
+
+      operation 165019 "bCerrarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_tUsuarioActionPerformed"
+      end
+
+      classrelation 131483 // StatusBar (<unidirectional association>)
+	relation 131483 --->
+	  a role_name "StatusBar" private
+	    comment "GEN-LAST:event_bCerrarActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 131483 // StatusBar (<unidirectional association>)
+	  b parent class_ref 132635 // StatusBar
+      end
+
+      attribute 139803 "bCerrar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139931 "bEntrar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140059 "lBgImage"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140187 "lPassword"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140315 "lUsuario"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140443 "pImagen"
+	private explicit_type "javax.swing.JPanel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140571 "tPassword"
+	private explicit_type "javax.swing.JPasswordField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140699 "tUsuario"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      simplerelation 128667
+	-_->
+	  on 
+	  package_ref 129051 // miCrm
+      end
+
+      classrelation 136731 // <dependency>
+	relation 136731 -_->
+	  a default
+	    classrelation_ref 136731 // <dependency>
+	  b parent class_ref 133659 // Principal
+      end
+    end
+
+    class 133403 "ModeloArbol"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      classrelation 131611 // <realization>
+	relation 131611 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131611 // <realization>
+	  b parent class_ref 133531 // TreeModel
+      end
+
+      classrelation 131739 // raiz (<unidirectional association>)
+	relation 131739 --->
+	  a role_name "raiz" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 131739 // raiz (<unidirectional association>)
+	  b parent class_ref 128027 // Articulo
+      end
+
+      operation 165147 "ModeloArbol"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "r" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165275 "eliminar"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unComponente" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165403 "getChild"
+	public explicit_return_type "Object"
+	nparams 2
+	  param inout name "nodo" explicit_type "Object"
+	  param in name "posicion" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165531 "getChildCount"
+	public explicit_return_type "int"
+	nparams 1
+	  param inout name "n" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165659 "getIndexOfChild"
+	public explicit_return_type "int"
+	nparams 2
+	  param inout name "p" explicit_type "Object"
+	  param inout name "hijo" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165787 "getRoot"
+	public explicit_return_type "Object"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 165915 "isLeaf"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "n" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166043 "removeTreeModelListener"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "arg0" explicit_type "TreeModelListener"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166171 "valueForPathChanged"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "arg0" explicit_type "TreePath"
+	  param inout name "arg1" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166299 "addTreeModelListener"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "arg0" explicit_type "TreeModelListener"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 133659 "Principal"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 131867 // <generalisation>
+	relation 131867 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131867 // <generalisation>
+	  b parent class_ref 133275 // JFrame
+      end
+
+      operation 166427 "Principal"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form Principal "
+      end
+
+      operation 166555 "articulos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166683 "atenderLlamadas"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166811 "clientes"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 166939 "consolaTecnicos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 167067 "controlDeAsignaciones"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 167195 "grupos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 167323 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 167451 "llamadasPorFecha"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 167579 "mSalirMouseClicked"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 167707 "mUsuariosActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mSalirMouseClicked"
+      end
+
+      operation 167835 "mNuevoContactoActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mUsuariosActionPerformed"
+      end
+
+      operation 167963 "mGruposActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mNuevoContactoActionPerformed"
+      end
+
+      operation 168091 "mClientesActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mGruposActionPerformed"
+      end
+
+      operation 168219 "mArticulosActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mClientesActionPerformed"
+      end
+
+      operation 168347 "mConsolaTrabajosActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mArticulosActionPerformed"
+      end
+
+      operation 168475 "mSalirActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mConsolaTrabajosActionPerformed"
+      end
+
+      operation 168603 "jMenuItem1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mSalirActionPerformed"
+      end
+
+      operation 168731 "jButton1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jMenuItem1ActionPerformed"
+      end
+
+      operation 168859 "jButton2ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton1ActionPerformed"
+      end
+
+      operation 168987 "jButton3ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton2ActionPerformed"
+      end
+
+      operation 169115 "jButton4ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton3ActionPerformed"
+      end
+
+      operation 169243 "jButton5ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton4ActionPerformed"
+      end
+
+      operation 169371 "jButton6ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton5ActionPerformed"
+      end
+
+      operation 169499 "jButton8ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton6ActionPerformed"
+      end
+
+      operation 169627 "mControlAsignacionesActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton8ActionPerformed"
+      end
+
+      operation 169755 "mLlamadasFechaActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mControlAsignacionesActionPerformed"
+      end
+
+      operation 169883 "mTrabajosPendientesActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mLlamadasFechaActionPerformed"
+      end
+
+      operation 170011 "mRankingTecnicosActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mTrabajosPendientesActionPerformed"
+      end
+
+      operation 170139 "mPrioridadesActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_mRankingTecnicosActionPerformed"
+      end
+
+      attribute 140827 "jButton1"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_mPrioridadesActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 140955 "jButton2"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141083 "jButton3"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141211 "jButton4"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141339 "jButton5"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141467 "jButton6"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141595 "jButton8"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141723 "jInternalFrame1"
+	private explicit_type "javax.swing.JInternalFrame"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141851 "jLabel1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141979 "jLabel2"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142107 "jLabel3"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142235 "jMenuBar1"
+	private explicit_type "javax.swing.JMenuBar"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142363 "jMenuItem1"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142491 "jMenuItem2"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142619 "jPanel1"
+	private explicit_type "javax.swing.JPanel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142747 "jTextField1"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142875 "mAdministracion"
+	private explicit_type "javax.swing.JMenu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143003 "mArchivo"
+	private explicit_type "javax.swing.JMenu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143131 "mArticulos"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143259 "mClientes"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143387 "mConsolaTrabajos"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143515 "mContactos"
+	private explicit_type "javax.swing.JMenu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143643 "mControlAsignaciones"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143771 "mGrupos"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143899 "mListados"
+	private explicit_type "javax.swing.JMenu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144027 "mLlamadasFecha"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144155 "mNuevoContacto"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144283 "mOperaciones"
+	private explicit_type "javax.swing.JMenu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144411 "mPrioridades"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144539 "mRankingTecnicos"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144667 "mSalir"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144795 "mTrabajosPendientes"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144923 "mUsuarios"
+	private explicit_type "javax.swing.JMenuItem"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 131995 // statusBar1 (<unidirectional association>)
+	relation 131995 --->
+	  a role_name "statusBar1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 131995 // statusBar1 (<unidirectional association>)
+	  b parent class_ref 132635 // StatusBar
+      end
+
+      operation 170267 "prioridades"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+
+      operation 170395 "rankingTecnicos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration"
+      end
+
+      operation 170523 "trabajosPendientes"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration"
+      end
+
+      operation 170651 "usuarios"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration"
+      end
+
+      classrelation 136859 // <dependency>
+	relation 136859 -_->
+	  a default
+	    classrelation_ref 136859 // <dependency>
+	  b parent class_ref 133787 // Articulos
+      end
+
+      classrelation 136987 // <dependency>
+	relation 136987 -_->
+	  a default
+	    classrelation_ref 136987 // <dependency>
+	  b parent class_ref 134043 // Clientes
+      end
+
+      classrelation 137115 // <dependency>
+	relation 137115 -_->
+	  a default
+	    classrelation_ref 137115 // <dependency>
+	  b parent class_ref 134171 // Grupos
+      end
+
+      classrelation 137243 // <dependency>
+	relation 137243 -_->
+	  a default
+	    classrelation_ref 137243 // <dependency>
+	  b parent class_ref 134299 // Prioridades
+      end
+
+      classrelation 137371 // <dependency>
+	relation 137371 -_->
+	  a default
+	    classrelation_ref 137371 // <dependency>
+	  b parent class_ref 134427 // Usuarios
+      end
+
+      classrelation 137499 // <dependency>
+	relation 137499 -_->
+	  a default
+	    classrelation_ref 137499 // <dependency>
+	  b parent class_ref 134555 // LlamadasPorFecha
+      end
+
+      classrelation 137627 // <dependency>
+	relation 137627 -_->
+	  a default
+	    classrelation_ref 137627 // <dependency>
+	  b parent class_ref 134683 // RankingTecnicos
+      end
+
+      classrelation 137755 // <dependency>
+	relation 137755 -_->
+	  a default
+	    classrelation_ref 137755 // <dependency>
+	  b parent class_ref 134811 // TrabajosPendientes
+      end
+
+      classrelation 137883 // <dependency>
+	relation 137883 -_->
+	  a default
+	    classrelation_ref 137883 // <dependency>
+	  b parent class_ref 134939 // BuscarSoluciones
+      end
+
+      classrelation 138011 // <dependency>
+	relation 138011 -_->
+	  a default
+	    classrelation_ref 138011 // <dependency>
+	  b parent class_ref 135067 // ConsolaTecnico
+      end
+
+      classrelation 138139 // <dependency>
+	relation 138139 -_->
+	  a default
+	    classrelation_ref 138139 // <dependency>
+	  b parent class_ref 135195 // ControlAsignaciones
+      end
+
+      classrelation 138267 // <dependency>
+	relation 138267 -_->
+	  a default
+	    classrelation_ref 138267 // <dependency>
+	  b parent class_ref 135323 // RegistroContactos
+      end
+
+      classrelation 138651 // <dependency>
+	relation 138651 -_->
+	  a default
+	    classrelation_ref 138651 // <dependency>
+	  b parent class_ref 132123 // Fachada
+      end
+    end
+  end
+
+  deploymentview 128795 "vista"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 132635 "Login"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import lib.model.miCRM.Usuario;
+import miCrm.Conf;
+import miCrm.Fachada;
+import miCrm.resources.widget.StatusBar.MSG;
+import miCrm.resources.widget.Ventanas;
+${definition}"
+      associated_classes
+	class_ref 133147 // Login
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+Login.java
+
+Created on 20/02/2009, 02:31:18 PM"
+    end
+
+    artifact 132763 "ModeloArbol"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+import lib.model.miCRM.Articulo;
+${definition}"
+      associated_classes
+	class_ref 133403 // ModeloArbol
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 132891 "Principal"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import javax.swing.JOptionPane;
+import miCrm.Conf;
+import miCrm.resources.widget.StatusBar.MSG;
+import miCrm.resources.widget.Ventanas;
+import miCrm.vista.sistema.RegistroContactos;
+import miCrm.vista.admin.Usuarios;
+import miCrm.vista.admin.Clientes;
+import miCrm.vista.admin.Grupos;
+import miCrm.vista.admin.Articulos;
+import miCrm.vista.admin.Prioridades;
+import miCrm.vista.listados.LlamadasPorFecha;
+import miCrm.vista.listados.RankingTecnicos;
+import miCrm.vista.listados.TrabajosPendientes;
+import miCrm.vista.sistema.ConsolaTecnico;
+import miCrm.vista.sistema.ControlAsignaciones;
+${definition}"
+      associated_classes
+	class_ref 133659 // Principal
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+Principal.java
+
+Created on 20/02/2009, 02:28:27 PM"
+    end
+  end
+
+  package_ref 129819 // admin
+
+  package_ref 129947 // listados
+
+  package_ref 130075 // sistema
+
+  simplerelation 128283
+    -_->
+      on 
+      package_ref 129051 // miCrm
+  end
+end

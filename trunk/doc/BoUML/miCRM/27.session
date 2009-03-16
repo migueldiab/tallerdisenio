@@ -1,0 +1,32 @@
+window_sizes 1680 978 393 1182 700 82
+diagrams
+  classdiagram_ref 128027 // Diagrama de Paquetes
+    936 609 100 17 0 0
+  classdiagram_ref 129179 // Diagrama de Paquetes Simple
+    1020 657 100 18 0 0
+  classdiagram_ref 129307 // Diagrama de clases conceptual
+    1020 657 100 18 0 0
+  active  classdiagram_ref 129435 // Entidades
+    1277 822 100 17 60 19
+end
+show_stereotypes
+selected class_ref 135323 // RegistroContactos
+open
+  classview_ref 128027 // miCRM
+  
+  package_ref 128539 // persistencia
+  classview_ref 128283 // servicios
+  
+  package_ref 128795 // utilities
+  classview_ref 128667 // miCrm
+  
+  package_ref 129307 // widget
+  classview_ref 128923 // vista
+  classview_ref 129179 // admin
+  classview_ref 129307 // listados
+  classview_ref 129435 // sistema
+  
+  package_ref 128923 // unknown
+  classview_ref 129563 // Diagrama de Paquetes
+end
+end

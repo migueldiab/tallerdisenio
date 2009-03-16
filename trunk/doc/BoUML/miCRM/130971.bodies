@@ -1,0 +1,7 @@
+class Grupos
+!!!154011.java!!!	listar() : ArrayList
+    return pGrupo.listar();
+!!!154139.java!!!	buscarPorId(inout id : Integer) : Grupo
+    return pGrupo.buscarPorId(id);
+!!!154267.java!!!	buscarPorNombre(in nombre : String) : Grupo
+    return pGrupo.buscarPorNombre(nombre);

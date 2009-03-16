@@ -1,0 +1,9 @@
+class Clientes
+!!!151451.java!!!	buscarPorApellidoNombre(in nombre : String, in apellido : String) : Cliente
+    return pCliente.buscarPorApellidoNombre(nombre, apellido);
+!!!151579.java!!!	listar() : Cliente
+    return pCliente.listar();
+!!!151707.java!!!	buscarPorId(inout id : Integer) : Cliente
+    return pCliente.buscarPorId(id);
+!!!151835.java!!!	buscarPorNombre(in nombre : String) : ArrayList
+    return pCliente.buscarPorNombre(nombre);

@@ -1,0 +1,1798 @@
+format 66
+"persistencia" // src::lib::model::persistencia
+  revision 1
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "lib/model/persistencia"
+  java_package "lib.model.persistencia"
+  classview 128155 "persistencia"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 129179 "Access"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      operation 142875 "conectar"
+	class_operation public explicit_return_type "Connection"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143003 "ultimoId"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "con" explicit_type "Connection"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143131 "desconectar"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "con" explicit_type "Connection"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 129307 "pArticulo"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 131611 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"articulo\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 131739 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 131867 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 131995 "COSTO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"costo\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 143259 "toArticulo"
+	class_operation private return_type class_ref 128027 // Articulo
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Articulo
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 143387 "listar"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143515 "buscarPorId"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143643 "buscarPorNombre"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 143771 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unArticulo" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143899 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unArticulo" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134299 // <dependency>
+	relation 134299 -_->
+	  a default
+	    classrelation_ref 134299 // <dependency>
+	  b parent class_ref 130459 // Articulos
+      end
+
+      classrelation 135451 // <dependency>
+	relation 135451 -_->
+	  a default
+	    classrelation_ref 135451 // <dependency>
+	  b parent class_ref 129563 // pComponente
+      end
+    end
+
+    class 129435 "pCliente"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 132123 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"cliente\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 132251 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 132379 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el Nombre
+"
+      end
+
+      attribute 132507 "APELLIDO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"apellido\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 132635 "TELEFONO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"telefono\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 132763 "DIRECCION"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"direccion\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144027 "buscarPorApellidoNombre"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 2
+	  param in name "nombre" explicit_type "String"
+	  param in name "apellido" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144155 "toCliente"
+	class_operation private return_type class_ref 128283 // Cliente
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Cliente
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 144283 "listar"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 144411 "buscarPorId"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144539 "buscarPorNombre"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 144667 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unCliente" type class_ref 128283 // Cliente
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144795 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unCliente" type class_ref 128283 // Cliente
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 129563 "pComponente"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 132891 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"compuestos\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 133019 "PADRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_articulo\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133147 "COMPONENTE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_componente\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133275 "CANTIDAD"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"cantidad\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144923 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "unComponente" type class_ref 128027 // Articulo
+	  param inout name "padre" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145051 "guardar"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "unComponente" type class_ref 128027 // Articulo
+	  param inout name "padre" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145179 "toComponente"
+	class_operation private return_type class_ref 128027 // Articulo
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Componente
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 145307 "buscarPorArticulo"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param inout name "unArticulo" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 129691 "pContacto"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 133403 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133531 "TABLA_ARTICULOS"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"articulo_contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133659 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 133787 "RECIBIDO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"recibido_el\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133915 "ASIGNADO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"asignado_el\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134043 "NUMERO_ENTRANTE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"numero_entrante\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134171 "DESC"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"descripcion\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134299 "RESOLUCION"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"resolucion\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134427 "ESTADO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_estado_contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134555 "TIPO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_tipo_contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134683 "CLIENTE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_cliente\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134811 "PRIORIDAD"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_prioridad\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134939 "TECNICO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_tecnico\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135067 "TELEFONISTA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_telefonista\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135195 "TIEMPO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"tiempo_resolucion\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135323 "ARTICULO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"articulo_id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135451 "CONTACTO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"contacto_id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135579 "CANTIDAD"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"cantidad\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 145435 "listarContactosRangoFecha"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 2
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145563 "listarPorFechaPorEstado"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "estado" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145691 "listarPorFechaSinAsignar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145819 "listarPorFechaEstadoDistintoDe"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "estado" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145947 "listarRankingTecnicosPorFechaPorEstado"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 3
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	  param inout name "estado" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Hashtable<${type}, Integer> ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146075 "listarArticulosPorContacto"
+	class_operation private return_type class_ref 128155 // ArticulosVendidos
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146203 "toArticuloVendido"
+	class_operation private return_type class_ref 128155 // ArticulosVendidos
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146331 "toContacto"
+	class_operation private return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Contacto
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 146459 "listar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146587 "buscarPorId"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146715 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unContacto" type class_ref 128411 // Contacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146843 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unContacto" type class_ref 128411 // Contacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134171 // <dependency>
+	relation 134171 -_->
+	  a default
+	    classrelation_ref 134171 // <dependency>
+	  b parent class_ref 129179 // Access
+      end
+    end
+
+    class 129819 "pEstadoContacto"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 135707 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"estado_contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135835 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 135963 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el Nombre
+"
+      end
+
+      operation 146971 "toEstadoContacto"
+	class_operation private return_type class_ref 128539 // EstadoContacto
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo EstadoContacto
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 147099 "listar"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 147227 "buscarPorId"
+	class_operation public return_type class_ref 128539 // EstadoContacto
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 147355 "buscarPorNombre"
+	class_operation public return_type class_ref 128539 // EstadoContacto
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 147483 "guardar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unEstadoContacto" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 147611 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unEstadoContacto" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 129947 "pGrupo"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 136091 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"grupo\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136219 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 136347 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el Nombre
+"
+      end
+
+      operation 147739 "toGrupo"
+	class_operation private return_type class_ref 129051 // Grupo
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Grupo
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 147867 "listar"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 147995 "buscarPorId"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148123 "buscarPorNombre"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 148251 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unGrupo" type class_ref 129051 // Grupo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148379 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unGrupo" type class_ref 129051 // Grupo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 130075 "pPrioridad"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 136475 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"prioridad\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136603 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 136731 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el Nombre
+"
+      end
+
+      operation 148507 "toPrioridad"
+	class_operation private return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo Prioridad
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 148635 "listar"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 148763 "buscarPorId"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148891 "buscarPorNombre"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 149019 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unPrioridad" type class_ref 128795 // Prioridad
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149147 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unPrioridad" type class_ref 128795 // Prioridad
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 130203 "pTipoContacto"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 136859 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"tipo_contacto\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136987 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el ID
+"
+      end
+
+      attribute 137115 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Nombre de campo en la base de datos para el Nombre
+"
+      end
+
+      operation 149275 "toTipoContacto"
+	class_operation private return_type class_ref 128667 // TipoContacto
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Convierte un ResultSet específico en un objeto de tipo TipoContacto
+en base a los campos definidos
+
+@parm rs ResultSet definido"
+      end
+
+      operation 149403 "listar"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 149531 "buscarPorId"
+	class_operation public return_type class_ref 128667 // TipoContacto
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149659 "buscarPorNombre"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 149787 "guardar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unTipoContacto" type class_ref 128667 // TipoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149915 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unTipoContacto" type class_ref 128667 // TipoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 130331 "pUsuario"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Miguel A. Diab"
+      attribute 137243 "TABLA"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"usuario\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137371 "ID"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137499 "PASSWORD"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"password\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137627 "NOMBRE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"nombre\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137755 "GRUPO"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "=  \"id_grupo\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 150043 "toUsuario"
+	class_operation private return_type class_ref 128923 // Usuario
+	nparams 1
+	  param inout name "rs" explicit_type "ResultSet"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150171 "listar"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 150299 "buscarPorId"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150427 "buscarPorNombre"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+      end
+
+      operation 150555 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unUsuario" type class_ref 128923 // Usuario
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150683 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unUsuario" type class_ref 128923 // Usuario
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128155 "persistencia"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 129179 "Access"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import miCrm.Conf;
+${definition}"
+      associated_classes
+	class_ref 129179 // Access
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129307 "pArticulo"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129307 // pArticulo
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129435 "pCliente"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129435 // pCliente
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129563 "pComponente"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129563 // pComponente
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129691 "pContacto"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129691 // pContacto
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129819 "pEstadoContacto"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129819 // pEstadoContacto
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 129947 "pGrupo"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 129947 // pGrupo
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130075 "pPrioridad"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 130075 // pPrioridad
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130203 "pTipoContacto"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 130203 // pTipoContacto
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130331 "pUsuario"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.*;
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+${definition}"
+      associated_classes
+	class_ref 130331 // pUsuario
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+  end
+end

@@ -1,0 +1,1107 @@
+format 66
+"listados" // src::miCrm::vista::listados
+  revision 2
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "miCrm/vista/listados"
+  java_package "miCrm.vista.listados"
+  classview 129307 "listados"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 134555 "LlamadasPorFecha"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 132891 // <generalisation>
+	relation 132891 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132891 // <generalisation>
+	  b parent class_ref 133915 // JDialog
+      end
+
+      attribute 157083 "ventanaPadre"
+	private explicit_type "JFrame"
+	init_value "=  null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 179867 "LlamadasPorFecha"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "JFrame"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form RegistroContactos "
+      end
+
+      operation 179995 "cargarDatos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 180123 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 180251 "limpiarCampos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 180379 "mostrarReporte"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 180507 "tFechaActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 180635 "bGuardarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_tFechaActionPerformed"
+      end
+
+      operation 180763 "bCancelarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bGuardarActionPerformed"
+      end
+
+      operation 180891 "tFecha1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bCancelarActionPerformed"
+      end
+
+      operation 181019 "bImprimirActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_tFecha1ActionPerformed"
+      end
+
+      operation 181147 "bExportarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bImprimirActionPerformed"
+      end
+
+      attribute 157211 "bCancelar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_bExportarActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 157339 "bExportar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157467 "bGuardar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157595 "bImprimir"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157723 "jScrollPane1"
+	private explicit_type "javax.swing.JScrollPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157851 "jTextArea1"
+	private explicit_type "javax.swing.JTextArea"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157979 "lFecha"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158107 "lFecha1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158235 "lIcon"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158363 "pAsignacionContacto"
+	private explicit_type "javax.swing.JPanel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158491 "pControlAsignaciones"
+	private explicit_type "javax.swing.JSplitPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158619 "tFecha"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 158747 "tFecha1"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 181275 "validarDatos"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+
+      classrelation 141083 // <dependency>
+	relation 141083 -_->
+	  a default
+	    classrelation_ref 141083 // <dependency>
+	  b parent class_ref 132123 // Fachada
+      end
+    end
+
+    class 134683 "RankingTecnicos"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 133019 // <generalisation>
+	relation 133019 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 133019 // <generalisation>
+	  b parent class_ref 133915 // JDialog
+      end
+
+      attribute 158875 "ventanaPadre"
+	private explicit_type "JFrame"
+	init_value "=  null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 181403 "RankingTecnicos"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "JFrame"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form RegistroContactos "
+      end
+
+      operation 181531 "cargarDatos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 181659 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 181787 "limpiarCampos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 181915 "mostrarReporte"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 182043 "tFechaActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 182171 "bGuardarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_tFechaActionPerformed"
+      end
+
+      operation 182299 "bCancelarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bGuardarActionPerformed"
+      end
+
+      operation 182427 "tFecha1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bCancelarActionPerformed"
+      end
+
+      operation 182555 "bImprimirActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_tFecha1ActionPerformed"
+      end
+
+      operation 182683 "bExportarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bImprimirActionPerformed"
+      end
+
+      attribute 159003 "bCancelar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_bExportarActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 159131 "bExportar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159259 "bGuardar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159387 "bImprimir"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159515 "jScrollPane1"
+	private explicit_type "javax.swing.JScrollPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159643 "jTextArea1"
+	private explicit_type "javax.swing.JTextArea"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159771 "lFecha"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 159899 "lFecha1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 160027 "lIcon"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 160155 "pAsignacionContacto"
+	private explicit_type "javax.swing.JPanel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 160283 "pControlAsignaciones"
+	private explicit_type "javax.swing.JSplitPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 160411 "tFecha"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 160539 "tFecha1"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 182811 "validarDatos"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+
+      classrelation 141211 // <dependency>
+	relation 141211 -_->
+	  a default
+	    classrelation_ref 141211 // <dependency>
+	  b parent class_ref 132123 // Fachada
+      end
+    end
+
+    class 134811 "TrabajosPendientes"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 133147 // <generalisation>
+	relation 133147 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 133147 // <generalisation>
+	  b parent class_ref 133915 // JDialog
+      end
+
+      attribute 160667 "ventanaPadre"
+	private explicit_type "JFrame"
+	init_value "=  null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 182939 "TrabajosPendientes"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "JFrame"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form RegistroContactos "
+      end
+
+      operation 183067 "cargarDatos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 183195 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 183323 "limpiarCampos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 183451 "mostrarReporte"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 183579 "bGuardarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 183707 "bCancelarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bGuardarActionPerformed"
+      end
+
+      operation 183835 "bImprimirActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bCancelarActionPerformed"
+      end
+
+      operation 183963 "bExportarActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_bImprimirActionPerformed"
+      end
+
+      attribute 160795 "bCancelar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_bExportarActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 160923 "bExportar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161051 "bGuardar"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161179 "bImprimir"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161307 "cTecnico"
+	private explicit_type "javax.swing.JComboBox"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161435 "jScrollPane1"
+	private explicit_type "javax.swing.JScrollPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161563 "jTextArea1"
+	private explicit_type "javax.swing.JTextArea"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161691 "lIcon"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161819 "lTecnico"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 161947 "pAsignacionContacto"
+	private explicit_type "javax.swing.JPanel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 162075 "pControlAsignaciones"
+	private explicit_type "javax.swing.JSplitPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 184091 "validarDatos"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+
+      classrelation 141339 // <dependency>
+	relation 141339 -_->
+	  a default
+	    classrelation_ref 141339 // <dependency>
+	  b parent class_ref 132123 // Fachada
+      end
+    end
+  end
+
+  deploymentview 129051 "listados"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 133659 "LlamadasPorFecha"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import lib.model.miCRM.Contacto;
+import lib.utilities.DateUtilities;
+import lib.utilities.StringUtilities;
+import miCrm.Fachada;
+${definition}"
+      associated_classes
+	class_ref 134555 // LlamadasPorFecha
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+RegistroContactos.java
+
+Created on 21/02/2009, 04:16:20 PM"
+    end
+
+    artifact 133787 "RankingTecnicos"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import lib.model.miCRM.Usuario;
+import lib.utilities.DateUtilities;
+import lib.utilities.StringUtilities;
+import miCrm.Conf;
+import miCrm.Fachada;
+${definition}"
+      associated_classes
+	class_ref 134683 // RankingTecnicos
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+RegistroContactos.java
+
+Created on 21/02/2009, 04:16:20 PM"
+    end
+
+    artifact 133915 "TrabajosPendientes"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import lib.model.miCRM.Contacto;
+import lib.model.miCRM.Usuario;
+import lib.utilities.DateUtilities;
+import lib.utilities.StringUtilities;
+import miCrm.Conf;
+import miCrm.Fachada;
+${definition}"
+      associated_classes
+	class_ref 134811 // TrabajosPendientes
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+RegistroContactos.java
+
+Created on 21/02/2009, 04:16:20 PM"
+    end
+  end
+end

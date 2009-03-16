@@ -11,19 +11,33 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Observable;
 import lib.model.miCRM.*;
 import lib.model.persistencia.pContacto;
 import lib.utilities.OrdenadorHashtablePorValor;
 import miCrm.Conf;
+import miCrm.Inicio;
 
 /**
  *
  * @author Administrator
  */
 public class Contactos {
-
+  public static ModeloContactos modContactos = new ModeloContactos();
+  
   public static ArrayList<Contacto> listar() {
     return pContacto.listar();
+  }
+
+  public static ArrayList<Contacto> listarContactosPorCliente(Cliente cliente, Timestamp inicio, Timestamp fin) {
+    ArrayList<Contacto> contactos = pContacto.listarContactosRangoFecha(inicio, fin);
+    ArrayList<Contacto> contactosPorCliente = new ArrayList<Contacto>();
+    for (Contacto c : contactos) {
+      if (cliente.equals(c.getCliente())) {
+        contactosPorCliente.add(c);
+      }
+    }
+    return contactosPorCliente;
   }
 
   public static ArrayList<Contacto> listarContactosPorTecnicoPorEstado(Usuario tecnico, EstadoContacto estado) {
@@ -105,14 +119,22 @@ public class Contactos {
     throw new UnsupportedOperationException("Not supported yet.");
   }
   public static boolean borrar(Contacto unContacto) {
+    modContactos.cambioContactos();
     if (pContacto.borrar(unContacto)) {
       return true;
     }
     return false;
   }
-  public static Integer guardar(Contacto unContacto) {
-    return pContacto.guardar(unContacto);
+  public static boolean guardar(Contacto unContacto) {
+    Integer autoId = pContacto.guardar(unContacto);
+    if (autoId!=-1) {
+      unContacto.setId(autoId);
+      modContactos.cambioContactos();
+      return true;
+    }
+    return false;
   }
-
-
+  public static ModeloContactos getObserbavle() {
+    return modContactos;
+  }
 }

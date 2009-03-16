@@ -1,0 +1,311 @@
+class Usuarios
+!!!178203.java!!!	Usuarios(inout parent : JFrame)
+        super(parent);
+        initComponents();
+        cargarListas();
+!!!178331.java!!!	cargarDatos(inout u : Usuario) : void
+    tId.setText(u.getId().toString());
+    tNombre.setText(u.getNombre());
+    tPassword.setText("");
+    tRepetir.setText("");
+    cGrupo.setSelectedItem(u.getGrupo());
+!!!178459.java!!!	eliminarUsuario() : void
+    try {
+        Usuario unUsuario = Fachada.buscarUsuarioPorId(Integer.parseInt(tId.getText()));
+        if (unUsuario==null) {
+          throw new Exception("No existe usuario con ID = "+tId.getText());
+        }
+        if (!unUsuario.borrar()) {
+          throw new Exception("Falló borrarUsuario(unUsuario)");
+        }
+        else {
+          JOptionPane.showMessageDialog(
+              this,"El usuario "+unUsuario.toString()+" fue eliminado",
+              "Usuario Eliminado",
+              JOptionPane.INFORMATION_MESSAGE);
+          limpiarCampos();
+        }
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al eliminar el usuario. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al eliminar",
+              JOptionPane.ERROR_MESSAGE);
+      }
+!!!178587.java!!!	guardarUsuario() : void
+    try {
+        if (!validarCampos()) {
+          return;
+        }
+        Usuario u = new Usuario();
+        u.setNombre(tNombre.getText());
+        u.setPassword(tPassword.getPassword());
+        u.setGrupo((Grupo) cGrupo.getSelectedItem());
+        if (u.guardar()) {
+          JOptionPane.showMessageDialog(
+              this,"Usuario guardado",
+              "Usuario guardado",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+          throw new Exception("Error en Usuario.guardar()");
+        }
+        limpiarCampos();
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        JOptionPane.showMessageDialog(
+              this,"Error al guardar el usuario. Verifique los datos.\r\n"+
+              "Si el error persiste, por favor consulte con el administrador.\r\n"
+              +e.toString(),
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+      }
+!!!178715.java!!!	limpiarCampos() : void
+    tId.setText("");
+    tNombre.setText("");
+    tPassword.setText("");
+    tRepetir.setText("");
+    cGrupo.setSelectedItem(null);
+    cargarListas();
+!!!178843.java!!!	validarCampos() : boolean
+    if (tPassword.getPassword().length!=tRepetir.getPassword().length) {
+      JOptionPane.showMessageDialog(
+        this,"La constraseña no coincide con la verificación",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    for (int i = 0; i < tPassword.getPassword().length; i++) {
+      if (tPassword.getPassword()[i]!=tRepetir.getPassword()[i]) {
+        JOptionPane.showMessageDialog(
+          this,"La constraseña no coincide con la verificación",
+          "Error al guardar",
+          JOptionPane.ERROR_MESSAGE);
+        return false;
+      }
+    }
+    if (tPassword.getPassword().toString().length()<4) {
+      JOptionPane.showMessageDialog(
+        null,"La constraseña debe tener al menos 4 caracteres",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    if (cGrupo.getSelectedIndex()==-1) {
+      JOptionPane.showMessageDialog(
+        this,"Debe elegir un grupo para el usuario",
+        "Error al guardar",
+        JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    return true;
+!!!178971.java!!!	cargarListas() : void
+    listaUsuarios.clear();
+    for (Usuario u : Fachada.listarUsuarios()) {
+      listaUsuarios.addElement(u);
+    }
+    cGrupo.removeAllItems();
+    for (Grupo g : Fachada.listarGrupos()) {
+      cGrupo.addItem(g);
+    }
+!!!179099.java!!!	initComponents() : void
+
+    panelABM = new javax.swing.JSplitPane();
+    panelEditar = new javax.swing.JPanel();
+    lId = new javax.swing.JLabel();
+    tId = new javax.swing.JTextField();
+    tNombre = new javax.swing.JTextField();
+    lNombre = new javax.swing.JLabel();
+    lClave = new javax.swing.JLabel();
+    lRepetir = new javax.swing.JLabel();
+    lGrupo = new javax.swing.JLabel();
+    cGrupo = new javax.swing.JComboBox();
+    tRepetir = new javax.swing.JPasswordField();
+    tPassword = new javax.swing.JPasswordField();
+    bGuardar = new javax.swing.JButton();
+    bEliminar = new javax.swing.JButton();
+    bCerrar = new javax.swing.JButton();
+    bNuevo = new javax.swing.JButton();
+    lIcon1 = new javax.swing.JLabel();
+    panelListado = new javax.swing.JScrollPane();
+    listaUsuarios = new DefaultListModel();
+    jListado = new javax.swing.JList(listaUsuarios);
+
+    setTitle("Usuarios");
+
+    panelABM.setDividerLocation(150);
+    panelABM.setMinimumSize(new java.awt.Dimension(350, 162));
+    panelABM.setPreferredSize(new java.awt.Dimension(350, 322));
+
+    panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
+
+    lId.setText("Id");
+
+    tId.setEnabled(false);
+
+    lNombre.setText("Nombre");
+
+    lClave.setText("Clave");
+
+    lRepetir.setText("Repetir");
+
+    lGrupo.setText("Grupo");
+
+    bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_edit.png"))); // NOI18N
+    bGuardar.setText("Guardar");
+    bGuardar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bGuardarActionPerformed(evt);
+      }
+    });
+
+    bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_delete.png"))); // NOI18N
+    bEliminar.setText("Eliminar");
+    bEliminar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bEliminarActionPerformed(evt);
+      }
+    });
+
+    bCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/cancel.png"))); // NOI18N
+    bCerrar.setText("Cerrar");
+    bCerrar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bCerrarActionPerformed(evt);
+      }
+    });
+
+    bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_add.png"))); // NOI18N
+    bNuevo.setText("Nuevo");
+    bNuevo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bNuevoActionPerformed(evt);
+      }
+    });
+
+    lIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/53.png"))); // NOI18N
+
+    javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
+    panelEditar.setLayout(panelEditarLayout);
+    panelEditarLayout.setHorizontalGroup(
+      panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelEditarLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addGroup(panelEditarLayout.createSequentialGroup()
+                .addComponent(lId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(panelEditarLayout.createSequentialGroup()
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(lNombre)
+                  .addComponent(lGrupo)
+                  .addComponent(lRepetir)
+                  .addComponent(lClave))
+                .addGap(30, 30, 30)
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(tPassword)
+                  .addComponent(tRepetir)
+                  .addComponent(cGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+            .addComponent(lIcon1))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(bGuardar)
+              .addComponent(bNuevo))
+            .addGap(18, 18, 18)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(bEliminar)
+              .addComponent(bCerrar))))
+        .addContainerGap())
+    );
+
+    panelEditarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bCerrar, bEliminar, bGuardar, bNuevo});
+
+    panelEditarLayout.setVerticalGroup(
+      panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelEditarLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lId)
+              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lNombre)
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lClave)
+              .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lRepetir)
+              .addComponent(tRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lGrupo)
+              .addComponent(cGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addComponent(lIcon1))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bEliminar)
+          .addComponent(bNuevo))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bCerrar)
+          .addComponent(bGuardar))
+        .addGap(28, 28, 28))
+    );
+
+    panelABM.setRightComponent(panelEditar);
+
+    panelListado.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelListado.setPreferredSize(new java.awt.Dimension(80, 160));
+
+    jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jListado.setMinimumSize(new java.awt.Dimension(80, 160));
+    jListado.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jListadoValueChanged(evt);
+      }
+    });
+    panelListado.setViewportView(jListado);
+
+    panelABM.setLeftComponent(panelListado);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+    );
+
+    pack();
+!!!179227.java!!!	bGuardarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bGuardarActionPerformed
+      guardarUsuario();
+!!!179355.java!!!	bNuevoActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bNuevoActionPerformed
+      limpiarCampos();
+!!!179483.java!!!	bEliminarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bEliminarActionPerformed
+      eliminarUsuario();
+!!!179611.java!!!	jListadoValueChanged(inout evt : javax.swing.event.ListSelectionEvent) : void
+//GEN-FIRST:event_jListadoValueChanged
+      if (jListado.getSelectedIndex()!=-1) {
+        cargarDatos((Usuario) jListado.getSelectedValue());
+      }
+!!!179739.java!!!	bCerrarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bCerrarActionPerformed
+      this.dispose();

@@ -1,0 +1,17 @@
+class TiposContactos
+!!!154779.java!!!	listar() : TipoContacto
+    return pTipoContacto.listar();
+!!!154907.java!!!	buscarPorId(inout id : Integer) : TipoContacto
+    return pTipoContacto.buscarPorId(id);
+!!!155035.java!!!	buscarPorNombre(in nombre : String) : TipoContacto
+    throw new UnsupportedOperationException("Not supported yet.");
+!!!155163.java!!!	borrar(inout unTipoContacto : TipoContacto) : boolean
+    if (pTipoContacto.borrar(unTipoContacto)) {
+      return true;
+    }
+    return false;
+!!!155291.java!!!	guardar(inout unTipoContacto : TipoContacto) : boolean
+    if (pTipoContacto.guardar(unTipoContacto)) {
+      return true;
+    }
+    return false;

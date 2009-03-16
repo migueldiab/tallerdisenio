@@ -64,8 +64,9 @@
                               <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bEliminar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lCosto" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -73,31 +74,35 @@
                                   <Component id="lId" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tId" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="bCerrar" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tCosto" alignment="0" pref="116" max="32767" attributes="1"/>
-                                                  <Component id="tNombre" alignment="0" pref="116" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="bCerrar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tCosto" alignment="0" pref="116" max="32767" attributes="1"/>
+                                                      <Component id="tNombre" alignment="0" pref="116" max="32767" attributes="1"/>
+                                                  </Group>
+                                                  <Component id="sComponentes" min="-2" pref="160" max="-2" attributes="1"/>
                                               </Group>
-                                              <Component id="sComponentes" min="-2" pref="160" max="-2" attributes="1"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="bQuitar" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="bAgregar" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="bQuitar" min="-2" max="-2" attributes="0"/>
-                                              <Component id="bAgregar" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Component id="tId" min="-2" pref="116" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="sArticulos" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="lIcon1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -105,19 +110,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lCosto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lIcon1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -128,9 +138,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="bQuitar" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="sComponentes" alignment="0" pref="179" max="32767" attributes="1"/>
+                          <Component id="sComponentes" alignment="0" pref="178" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace pref="18" max="-2" attributes="0"/>
+                      <EmptySpace pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -162,6 +172,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bGuardar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/computer_edit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -170,6 +183,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bEliminar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/computer_delete.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
@@ -178,6 +194,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bCerrar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/cancel.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar"/>
               </Properties>
               <Events>
@@ -186,6 +205,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bNuevo">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/computer_add.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <Events>
@@ -217,7 +239,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bAgregar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/add.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAgregarActionPerformed"/>
@@ -225,7 +249,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bQuitar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/delete.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bQuitarActionPerformed"/>
@@ -251,6 +277,13 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="lIcon1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/22.png"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="panelLista">

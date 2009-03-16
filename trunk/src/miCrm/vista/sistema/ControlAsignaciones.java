@@ -16,6 +16,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -26,6 +28,7 @@ import lib.model.miCRM.EstadoContacto;
 import lib.model.miCRM.Prioridad;
 import lib.model.miCRM.TipoContacto;
 import lib.model.miCRM.Usuario;
+import lib.model.servicios.Contactos;
 import lib.utilities.DateUtilities;
 import miCrm.Conf;
 import miCrm.Fachada;
@@ -36,14 +39,17 @@ import miCrm.vista.admin.Clientes;
  *
  * @author Administrator
  */
-public class ControlAsignaciones extends javax.swing.JDialog {
+public class ControlAsignaciones extends javax.swing.JDialog implements Observer {
     private JFrame ventanaPadre = null;
     /** Creates new form RegistroContactos */
     public ControlAsignaciones(JFrame parent) {
       super(parent);
       this.ventanaPadre = parent;
+      Contactos.getObserbavle().addObserver(this);
+      
       initComponents();
       cargarListas();
+      cargarContactos();
       cargarCamposAutomaticos();
     }
 
@@ -76,6 +82,17 @@ public class ControlAsignaciones extends javax.swing.JDialog {
     cPrioridad.setSelectedItem(Conf.PRIORIDAD_POR_DEFECTO);
   }
 
+  private void cargarContactos() {
+    this.lista.clear();
+    for (Contacto u : Fachada.listarContactosPorFechaSinAsignar()) {
+      this.lista.addElement(u);
+    }
+
+    lContactos.updateUI();
+    lContactos.repaint();
+    
+  }
+
   private void cargarDatos() {
     try {
       Contacto c = (Contacto) lContactos.getSelectedValue();
@@ -105,10 +122,6 @@ public class ControlAsignaciones extends javax.swing.JDialog {
   }
 
   private void cargarListas() {
-    this.lista.clear();
-    for (Contacto u : Fachada.listarContactosPorFechaSinAsignar()) {
-      this.lista.addElement(u);
-    }
     cEstado.removeAllItems();
     for (EstadoContacto e : Fachada.listarEstados()) {
       if (e.equals(Conf.ESTADO_ASIGNADO))
@@ -139,7 +152,7 @@ public class ControlAsignaciones extends javax.swing.JDialog {
       c.setAsignadoEl(new Timestamp(new Date().getTime()));
       c.setPrioridad((Prioridad) cPrioridad.getSelectedItem());
       c.setTecnico((Usuario) cTecnico.getSelectedItem());
-      if (c.guardar()) {
+      if (Fachada.guardarContacto(c)) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
             "Contacto guardado",
@@ -614,4 +627,9 @@ public class ControlAsignaciones extends javax.swing.JDialog {
       return false;
     }
   }
+  @Override
+	public void update(Observable arg0, Object arg1) {
+		cargarContactos();
+    System.out.println("Observando");
+	}
 }

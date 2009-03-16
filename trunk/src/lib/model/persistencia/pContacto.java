@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import lib.model.miCRM.*;
+import lib.model.servicios.Contactos;
 
 /**
  *
@@ -374,7 +375,7 @@ public class pContacto {
         }
 
         stmt = con.prepareStatement("DELETE FROM "+pContacto.TABLA_ARTICULOS+" WHERE "+
-                pContacto.ARTICULO+"= ?");
+                pContacto.CONTACTO+"= ?");
         stmt.setInt(1, unContacto.getId());
         stmt.executeUpdate();
 

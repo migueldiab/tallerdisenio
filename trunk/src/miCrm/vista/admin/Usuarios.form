@@ -22,12 +22,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" min="-2" pref="550" max="-2" attributes="0"/>
+          <Component id="panelABM" min="-2" pref="500" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelABM" alignment="0" pref="322" max="32767" attributes="0"/>
+          <Component id="panelABM" alignment="0" pref="394" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -35,6 +35,12 @@
     <Container class="javax.swing.JSplitPane" name="panelABM">
       <Properties>
         <Property name="dividerLocation" type="int" value="150"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 162]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 322]"/>
+        </Property>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
@@ -57,36 +63,42 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="1">
-                                  <Component id="lId" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="tId" min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lGrupo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lRepetir" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lClave" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="lId" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="tId" min="-2" pref="116" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tPassword" max="32767" attributes="1"/>
-                                      <Component id="tRepetir" max="32767" attributes="1"/>
-                                      <Component id="cGrupo" max="32767" attributes="1"/>
-                                      <Component id="tNombre" alignment="0" pref="116" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lGrupo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lRepetir" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lClave" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tPassword" max="32767" attributes="1"/>
+                                          <Component id="tRepetir" max="32767" attributes="1"/>
+                                          <Component id="cGrupo" max="32767" attributes="1"/>
+                                          <Component id="tNombre" alignment="0" pref="116" max="32767" attributes="1"/>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="93" max="32767" attributes="0"/>
+                              <Component id="lIcon1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="bNuevo" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="bGuardar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bNuevo" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bGuardar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bEliminar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="64" max="32767" attributes="0"/>
-                              <Component id="bCerrar" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="bEliminar" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bCerrar" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -95,40 +107,48 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lId" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lClave" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lIcon1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lClave" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tRepetir" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cGrupo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="149" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -174,6 +194,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bGuardar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/user_edit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -182,6 +205,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bEliminar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/user_delete.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
@@ -190,6 +216,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="bCerrar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/cancel.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar"/>
               </Properties>
               <Events>
@@ -198,11 +227,21 @@
             </Component>
             <Component class="javax.swing.JButton" name="bNuevo">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/user_add.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bNuevoActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lIcon1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/53.png"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

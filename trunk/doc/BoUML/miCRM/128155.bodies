@@ -1,0 +1,32 @@
+class ArticulosVendidos
+!!!130331.java!!!	ArticulosVendidos(inout unArticulo : Articulo, inout cantidad : Integer)
+    this.setArticulo(unArticulo);
+    this.setCantidad(cantidad);
+!!!130459.java!!!	agregar() : void
+    this.cantidad++;
+!!!130587.java!!!	getArticulo() : Articulo
+    return articulo;
+!!!130715.java!!!	quitar() : void
+    if (cantidad>0)
+      this.cantidad--;    
+!!!130843.java!!!	setArticulo(inout unArticulo : Articulo) : void
+    this.articulo = unArticulo;
+!!!130971.java!!!	getCantidad() : Integer
+    return cantidad;
+!!!131099.java!!!	setCantidad(inout cantidad : Integer) : void
+    this.cantidad = cantidad;
+!!!131227.java!!!	equals(inout obj : Object) : boolean
+    try {
+      ArticulosVendidos unArticulo = (ArticulosVendidos) obj;
+      if (this.getArticulo().equals(unArticulo.getArticulo())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!131355.java!!!	toString() : String
+    return "("+cantidad.toString()+") "+articulo.toString();

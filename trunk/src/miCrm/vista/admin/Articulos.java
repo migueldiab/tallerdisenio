@@ -235,6 +235,7 @@ public class Articulos extends javax.swing.JDialog {
     sArticulos = new javax.swing.JScrollPane();
     articulos = new DefaultListModel();
     lArticulos = new javax.swing.JList(articulos);
+    lIcon1 = new javax.swing.JLabel();
     panelLista = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     jListado = new javax.swing.JList(lista);
@@ -252,6 +253,7 @@ public class Articulos extends javax.swing.JDialog {
 
     lNombre.setText("Nombre");
 
+    bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/computer_edit.png"))); // NOI18N
     bGuardar.setText("Guardar");
     bGuardar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +261,7 @@ public class Articulos extends javax.swing.JDialog {
       }
     });
 
+    bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/computer_delete.png"))); // NOI18N
     bEliminar.setText("Eliminar");
     bEliminar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +269,7 @@ public class Articulos extends javax.swing.JDialog {
       }
     });
 
+    bCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/cancel.png"))); // NOI18N
     bCerrar.setText("Cerrar");
     bCerrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,6 +277,7 @@ public class Articulos extends javax.swing.JDialog {
       }
     });
 
+    bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/computer_add.png"))); // NOI18N
     bNuevo.setText("Nuevo");
     bNuevo.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,14 +291,14 @@ public class Articulos extends javax.swing.JDialog {
 
     lComponentes.setText("Componentes");
 
-    bAgregar.setText("<<");
+    bAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/add.png"))); // NOI18N
     bAgregar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         bAgregarActionPerformed(evt);
       }
     });
 
-    bQuitar.setText(">>");
+    bQuitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/delete.png"))); // NOI18N
     bQuitar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         bQuitarActionPerformed(evt);
@@ -301,6 +306,8 @@ public class Articulos extends javax.swing.JDialog {
     });
 
     sArticulos.setViewportView(lArticulos);
+
+    lIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/22.png"))); // NOI18N
 
     javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
     panelEditar.setLayout(panelEditarLayout);
@@ -314,7 +321,8 @@ public class Articulos extends javax.swing.JDialog {
             .addGap(18, 18, 18)
             .addComponent(bGuardar)
             .addGap(18, 18, 18)
-            .addComponent(bEliminar))
+            .addComponent(bEliminar)
+            .addGap(209, 209, 209))
           .addGroup(panelEditarLayout.createSequentialGroup()
             .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(lNombre)
@@ -322,39 +330,44 @@ public class Articulos extends javax.swing.JDialog {
               .addComponent(lComponentes)
               .addComponent(lId))
             .addGap(30, 30, 30)
-            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(bCerrar)
-                .addGroup(panelEditarLayout.createSequentialGroup()
-                  .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addComponent(tCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                      .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                    .addComponent(sComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bQuitar)
-                    .addComponent(bAgregar))
-                  .addGap(6, 6, 6)
-                  .addComponent(sArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-        .addGap(100, 100, 100))
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(bCerrar)
+              .addGroup(panelEditarLayout.createSequentialGroup()
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(panelEditarLayout.createSequentialGroup()
+                    .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                      .addComponent(sComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(bQuitar)
+                      .addComponent(bAgregar)))
+                  .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                  .addComponent(sArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(lIcon1)))))))
     );
     panelEditarLayout.setVerticalGroup(
       panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(panelEditarLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lId)
-          .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lNombre)
-          .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(lCosto)
-          .addComponent(tCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lId)
+              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lNombre)
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lCosto)
+              .addComponent(tCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addComponent(lIcon1))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addComponent(sArticulos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
@@ -363,8 +376,8 @@ public class Articulos extends javax.swing.JDialog {
             .addComponent(bAgregar)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bQuitar))
-          .addComponent(sComponentes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(sComponentes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(bNuevo)
           .addComponent(bGuardar)
@@ -444,6 +457,7 @@ public class Articulos extends javax.swing.JDialog {
   private javax.swing.JList lArticulos;
   private javax.swing.JLabel lComponentes;
   private javax.swing.JLabel lCosto;
+  private javax.swing.JLabel lIcon1;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lNombre;
   private javax.swing.JSplitPane panelABM;

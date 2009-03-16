@@ -1,0 +1,322 @@
+class Clientes
+!!!172955.java!!!	Clientes(inout hermana : JDialog)
+    super(hermana);
+    initComponents();
+    cargarListas();
+    modoSeleccionar();
+!!!173083.java!!!	Clientes(inout parent : JFrame)
+      super(parent);
+      initComponents();
+      cargarListas();
+!!!173211.java!!!	cargarDatos(inout u : Cliente) : void
+    tId.setText(u.getId().toString());
+    tNombre.setText(u.getNombre());
+    tApellido.setText(u.getApellido());
+    tDireccion.setText(u.getDireccion());
+    tTelefono.setText(u.getTelefono());
+!!!173339.java!!!	eliminarCliente() : void
+    try {
+      Cliente unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
+      if (unCliente==null) {
+        throw new Exception("No existe Cliente con ID = "+tId.getText());
+      }
+      if (!unCliente.borrar()) {
+        throw new Exception("Falló borrarCliente(unCliente)");
+      }
+      else {
+        JOptionPane.showMessageDialog(
+            this,"El Cliente "+unCliente.toString()+" fue eliminado",
+            "Cliente Eliminado",
+            JOptionPane.INFORMATION_MESSAGE);
+        limpiarCampos();
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      JOptionPane.showMessageDialog(
+            this,"Error al eliminar el Cliente. Verifique los datos.\r\n"+
+            "Si el error persiste, por favor consulte con el administrador.\r\n"
+            +e.toString(),
+            "Error al eliminar",
+            JOptionPane.ERROR_MESSAGE);
+    }
+!!!173467.java!!!	limpiarCampos() : void
+    tId.setText("");
+    tNombre.setText("");
+    tApellido.setText("");
+    tDireccion.setText("");
+    tTelefono.setText("");
+    cargarListas();
+!!!173595.java!!!	modoSeleccionar() : void
+    bEliminar.setText("Seleccionar");
+    this.modoSeleccionar = true;
+!!!173723.java!!!	bSeleccionarActionPerformed(inout evt : ActionEvent) : void
+    
+!!!173851.java!!!	seleccionarCliente() : void
+    if (jListado.getSelectedIndex()!=-1) {
+      RegistroContactos padre = (RegistroContactos) this.getOwner();
+      padre.seleccionarCliente(jListado.getSelectedValue());
+      this.dispose();
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"Debe seleccionar un cliente",
+        "Error al seleccionar",
+        JOptionPane.ERROR_MESSAGE);
+    }
+    
+!!!173979.java!!!	validarCampos() : boolean
+    return true;
+!!!174107.java!!!	cargarListas() : void
+    lista.clear();
+    for (Cliente unCliente : Fachada.listarClientes()) {
+      lista.addElement(unCliente);
+    }
+!!!174235.java!!!	guardarDatos(inout unCliente : Cliente) : boolean
+    try {
+      if (unCliente==null) {
+        unCliente = new Cliente();
+        unCliente.setId(Integer.parseInt(tId.getText()));
+      }
+      unCliente.setNombre(tNombre.getText());
+      unCliente.setApellido(tApellido.getText());
+      unCliente.setDireccion(tDireccion.getText());
+      unCliente.setTelefono(tTelefono.getText());
+      if (unCliente.guardar()) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      return false;
+    }
+!!!174363.java!!!	initComponents() : void
+
+    panelABM = new javax.swing.JSplitPane();
+    panelEditar = new javax.swing.JPanel();
+    bNuevo = new javax.swing.JButton();
+    lDireccion = new javax.swing.JLabel();
+    lTelefono = new javax.swing.JLabel();
+    lApellido = new javax.swing.JLabel();
+    lNombre = new javax.swing.JLabel();
+    lId = new javax.swing.JLabel();
+    bGuardar = new javax.swing.JButton();
+    bEliminar = new javax.swing.JButton();
+    bCerrar = new javax.swing.JButton();
+    tId = new javax.swing.JTextField();
+    tApellido = new javax.swing.JTextField();
+    tNombre = new javax.swing.JTextField();
+    tTelefono = new javax.swing.JTextField();
+    sDireccion = new javax.swing.JScrollPane();
+    tDireccion = new javax.swing.JTextArea();
+    lIcon1 = new javax.swing.JLabel();
+    panelLista = new javax.swing.JScrollPane();
+    lista = new DefaultListModel();
+    jListado = new javax.swing.JList(lista);
+
+    setTitle("Clientes");
+
+    panelABM.setDividerLocation(150);
+    panelABM.setMinimumSize(new java.awt.Dimension(630, 162));
+
+    panelEditar.setMinimumSize(new java.awt.Dimension(160, 160));
+
+    bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_add.png"))); // NOI18N
+    bNuevo.setText("Nuevo");
+    bNuevo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bNuevoActionPerformed(evt);
+      }
+    });
+
+    lDireccion.setText("Direccion");
+
+    lTelefono.setText("Telefono");
+
+    lApellido.setText("Apellido");
+
+    lNombre.setText("Nombre");
+
+    lId.setText("Id");
+
+    bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_edit.png"))); // NOI18N
+    bGuardar.setText("Guardar");
+    bGuardar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bGuardarActionPerformed(evt);
+      }
+    });
+
+    bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/user_delete.png"))); // NOI18N
+    bEliminar.setText("Eliminar");
+    bEliminar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bEliminarActionPerformed(evt);
+      }
+    });
+
+    bCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/cancel.png"))); // NOI18N
+    bCerrar.setText("Cerrar");
+    bCerrar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bCerrarActionPerformed(evt);
+      }
+    });
+
+    tId.setEnabled(false);
+
+    tDireccion.setColumns(20);
+    tDireccion.setRows(5);
+    sDireccion.setViewportView(tDireccion);
+
+    lIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/46.png"))); // NOI18N
+
+    javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
+    panelEditar.setLayout(panelEditarLayout);
+    panelEditarLayout.setHorizontalGroup(
+      panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelEditarLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(lDireccion)
+              .addComponent(lTelefono)
+              .addComponent(lApellido)
+              .addComponent(lNombre)
+              .addComponent(lId))
+            .addGap(28, 28, 28)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(tApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(sDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+              .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(panelEditarLayout.createSequentialGroup()
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addComponent(lIcon1))))
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addComponent(bNuevo)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(bGuardar)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(bEliminar)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+            .addComponent(bCerrar)))
+        .addContainerGap())
+    );
+
+    panelEditarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bCerrar, bEliminar, bGuardar, bNuevo});
+
+    panelEditarLayout.setVerticalGroup(
+      panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelEditarLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(panelEditarLayout.createSequentialGroup()
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lId))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lNombre))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lApellido))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lTelefono)))
+          .addComponent(lIcon1))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(lDireccion)
+          .addComponent(sDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bNuevo)
+          .addComponent(bCerrar)
+          .addComponent(bGuardar)
+          .addComponent(bEliminar))
+        .addContainerGap())
+    );
+
+    panelABM.setRightComponent(panelEditar);
+
+    panelLista.setMinimumSize(new java.awt.Dimension(80, 80));
+    panelLista.setPreferredSize(new java.awt.Dimension(80, 160));
+
+    jListado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jListado.setMinimumSize(new java.awt.Dimension(80, 160));
+    jListado.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jListadoValueChanged(evt);
+      }
+    });
+    panelLista.setViewportView(jListado);
+
+    panelABM.setLeftComponent(panelLista);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(panelABM, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(panelABM, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+    );
+
+    pack();
+!!!174491.java!!!	jListadoValueChanged(inout evt : javax.swing.event.ListSelectionEvent) : void
+//GEN-FIRST:event_jListadoValueChanged
+      if (jListado.getSelectedIndex()!=-1) {
+        cargarDatos((Cliente) jListado.getSelectedValue());
+      }
+!!!174619.java!!!	bNuevoActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bNuevoActionPerformed
+      limpiarCampos();
+!!!174747.java!!!	bCerrarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bCerrarActionPerformed
+      this.dispose();
+!!!174875.java!!!	bEliminarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bEliminarActionPerformed
+      if (this.modoSeleccionar) {
+        seleccionarCliente();
+      }
+      else {
+        eliminarCliente();  
+      }
+!!!175003.java!!!	bGuardarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bGuardarActionPerformed
+      try {
+        Cliente unCliente = new Cliente();
+        if (validarCampos()) {
+          if (!tId.getText().equals("")) {
+            unCliente = Fachada.buscarClientePorId(Integer.parseInt(tId.getText()));
+          }
+          if (guardarDatos(unCliente)) {
+            JOptionPane.showMessageDialog(
+                this,"El Cliente "+unCliente.toString()+" fue guardado",
+                "Cliente Guardado",
+                JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+          }
+          else {
+            JOptionPane.showMessageDialog(
+              this,"No se pudo guardar el cliente.",
+              "Error al guardar",
+              JOptionPane.ERROR_MESSAGE);
+          }
+        }        
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(
+          this,"No se pudo guardar el cliente.",
+          "Error al guardar",
+          JOptionPane.ERROR_MESSAGE);
+      }
+

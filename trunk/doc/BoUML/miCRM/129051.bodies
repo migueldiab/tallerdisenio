@@ -1,0 +1,35 @@
+class Grupo
+!!!138267.java!!!	borrar() : boolean
+    if (pGrupo.borrar(this)) {
+      return true;
+    }
+    return false;
+!!!138395.java!!!	getId() : Integer
+    return id;
+!!!138523.java!!!	guardar() : boolean
+    Integer id = pGrupo.guardar(this);
+    if (id!=-1) {
+      return true;
+    }
+    return false;
+!!!138651.java!!!	setId(inout id : Integer) : void
+    this.id = id;
+!!!138779.java!!!	getNombre() : String
+    return nombre;
+!!!138907.java!!!	setNombre(in nombre : String) : void
+    this.nombre = nombre;
+!!!139035.java!!!	equals(inout obj : Object) : boolean
+    try {
+      Grupo unGrupo = (Grupo) obj;
+      if (this.getNombre().equals(unGrupo.getNombre())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!139163.java!!!	toString() : String
+    return this.getNombre();

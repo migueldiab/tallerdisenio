@@ -1,0 +1,17 @@
+class Estados
+!!!153371.java!!!	listar() : EstadoContacto
+    return pEstadoContacto.listar();
+!!!153499.java!!!	buscarPorId(inout id : Integer) : Object
+    return pEstadoContacto.buscarPorId(id);
+!!!153627.java!!!	buscarPorNombre(in nombre : String) : EstadoContacto
+    return pEstadoContacto.buscarPorNombre(nombre);
+!!!153755.java!!!	borrar(inout unEstadoContacto : EstadoContacto) : boolean
+    if (pEstadoContacto.borrar(unEstadoContacto)) {
+      return true;
+    }
+    return false;
+!!!153883.java!!!	guardar(inout unEstadoContacto : EstadoContacto) : boolean
+    if (pEstadoContacto.guardar(unEstadoContacto)) {
+      return true;
+    }
+    return false;

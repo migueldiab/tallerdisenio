@@ -1,0 +1,64 @@
+class Fachada
+!!!159899.java!!!	buscarArticuloPorId(in id : int) : Articulo
+    return Articulos.buscarPorId(id);
+!!!160027.java!!!	buscarClientePorApellidoNombre(in nombre : String, in apellido : String) : Cliente
+    return Clientes.buscarPorApellidoNombre(nombre, apellido);
+!!!160155.java!!!	buscarClientePorId(in id : int) : Cliente
+    return Clientes.buscarPorId(id);
+!!!160283.java!!!	buscarClientePorNombre(in nombre : String) : Cliente
+    return Clientes.buscarPorNombre(nombre);
+!!!160411.java!!!	buscarContactoPorId(in id : int) : Contacto
+    return Contactos.buscarPorId(id);
+!!!160539.java!!!	buscarGrupoPorId(in id : int) : Grupo
+    return Grupos.buscarPorId(id);
+!!!160667.java!!!	buscarGrupoPorNombre(in nombre : String) : Grupo
+    return Grupos.buscarPorNombre(nombre);
+!!!160795.java!!!	buscarPrioridadPorId(in id : int) : Prioridad
+    return Prioridades.buscarPorId(id);
+!!!160923.java!!!	buscarPrioridadPorNombre(in nombre : String) : Prioridad
+    return Prioridades.buscarPorNombre(nombre);
+!!!161051.java!!!	buscarUsuarioPorId(in id : int) : Usuario
+    return Usuarios.buscarPorId(id);
+!!!161179.java!!!	listarArticulos() : Articulo
+    return Articulos.listar();
+!!!161307.java!!!	listarClientes() : Cliente
+    return Clientes.listar();
+!!!161435.java!!!	listarContactos() : Contacto
+    return Contactos.listar();
+!!!161563.java!!!	listarContactosPorFechaSinAsignar() : Contacto
+    return Contactos.listarPorFechaSinAsignar();
+!!!161691.java!!!	listarContactosPorTecnicoPorEstado(inout tecnico : Usuario, inout estado : EstadoContacto) : Contacto
+    return Contactos.listarContactosPorTecnicoPorEstado(tecnico, estado);
+!!!161819.java!!!	listarContactosPorTecnicoSinFinalizar(inout tecnico : Usuario) : Contacto
+    return Contactos.listarContactosPorTecnicoSinFinalizar(tecnico);
+!!!161947.java!!!	listarContactosProblemasSimilares(in text : String) : Contacto
+    return Contactos.listarContactosProblemasSimilares(text);
+!!!162075.java!!!	listarContactosRangoFecha(inout inicio : Timestamp, inout fin : Timestamp) : Contacto
+    return Contactos.listarContactosRangoFecha(inicio, fin);
+!!!162203.java!!!	listarEstados() : EstadoContacto
+    return Estados.listar();
+!!!162331.java!!!	listarGrupos() : Grupo
+    return Grupos.listar();
+!!!162459.java!!!	listarPrioridades() : Prioridad
+    return Prioridades.listar();
+!!!162587.java!!!	listarRankingTecnicos(inout inicio : Timestamp, inout fin : Timestamp, inout estado : EstadoContacto) : Usuario
+    return Contactos.listarRankingTecnicos(inicio, fin, estado);
+!!!162715.java!!!	listarTecnicos() : Usuario
+    return Usuarios.listarPorGrupo("Técnico");
+!!!162843.java!!!	listarTelefonistas() : Usuario
+    return Usuarios.listarPorGrupo("Telefonista");
+!!!162971.java!!!	listarTipoContactos() : TipoContacto
+    return TiposContactos.listar();
+!!!163099.java!!!	listarUsuarios() : Usuario
+    return Usuarios.listar();
+!!!163227.java!!!	loginUsuario(in usuario : String, in password : char) : Usuario
+    return Usuarios.login(usuario, password);
+!!!163355.java!!!	validarComponente(inout unArticulo : Articulo, inout unComponente : Articulo) : boolean
+    return Articulos.validarComponente(unArticulo, unComponente);
+!!!163483.java!!!	buscarEstadoPorNombre(in nombre : String) : EstadoContacto
+    return Estados.buscarPorNombre(nombre);
+!!!163739.java!!!	getInstance() : Fachada
+    if (this.fachada==null) {
+      this.fachada = new Fachada();
+    }
+    return fachada;
