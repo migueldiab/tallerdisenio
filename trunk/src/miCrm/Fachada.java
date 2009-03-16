@@ -34,6 +34,10 @@ public class Fachada {
     return Clientes.buscarPorNombre(nombre);
   }
 
+  public static Contacto buscarContactoPorId(int id) {
+    return Contactos.buscarPorId(id);
+  }
+
   public static Grupo buscarGrupoPorId(int id) {
     return Grupos.buscarPorId(id);
   }
@@ -76,6 +80,10 @@ public class Fachada {
 
   public static ArrayList<Contacto> listarContactosPorTecnicoSinFinalizar(Usuario tecnico) {
     return Contactos.listarContactosPorTecnicoSinFinalizar(tecnico);
+  }
+
+  public static ArrayList<Contacto> listarContactosProblemasSimilares(String text) {
+    return Contactos.listarContactosProblemasSimilares(text);
   }
 
   public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {

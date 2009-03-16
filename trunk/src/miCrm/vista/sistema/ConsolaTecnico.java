@@ -45,7 +45,18 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       initComponents();
       cargarListas();
       cargarCamposAutomaticos();
+      cargarPendientes();
     }
+
+  void solucionBase(Contacto contacto) {
+    tResolucion.setEnabled(true);
+    if (contacto!=null) {
+      tResolucion.setText(contacto.getResolucion());
+    }
+    else {
+      tResolucion.setText("Por favor, documente la solución lo mas detalladamente posible.");
+    }
+  }
 
   private void agregarArticulo() {
     if (lArticulos.getSelectedIndex()==-1) {
@@ -59,8 +70,15 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     }
   }
 
-  private void bloqueante() {
-    System.out.println("Bloqueante");
+  private boolean bloqueante() {
+    
+    for (Object o : lista.toArray()) {
+      Contacto u = (Contacto) o;
+      if (u.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private void buscarCliente() {
@@ -101,6 +119,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       tCliente.setText(c.getCliente().toString());
       elCliente = c.getCliente();
       cEstado.setSelectedItem(c.getEstadoContacto());
+      cEstado.setEnabled(true);
       cPrioridad.setSelectedItem(c.getPrioridad());
       cTecnico.setSelectedItem(c.getTecnico());
       cTelefonista.setSelectedItem(c.getTelefonista());
@@ -111,8 +130,8 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       else {
         cEstado.setSelectedItem(c.getEstadoContacto());
       }
-      cPrioridad.setSelectedItem(c.getPrioridad());
-      cTecnico.setSelectedItem(c.getTecnico());
+      //cPrioridad.setSelectedItem(c.getPrioridad());
+      //cTecnico.setSelectedItem(c.getTecnico());
       this.listaArticulosContacto.clear();
       if (c.getArticulos()!=null) {
         for (Articulo u : c.getArticulos()) {
@@ -129,14 +148,6 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   }
 
   private void cargarListas() {
-    this.lista.clear();
-    for (Contacto u : Fachada.listarContactosPorTecnicoSinFinalizar(Conf.getUsuarioLogueado())) {
-      this.lista.addElement(u);
-      if (u.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
-        cargarDatos(u);
-        bloqueante();
-      }
-    }
     this.listaArticulos.clear();
     for (Articulo u : Fachada.listarArticulos()) {
       this.listaArticulos.addElement(u);
@@ -163,27 +174,34 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     }
   }
 
+  private void cargarPendientes() {
+    this.lista.clear();
+    for (Contacto u : Fachada.listarContactosPorTecnicoSinFinalizar(Conf.getUsuarioLogueado())) {
+      this.lista.addElement(u);
+      if (u.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
+        cargarDatos(u);
+      }
+    }
+
+  }
+
   private void guardarContacto() {
     try {
-      Contacto c = new Contacto();
-      c.setId(Integer.parseInt(tId.getText()));
-      c.setRecibidoEl(DateUtilities.toTimestamp(tFecha.getText()+" "+tHora.getText(), DateUtilities.DATE_TIME_FORMAT));
-      c.setAsignadoEl(new Timestamp(new Date().getTime()));
-      // Get the default MEDIUM/SHORT DateFormat      
-      c.setTipoContacto((TipoContacto) cTipoContacto.getSelectedItem());
-      c.setNumeroEntrante(tTelefono.getText());
-      c.setPrioridad((Prioridad) cPrioridad.getSelectedItem());
+      Contacto c = Fachada.buscarContactoPorId(Integer.parseInt(tId.getText()));
       c.setEstadoContacto((EstadoContacto) cEstado.getSelectedItem());
-      c.setTecnico((Usuario) cTecnico.getSelectedItem());
-      c.setDesc(tDescripcion.getText());
-      c.setCliente(elCliente);
-      c.setTelefonista((Usuario) cTelefonista.getSelectedItem());
+      c.setResolucion(tResolucion.getText());
+      c.setTiempoResolucion(Integer.parseInt(tTiempo.getText()));
+      c.limpiarArticulos();
+      for (Object o : listaArticulosContacto.toArray()) {
+        c.agregarArticulo((Articulo) o);
+      }
       if (c.guardar()) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
             "Contacto guardado",
             JOptionPane.INFORMATION_MESSAGE);
         cargarListas();
+        cargarPendientes();
       }
       else {
         throw new Exception("falló guardar()");
@@ -199,6 +217,26 @@ public class ConsolaTecnico extends javax.swing.JDialog {
             JOptionPane.ERROR_MESSAGE);
     }
 
+  }
+
+  private void habilitarIngreso() {
+    if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_PROCESO)) {
+      tTiempo.setEnabled(true);
+      bAgregar.setEnabled(false);
+      bQuitar.setEnabled(false);
+      lArticulos.setEnabled(false);
+      lArticulosContacto.setEnabled(false);
+      listaArticulosContacto.removeAllElements();
+      tTiempo.setText("3");
+    }
+    else if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_VISITA)) {
+      tTiempo.setEnabled(false);
+      tTiempo.setText("");
+      bAgregar.setEnabled(true);
+      bQuitar.setEnabled(true);
+      lArticulos.setEnabled(true);
+      lArticulosContacto.setEnabled(true);
+    }
   }
 
     /** This method is called from within the constructor to
@@ -246,6 +284,14 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     sArticulosContacto = new javax.swing.JScrollPane();
     listaArticulosContacto = new DefaultListModel();
     lArticulosContacto = new javax.swing.JList(listaArticulosContacto);
+    sResolucion = new javax.swing.JScrollPane();
+    tResolucion = new javax.swing.JTextArea();
+    lResolucion = new javax.swing.JLabel();
+    ltiempo = new javax.swing.JLabel();
+    tTiempo = new javax.swing.JTextField();
+    bBuscar = new javax.swing.JButton();
+    lReparados = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
     sContactos = new javax.swing.JScrollPane();
     lista = new DefaultListModel();
     lContactos = new javax.swing.JList(lista);
@@ -254,6 +300,8 @@ public class ConsolaTecnico extends javax.swing.JDialog {
 
     pControlAsignaciones.setDividerLocation(300);
     pControlAsignaciones.setLastDividerLocation(300);
+
+    pAsignacionContacto.setMinimumSize(new java.awt.Dimension(250, 0));
 
     lDescipcion.setText("Descripción");
 
@@ -296,8 +344,14 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     cPrioridad.setPreferredSize(new java.awt.Dimension(150, 22));
 
     cEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cEstado.setEnabled(false);
     cEstado.setMinimumSize(new java.awt.Dimension(150, 20));
     cEstado.setPreferredSize(new java.awt.Dimension(150, 22));
+    cEstado.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cEstadoActionPerformed(evt);
+      }
+    });
 
     cTipoContacto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
     cTipoContacto.setEnabled(false);
@@ -365,23 +419,52 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     cTelefonista.setMinimumSize(new java.awt.Dimension(150, 20));
     cTelefonista.setPreferredSize(new java.awt.Dimension(150, 22));
 
-    bAgregar.setText("<< Agregar");
+    bAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/add.png"))); // NOI18N
+    bAgregar.setText("Agregar");
+    bAgregar.setEnabled(false);
     bAgregar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         bAgregarActionPerformed(evt);
       }
     });
 
-    bQuitar.setText("Quitar >>");
+    bQuitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/delete.png"))); // NOI18N
+    bQuitar.setText("Quitar");
+    bQuitar.setEnabled(false);
     bQuitar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         bQuitarActionPerformed(evt);
       }
     });
 
+    lArticulos.setEnabled(false);
     sArticulos.setViewportView(lArticulos);
 
+    lArticulosContacto.setEnabled(false);
     sArticulosContacto.setViewportView(lArticulosContacto);
+
+    tResolucion.setColumns(20);
+    tResolucion.setRows(5);
+    tResolucion.setEnabled(false);
+    sResolucion.setViewportView(tResolucion);
+
+    lResolucion.setText("Resolución");
+
+    ltiempo.setText("Tiempo resolución");
+
+    tTiempo.setEnabled(false);
+
+    bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/magnifier.png"))); // NOI18N
+    bBuscar.setText("Buscar");
+    bBuscar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bBuscarActionPerformed(evt);
+      }
+    });
+
+    lReparados.setText("Articulos reparados");
+
+    jLabel2.setText("Articulos disponibles");
 
     javax.swing.GroupLayout pAsignacionContactoLayout = new javax.swing.GroupLayout(pAsignacionContacto);
     pAsignacionContacto.setLayout(pAsignacionContactoLayout);
@@ -392,9 +475,6 @@ public class ConsolaTecnico extends javax.swing.JDialog {
         .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(pAsignacionContactoLayout.createSequentialGroup()
             .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(lTecnico)
-              .addComponent(lPrioridad)
-              .addComponent(lEstado)
               .addComponent(lCliente)
               .addComponent(ltipoContacto)
               .addComponent(lDescipcion)
@@ -402,38 +482,59 @@ public class ConsolaTecnico extends javax.swing.JDialog {
               .addComponent(lHora)
               .addComponent(lFecha)
               .addComponent(lTelefonista)
-              .addComponent(lTelefono))
+              .addComponent(lTelefono)
+              .addComponent(lEstado)
+              .addComponent(lPrioridad)
+              .addComponent(lTecnico))
             .addGap(52, 52, 52)
             .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(tCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(cTipoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(cEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAsignacionContactoLayout.createSequentialGroup()
+              .addComponent(cTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(cPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(cEstado, 0, 279, Short.MAX_VALUE)
+              .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cTipoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pAsignacionContactoLayout.createSequentialGroup()
                   .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                   .addComponent(lIcon))
-                .addComponent(cTecnico, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cPrioridad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cTelefonista, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))))
-          .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(bQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-              .addComponent(sArticulosContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                .addComponent(cTelefonista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(sDescripcion)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(bAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(sArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
-          .addComponent(bCancelar))
-        .addGap(298, 298, 298))
+            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(pAsignacionContactoLayout.createSequentialGroup()
+                .addComponent(ltiempo)
+                .addContainerGap())
+              .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pAsignacionContactoLayout.createSequentialGroup()
+                  .addComponent(lReparados)
+                  .addGap(47, 47, 47)
+                  .addComponent(jLabel2)
+                  .addGap(182, 182, 182))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAsignacionContactoLayout.createSequentialGroup()
+                  .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pAsignacionContactoLayout.createSequentialGroup()
+                      .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(bQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addComponent(lResolucion, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(sArticulosContacto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                      .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(sArticulos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addComponent(bAgregar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tTiempo, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+                    .addComponent(sResolucion, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
+                  .addGap(142, 142, 142)))))
+          .addGroup(pAsignacionContactoLayout.createSequentialGroup()
+            .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(bCancelar)
+            .addGap(632, 632, 632))))
     );
 
     pAsignacionContactoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bCancelar, bGuardar});
@@ -443,24 +544,21 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     pAsignacionContactoLayout.setVerticalGroup(
       pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-        .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAsignacionContactoLayout.createSequentialGroup()
-            .addContainerGap()
+        .addContainerGap()
+        .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(pAsignacionContactoLayout.createSequentialGroup()
             .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-                .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-                    .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                      .addComponent(tFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(lFecha)))
-                  .addComponent(lId))
+                .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(lHora)))
-              .addComponent(lIcon))
+                  .addComponent(tFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(lFecha)))
+              .addComponent(lId))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(tHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lHora))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(cTelefonista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -472,47 +570,55 @@ public class ConsolaTecnico extends javax.swing.JDialog {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(tCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(lCliente))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(cTipoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(ltipoContacto))
-            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lDescipcion))
-              .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+              .addComponent(lCliente)))
           .addGroup(pAsignacionContactoLayout.createSequentialGroup()
-            .addGap(87, 87, 87)
-            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(sArticulosContacto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-              .addComponent(sArticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))))
+            .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(bBuscar)
+              .addComponent(lResolucion)
+              .addComponent(lIcon))
+            .addGap(5, 5, 5)
+            .addComponent(sResolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(cEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lEstado)
+          .addComponent(cTipoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ltipoContacto)
+          .addComponent(lReparados)
+          .addComponent(jLabel2))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addGroup(pAsignacionContactoLayout.createSequentialGroup()
+            .addGap(21, 21, 21)
+            .addComponent(lDescipcion))
+          .addComponent(sDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(sArticulosContacto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+          .addComponent(sArticulos, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE))
+        .addGap(6, 6, 6)
+        .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(bAgregar)
           .addComponent(bQuitar)
-          .addComponent(bAgregar))
-        .addGap(4, 4, 4)
+          .addComponent(cEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lEstado))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lPrioridad))
+          .addComponent(lPrioridad)
+          .addComponent(ltiempo)
+          .addComponent(tTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(lTecnico))
-        .addGap(35, 35, 35)
+        .addGap(26, 26, 26)
         .addGroup(pAsignacionContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(bCancelar)
-          .addComponent(bGuardar))
+          .addComponent(bGuardar)
+          .addComponent(bCancelar))
         .addContainerGap())
     );
 
     pControlAsignaciones.setRightComponent(pAsignacionContacto);
 
     lContactos.setModel(lista);
+    lContactos.setMinimumSize(new java.awt.Dimension(250, 0));
     lContactos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
       public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
         lContactosValueChanged(evt);
@@ -526,7 +632,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pControlAsignaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 1026, Short.MAX_VALUE)
+      .addComponent(pControlAsignaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,8 +644,24 @@ public class ConsolaTecnico extends javax.swing.JDialog {
 
   private void limpiarCampos() {
     cargarCamposAutomaticos();
+    tId.setText("");
+    tFecha.setText("");
+    cTelefonista.setSelectedItem(null);
     tTelefono.setText("");
+    cTipoContacto.setSelectedItem(null);
+    cEstado.setSelectedItem(null);
+    cPrioridad.setSelectedItem(null);
+    cTecnico.setSelectedItem(null);
     tDescripcion.setText("");
+    tResolucion.setText("");
+    tResolucion.setEnabled(false);
+    bAgregar.setEnabled(false);
+    bQuitar.setEnabled(false);
+    listaArticulosContacto.removeAllElements();
+    lArticulos.setEnabled(false);
+    lArticulosContacto.setEnabled(false);
+    tTiempo.setText("");
+    tTiempo.setEnabled(false);
     tCliente.setText("");
     this.listaArticulosContacto.clear();
   }
@@ -617,7 +739,15 @@ public class ConsolaTecnico extends javax.swing.JDialog {
 
     private void lContactosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lContactosValueChanged
       if (lContactos.getSelectedIndex()!=-1) {
-        cargarDatos((Contacto) lContactos.getSelectedValue());
+        if (!bloqueante()) {
+          cargarDatos((Contacto) lContactos.getSelectedValue());
+        }
+        else {
+          JOptionPane.showMessageDialog(
+            this,"Tiene una tarea bloqueante. No puede trabajar en otra hasta que la misma esté cerrada.",
+            "Tarea Bloqueante pendiente",
+            JOptionPane.INFORMATION_MESSAGE);
+        }
       }
     }//GEN-LAST:event_lContactosValueChanged
 
@@ -629,8 +759,20 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       quitarArticulo();
 }//GEN-LAST:event_bQuitarActionPerformed
 
+    private void cEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEstadoActionPerformed
+      if (cEstado.getSelectedIndex()!=-1) {
+        habilitarIngreso();
+      }
+    }//GEN-LAST:event_cEstadoActionPerformed
+
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+      BuscarSoluciones vBuscarSoluciones = new BuscarSoluciones((JDialog) this);
+      vBuscarSoluciones.setVisible(true);
+    }//GEN-LAST:event_bBuscarActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton bAgregar;
+  private javax.swing.JButton bBuscar;
   private javax.swing.JButton bCancelar;
   private javax.swing.JButton bGuardar;
   private javax.swing.JButton bQuitar;
@@ -639,6 +781,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   private javax.swing.JComboBox cTecnico;
   private javax.swing.JComboBox cTelefonista;
   private javax.swing.JComboBox cTipoContacto;
+  private javax.swing.JLabel jLabel2;
   private javax.swing.JList lArticulos;
   private javax.swing.JList lArticulosContacto;
   private javax.swing.JLabel lCliente;
@@ -650,9 +793,12 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   private javax.swing.JLabel lIcon;
   private javax.swing.JLabel lId;
   private javax.swing.JLabel lPrioridad;
+  private javax.swing.JLabel lReparados;
+  private javax.swing.JLabel lResolucion;
   private javax.swing.JLabel lTecnico;
   private javax.swing.JLabel lTelefonista;
   private javax.swing.JLabel lTelefono;
+  private javax.swing.JLabel ltiempo;
   private javax.swing.JLabel ltipoContacto;
   private javax.swing.JPanel pAsignacionContacto;
   private javax.swing.JSplitPane pControlAsignaciones;
@@ -660,12 +806,15 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   private javax.swing.JScrollPane sArticulosContacto;
   private javax.swing.JScrollPane sContactos;
   private javax.swing.JScrollPane sDescripcion;
+  private javax.swing.JScrollPane sResolucion;
   private javax.swing.JTextField tCliente;
   private javax.swing.JTextArea tDescripcion;
   private javax.swing.JTextField tFecha;
   private javax.swing.JTextField tHora;
   private javax.swing.JTextField tId;
+  private javax.swing.JTextArea tResolucion;
   private javax.swing.JTextField tTelefono;
+  private javax.swing.JTextField tTiempo;
   // End of variables declaration//GEN-END:variables
   DefaultListModel lista = new DefaultListModel();
   DefaultListModel listaArticulos = new DefaultListModel();
@@ -681,6 +830,12 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       }
       if (cEstado.getSelectedIndex()==-1) {
         return false;
+      }
+      if (tResolucion.getText().length()<Conf.MIN_LEN_RESOLUCION) {
+        return false;
+      }
+      if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_PROCESO)) {
+        Integer tiempo = Integer.parseInt(tTiempo.getText());
       }
       if (cPrioridad.getSelectedIndex()==-1) {
         return false;
@@ -708,4 +863,5 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       return false;
     }
   }
+
 }

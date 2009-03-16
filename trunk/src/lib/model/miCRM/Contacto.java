@@ -28,7 +28,12 @@ public class Contacto {
   private Prioridad prioridad;
   private Usuario tecnico;
   private Usuario telefonista;
+  private Integer tiempoResolucion;
   private ArrayList<Articulo> articulos;
+
+  public void agregarArticulo(Articulo articulo) {
+    articulos.add(articulo);
+  }
 
   /**
    * @return the id
@@ -44,6 +49,10 @@ public class Contacto {
       return true;
     }
     return false;
+  }
+
+  public void limpiarArticulos() {
+    articulos = new ArrayList<Articulo>();
   }
 
   /**
@@ -240,5 +249,19 @@ public class Contacto {
   @Override
   public String toString() {
     return this.getRecibidoEl().toString()+" - "+this.getCliente().toString() + " - "+this.getEstadoContacto();
+  }
+
+  /**
+   * @return the tiempoResolucion
+   */
+  public Integer getTiempoResolucion() {
+    return tiempoResolucion;
+  }
+
+  /**
+   * @param tiempoResolucion the tiempoResolucion to set
+   */
+  public void setTiempoResolucion(Integer tiempoResolucion) {
+    this.tiempoResolucion = tiempoResolucion;
   }
 }

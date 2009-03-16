@@ -5,6 +5,7 @@
 
 package lib.model.persistencia;
 
+import com.sun.xml.internal.ws.message.saaj.SAAJHeader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -31,7 +32,9 @@ public class pContacto {
   public static final String PRIORIDAD = "id_prioridad";
   public static final String TECNICO = "id_tecnico";
   public static final String TELEFONISTA = "id_telefonista";
+  public static final String TIEMPO = "tiempo_resolucion";
 
+  
   public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {
     ArrayList listaContactos = new ArrayList();
     try {
@@ -190,6 +193,7 @@ public class pContacto {
       unContacto.setTecnico(pUsuario.buscarPorId(rs.getInt(pContacto.TECNICO)));
       unContacto.setTelefonista(pUsuario.buscarPorId(rs.getInt(pContacto.TELEFONISTA)));
       unContacto.setTipoContacto(pTipoContacto.buscarPorId(rs.getInt(pContacto.TIPO)));
+      unContacto.setTiempoResolucion(rs.getInt(pContacto.TIEMPO));
       return unContacto;
     } catch (Exception e) {
       System.out.println(e.toString());
@@ -220,7 +224,7 @@ public class pContacto {
     }
   }
 
-  public static Object buscarPorId(Integer id) {
+  public static Contacto buscarPorId(Integer id) {
     Connection con=Access.conectar();
     if (con!=null) {
       try {
@@ -265,8 +269,9 @@ public class pContacto {
                   +pContacto.RESOLUCION+", "
                   +pContacto.TECNICO+", "
                   +pContacto.TELEFONISTA+", "
-                  +pContacto.TIPO
-                  + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                  +pContacto.TIPO+", "
+                  +pContacto.TIEMPO
+                  + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         }
         else {
           stmt = con.prepareStatement("UPDATE "+pContacto.TABLA+" SET "
@@ -280,9 +285,10 @@ public class pContacto {
                   +pContacto.RESOLUCION+"= ?,"
                   +pContacto.TECNICO+"= ?,"
                   +pContacto.TELEFONISTA+"= ?,"
-                  +pContacto.TIPO+"= ?"
+                  +pContacto.TIPO+"= ?,"
+                  +pContacto.TIEMPO+"= ?"
                   +" WHERE "+pContacto.ID+"= ?");
-          stmt.setInt(12, unContacto.getId());
+          stmt.setInt(13, unContacto.getId());
         }
         stmt.setTimestamp(1, unContacto.getAsignadoEl());
         stmt.setInt(2, unContacto.getCliente().getId());
@@ -305,6 +311,7 @@ public class pContacto {
         }
         stmt.setInt(10, unContacto.getTelefonista().getId());
         stmt.setInt(11, unContacto.getTipoContacto().getId());
+        stmt.setInt(12, unContacto.getTiempoResolucion());
         stmt.executeUpdate();
 
         Integer id = Access.ultimoId(con);

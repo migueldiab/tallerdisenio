@@ -133,19 +133,11 @@ public class ControlAsignaciones extends javax.swing.JDialog {
 
   private void guardarContacto() {
     try {
-      Contacto c = new Contacto();
-      c.setId(Integer.parseInt(tId.getText()));
-      c.setRecibidoEl(DateUtilities.toTimestamp(tFecha.getText()+" "+tHora.getText(), DateUtilities.DATE_TIME_FORMAT));
-      c.setAsignadoEl(new Timestamp(new Date().getTime()));
-      // Get the default MEDIUM/SHORT DateFormat      
-      c.setTipoContacto((TipoContacto) cTipoContacto.getSelectedItem());
-      c.setNumeroEntrante(tTelefono.getText());
-      c.setPrioridad((Prioridad) cPrioridad.getSelectedItem());
+      Contacto c = Fachada.buscarContactoPorId(Integer.parseInt(tId.getText()));
       c.setEstadoContacto((EstadoContacto) cEstado.getSelectedItem());
+      c.setAsignadoEl(new Timestamp(new Date().getTime()));
+      c.setPrioridad((Prioridad) cPrioridad.getSelectedItem());
       c.setTecnico((Usuario) cTecnico.getSelectedItem());
-      c.setDesc(tDescripcion.getText());
-      c.setCliente(elCliente);
-      c.setTelefonista((Usuario) cTelefonista.getSelectedItem());
       if (c.guardar()) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
