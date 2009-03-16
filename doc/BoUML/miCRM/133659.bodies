@@ -1,0 +1,568 @@
+class Principal
+!!!166427.java!!!	Principal()
+        initComponents();
+        Ventanas.centrarVentana(this);
+        statusBar1.setMessage("Bienvenido, usted está logueado como "+Conf.getUsuarioLogueado().toString(), MSG.INFO);
+!!!166555.java!!!	articulos() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Articulos vArticulos = new Articulos(this);
+      vArticulos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!166683.java!!!	atenderLlamadas() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TELEFONISTA)) {
+      RegistroContactos vRegistroContactos = new RegistroContactos(this);
+      vRegistroContactos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!166811.java!!!	clientes() : void
+    if ((Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) ||
+        (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TELEFONISTA))) {
+      Clientes vClientes = new Clientes(this);
+      vClientes.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!166939.java!!!	consolaTecnicos() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_TECNICO)) {
+      ConsolaTecnico vConsolaTecnico = new ConsolaTecnico(this);
+      vConsolaTecnico.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!167067.java!!!	controlDeAsignaciones() : void
+     if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      ControlAsignaciones vControlAsignaciones = new ControlAsignaciones(this);
+      vControlAsignaciones.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!167195.java!!!	grupos() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Grupos vGrupos = new Grupos(this);
+      vGrupos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!167323.java!!!	initComponents() : void
+
+    jTextField1 = new javax.swing.JTextField();
+    jInternalFrame1 = new javax.swing.JInternalFrame();
+    jPanel1 = new javax.swing.JPanel();
+    statusBar1 = new miCrm.resources.widget.StatusBar();
+    jLabel1 = new javax.swing.JLabel();
+    jButton1 = new javax.swing.JButton();
+    jButton2 = new javax.swing.JButton();
+    jButton3 = new javax.swing.JButton();
+    jLabel2 = new javax.swing.JLabel();
+    jButton4 = new javax.swing.JButton();
+    jButton5 = new javax.swing.JButton();
+    jButton6 = new javax.swing.JButton();
+    jLabel3 = new javax.swing.JLabel();
+    jButton8 = new javax.swing.JButton();
+    jMenuBar1 = new javax.swing.JMenuBar();
+    mArchivo = new javax.swing.JMenu();
+    jMenuItem1 = new javax.swing.JMenuItem();
+    mSalir = new javax.swing.JMenuItem();
+    mAdministracion = new javax.swing.JMenu();
+    mArticulos = new javax.swing.JMenuItem();
+    mClientes = new javax.swing.JMenuItem();
+    mGrupos = new javax.swing.JMenuItem();
+    mPrioridades = new javax.swing.JMenuItem();
+    mUsuarios = new javax.swing.JMenuItem();
+    mOperaciones = new javax.swing.JMenu();
+    mContactos = new javax.swing.JMenu();
+    mNuevoContacto = new javax.swing.JMenuItem();
+    mControlAsignaciones = new javax.swing.JMenuItem();
+    mConsolaTrabajos = new javax.swing.JMenuItem();
+    jMenuItem2 = new javax.swing.JMenuItem();
+    mListados = new javax.swing.JMenu();
+    mLlamadasFecha = new javax.swing.JMenuItem();
+    mTrabajosPendientes = new javax.swing.JMenuItem();
+    mRankingTecnicos = new javax.swing.JMenuItem();
+
+    jTextField1.setText("jTextField1");
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("miCRM - Líder en manejo de contactos");
+    setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+    jInternalFrame1.setClosable(true);
+    jInternalFrame1.setIconifiable(true);
+    jInternalFrame1.setVisible(true);
+
+    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 413, Short.MAX_VALUE)
+    );
+    jPanel1Layout.setVerticalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 224, Short.MAX_VALUE)
+    );
+
+    javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+    jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+    jInternalFrame1Layout.setHorizontalGroup(
+      jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 0, Short.MAX_VALUE)
+      .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addContainerGap()))
+    );
+    jInternalFrame1Layout.setVerticalGroup(
+      jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGap(0, 235, Short.MAX_VALUE)
+      .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addContainerGap()))
+    );
+
+    statusBar1.setFont(new java.awt.Font("Verdana", 0, 14));
+
+    jLabel1.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel1.setText("Manejo de Incidentes");
+
+    jButton1.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/5.png"))); // NOI18N
+    jButton1.setText("Atender Llamadas");
+    jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1ActionPerformed(evt);
+      }
+    });
+
+    jButton2.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/12.png"))); // NOI18N
+    jButton2.setText("Control de Asignaciones");
+    jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2ActionPerformed(evt);
+      }
+    });
+
+    jButton3.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/29.png"))); // NOI18N
+    jButton3.setText("Consola Técnicos");
+    jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3ActionPerformed(evt);
+      }
+    });
+
+    jLabel2.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel2.setText("Reportes");
+
+    jButton4.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/2.png"))); // NOI18N
+    jButton4.setText("Llamadas por Fecha");
+    jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton4.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4ActionPerformed(evt);
+      }
+    });
+
+    jButton5.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/84.png"))); // NOI18N
+    jButton5.setText("Trabajos Pendientes");
+    jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton5.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton5ActionPerformed(evt);
+      }
+    });
+
+    jButton6.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/81.png"))); // NOI18N
+    jButton6.setText("Ranking Técnicos");
+    jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton6.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton6ActionPerformed(evt);
+      }
+    });
+
+    jLabel3.setFont(new java.awt.Font("Verdana", 0, 14));
+    jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel3.setText("Clientes");
+
+    jButton8.setFont(new java.awt.Font("Verdana", 0, 12));
+    jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/86.png"))); // NOI18N
+    jButton8.setText("Estado de Cuenta");
+    jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jButton8.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton8ActionPerformed(evt);
+      }
+    });
+
+    mArchivo.setText("Archivo");
+
+    jMenuItem1.setText("Cerrar Sesión");
+    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1ActionPerformed(evt);
+      }
+    });
+    mArchivo.add(jMenuItem1);
+
+    mSalir.setText("Salir");
+    mSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mSalirMouseClicked(evt);
+      }
+    });
+    mSalir.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mSalirActionPerformed(evt);
+      }
+    });
+    mArchivo.add(mSalir);
+
+    jMenuBar1.add(mArchivo);
+
+    mAdministracion.setText("Administracion");
+
+    mArticulos.setText("Articulos");
+    mArticulos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mArticulosActionPerformed(evt);
+      }
+    });
+    mAdministracion.add(mArticulos);
+
+    mClientes.setText("Clientes");
+    mClientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mClientesActionPerformed(evt);
+      }
+    });
+    mAdministracion.add(mClientes);
+
+    mGrupos.setText("Grupos");
+    mGrupos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mGruposActionPerformed(evt);
+      }
+    });
+    mAdministracion.add(mGrupos);
+
+    mPrioridades.setText("Prioridades");
+    mPrioridades.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mPrioridadesActionPerformed(evt);
+      }
+    });
+    mAdministracion.add(mPrioridades);
+
+    mUsuarios.setText("Usuarios");
+    mUsuarios.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mUsuariosActionPerformed(evt);
+      }
+    });
+    mAdministracion.add(mUsuarios);
+
+    jMenuBar1.add(mAdministracion);
+
+    mOperaciones.setText("Operaciones");
+
+    mContactos.setText("Contactos");
+
+    mNuevoContacto.setText("Atender Llamadas");
+    mNuevoContacto.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mNuevoContactoActionPerformed(evt);
+      }
+    });
+    mContactos.add(mNuevoContacto);
+
+    mControlAsignaciones.setText("Control de Asignaciones");
+    mControlAsignaciones.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mControlAsignacionesActionPerformed(evt);
+      }
+    });
+    mContactos.add(mControlAsignaciones);
+
+    mConsolaTrabajos.setText("Consola Trabajos");
+    mConsolaTrabajos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mConsolaTrabajosActionPerformed(evt);
+      }
+    });
+    mContactos.add(mConsolaTrabajos);
+
+    mOperaciones.add(mContactos);
+
+    jMenuItem2.setText("Estado de Cuenta");
+    mOperaciones.add(jMenuItem2);
+
+    jMenuBar1.add(mOperaciones);
+
+    mListados.setText("Listados");
+
+    mLlamadasFecha.setText("Llamadas por Fecha");
+    mLlamadasFecha.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mLlamadasFechaActionPerformed(evt);
+      }
+    });
+    mListados.add(mLlamadasFecha);
+
+    mTrabajosPendientes.setText("Trabajos Pendientes");
+    mTrabajosPendientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mTrabajosPendientesActionPerformed(evt);
+      }
+    });
+    mListados.add(mTrabajosPendientes);
+
+    mRankingTecnicos.setText("Ranking Técnicos");
+    mRankingTecnicos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mRankingTecnicosActionPerformed(evt);
+      }
+    });
+    mListados.add(mRankingTecnicos);
+
+    jMenuBar1.add(mListados);
+
+    setJMenuBar(jMenuBar1);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(statusBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+            .addContainerGap())
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+              .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                  .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                .addGap(10, 10, 10)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+            .addGap(9, 9, 9)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel3)
+              .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(173, 173, 173))))
+    );
+
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton8, jLabel1, jLabel2, jLabel3});
+
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton3))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton4)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton5)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton6))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel3)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton8)
+            .addGap(126, 126, 126)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+        .addComponent(statusBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+
+    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton8});
+
+    pack();
+!!!167451.java!!!	llamadasPorFecha() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      LlamadasPorFecha vLlamadasPorFecha = new LlamadasPorFecha(this);
+      vLlamadasPorFecha.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!167579.java!!!	mSalirMouseClicked(inout evt : java.awt.event.MouseEvent) : void
+//GEN-FIRST:event_mSalirMouseClicked
+      
+!!!167707.java!!!	mUsuariosActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mUsuariosActionPerformed
+      usuarios();
+!!!167835.java!!!	mNuevoContactoActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mNuevoContactoActionPerformed
+      atenderLlamadas();
+!!!167963.java!!!	mGruposActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mGruposActionPerformed
+      grupos();
+!!!168091.java!!!	mClientesActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mClientesActionPerformed
+      clientes();
+!!!168219.java!!!	mArticulosActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mArticulosActionPerformed
+      articulos();
+!!!168347.java!!!	mConsolaTrabajosActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mConsolaTrabajosActionPerformed
+      consolaTecnicos();
+!!!168475.java!!!	mSalirActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mSalirActionPerformed
+
+      this.dispose();
+!!!168603.java!!!	jMenuItem1ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jMenuItem1ActionPerformed
+      Login vLogin = new Login();
+      vLogin.setVisible(true);
+      Conf.setUsuarioLogueado(null);
+      this.dispose();
+!!!168731.java!!!	jButton1ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton1ActionPerformed
+      atenderLlamadas();
+!!!168859.java!!!	jButton2ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton2ActionPerformed
+      controlDeAsignaciones();
+!!!168987.java!!!	jButton3ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton3ActionPerformed
+      consolaTecnicos();
+!!!169115.java!!!	jButton4ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton4ActionPerformed
+      llamadasPorFecha();
+!!!169243.java!!!	jButton5ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton5ActionPerformed
+      trabajosPendientes();
+!!!169371.java!!!	jButton6ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton6ActionPerformed
+      rankingTecnicos();
+!!!169499.java!!!	jButton8ActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_jButton8ActionPerformed
+      // TODO add your handling code here:
+!!!169627.java!!!	mControlAsignacionesActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mControlAsignacionesActionPerformed
+      controlDeAsignaciones();
+!!!169755.java!!!	mLlamadasFechaActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mLlamadasFechaActionPerformed
+      llamadasPorFecha();
+!!!169883.java!!!	mTrabajosPendientesActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mTrabajosPendientesActionPerformed
+      trabajosPendientes();
+!!!170011.java!!!	mRankingTecnicosActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mRankingTecnicosActionPerformed
+      rankingTecnicos();
+!!!170139.java!!!	mPrioridadesActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_mPrioridadesActionPerformed
+      prioridades();
+!!!170267.java!!!	prioridades() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Prioridades vPrioridades = new Prioridades(this);
+      vPrioridades.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!170395.java!!!	rankingTecnicos() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      RankingTecnicos vRankingTecnicos = new RankingTecnicos(this);
+      vRankingTecnicos.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!170523.java!!!	trabajosPendientes() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      TrabajosPendientes vTrabajosPendientes = new TrabajosPendientes(this);
+      vTrabajosPendientes.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }
+!!!170651.java!!!	usuarios() : void
+    if (Conf.getUsuarioLogueado().getGrupo().equals(Conf.GRUPO_ADMIN)) {
+      Usuarios vUsuarios = new Usuarios(this);
+      vUsuarios.setVisible(true);
+    }
+    else {
+      JOptionPane.showMessageDialog(
+        this,"No tiene permiso para acceder al área",
+        "Error de privilegios",
+        JOptionPane.ERROR_MESSAGE);
+    }

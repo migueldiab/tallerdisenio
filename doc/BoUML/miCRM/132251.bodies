@@ -1,0 +1,5 @@
+class Inicio
+!!!163867.java!!!	main(in args : String) : void
+      
+      Login vLogin = new Login();
+      vLogin.setVisible(true);

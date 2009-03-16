@@ -1,0 +1,75 @@
+class pComponente
+!!!144923.java!!!	borrar(inout unComponente : Articulo, inout padre : Articulo) : boolean
+    try {
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        stmt = con.prepareStatement("DELETE FROM "+pComponente.TABLA+" WHERE "
+                + pComponente.PADRE+" = ?, "
+                + pComponente.COMPONENTE+" = ?");
+        stmt.setInt(1, padre.getId());
+        stmt.setInt(2, unComponente.getId());        
+        stmt.executeUpdate();
+        Access.desconectar(con);
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!145051.java!!!	guardar(inout unComponente : Articulo, inout padre : Articulo) : boolean
+    try {      
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        stmt = con.prepareStatement("INSERT INTO "+pComponente.TABLA+" (" +
+                pComponente.PADRE+", "+
+                pComponente.COMPONENTE+" )" +
+                " VALUES (?, ?)");
+        stmt.setInt(1, padre.getId());
+        stmt.setInt(2, unComponente.getId());
+        //stmt.setInt(3, unComponente.getCantidad());
+        stmt.executeUpdate();        
+        Access.desconectar(con);
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!145179.java!!!	toComponente(inout rs : ResultSet) : Articulo
+    try {
+      Articulo unComponente = pArticulo.buscarPorId(rs.getInt(pComponente.COMPONENTE));
+      //unComponente.setCantidad(rs.getInt(pComponente.CANTIDAD));
+      return unComponente;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }
+!!!145307.java!!!	buscarPorArticulo(inout unArticulo : Articulo) : ArrayList
+    ArrayList<Articulo> listaComponentes = new ArrayList<Articulo>();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pComponente.TABLA+" WHERE id_articulo = "+unArticulo.getId());
+        while (rs.next()) {
+          Articulo unComponente = pComponente.toComponente(rs);
+          listaComponentes.add(unComponente);
+        }        
+        Access.desconectar(con);
+        return listaComponentes;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        return null;
+      }
+    }
+    else {
+      return null;
+    }

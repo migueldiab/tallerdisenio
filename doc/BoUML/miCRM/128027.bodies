@@ -1,0 +1,110 @@
+class Articulo
+!!!128027.java!!!	agregarComponente(inout unComponente : Articulo) : boolean
+    if (componentes==null) {
+      componentes = new ArrayList<Articulo>();      
+    }
+    if (Fachada.validarComponente(this, unComponente)) {
+      if (componentes.add(unComponente)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+!!!128155.java!!!	borrar() : boolean
+    if (pArticulo.borrar(this)) {
+      return true;
+    }
+    return false;
+!!!128283.java!!!	contarComponentes() : int
+    if (componentes==null) {
+      return 0;
+    }
+    else {
+      return componentes.size();
+    }
+!!!128411.java!!!	eliminarComponente(inout elComponente : Articulo) : boolean
+    if (componentes.indexOf(elComponente)!=-1) {
+      if (!componentes.remove(elComponente)) {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+    if (componentes.size()==0) {
+      componentes = null;
+    }
+    return true;
+!!!128539.java!!!	esHoja() : boolean
+    if (componentes==null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+!!!128667.java!!!	getComponentes() : Articulo
+    return componentes;
+!!!128795.java!!!	getHijo(in posicion : int) : Object
+    if (componentes==null) {
+      return null;
+    }
+    else {
+      return componentes.get(posicion);
+    }
+!!!128923.java!!!	getId() : Integer
+    return id;
+!!!129051.java!!!	getPosComponente(inout articulo : Articulo) : int
+    if (componentes==null) {
+      return -1;
+    }
+    else {
+      return componentes.indexOf(articulo);
+    }
+!!!129179.java!!!	guardar() : boolean
+      Integer autoId = pArticulo.guardar(this);
+      if (autoId!=-1) {
+        this.setId(autoId);
+        return true;
+      }
+      return false;
+!!!129307.java!!!	remplazarComponentes(inout nuevosComponentes : ArrayList<Articulo>) : void
+    if (nuevosComponentes!=null) {
+      if (componentes == null) {
+        componentes = new ArrayList<Articulo>();
+      }
+      else {
+        componentes.clear();
+      }
+      for (Articulo u : nuevosComponentes) {
+        componentes.add(u);
+      }
+    }
+!!!129435.java!!!	setId(inout id : Integer) : void
+    this.id = id;
+!!!129563.java!!!	getNombre() : String
+    return nombre;
+!!!129691.java!!!	setNombre(in nombre : String) : void
+    this.nombre = nombre;
+!!!129819.java!!!	getCosto() : Double
+    return costo;
+!!!129947.java!!!	setCosto(inout costo : Double) : void
+    this.costo = costo;
+!!!130075.java!!!	equals(inout obj : Object) : boolean
+    try {
+      Articulo unArticulo = (Articulo) obj;
+      if (this.getNombre().equals(unArticulo.getNombre())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!130203.java!!!	toString() : String
+    return this.getNombre();

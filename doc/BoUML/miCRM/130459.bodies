@@ -1,0 +1,34 @@
+class Articulos
+!!!150811.java!!!	listadoCompuestos() : Articulo
+    ArrayList<Articulo> articulos = listar();
+    ArrayList<Articulo> articulosCompuestos = new ArrayList<Articulo>();
+    for (Articulo u : articulos) {
+        if (u.getComponentes()!=null && u.getComponentes().size()>0) {
+            articulosCompuestos.add(u);
+        }
+    }
+    return articulosCompuestos;
+!!!150939.java!!!	listar() : Articulo
+    return pArticulo.listar();
+!!!151067.java!!!	buscarPorId(inout id : Integer) : Articulo
+    return pArticulo.buscarPorId(id);
+!!!151195.java!!!	buscarPorNombre(in nombre : String) : ArrayList
+    return pArticulo.buscarPorNombre(nombre);
+!!!151323.java!!!	validarComponente(inout unArticulo : Articulo, inout unComponente : Articulo) : boolean
+    if (unComponente.equals(unArticulo)) {
+      return false;
+    }
+    if (unComponente.contarComponentes()>0) {
+      ArrayList<Articulo> componentes = unComponente.getComponentes();
+      for (Articulo u : componentes) {
+        if (u.equals(unArticulo)) {
+          return false;
+        }
+        if (u.contarComponentes()>0) {
+          if (!validarComponente(unArticulo, u)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;

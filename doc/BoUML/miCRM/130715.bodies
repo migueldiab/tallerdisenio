@@ -1,0 +1,74 @@
+class Contactos
+!!!151963.java!!!	listar() : Contacto
+    return pContacto.listar();
+!!!152091.java!!!	listarContactosPorTecnicoPorEstado(inout tecnico : Usuario, inout estado : EstadoContacto) : Contacto
+    ArrayList<Contacto> contactos = pContacto.listarPorFechaPorEstado(estado.getId());
+    ArrayList<Contacto> contactosPorTecnico = new ArrayList<Contacto>();
+    for (Contacto c : contactos) {
+      if (tecnico.equals(c.getTecnico())) {
+        contactosPorTecnico.add(c);
+      }
+    }
+    return contactosPorTecnico;
+!!!152219.java!!!	listarContactosPorTecnicoSinFinalizar(inout tecnico : Usuario) : Contacto
+    ArrayList<Contacto> contactosSinFinalizar = pContacto.listarPorFechaEstadoDistintoDe(Conf.ESTADO_FINALIZADO.getId());
+    ArrayList<Contacto> contactosPorTecnico = new ArrayList<Contacto>();
+    for (Contacto c : contactosSinFinalizar) {
+      if (tecnico.equals(c.getTecnico())) {
+        contactosPorTecnico.add(c);
+      }
+    }
+    return contactosPorTecnico;
+!!!152347.java!!!	listarContactosProblemasSimilares(in text : String) : Contacto
+    ArrayList<Contacto> contactos = pContacto.listarPorFechaPorEstado(Conf.ESTADO_FINALIZADO.getId());
+    Hashtable<Contacto, Integer> ranking = new Hashtable<Contacto, Integer>();
+    
+    String[] claves = text.split(" ");
+    for (Contacto c : contactos) {
+      for (String s : claves) {
+        if ((c.getDesc()!=null) && (c.getDesc().toUpperCase().contains(s.toUpperCase()))) {
+          Integer rank = ranking.get(c);
+          if (rank!=null) {
+            rank++;
+          }
+          else {
+            rank = 1;
+          }
+          ranking.put(c, rank);
+        }
+        if ((c.getResolucion()!=null) && (c.getResolucion().toUpperCase().contains(s.toUpperCase()))) {
+          Integer rank = ranking.get(c);
+          if (rank!=null) {
+            rank++;
+          }
+          else {
+            rank = 1;
+          }
+          ranking.put(c, rank);
+        }
+      }
+    }
+    ArrayList rankOrdenado=new ArrayList(ranking.entrySet());
+    Collections.sort(rankOrdenado, new OrdenadorHashtablePorValor());
+
+    
+    return rankOrdenado;
+
+!!!152475.java!!!	listarContactosRangoFecha(inout inicio : Timestamp, inout fin : Timestamp) : Contacto
+    return pContacto.listarContactosRangoFecha(inicio, fin);
+    
+!!!152603.java!!!	listarPorFechaSinAsignar() : Contacto
+    return pContacto.listarPorFechaSinAsignar();
+!!!152731.java!!!	listarRankingTecnicos(inout inicio : Timestamp, inout fin : Timestamp, inout estado : EstadoContacto) : Usuario
+    return pContacto.listarRankingTecnicosPorFechaPorEstado(inicio, fin, estado);
+!!!152859.java!!!	buscarPorId(inout id : Integer) : Contacto
+    return pContacto.buscarPorId(id);
+!!!152987.java!!!	buscarPorNombre(in nombre : String) : ArrayList
+    throw new UnsupportedOperationException("Not supported yet.");
+!!!153115.java!!!	borrar(inout unContacto : Contacto) : boolean
+    if (pContacto.borrar(unContacto)) {
+      return true;
+    }
+    return false;
+!!!153243.java!!!	guardar(inout unContacto : Contacto) : Integer
+    return pContacto.guardar(unContacto);

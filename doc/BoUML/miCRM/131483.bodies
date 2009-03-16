@@ -1,0 +1,219 @@
+class DateUtilities
+!!!156059.java!!!	parseTimestamp(inout value : Timestamp, in format : int) : String
+    if (value == null) {
+			return null;
+		}
+    if (format == DATE_TIME_FORMAT) {
+      return dateTimeFormatter.format(value);
+    }
+    if (format == DATE_FORMAT) {
+      return dateFormatter.format(value);
+    }
+    if (format == TIME_FORMAT) {
+      return timeFormatter.format(value);
+    }
+    return null;
+!!!156187.java!!!	toSQLDate(in string : String, in tipo : int) : java.sql.Date
+    try {
+      Date DateAString = toDate(string, tipo);
+      //System.out.println(DateAString.getTime());
+      java.sql.Date sqlDate = new java.sql.Date(DateAString.getTime());
+      //System.out.println(sqlDate.getTime());
+      return sqlDate;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }    
+!!!156315.java!!!	toString(inout value : Date, in format : int) : String
+		if (value == null) {
+			return null;
+		}
+		if (format == DATE_TIME_FORMAT) {
+			return dateTimeFormatter.format(value);
+		}
+		if (format == DATE_FORMAT) {
+			return dateFormatter.format(value);
+		}
+		if (format == TIME_FORMAT) {
+			return timeFormatter.format(value);
+		}
+		throw new IllegalArgumentException(
+				"[DateUtilities] Formato de fecha inválido");
+!!!156443.java!!!	toDate(in value : String, in format : int) : Date
+		if (value == null) {
+			return null;
+		}
+		try {
+			if (format == DATE_TIME_FORMAT) {
+				return dateTimeFormatter.parse(value);
+			}
+			if (format == DATE_FORMAT) {
+				return dateFormatter.parse(value);
+			}
+			if (format == TIME_FORMAT) {
+				return timeFormatter.parse(value);
+			}
+		} catch (ParseException pe) {
+			throw new IllegalArgumentException(
+					"Ocurrió un error al intentar parsear el texto "
+							+ value + "\n" + pe.getMessage());
+		}
+		throw new IllegalArgumentException("Formato de fecha inválido");
+!!!156571.java!!!	getCurrentDateTime() : Date
+		return new Date();
+!!!156699.java!!!	getCurrentDate() : Date
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		return calendar.getTime();
+!!!156827.java!!!	getDayOfWeek(inout date : Date) : int
+		calendar.setTime(date);
+		return calendar.get(Calendar.DAY_OF_WEEK);
+!!!156955.java!!!	getDayOfWeekAsString(inout date : Date) : String
+		calendar.setTime(date);
+		return dayOfWeekNames[calendar.get(Calendar.DAY_OF_WEEK)];
+!!!157083.java!!!	getDateFromDateTime(inout dateTime : Date) : Date
+		calendar.setTime(dateTime);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		return calendar.getTime();
+!!!157211.java!!!	getDateTimeFromDate(inout date : Date) : Date
+		return getDateTimeFromDate(date, false);
+!!!157339.java!!!	getDateTimeFromDate(inout date : Date, inout horaMaxima : boolean) : Date
+		calendar.setTime(date);
+		if (horaMaxima) {
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			calendar.set(Calendar.MILLISECOND, 999);
+		} else {
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
+		}
+		return calendar.getTime();
+!!!157467.java!!!	compare(inout date1 : Date, inout date2 : Date) : int
+		return date2.compareTo(date1);
+!!!157595.java!!!	after(inout date1 : Date, inout date2 : Date) : boolean
+		return date2.after(date1);
+!!!157723.java!!!	before(inout date1 : Date, inout date2 : Date) : boolean
+		return date2.before(date1);
+!!!157851.java!!!	equals(inout date1 : Date, inout date2 : Date) : boolean
+		return date2.equals(date1);
+!!!157979.java!!!	compareIgnoreTime(inout date1 : Date, inout date2 : Date) : int
+		calendar.setTime(date2);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d2 = calendar.getTime();
+
+		calendar.setTime(date1);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d1 = calendar.getTime();
+
+		return d2.compareTo(d1);
+!!!158107.java!!!	afterIgnoreTime(inout date1 : Date, inout date2 : Date) : boolean
+		calendar.setTime(date2);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d2 = calendar.getTime();
+
+		calendar.setTime(date1);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d1 = calendar.getTime();
+
+		return d2.after(d1);
+!!!158235.java!!!	beforeIgnoreTime(inout date1 : Date, inout date2 : Date) : boolean
+		calendar.setTime(date2);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d2 = calendar.getTime();
+
+		calendar.setTime(date1);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d1 = calendar.getTime();
+
+		return d2.before(d1);
+!!!158363.java!!!	equalsIgnoreTime(inout date1 : Date, inout date2 : Date) : boolean
+		calendar.setTime(date2);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d2 = calendar.getTime();
+
+		calendar.setTime(date1);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		Date d1 = calendar.getTime();
+
+		return d2.equals(d1);
+!!!158491.java!!!	getDayAsString(inout date : Date) : String
+		calendar.setTime(date);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		return StringUtilities.padLeft(day, 2, '0');
+!!!158619.java!!!	getMonthAsString(inout date : Date) : String
+		calendar.setTime(date);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		return StringUtilities.padLeft(month, 2, '0');
+!!!158747.java!!!	getYearAsString(inout date : Date) : String
+		calendar.setTime(date);
+		int year = calendar.get(Calendar.YEAR);
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(year);
+		return buffer.toString();
+!!!158875.java!!!	compareHoursMinutes(inout date1 : Date, inout date2 : Date) : int
+
+		calendar.setTime(date2);
+		int hours2 = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes2 = calendar.get(Calendar.MINUTE);
+
+		int absMinutes2 = hours2 * 60 + minutes2;
+
+		calendar.setTime(date1);
+		int hours1 = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes1 = calendar.get(Calendar.MINUTE);
+		int absMinutes1 = hours1 * 60 + minutes1;
+
+		int ret = 0;
+		if (absMinutes1 > absMinutes2) {
+			ret = -1;
+		} else if (absMinutes1 < absMinutes2) {
+			ret = 1;
+		} else {
+			ret = 0;
+
+		}
+		return ret;
+!!!159003.java!!!	toTimestamp(in string : String, in tipo : int) : Timestamp
+    try {
+      Date DateAString = toDate(string, tipo);
+      //System.out.println(DateAString.getTime());
+      java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(DateAString.getTime());
+      //System.out.println(sqlDate.getTime());
+      return sqlTimestamp;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }

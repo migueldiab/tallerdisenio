@@ -1,0 +1,44 @@
+class ModeloArbol
+!!!165147.java!!!	ModeloArbol(inout r : Articulo)
+    raiz=r;
+!!!165275.java!!!	eliminar(inout unComponente : Articulo) : boolean
+//    Componente padre=raiz.getPadre(unComponente);
+//    if(padre!=null){
+//      return padre.eliminarComponente(unComponente);
+//    }
+    return false;
+!!!165403.java!!!	getChild(inout nodo : Object, in posicion : int) : Object
+    try {
+      Articulo padre = (Articulo) nodo;
+      return padre.getHijo(posicion);
+    } catch (Exception e) {
+      Articulo padre = (Articulo) nodo;
+      return padre.getHijo(posicion);
+    }
+!!!165531.java!!!	getChildCount(inout n : Object) : int
+    try {
+      Articulo nodo=(Articulo)n;
+      return nodo.contarComponentes();
+    }
+    catch (Exception e) {
+      System.out.println(e.toString());
+      return -1;
+    }
+!!!165659.java!!!	getIndexOfChild(inout p : Object, inout hijo : Object) : int
+    try {
+      Articulo padre=(Articulo)p;
+      return padre.getPosComponente((Articulo) hijo);
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return -1;
+    }
+!!!165787.java!!!	getRoot() : Object
+    return raiz;
+!!!165915.java!!!	isLeaf(inout n : Object) : boolean
+    try {
+      Articulo nodo=(Articulo)n;
+      return nodo.esHoja();
+
+    } catch (Exception e) {
+      return false;
+    }

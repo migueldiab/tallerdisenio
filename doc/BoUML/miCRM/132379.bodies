@@ -1,0 +1,3 @@
+class ModeloTabla
+!!!163995.java!!!	isCellEditable(in row : int, in column : int) : boolean
+      return false;

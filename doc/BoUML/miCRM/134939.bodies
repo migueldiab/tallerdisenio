@@ -1,0 +1,186 @@
+class BuscarSoluciones
+!!!184219.java!!!	BuscarSoluciones(inout parent : JDialog)
+      super(parent);
+      this.ventanaPadre = parent;
+      initComponents();
+
+!!!184347.java!!!	initComponents() : void
+
+    lPalabras = new javax.swing.JLabel();
+    lIcon1 = new javax.swing.JLabel();
+    tClaves = new javax.swing.JTextField();
+    lResoluciones = new javax.swing.JLabel();
+    bBuscar = new javax.swing.JButton();
+    bSeleccionar = new javax.swing.JButton();
+    sContactos = new javax.swing.JScrollPane();
+    lista = new DefaultListModel();
+    lContactos = new javax.swing.JList();
+    sDescipcion = new javax.swing.JScrollPane();
+    tDescripcion = new javax.swing.JTextArea();
+    sResolucion = new javax.swing.JScrollPane();
+    tResolucion = new javax.swing.JTextArea();
+    lDescipcion = new javax.swing.JLabel();
+    lResolucion = new javax.swing.JLabel();
+
+    setTitle("Registro de Contactos");
+
+    lPalabras.setText("Palabras Clave");
+
+    lIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/10.png"))); // NOI18N
+
+    tClaves.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tClavesActionPerformed(evt);
+      }
+    });
+
+    lResoluciones.setText("Resoluciones anteriores");
+
+    bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/magnifier.png"))); // NOI18N
+    bBuscar.setText("Buscar");
+    bBuscar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bBuscarActionPerformed(evt);
+      }
+    });
+
+    bSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miCrm/resources/images/disk.png"))); // NOI18N
+    bSeleccionar.setText("Seleccionar");
+    bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        bSeleccionarActionPerformed(evt);
+      }
+    });
+
+    lContactos.setModel(lista);
+    lContactos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        lContactosValueChanged(evt);
+      }
+    });
+    sContactos.setViewportView(lContactos);
+
+    tDescripcion.setColumns(20);
+    tDescripcion.setRows(5);
+    sDescipcion.setViewportView(tDescripcion);
+
+    tResolucion.setColumns(20);
+    tResolucion.setRows(5);
+    sResolucion.setViewportView(tResolucion);
+
+    lDescipcion.setText("Descipcion");
+
+    lResolucion.setText("Resolucion");
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(lResoluciones)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(lPalabras)
+            .addGap(44, 44, 44)
+            .addComponent(tClaves, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+          .addComponent(sContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(bSeleccionar, javax.swing.GroupLayout.Alignment.TRAILING))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(lResolucion)
+              .addComponent(lDescipcion))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(sResolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(sDescipcion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(bBuscar)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lIcon1)))
+        .addContainerGap())
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(lPalabras)
+              .addComponent(tClaves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(bBuscar))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(lResoluciones))
+          .addComponent(lIcon1))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(lDescipcion)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(sDescipcion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(sResolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(lResolucion)))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(sContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(bSeleccionar)))
+        .addContainerGap())
+    );
+
+    pack();
+!!!184475.java!!!	mostrarDatos(inout contacto : Contacto) : void
+    if (contacto==null) {
+      tDescripcion.setText("");
+      tResolucion.setText("");
+    }
+    else {
+      tDescripcion.setText(contacto.getDesc());
+      tResolucion.setText(contacto.getResolucion());
+    }
+!!!184603.java!!!	tClavesActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_tClavesActionPerformed
+      // TODO add your handling code here:
+!!!184731.java!!!	bSeleccionarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bSeleccionarActionPerformed
+      ConsolaTecnico vCT = (ConsolaTecnico) ventanaPadre;
+      try {
+        vCT.solucionBase((Contacto) lContactos.getSelectedValue());
+        this.dispose();
+      } catch (Exception e) {
+        vCT.solucionBase(null);
+        this.dispose();
+      }
+
+!!!184859.java!!!	bBuscarActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_bBuscarActionPerformed
+      lista.removeAllElements();
+      ArrayList<Contacto> resultados = Fachada.listarContactosProblemasSimilares(tClaves.getText());
+
+      Iterator itr=resultados.iterator();
+      Contacto key=null;
+      Integer value=0;
+      while(itr.hasNext()){
+        Map.Entry e=(Map.Entry)itr.next();
+        key = (Contacto) e.getKey();
+        //value = ((Integer)e.getValue()).intValue();
+        if (key!=null) {
+          lista.addElement(key);
+        }
+        //System.out.println(key.toString()+", "+value);
+      }      
+      lista.addElement("Nuevo problema...");
+
+!!!184987.java!!!	lContactosValueChanged(inout evt : javax.swing.event.ListSelectionEvent) : void
+//GEN-FIRST:event_lContactosValueChanged
+      if (lContactos.getSelectedIndex()!=-1) {
+        try {
+          mostrarDatos((Contacto) lContactos.getSelectedValue());
+        } catch (Exception e) {
+          mostrarDatos(null);
+        }
+        
+      }

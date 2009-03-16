@@ -20,8 +20,8 @@ public class TiposContactos {
   public static TipoContacto buscarPorId(Integer id) {
     return pTipoContacto.buscarPorId(id);
   }
-  public static ArrayList<TipoContacto> buscarPorNombre(String nombre) {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public static TipoContacto buscarPorNombre(String nombre) {
+    return pTipoContacto.buscarPorNombre(nombre);
   }
   public static boolean borrar(TipoContacto unTipoContacto) {
     if (pTipoContacto.borrar(unTipoContacto)) {

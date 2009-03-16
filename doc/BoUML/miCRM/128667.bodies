@@ -1,0 +1,28 @@
+class TipoContacto
+!!!140315.java!!!	getId() : Integer
+    return id;
+!!!140443.java!!!	setId(inout id : Integer) : void
+    this.id = id;
+!!!140571.java!!!	getNombre() : String
+    return nombre;
+!!!140699.java!!!	setNombre(in nombre : String) : void
+    this.nombre = nombre;
+!!!140827.java!!!	getCosto() : Double
+    return costo;
+!!!140955.java!!!	setCosto(inout costo : Double) : void
+    this.costo = costo;
+!!!141083.java!!!	equals(inout obj : Object) : boolean
+    try {
+      TipoContacto unTipoContacto = (TipoContacto) obj;
+      if (this.getId().equals(unTipoContacto.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!141211.java!!!	toString() : String
+    return this.getNombre()+" ("+this.getId()+")";

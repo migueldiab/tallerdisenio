@@ -1,0 +1,28 @@
+class Usuarios
+!!!155419.java!!!	listar() : Usuario
+    return pUsuario.listar();
+!!!155547.java!!!	buscarPorId(inout id : Integer) : Usuario
+    return pUsuario.buscarPorId(id);
+!!!155675.java!!!	buscarPorNombre(in nombre : String) : Usuario
+    return pUsuario.buscarPorNombre(nombre);
+!!!155803.java!!!	listarPorGrupo(in grupo : String) : Usuario
+    ArrayList<Usuario> losUsuarios = pUsuario.listar();
+    ArrayList<Usuario> subgrupo = new ArrayList<Usuario>();
+    Grupo tecnico = Fachada.buscarGrupoPorNombre(grupo);
+    for (Usuario u : losUsuarios) {
+      if (u.getGrupo().equals(tecnico)) {
+        subgrupo.add(u);
+      }
+    }
+    return subgrupo;
+    
+!!!155931.java!!!	login(in usuario : String, in password : char) : Usuario
+    Usuario unUsuario = Usuarios.buscarPorNombre(usuario);
+    if (unUsuario!=null) {
+      if (password.length == unUsuario.getPassword().length) {
+        if (Arrays.equals(unUsuario.getPassword() , password)) {
+          return unUsuario;
+        }
+      }
+    }
+    return null;

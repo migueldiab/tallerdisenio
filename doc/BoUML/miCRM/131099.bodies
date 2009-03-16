@@ -1,0 +1,7 @@
+class Prioridades
+!!!154395.java!!!	listar() : Prioridad
+    return pPrioridad.listar();
+!!!154523.java!!!	buscarPorId(inout id : Integer) : Prioridad
+    return pPrioridad.buscarPorId(id);
+!!!154651.java!!!	buscarPorNombre(in nombre : String) : Prioridad
+    return pPrioridad.buscarPorNombre(nombre);

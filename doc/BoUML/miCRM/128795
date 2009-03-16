@@ -1,0 +1,717 @@
+format 66
+"utilities" // src::lib::utilities
+  revision 1
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "lib/utilities"
+  java_package "lib.utilities"
+  classview 128411 "utilities"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 131483 "DateUtilities"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Utilidades para la manipulaci�n de fechas.
+
+Observaci�n: Todos los m�todos esperan par�metros no nulos y tiran
+NullPointerException en caso de recibir alguno nulo.
+
+@author Carlos Soderguit, Mart�n Cabrera"
+      attribute 137883 "DATE_TIME_FORMAT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value "=  1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Indica que la fecha se transforme a formato fecha-hora "
+      end
+
+      attribute 138011 "DATE_FORMAT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value "=  2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Indica que la fecha se transforme a formato fecha "
+      end
+
+      attribute 138139 "TIME_FORMAT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value "=  3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Indica que la fecha se transforme a formato hora "
+      end
+
+      attribute 138267 "calendar"
+	class_attribute private explicit_type "GregorianCalendar"
+	init_value "=  new GregorianCalendar()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Calendario utilizado para los c�lculos en los m�todos."
+      end
+
+      attribute 138395 "dateTimeFormatter"
+	class_attribute private explicit_type "SimpleDateFormat"
+	init_value "=  new SimpleDateFormat(
+			\"dd/MM/yyyy HH:mm\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138523 "dateFormatter"
+	class_attribute private explicit_type "SimpleDateFormat"
+	init_value "=  new SimpleDateFormat(
+			\"dd/MM/yyyy\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138651 "timeFormatter"
+	class_attribute private explicit_type "SimpleDateFormat"
+	init_value "=  new SimpleDateFormat(
+			\"HH:mm\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138779 "dayOfWeekOrdinals"
+	class_attribute private explicit_type "int"
+	multiplicity "[]"
+	init_value "=  new int[8]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138907 "dayOfWeekNames"
+	class_attribute private explicit_type "String"
+	multiplicity "[]"
+	init_value "=  new String[8]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      extra_member 128027 "initialization"
+	
+	cpp "" ""
+	java "  static {
+		dayOfWeekOrdinals[Calendar.MONDAY] = 1;
+		dayOfWeekOrdinals[Calendar.TUESDAY] = 2;
+		dayOfWeekOrdinals[Calendar.WEDNESDAY] = 3;
+		dayOfWeekOrdinals[Calendar.THURSDAY] = 4;
+		dayOfWeekOrdinals[Calendar.FRIDAY] = 5;
+		dayOfWeekOrdinals[Calendar.SATURDAY] = 6;
+		dayOfWeekOrdinals[Calendar.SUNDAY] = 7;
+
+		dayOfWeekNames[Calendar.MONDAY] = \"LUN\";
+		dayOfWeekNames[Calendar.TUESDAY] = \"MAR\";
+		dayOfWeekNames[Calendar.WEDNESDAY] = \"MIE\";
+		dayOfWeekNames[Calendar.THURSDAY] = \"JUE\";
+		dayOfWeekNames[Calendar.FRIDAY] = \"VIE\";
+		dayOfWeekNames[Calendar.SATURDAY] = \"SAB\";
+		dayOfWeekNames[Calendar.SUNDAY] = \"DOM\";
+
+	}"
+	php ""
+	python ""
+	idl ""
+      end
+
+      operation 156059 "parseTimestamp"
+	class_operation public explicit_return_type "String"
+	nparams 2
+	  param inout name "value" explicit_type "Timestamp"
+	  param in name "format" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156187 "toSQLDate"
+	class_operation public explicit_return_type "java.sql.Date"
+	nparams 2
+	  param in name "string" explicit_type "String"
+	  param in name "tipo" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156315 "toString"
+	class_operation public explicit_return_type "String"
+	nparams 2
+	  param inout name "value" explicit_type "Date"
+	  param in name "format" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Transforma una fecha a String.
+
+@param value
+           Valor a transformar.
+@param format
+           Formato de transformaci�n de la fecha.
+
+@return El valor transformado a String."
+      end
+
+      operation 156443 "toDate"
+	class_operation public explicit_return_type "Date"
+	nparams 2
+	  param in name "value" explicit_type "String"
+	  param in name "format" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Transforma la fecha en formato texto a un objeto Date.
+
+@param value
+           Valor a transformar.
+@param format
+           Formato de trasnformaci�n de la fecha.
+@return El objeto Date correspondiente."
+      end
+
+      operation 156571 "getCurrentDateTime"
+	class_operation public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Obtiene la fecha del actual."
+      end
+
+      operation 156699 "getCurrentDate"
+	class_operation public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Obtiene la fecha del actual sin el componente hora."
+      end
+
+      operation 156827 "getDayOfWeek"
+	class_operation public explicit_return_type "int"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param date
+           Fecha
+@return El d�a de la semana que corresponde a la fecha, ver las
+        constantes de java.util.Calendar"
+      end
+
+      operation 156955 "getDayOfWeekAsString"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param date
+           Fecha
+@return El nombre del d�a de la semana que corresponde a la fecha, ver
+        las constantes de java.util.Calendar"
+      end
+
+      operation 157083 "getDateFromDateTime"
+	class_operation public explicit_return_type "Date"
+	nparams 1
+	  param inout name "dateTime" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Obtiene la fecha del sin las horas."
+      end
+
+      operation 157211 "getDateTimeFromDate"
+	class_operation public explicit_return_type "Date"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Obtiene una FechaHora a partir de una fecha sin las horas. La hora se
+inicializa en 00:00:00.000"
+      end
+
+      operation 157339 "getDateTimeFromDate"
+	class_operation public explicit_return_type "Date"
+	nparams 2
+	  param inout name "date" explicit_type "Date"
+	  param inout name "horaMaxima" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Obtiene una FechaHora a partir de una fecha sin las horas. Si horaMaxima
+es true la hora es 23:59:59.999 si no 00:00:00.000"
+      end
+
+      operation 157467 "compare"
+	class_operation public explicit_return_type "int"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Compara dos fechas. Retorna -1 si la segunda es menor que la primera, 0
+si son iguales y 1 si la segunda es mayor que la primera."
+      end
+
+      operation 157595 "after"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que la segunda fecha sea estrictamente posterior a la primera."
+      end
+
+      operation 157723 "before"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que la segunda fecha sea estrictamente anterior a la primera."
+      end
+
+      operation 157851 "equals"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que las dos fechas sean iguales."
+      end
+
+      operation 157979 "compareIgnoreTime"
+	class_operation public explicit_return_type "int"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Compara dos fechas. Ignora las componentes de tiempo (horas, minutos,
+segundos). Retorna -1 si la segunda es menor que la primera, 0 si son
+iguales y 1 si la segunda es mayor que la primera."
+      end
+
+      operation 158107 "afterIgnoreTime"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que la segunda fecha sea estrictamente posterior a la primera.
+Ignora las componentes de tiempo (horas, minutos, segundos)."
+      end
+
+      operation 158235 "beforeIgnoreTime"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que la segunda fecha sea estrictamente anterior a la primera.
+Ignora las componentes de tiempo (horas, minutos, segundos)."
+      end
+
+      operation 158363 "equalsIgnoreTime"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifica que las dos fechas sean iguales. Ignora las componentes de
+tiempo (horas, minutos, segundos)."
+      end
+
+      operation 158491 "getDayAsString"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return El d�a del mes en formato String(2), p.e. si el d�a es 5 retorna
+        el String 05"
+      end
+
+      operation 158619 "getMonthAsString"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return El mes en formato String(2), p.e. si el mes es 5 retorna el
+        String 05"
+      end
+
+      operation 158747 "getYearAsString"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param inout name "date" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return El a�o en formato String(4)."
+      end
+
+      operation 158875 "compareHoursMinutes"
+	class_operation public explicit_return_type "int"
+	nparams 2
+	  param inout name "date1" explicit_type "Date"
+	  param inout name "date2" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Compara las horas ignorando la fecha. Retorna -1 si la segunda es menor
+que la primera, 0 si son iguales y 1 si la segunda es mayor que la
+primera."
+      end
+
+      operation 159003 "toTimestamp"
+	class_operation public explicit_return_type "Timestamp"
+	nparams 2
+	  param in name "string" explicit_type "String"
+	  param in name "tipo" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131611 "OrdenadorHashtablePorValor"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 129307 // <realization>
+	relation 129307 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129307 // <realization>
+	  b parent class_ref 131739 // Comparator
+      end
+
+      operation 159131 "OrdenadorHashtablePorValor"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 159259 "compare"
+	public explicit_return_type "int"
+	nparams 2
+	  param inout name "obj1" explicit_type "Object"
+	  param inout name "obj2" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131867 "StringUtilities"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Clase con m�todos utilitarios para el manejo de Strings
+
+@author Mart�n Cabrera, Carlos Soderguit,
+"
+      operation 159387 "pad"
+	class_operation public explicit_return_type "String"
+	nparams 2
+	  param in name "texto" explicit_type "String"
+	  param in name "largo" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 159515 "padLeft"
+	class_operation public explicit_return_type "String"
+	nparams 3
+	  param in name "param" explicit_type "int"
+	  param in name "length" explicit_type "int"
+	  param in name "pad" explicit_type "char"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128411 "utilities"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 131483 "DateUtilities"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+${definition}"
+      associated_classes
+	class_ref 131483 // DateUtilities
+      end
+    end
+
+    artifact 131611 "OrdenadorHashtablePorValor"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Comparator;
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 131611 // OrdenadorHashtablePorValor
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 131739 "StringUtilities"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 131867 // StringUtilities
+      end
+    end
+  end
+end

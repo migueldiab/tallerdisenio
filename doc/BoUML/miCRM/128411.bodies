@@ -1,0 +1,83 @@
+class Contacto
+!!!133275.java!!!	agregarArticulo(inout articulo : ArticulosVendidos) : void
+    articulos.add(articulo);
+!!!133403.java!!!	getId() : Integer
+    return id;
+!!!133531.java!!!	guardar() : boolean
+    Integer autoId = pContacto.guardar(this);
+    if (autoId!=-1) {
+      this.setId(autoId);
+      return true;
+    }
+    return false;
+!!!133659.java!!!	limpiarArticulos() : void
+    articulos = new ArrayList<ArticulosVendidos>();
+!!!133787.java!!!	setId(inout id : Integer) : void
+    this.id = id;
+!!!133915.java!!!	getRecibidoEl() : Timestamp
+    return recibidoEl;
+!!!134043.java!!!	setRecibidoEl(inout recibidoEl : Timestamp) : void
+    this.recibidoEl = recibidoEl;
+!!!134171.java!!!	getAsignadoEl() : Timestamp
+    return asignadoEl;
+!!!134299.java!!!	setAsignadoEl(inout asignadoEl : Timestamp) : void
+    this.asignadoEl = asignadoEl;
+!!!134427.java!!!	getNumeroEntrante() : String
+    return numeroEntrante;
+!!!134555.java!!!	setNumeroEntrante(in numeroEntrante : String) : void
+    this.numeroEntrante = numeroEntrante;
+!!!134683.java!!!	getDesc() : String
+    return desc;
+!!!134811.java!!!	setDesc(in desc : String) : void
+    this.desc = desc;
+!!!134939.java!!!	getEstadoContacto() : EstadoContacto
+    return estadoContacto;
+!!!135067.java!!!	setEstadoContacto(inout estadoContacto : EstadoContacto) : void
+    this.estadoContacto = estadoContacto;
+!!!135195.java!!!	getTipoContacto() : TipoContacto
+    return tipoContacto;
+!!!135323.java!!!	setTipoContacto(inout tipoContacto : TipoContacto) : void
+    this.tipoContacto = tipoContacto;
+!!!135451.java!!!	getCliente() : Cliente
+    return cliente;
+!!!135579.java!!!	setCliente(inout cliente : Cliente) : void
+    this.cliente = cliente;
+!!!135707.java!!!	getPrioridad() : Prioridad
+    return prioridad;
+!!!135835.java!!!	setPrioridad(inout prioridad : Prioridad) : void
+    this.prioridad = prioridad;
+!!!135963.java!!!	getTecnico() : Usuario
+    return tecnico;
+!!!136091.java!!!	setTecnico(inout tecnico : Usuario) : void
+    this.tecnico = tecnico;
+!!!136219.java!!!	getTelefonista() : Usuario
+    return telefonista;
+!!!136347.java!!!	setTelefonista(inout telefonista : Usuario) : void
+    this.telefonista = telefonista;
+!!!136475.java!!!	getArticulos() : ArticulosVendidos
+    return articulos;
+!!!136603.java!!!	setArticulos(inout losArticulos : ArrayList<ArticulosVendidos>) : void
+    this.articulos = losArticulos;
+!!!136731.java!!!	getResolucion() : String
+    return resolucion;
+!!!136859.java!!!	setResolucion(in resolucion : String) : void
+    this.resolucion = resolucion;
+!!!136987.java!!!	equals(inout obj : Object) : boolean
+    try {
+      Contacto unContacto = (Contacto) obj;
+      if (this.getId().equals(unContacto.getId())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!137115.java!!!	toString() : String
+    return this.getRecibidoEl().toString()+" - "+this.getCliente().toString() + " - "+this.getEstadoContacto();
+!!!137243.java!!!	getTiempoResolucion() : Integer
+    return tiempoResolucion;
+!!!137371.java!!!	setTiempoResolucion(inout tiempoResolucion : Integer) : void
+    this.tiempoResolucion = tiempoResolucion;

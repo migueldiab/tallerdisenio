@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import lib.model.miCRM.*;
-import lib.model.miCRM.Usuario;
 import lib.model.servicios.*;
 
 /**
@@ -58,6 +57,10 @@ public class Fachada {
     return Usuarios.buscarPorId(id);
   }
 
+  public static boolean guardarContacto(Contacto c) {
+    return Contactos.guardar(c);
+  }
+
   public static ArrayList<Articulo> listarArticulos() {
     return Articulos.listar();
   }
@@ -68,6 +71,10 @@ public class Fachada {
 
   public static ArrayList<Contacto> listarContactos() {
     return Contactos.listar();
+  }
+
+  public static ArrayList<Contacto> listarContactosPorCliente(Cliente cliente, Timestamp inicio, Timestamp fin) {
+    return Contactos.listarContactosPorCliente(cliente, inicio, fin);
   }
 
   public static ArrayList<Contacto> listarContactosPorFechaSinAsignar() {
@@ -132,6 +139,10 @@ public class Fachada {
 
   static EstadoContacto buscarEstadoPorNombre(String nombre) {
     return Estados.buscarPorNombre(nombre);
+  }
+
+  static TipoContacto buscarTipoContactoPorNombre(String string) {
+    return TiposContactos.buscarPorNombre(string);
   }
   
   Fachada fachada = null;

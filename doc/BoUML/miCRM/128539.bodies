@@ -1,0 +1,24 @@
+class EstadoContacto
+!!!137499.java!!!	getId() : Integer
+    return id;
+!!!137627.java!!!	setId(inout id : Integer) : void
+    this.id = id;
+!!!137755.java!!!	getNombre() : String
+    return nombre;
+!!!137883.java!!!	setNombre(in nombre : String) : void
+    this.nombre = nombre;
+!!!138011.java!!!	equals(inout obj : Object) : boolean
+    try {
+      EstadoContacto unEstadoContacto = (EstadoContacto) obj;
+      if (this.getNombre().equals(unEstadoContacto.getNombre())) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }
+!!!138139.java!!!	toString() : String
+    return this.getNombre()+" ("+this.getId()+")";

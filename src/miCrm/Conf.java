@@ -8,6 +8,7 @@ package miCrm;
 import lib.model.miCRM.EstadoContacto;
 import lib.model.miCRM.Grupo;
 import lib.model.miCRM.Prioridad;
+import lib.model.miCRM.TipoContacto;
 import lib.model.miCRM.Usuario;
 
 /**
@@ -29,6 +30,8 @@ public class Conf {
     public static final Grupo GRUPO_TELEFONISTA = Fachada.buscarGrupoPorNombre("Telefonista");
     public static final Grupo GRUPO_ADMIN = Fachada.buscarGrupoPorNombre("Administrador");
     public static final Grupo GRUPO_TECNICO = Fachada.buscarGrupoPorNombre("Técnico ");
+    public static final TipoContacto TIPO_VISITA = Fachada.buscarTipoContactoPorNombre("Visita Técnica");
+    public static final TipoContacto TIPO_CONSULTA = Fachada.buscarTipoContactoPorNombre("Consulta Telefónica");
 
     private static Usuario usuarioLogueado = null;
 

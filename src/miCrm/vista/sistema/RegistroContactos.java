@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -28,9 +29,9 @@ import lib.model.miCRM.TipoContacto;
 import lib.model.miCRM.Usuario;
 import lib.utilities.DateUtilities;
 import miCrm.Conf;
-import miCrm.Conf;
 import miCrm.Fachada;
 import miCrm.vista.admin.Clientes;
+
 
 /**
  *
@@ -38,10 +39,14 @@ import miCrm.vista.admin.Clientes;
  */
 public class RegistroContactos extends javax.swing.JDialog {
     private JFrame ventanaPadre = null;
+    private DefaultListModel listaClientes = new DefaultListModel();
+    private Cliente elCliente = null;
+
     /** Creates new form RegistroContactos */
     public RegistroContactos(JFrame parent) {
       super(parent);
       this.ventanaPadre = parent;
+
       initComponents();
       cargarListas();
       cargarCamposAutomaticos();
@@ -109,7 +114,7 @@ public class RegistroContactos extends javax.swing.JDialog {
       c.setDesc(tDescripcion.getText());
       c.setCliente(elCliente);
       c.setTelefonista(Conf.getUsuarioLogueado());
-      if (c.guardar()) {
+      if (Fachada.guardarContacto(c)) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
             "Contacto guardado",
@@ -428,6 +433,7 @@ public class RegistroContactos extends javax.swing.JDialog {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
       if (validarDatos()) {
         guardarContacto();
+
       }
       else {
         JOptionPane.showMessageDialog(
@@ -485,9 +491,7 @@ public class RegistroContactos extends javax.swing.JDialog {
   private javax.swing.JTextField tHora;
   private javax.swing.JTextField tTelefono;
   // End of variables declaration//GEN-END:variables
-  DefaultListModel listaClientes = new DefaultListModel();
-  Cliente elCliente = null;
-  
+
   private boolean validarDatos() {
     try {
       if (cTipoContacto.getSelectedIndex()==-1) {
@@ -516,4 +520,5 @@ public class RegistroContactos extends javax.swing.JDialog {
       return false;
     }
   }
+
 }

@@ -1,0 +1,129 @@
+class pPrioridad
+!!!148507.java!!!	toPrioridad(inout rs : ResultSet) : Prioridad
+    try {
+      Prioridad unPrioridad = new Prioridad();
+      unPrioridad.setId(rs.getInt(pPrioridad.ID));
+      unPrioridad.setNombre(rs.getString(pPrioridad.NOMBRE));
+      return unPrioridad;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }
+!!!148635.java!!!	listar() : ArrayList
+    ArrayList listaPrioridads = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA);
+        while (rs.next()) {
+          Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
+          listaPrioridads.add(unPrioridad);
+        }
+        Access.desconectar(con);
+        return listaPrioridads;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+!!!148763.java!!!	buscarPorId(inout id : Integer) : Prioridad
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.ID+" = "+id);
+        if (!rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        Prioridad unPrioridad = pPrioridad.toPrioridad(rs);
+        if (rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        Access.desconectar(con);
+        return unPrioridad;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+!!!148891.java!!!	buscarPorNombre(in nombre : String) : Prioridad
+    Prioridad unPrioridad = null;
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unPrioridad = pPrioridad.toPrioridad(rs);
+        }
+        if (rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        return unPrioridad;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+!!!149019.java!!!	guardar(inout unPrioridad : Prioridad) : Integer
+    try {
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        if (pPrioridad.buscarPorId(unPrioridad.getId())==null) {
+          stmt = con.prepareStatement("INSERT INTO "+pPrioridad.TABLA+" ("+pPrioridad.NOMBRE+") VALUES (?)");
+        }
+        else {
+          stmt = con.prepareStatement("UPDATE "+pPrioridad.TABLA+" SET "+pPrioridad.NOMBRE+" = ? WHERE "+pPrioridad.ID+" = ?");
+          stmt.setInt(2, unPrioridad.getId());
+        }
+        stmt.setString(1, unPrioridad.getNombre());
+        stmt.executeUpdate();
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);
+        return id;
+      }
+      else {
+        return -1;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return -1;
+    }
+!!!149147.java!!!	borrar(inout unPrioridad : Prioridad) : boolean
+    try {
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        if (pPrioridad.buscarPorId(unPrioridad.getId())!=null) {
+          stmt = con.prepareStatement("DELETE FROM "+pPrioridad.TABLA+" WHERE "+pPrioridad.ID+" = ?");
+          stmt.setInt(1, unPrioridad.getId());
+          stmt.executeUpdate();
+        }
+        Access.desconectar(con);
+        return true;
+      }
+      else {
+        Access.desconectar(con);
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }

@@ -1,0 +1,960 @@
+format 66
+"servicios" // src::lib::model::servicios
+  revision 1
+  modified_by 27 "Administrator"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "lib/model/servicios"
+  java_package "lib.model.servicios"
+  classview 128283 "servicios"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 130459 "Articulos"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 150811 "listadoCompuestos"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150939 "listar"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151067 "buscarPorId"
+	class_operation public return_type class_ref 128027 // Articulo
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151195 "buscarPorNombre"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151323 "validarComponente"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "unArticulo" type class_ref 128027 // Articulo
+	  param inout name "unComponente" type class_ref 128027 // Articulo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134427 // <dependency>
+	relation 134427 -_->
+	  a default
+	    classrelation_ref 134427 // <dependency>
+	  b parent class_ref 129307 // pArticulo
+      end
+
+      classrelation 135579 // <directional composition>
+	relation 135579 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135579 // <directional composition>
+	  b parent class_ref 128027 // Articulo
+      end
+    end
+
+    class 130587 "Clientes"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 151451 "buscarPorApellidoNombre"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 2
+	  param in name "nombre" explicit_type "String"
+	  param in name "apellido" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151579 "listar"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151707 "buscarPorId"
+	class_operation public return_type class_ref 128283 // Cliente
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151835 "buscarPorNombre"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134555 // <dependency>
+	relation 134555 -_->
+	  a default
+	    classrelation_ref 134555 // <dependency>
+	  b parent class_ref 129435 // pCliente
+      end
+
+      classrelation 135707 // <directional composition>
+	relation 135707 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135707 // <directional composition>
+	  b parent class_ref 128283 // Cliente
+      end
+    end
+
+    class 130715 "Contactos"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 151963 "listar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152091 "listarContactosPorTecnicoPorEstado"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 2
+	  param inout name "tecnico" type class_ref 128923 // Usuario
+	  param inout name "estado" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152219 "listarContactosPorTecnicoSinFinalizar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "tecnico" type class_ref 128923 // Usuario
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152347 "listarContactosProblemasSimilares"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param in name "text" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152475 "listarContactosRangoFecha"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 2
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152603 "listarPorFechaSinAsignar"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152731 "listarRankingTecnicos"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 3
+	  param inout name "inicio" explicit_type "Timestamp"
+	  param inout name "fin" explicit_type "Timestamp"
+	  param inout name "estado" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Hashtable<${type}, Integer> ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152859 "buscarPorId"
+	class_operation public return_type class_ref 128411 // Contacto
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152987 "buscarPorNombre"
+	public explicit_return_type "ArrayList"
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153115 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unContacto" type class_ref 128411 // Contacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153243 "guardar"
+	class_operation public explicit_return_type "Integer"
+	nparams 1
+	  param inout name "unContacto" type class_ref 128411 // Contacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134683 // <dependency>
+	relation 134683 -_->
+	  a default
+	    classrelation_ref 134683 // <dependency>
+	  b parent class_ref 129691 // pContacto
+      end
+
+      classrelation 135835 // <directional composition>
+	relation 135835 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135835 // <directional composition>
+	  b parent class_ref 128411 // Contacto
+      end
+    end
+
+    class 130843 "Estados"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 153371 "listar"
+	class_operation public return_type class_ref 128539 // EstadoContacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153499 "buscarPorId"
+	class_operation public explicit_return_type "Object"
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153627 "buscarPorNombre"
+	class_operation public return_type class_ref 128539 // EstadoContacto
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153755 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unEstadoContacto" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153883 "guardar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unEstadoContacto" type class_ref 128539 // EstadoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134811 // <dependency>
+	relation 134811 -_->
+	  a default
+	    classrelation_ref 134811 // <dependency>
+	  b parent class_ref 129819 // pEstadoContacto
+      end
+
+      classrelation 136219 // <directional composition>
+	relation 136219 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136219 // <directional composition>
+	  b parent class_ref 128539 // EstadoContacto
+      end
+    end
+
+    class 130971 "Grupos"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 154011 "listar"
+	class_operation public explicit_return_type "ArrayList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154139 "buscarPorId"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154267 "buscarPorNombre"
+	class_operation public return_type class_ref 129051 // Grupo
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134939 // <dependency>
+	relation 134939 -_->
+	  a default
+	    classrelation_ref 134939 // <dependency>
+	  b parent class_ref 129947 // pGrupo
+      end
+
+      classrelation 135963 // <directional composition>
+	relation 135963 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135963 // <directional composition>
+	  b parent class_ref 129051 // Grupo
+      end
+    end
+
+    class 131099 "Prioridades"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 154395 "listar"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154523 "buscarPorId"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154651 "buscarPorNombre"
+	class_operation public return_type class_ref 128795 // Prioridad
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135067 // <dependency>
+	relation 135067 -_->
+	  a default
+	    classrelation_ref 135067 // <dependency>
+	  b parent class_ref 130075 // pPrioridad
+      end
+
+      classrelation 136347 // <directional composition>
+	relation 136347 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136347 // <directional composition>
+	  b parent class_ref 128795 // Prioridad
+      end
+    end
+
+    class 131227 "TiposContactos"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 154779 "listar"
+	class_operation public return_type class_ref 128667 // TipoContacto
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154907 "buscarPorId"
+	class_operation public return_type class_ref 128667 // TipoContacto
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155035 "buscarPorNombre"
+	class_operation public return_type class_ref 128667 // TipoContacto
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155163 "borrar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unTipoContacto" type class_ref 128667 // TipoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155291 "guardar"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "unTipoContacto" type class_ref 128667 // TipoContacto
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135195 // <dependency>
+	relation 135195 -_->
+	  a default
+	    classrelation_ref 135195 // <dependency>
+	  b parent class_ref 130203 // pTipoContacto
+      end
+
+      classrelation 136475 // <directional composition>
+	relation 136475 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136475 // <directional composition>
+	  b parent class_ref 128667 // TipoContacto
+      end
+    end
+
+    class 131355 "Usuarios"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      operation 155419 "listar"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155547 "buscarPorId"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param inout name "id" explicit_type "Integer"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155675 "buscarPorNombre"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param in name "nombre" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155803 "listarPorGrupo"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 1
+	  param in name "grupo" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}ArrayList<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155931 "login"
+	class_operation public return_type class_ref 128923 // Usuario
+	nparams 2
+	  param in name "usuario" explicit_type "String"
+	  param in name "password" explicit_type "char"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1}[] ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135323 // <dependency>
+	relation 135323 -_->
+	  a default
+	    classrelation_ref 135323 // <dependency>
+	  b parent class_ref 130331 // pUsuario
+      end
+
+      classrelation 136091 // <directional composition>
+	relation 136091 *-->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136091 // <directional composition>
+	  b parent class_ref 128923 // Usuario
+      end
+    end
+  end
+
+  deploymentview 128283 "servicios"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 130459 "Articulos"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pArticulo;
+${definition}"
+      associated_classes
+	class_ref 130459 // Articulos
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130587 "Clientes"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pCliente;
+${definition}"
+      associated_classes
+	class_ref 130587 // Clientes
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130715 "Contactos"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pContacto;
+import lib.utilities.OrdenadorHashtablePorValor;
+import miCrm.Conf;
+${definition}"
+      associated_classes
+	class_ref 130715 // Contactos
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130843 "Estados"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.EstadoContacto;
+import lib.model.persistencia.pEstadoContacto;
+${definition}"
+      associated_classes
+	class_ref 130843 // Estados
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 130971 "Grupos"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pGrupo;
+${definition}"
+      associated_classes
+	class_ref 130971 // Grupos
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 131099 "Prioridades"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.*;
+import lib.model.persistencia.pPrioridad;
+${definition}"
+      associated_classes
+	class_ref 131099 // Prioridades
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 131227 "TiposContactos"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import lib.model.miCRM.TipoContacto;
+import lib.model.persistencia.pTipoContacto;
+${definition}"
+      associated_classes
+	class_ref 131227 // TiposContactos
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 131355 "Usuarios"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Arrays;
+import lib.model.miCRM.Grupo;
+import lib.model.miCRM.Usuario;
+import lib.model.persistencia.pUsuario;
+import miCrm.Fachada;
+${definition}"
+      associated_classes
+	class_ref 131355 // Usuarios
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+  end
+end

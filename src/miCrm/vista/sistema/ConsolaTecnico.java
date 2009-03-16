@@ -128,6 +128,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       tTelefono.setText(c.getNumeroEntrante().toString());
       tCliente.setText(c.getCliente().toString());
       elCliente = c.getCliente();
+      cTipoContacto.setSelectedItem(c.getTipoContacto());
       cEstado.setSelectedItem(c.getEstadoContacto());
       cEstado.setEnabled(true);
       cPrioridad.setSelectedItem(c.getPrioridad());
@@ -217,7 +218,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
           c.agregarArticulo((ArticulosVendidos) o);
         }
       }
-      if (c.guardar()) {
+      if (Fachada.guardarContacto(c)) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
             "Contacto guardado",
@@ -863,8 +864,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
               ((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_FINALIZADO)) {
         return false;
       }
-      if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_PROCESO) ||
-          ((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_FINALIZADO)) {
+      if (tTiempo.isEnabled()) {
         Integer tiempo = Integer.parseInt(tTiempo.getText());
       }
       if (cPrioridad.getSelectedIndex()==-1) {

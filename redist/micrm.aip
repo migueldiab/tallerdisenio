@@ -6,41 +6,40 @@
     <ROW Property="BannerBitmap" MultiBuildValue="DefaultBuild:default_banner.bmp" Type="1"/>
     <ROW Property="DialogBitmap" MultiBuildValue="DefaultBuild:default_dialog.bmp" Type="1"/>
     <ROW Property="Manufacturer" Value="PeGrId" ValueLocId="*"/>
-    <ROW Property="ProductCode" Value="1033:{D9C62B1E-1F70-43F5-B261-92ABCEE0052E} 3082:{6CCA7996-6FD6-4648-9499-2D5FE611DA2E} " Type="16"/>
-    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductCode" Value="3082:{7080053D-78A9-4BAB-B951-26F44216AF7D} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="3082"/>
     <ROW Property="ProductName" Value="miCRM" ValueLocId="*"/>
     <ROW Property="ProductVersion" Value="1.0.0"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
-    <ROW Property="UpgradeCode" Value="{E4597A14-5DEE-47F3-97E4-BC8EB92ADE5D}"/>
+    <ROW Property="UpgradeCode" Value="{E44A24C1-B53C-488E-9F3B-BF02505CF132}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="SHORTCUTDIR" ComponentId="{8FB41D73-C13D-4713-9888-BBA775FB9433}" Directory_="SHORTCUTDIR" Attributes="0"/>
-    <ROW Component="miCRM.exe" ComponentId="{99DF1C2B-BA64-4939-B439-9DDCA0E3866D}" Directory_="APPDIR" Attributes="0" KeyPath="miCRM.exe"/>
-    <ROW Component="miCRM.jar" ComponentId="{2EB73F11-742F-4A23-B4FC-617B39C2BA0B}" Directory_="APPDIR" Attributes="0" KeyPath="miCRM.jar" Type="0"/>
+    <ROW Component="SHORTCUTDIR" ComponentId="{C3E202C6-33C3-462B-8D60-A792D8F55190}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="miCRM.exe" ComponentId="{395C7CC6-18EC-43ED-A4EA-3E709F54AAA8}" Directory_="APPDIR" Attributes="0" KeyPath="miCRM.exe"/>
+    <ROW Component="miCRM.jar" ComponentId="{1D864411-06E0-4A34-8E85-1D6C5D4F8E03}" Directory_="APPDIR" Attributes="0" KeyPath="miCRM.jar" Type="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Descripción" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="miCRM.jar miCRM.exe SHORTCUTDIR"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="README.TXT" Component_="miCRM.jar" FileName="README.TXT" Attributes="0" SourcePath="..\dist\README.TXT" SelfReg="false" Sequence="3"/>
-    <ROW File="miCRM.exe" Component_="miCRM.exe" FileName="miCRM.exe" Attributes="0" SourcePath="&lt;AI_STUBS&gt;aijclw.exe" SelfReg="false" Sequence="4" DigSign="true"/>
+    <ROW File="README.TXT" Component_="miCRM.jar" FileName="README.TXT" Attributes="0" SourcePath="..\dist\README.TXT" SelfReg="false" Sequence="2"/>
+    <ROW File="miCRM.exe" Component_="miCRM.exe" FileName="miCRM.exe" Attributes="0" SourcePath="&lt;AI_STUBS&gt;aijclw.exe" SelfReg="false" Sequence="3" DigSign="true"/>
     <ROW File="miCRM.jar" Component_="miCRM.jar" FileName="miCRM.jar" Attributes="0" SourcePath="..\dist\miCRM.jar" SelfReg="false" Sequence="1"/>
-    <ROW File="micrm.mdb" Component_="miCRM.jar" FileName="micrm.mdb" Attributes="0" SourcePath="..\dist\micrm.mdb" SelfReg="false" Sequence="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" Languages="es;en" InstallationType="4"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" Languages="es" InstallationType="4"/>
     <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;ui_es.ail"/>
-    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="FolderDlg.aip" Path="&lt;AI_FRAGS&gt;FolderDlg.aip"/>
@@ -101,6 +100,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="miCRM.exe" Directory_="SHORTCUTDIR" Name="miCRM.exe" Component_="miCRM.exe" Target="[#miCRM.exe]" Description="miCRM.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="miCRM.exe_1" Directory_="DesktopFolder" Name="miCRM.exe" Component_="miCRM.exe" Target="[#miCRM.exe]" Description="miCRM.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
     <ROW UpgradeCode="[|UpgradeCode]" VersionMax="[|ProductVersion]" Attributes="1025" ActionProperty="OLDPRODUCTS"/>

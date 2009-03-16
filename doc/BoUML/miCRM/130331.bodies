@@ -1,0 +1,147 @@
+class pUsuario
+!!!150043.java!!!	toUsuario(inout rs : ResultSet) : Usuario
+
+    try {
+      Usuario unUsuario = new Usuario();
+      unUsuario.setId(rs.getInt(pUsuario.ID));
+      unUsuario.setNombre(rs.getString(pUsuario.NOMBRE));
+      unUsuario.setPassword(rs.getString(pUsuario.PASSWORD).toCharArray());
+      pGrupo unPGrupo = new pGrupo();
+      unUsuario.setGrupo((Grupo) pGrupo.buscarPorId(rs.getInt(pUsuario.GRUPO)));
+      return unUsuario;
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return null;
+    }
+!!!150171.java!!!	listar() : Usuario
+    ArrayList listaUsuarios = new ArrayList();
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA);
+        while (rs.next()) {
+          Usuario unUsuario = pUsuario.toUsuario(rs);
+          listaUsuarios.add(unUsuario);
+        }
+        Access.desconectar(con);
+        return listaUsuarios;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }      
+    }
+    else {
+      return null;
+    }
+!!!150299.java!!!	buscarPorId(inout id : Integer) : Usuario
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.ID+" = "+id);
+        if (!rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        Usuario unUsuario = pUsuario.toUsuario(rs);
+        if (rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        Access.desconectar(con);
+        return unUsuario;        
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+!!!150427.java!!!	buscarPorNombre(in nombre : String) : Usuario
+    Usuario unUsuario = null;
+    Connection con=Access.conectar();
+    if (con!=null) {
+      try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM "+pUsuario.TABLA+" WHERE "+pUsuario.NOMBRE+" = '"+nombre+"'");
+        if (rs.next()) {
+          unUsuario = pUsuario.toUsuario(rs);          
+        }
+        if (rs.next()) {
+        Access.desconectar(con);
+          return null;
+        }
+        Access.desconectar(con);
+        return unUsuario;
+      } catch (Exception e) {
+        System.out.println(e.toString());
+        Access.desconectar(con);
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+!!!150555.java!!!	guardar(inout unUsuario : Usuario) : Integer
+    try {
+      // No permite agregar un usuario si el grupo no existe
+      if (pGrupo.buscarPorId(unUsuario.getGrupo().getId())==null) {
+        throw new Exception("El grupo no existe");
+      }
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        if (pUsuario.buscarPorId(unUsuario.getId())==null) {
+          stmt = con.prepareStatement("INSERT INTO "+pUsuario.TABLA+" ("+
+                  pUsuario.NOMBRE+", "+
+                  pUsuario.PASSWORD+", "+
+                  pUsuario.GRUPO+
+                  ") VALUES (?, ?, ?)");
+        }
+        else {
+          stmt = con.prepareStatement("UPDATE "+pUsuario.TABLA+" SET "+
+                  pUsuario.NOMBRE+" = ?, "+
+                  pUsuario.PASSWORD+" = ?, "+
+                  pUsuario.GRUPO+" = ? " +
+                  "WHERE "+pUsuario.ID+" = ?");
+          stmt.setInt(4, unUsuario.getId());
+        }
+        stmt.setString(1, unUsuario.getNombre());
+        stmt.setString(2, String.valueOf(unUsuario.getPassword()));
+        stmt.setInt(3, unUsuario.getGrupo().getId());
+        stmt.executeUpdate();
+        Integer id = Access.ultimoId(con);
+        Access.desconectar(con);
+        return id;
+      }
+      else {
+        throw new Exception("No se pudo conectar a la base de datos");
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return -1;
+    }
+!!!150683.java!!!	borrar(inout unUsuario : Usuario) : boolean
+    try {
+      Connection con=Access.conectar();
+      if (con!=null) {
+        PreparedStatement stmt = null;
+        if (pUsuario.buscarPorId(unUsuario.getId())!=null) {
+          stmt = con.prepareStatement("DELETE FROM "+pUsuario.TABLA+" WHERE "+pUsuario.ID+" = ?");
+          stmt.setInt(1, unUsuario.getId());
+          stmt.executeUpdate();
+        }
+        Access.desconectar(con);
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (Exception e) {
+      System.out.println(e.toString());
+      return false;
+    }

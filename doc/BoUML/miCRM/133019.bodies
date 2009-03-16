@@ -1,0 +1,7 @@
+class Ventanas
+!!!164379.java!!!	centrarVentana(inout ventana : JFrame) : void
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Dimension screenSize = toolkit.getScreenSize();
+    int x = (screenSize.width - ventana.getWidth()) / 2;
+    int y = (screenSize.height - ventana.getHeight()) / 2;
+    ventana.setLocation(x, y);
