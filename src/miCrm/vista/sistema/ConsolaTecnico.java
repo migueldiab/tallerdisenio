@@ -12,7 +12,6 @@
 package miCrm.vista.sistema;
 
 import java.awt.Color;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lib.model.miCRM.Articulo;
+import lib.model.miCRM.ArticulosVendidos;
 import lib.model.miCRM.Cliente;
 import lib.model.miCRM.Contacto;
 import lib.model.miCRM.EstadoContacto;
@@ -66,7 +66,16 @@ public class ConsolaTecnico extends javax.swing.JDialog {
         JOptionPane.ERROR_MESSAGE);
     }
     else {
-        listaArticulosContacto.addElement(lArticulos.getSelectedValue());
+      ArticulosVendidos unArtV = new ArticulosVendidos((Articulo) lArticulos.getSelectedValue(), 0);
+
+      if (listaArticulosContacto.contains(unArtV)) {
+        ArticulosVendidos articuloVendidoActual = (ArticulosVendidos) listaArticulosContacto.get(listaArticulosContacto.indexOf(unArtV));
+        articuloVendidoActual.agregar();
+        lArticulosContacto.updateUI();
+      }
+      else {
+        listaArticulosContacto.addElement(new ArticulosVendidos((Articulo) lArticulos.getSelectedValue(), 1));
+      }
     }
   }
 
@@ -75,6 +84,7 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     for (Object o : lista.toArray()) {
       Contacto u = (Contacto) o;
       if (u.getPrioridad().equals(Conf.PRIORIDAD_BLOQUENATE)) {
+        cargarDatos(u);
         return true;
       }
     }
@@ -124,20 +134,25 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       cTecnico.setSelectedItem(c.getTecnico());
       cTelefonista.setSelectedItem(c.getTelefonista());
       tDescripcion.setText(c.getDesc().toString());
+      tTiempo.setText(c.getTiempoResolucion().toString());
+      if (c.getResolucion()!=null) {
+        tResolucion.setText(c.getResolucion().toString());
+        tResolucion.setEnabled(true);
+      }
+      listaArticulosContacto.clear();
+      if (c.getArticulos()!=null) {
+        for (ArticulosVendidos a : c.getArticulos()) {
+          listaArticulosContacto.addElement(a);
+        }
+        bAgregar.setEnabled(true);
+        bQuitar.setEnabled(true);
+      }
       if (c.getEstadoContacto().equals(Conf.ESTADO_NUEVO_CONTACTO)) {
         cEstado.setSelectedItem(Conf.ESTADO_ASIGNADO);
       }
       else {
         cEstado.setSelectedItem(c.getEstadoContacto());
-      }
-      //cPrioridad.setSelectedItem(c.getPrioridad());
-      //cTecnico.setSelectedItem(c.getTecnico());
-      this.listaArticulosContacto.clear();
-      if (c.getArticulos()!=null) {
-        for (Articulo u : c.getArticulos()) {
-          this.lista.addElement(u);
-        }
-      }
+      }            
     } catch (Exception e) {
       System.out.println(e.toString());
       JOptionPane.showMessageDialog(
@@ -154,6 +169,9 @@ public class ConsolaTecnico extends javax.swing.JDialog {
     }
     cEstado.removeAllItems();
     for (EstadoContacto e : Fachada.listarEstados()) {
+      if ((e.equals(Conf.ESTADO_FINALIZADO)) ||
+          (e.equals(Conf.ESTADO_EN_PROCESO)) ||
+          (e.equals(Conf.ESTADO_EN_VISITA))) 
       cEstado.addItem(e);
     }
     cPrioridad.removeAllItems();
@@ -186,27 +204,31 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   }
 
   private void guardarContacto() {
-    try {
+    try {      
       Contacto c = Fachada.buscarContactoPorId(Integer.parseInt(tId.getText()));
       c.setEstadoContacto((EstadoContacto) cEstado.getSelectedItem());
       c.setResolucion(tResolucion.getText());
-      c.setTiempoResolucion(Integer.parseInt(tTiempo.getText()));
-      c.limpiarArticulos();
-      for (Object o : listaArticulosContacto.toArray()) {
-        c.agregarArticulo((Articulo) o);
+      if (tTiempo.isEnabled()) {
+        c.setTiempoResolucion(Integer.parseInt(tTiempo.getText()));
+      }
+      if (bAgregar.isEnabled()) {
+        c.limpiarArticulos();
+        for (Object o : listaArticulosContacto.toArray()) {
+          c.agregarArticulo((ArticulosVendidos) o);
+        }
       }
       if (c.guardar()) {
         JOptionPane.showMessageDialog(
             this,"Contacto guardado",
             "Contacto guardado",
             JOptionPane.INFORMATION_MESSAGE);
+        limpiarCampos();
         cargarListas();
         cargarPendientes();
       }
       else {
         throw new Exception("falló guardar()");
       }
-      limpiarCampos();
     } catch (Exception e) {
       System.out.println(e.toString());
       JOptionPane.showMessageDialog(
@@ -227,7 +249,6 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       lArticulos.setEnabled(false);
       lArticulosContacto.setEnabled(false);
       listaArticulosContacto.removeAllElements();
-      tTiempo.setText("3");
     }
     else if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_VISITA)) {
       tTiempo.setEnabled(false);
@@ -688,7 +709,14 @@ public class ConsolaTecnico extends javax.swing.JDialog {
         JOptionPane.ERROR_MESSAGE);
     }
     else {
-        listaArticulosContacto.remove(lArticulosContacto.getSelectedIndex());
+      ArticulosVendidos articuloVendidoActual = (ArticulosVendidos) lArticulosContacto.getSelectedValue();
+      if (articuloVendidoActual.getCantidad()>1) {
+        articuloVendidoActual.quitar();
+        lArticulosContacto.updateUI();
+      }
+      else {
+        listaArticulosContacto.removeElement(articuloVendidoActual);
+      }
     }
   }
 
@@ -816,10 +844,10 @@ public class ConsolaTecnico extends javax.swing.JDialog {
   private javax.swing.JTextField tTelefono;
   private javax.swing.JTextField tTiempo;
   // End of variables declaration//GEN-END:variables
-  DefaultListModel lista = new DefaultListModel();
-  DefaultListModel listaArticulos = new DefaultListModel();
-  DefaultListModel listaArticulosContacto = new DefaultListModel();
-  DefaultListModel listaClientes = new DefaultListModel();
+  DefaultListModel lista;
+  DefaultListModel listaArticulos;
+  DefaultListModel listaArticulosContacto;
+  DefaultListModel listaClientes;
   Cliente elCliente = null;
   
   private boolean validarDatos() {
@@ -831,10 +859,12 @@ public class ConsolaTecnico extends javax.swing.JDialog {
       if (cEstado.getSelectedIndex()==-1) {
         return false;
       }
-      if (tResolucion.getText().length()<Conf.MIN_LEN_RESOLUCION) {
+      if ((tResolucion.getText().length()<Conf.MIN_LEN_RESOLUCION) &&
+              ((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_FINALIZADO)) {
         return false;
       }
-      if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_PROCESO)) {
+      if (((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_EN_PROCESO) ||
+          ((EstadoContacto) cEstado.getSelectedItem()).equals(Conf.ESTADO_FINALIZADO)) {
         Integer tiempo = Integer.parseInt(tTiempo.getText());
       }
       if (cPrioridad.getSelectedIndex()==-1) {

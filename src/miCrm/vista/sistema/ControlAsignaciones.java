@@ -111,6 +111,7 @@ public class ControlAsignaciones extends javax.swing.JDialog {
     }
     cEstado.removeAllItems();
     for (EstadoContacto e : Fachada.listarEstados()) {
+      if (e.equals(Conf.ESTADO_ASIGNADO))
       cEstado.addItem(e);
     }
     cPrioridad.removeAllItems();
