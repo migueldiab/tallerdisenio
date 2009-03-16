@@ -7,9 +7,13 @@ package lib.model.servicios;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
 import lib.model.miCRM.*;
 import lib.model.persistencia.pContacto;
+import lib.utilities.OrdenadorHashtablePorValor;
 import miCrm.Conf;
 
 /**
@@ -44,6 +48,43 @@ public class Contactos {
     return contactosPorTecnico;
   }
 
+  public static ArrayList<Contacto> listarContactosProblemasSimilares(String text) {
+    ArrayList<Contacto> contactos = pContacto.listarPorFechaPorEstado(Conf.ESTADO_FINALIZADO.getId());
+    Hashtable<Contacto, Integer> ranking = new Hashtable<Contacto, Integer>();
+    
+    String[] claves = text.split(" ");
+    for (Contacto c : contactos) {
+      for (String s : claves) {
+        if ((c.getDesc()!=null) && (c.getDesc().toUpperCase().contains(s.toUpperCase()))) {
+          Integer rank = ranking.get(c);
+          if (rank!=null) {
+            rank++;
+          }
+          else {
+            rank = 1;
+          }
+          ranking.put(c, rank);
+        }
+        if ((c.getResolucion()!=null) && (c.getResolucion().toUpperCase().contains(s.toUpperCase()))) {
+          Integer rank = ranking.get(c);
+          if (rank!=null) {
+            rank++;
+          }
+          else {
+            rank = 1;
+          }
+          ranking.put(c, rank);
+        }
+      }
+    }
+    ArrayList rankOrdenado=new ArrayList(ranking.entrySet());
+    Collections.sort(rankOrdenado, new OrdenadorHashtablePorValor());
+
+    
+    return rankOrdenado;
+
+  }
+
   public static ArrayList<Contacto> listarContactosRangoFecha(Timestamp inicio, Timestamp fin) {
     return pContacto.listarContactosRangoFecha(inicio, fin);
     
@@ -57,7 +98,7 @@ public class Contactos {
     return pContacto.listarRankingTecnicosPorFechaPorEstado(inicio, fin, estado);
   }
 
-  public Object buscarPorId(Integer id) {
+  public static Contacto buscarPorId(Integer id) {
     return pContacto.buscarPorId(id);
   }
   public ArrayList buscarPorNombre(String nombre) {

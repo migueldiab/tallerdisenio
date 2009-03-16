@@ -22,7 +22,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pControlAsignaciones" alignment="0" pref="1026" max="32767" attributes="0"/>
+          <Component id="pControlAsignaciones" alignment="0" pref="1101" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -41,6 +41,11 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pAsignacionContacto">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[250, 0]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>
@@ -55,9 +60,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lTecnico" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lPrioridad" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lEstado" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="ltipoContacto" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lDescipcion" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -66,14 +68,19 @@
                                   <Component id="lFecha" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lTelefonista" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lEstado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lPrioridad" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lTecnico" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tHora" alignment="0" min="-2" pref="59" max="-2" attributes="1"/>
-                                  <Component id="tCliente" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
-                                  <Component id="cTipoContacto" alignment="0" min="-2" pref="180" max="-2" attributes="1"/>
-                                  <Component id="cEstado" alignment="0" min="-2" max="-2" attributes="1"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cTecnico" min="-2" max="-2" attributes="1"/>
+                                  <Component id="cPrioridad" min="-2" max="-2" attributes="1"/>
+                                  <Component id="cEstado" pref="279" max="32767" attributes="1"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="tHora" alignment="0" min="-2" pref="59" max="-2" attributes="1"/>
+                                      <Component id="tCliente" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                                      <Component id="cTipoContacto" alignment="0" min="-2" pref="180" max="-2" attributes="1"/>
                                       <Group type="102" alignment="0" attributes="1">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="tFecha" alignment="0" min="-2" pref="84" max="-2" attributes="1"/>
@@ -82,61 +89,78 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="lIcon" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="cTecnico" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="cPrioridad" alignment="0" max="32767" attributes="1"/>
                                       <Component id="cTelefonista" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="sDescripcion" alignment="0" max="32767" attributes="1"/>
                                       <Component id="tTelefono" alignment="0" pref="279" max="32767" attributes="1"/>
+                                      <Component id="sDescripcion" alignment="0" max="32767" attributes="1"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="ltiempo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lReparados" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="bQuitar" linkSize="2" pref="135" max="32767" attributes="1"/>
+                                                      <Component id="lResolucion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="sArticulosContacto" linkSize="2" alignment="0" pref="135" max="32767" attributes="1"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="sArticulos" linkSize="2" alignment="0" pref="135" max="32767" attributes="1"/>
+                                                      <Component id="bAgregar" linkSize="2" alignment="0" pref="135" max="32767" attributes="1"/>
+                                                      <Component id="bBuscar" min="-2" pref="116" max="-2" attributes="0"/>
+                                                      <Component id="tTiempo" alignment="1" pref="135" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Component id="sResolucion" alignment="1" pref="276" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="bGuardar" linkSize="1" alignment="0" pref="97" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="bQuitar" linkSize="2" pref="135" max="32767" attributes="1"/>
-                                  <Component id="sArticulosContacto" linkSize="2" alignment="0" pref="135" max="32767" attributes="1"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="bGuardar" linkSize="1" pref="97" max="32767" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="bAgregar" linkSize="2" max="32767" attributes="1"/>
-                                  <Component id="sArticulos" linkSize="2" alignment="0" pref="135" max="32767" attributes="1"/>
-                              </Group>
+                              <Component id="bCancelar" linkSize="1" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace min="-2" pref="632" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="bCancelar" linkSize="1" min="-2" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="tId" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="tFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="lId" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="tId" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="lIcon" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lId" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lHora" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -153,51 +177,57 @@
                                   <Component id="tCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cTipoContacto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ltipoContacto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="lDescipcion" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="sDescripcion" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="sArticulosContacto" alignment="1" pref="207" max="32767" attributes="1"/>
-                                  <Component id="sArticulos" alignment="1" pref="207" max="32767" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="bBuscar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lResolucion" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="sResolucion" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cTipoContacto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ltipoContacto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lReparados" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="lDescipcion" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="sDescripcion" alignment="1" max="32767" attributes="1"/>
+                          <Component id="sArticulosContacto" alignment="1" pref="96" max="32767" attributes="1"/>
+                          <Component id="sArticulos" alignment="1" min="0" pref="0" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="bAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bQuitar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bQuitar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cPrioridad" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lPrioridad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ltiempo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tTiempo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cTecnico" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lTecnico" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -304,6 +334,7 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[150, 20]"/>
                 </Property>
@@ -311,6 +342,9 @@
                   <Dimension value="[150, 22]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cEstadoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cTipoContacto">
               <Properties>
@@ -437,7 +471,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="bAgregar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;&lt; Agregar"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/add.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Agregar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAgregarActionPerformed"/>
@@ -445,7 +483,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="bQuitar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Quitar &gt;&gt;"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/delete.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Quitar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bQuitarActionPerformed"/>
@@ -463,6 +505,7 @@
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(listaArticulos)"/>
@@ -483,6 +526,7 @@
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(listaArticulosContacto)"/>
@@ -491,6 +535,58 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JScrollPane" name="sResolucion">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="tResolucion">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="lResolucion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Resoluci&#xf3;n"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ltiempo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tiempo resoluci&#xf3;n"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tTiempo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="bBuscar">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/miCrm/resources/images/magnifier.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Buscar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bBuscarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lReparados">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Articulos reparados"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Articulos disponibles"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="sContactos">
@@ -509,6 +605,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="lista" type="code"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[250, 0]"/>
                 </Property>
               </Properties>
               <Events>

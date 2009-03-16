@@ -17,9 +17,12 @@ import lib.model.miCRM.Usuario;
 public class Conf {
     public static final Boolean DEBUG_MODE = false;
     public static final Integer MAX_LEN_DESC = 600;
+    public static final Integer MIN_LEN_RESOLUCION = 10;
     public static final EstadoContacto ESTADO_NUEVO_CONTACTO = Fachada.buscarEstadoPorNombre("Pendiente");
     public static final EstadoContacto ESTADO_ASIGNADO = Fachada.buscarEstadoPorNombre("Asignado");
     public static final EstadoContacto ESTADO_FINALIZADO = Fachada.buscarEstadoPorNombre("Finalizado");
+    public static final EstadoContacto ESTADO_EN_PROCESO = Fachada.buscarEstadoPorNombre("En Proceso");
+    public static final EstadoContacto ESTADO_EN_VISITA = Fachada.buscarEstadoPorNombre("En Visita");
     public static final Usuario TECNICO_POR_DEFECTO = null;
     public static final Prioridad PRIORIDAD_POR_DEFECTO = null;
     public static final Prioridad PRIORIDAD_BLOQUENATE = Fachada.buscarPrioridadPorNombre("Bloqueante");
